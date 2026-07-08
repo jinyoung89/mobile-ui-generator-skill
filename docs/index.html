@@ -23,7 +23,9 @@
       <div class="nav-links">
         <a href="#views">Views</a>
         <a href="#pipeline">Pipeline</a>
+        <a href="#fonts">Fonts</a>
         <a href="#quality">Quality</a>
+        <a href="#korean">Korean</a>
         <a href="https://github.com/jinyoung89/mobile-ui-generator-skill">GitHub</a>
       </div>
     </nav>
@@ -34,6 +36,7 @@
           <p class="eyebrow">Agent Skill · Mobile UI Reference Bank</p>
           <h1>Stop asking agents to invent mobile UI from memory.</h1>
           <p class="lede">Build reference-backed Korean mobile signup, checkout, onboarding, booking, social, and finance briefs from real app screen patterns, assets, and quality gates.</p>
+          <p class="kr-note">한국 모바일 서비스의 회원가입, 결제, 온보딩, 예약 화면을 에이전트가 바로 이해할 수 있는 브리프와 JSON 스펙으로 정리합니다.</p>
           <div class="command" role="group" aria-label="Install command">
             <span>$</span>
             <code>npx skills add jinyoung89/mobile-ui-generator-skill</code>
@@ -65,13 +68,28 @@ quality gates: integrity · coverage · relevance · assets</pre>
         <b>Codex</b><b>Claude Code</b><b>Cursor</b><b>OpenCode</b><b>Gemini CLI</b><b>Hermes</b>
       </section>
 
+      <section id="korean" class="section korean-summary">
+        <div class="section-head narrow">
+          <p class="eyebrow">Korean quick summary</p>
+          <h2>한국 사용자도 쉽게 이해할 수 있게.</h2>
+          <p>이 스킬은 모바일 UI를 막연히 “그려줘”라고 하는 대신, 로컬에 준비된 레퍼런스 메타데이터를 바탕으로 화면 유형, 컴포넌트, 에셋 단서, 품질 체크 기준을 정리해 에이전트에게 전달합니다.</p>
+        </div>
+        <div class="summary-grid">
+          <article><strong>무엇을 하나요?</strong><p>회원가입, 본인인증, 결제, 상품상세, 지도 예약, 피드 같은 모바일 화면을 만들기 위한 구조화된 브리프를 생성합니다.</p></article>
+          <article><strong>무엇을 공개하나요?</strong><p>공개 레포에는 스킬 설명, 샘플 브리프, HTML/CSS 데모만 포함합니다. 원본 이미지와 private 데이터는 포함하지 않습니다.</p></article>
+          <article><strong>어떻게 쓰나요?</strong><p>에이전트에게 원하는 서비스/화면을 말하면, 관련 화면 유형과 컴포넌트 기준을 정리한 Markdown 브리프와 JSON 스펙을 만듭니다.</p></article>
+        </div>
+      </section>
+
       <section id="views" class="section">
         <div class="section-head">
           <p class="eyebrow">Generated from our brief templates</p>
           <h2>Mobile views the skill can brief precisely.</h2>
           <p>These are HTML/CSS mobile views derived from the current taxonomy and prompt/spec templates. No image-generation provider is used.</p>
+          <p class="kr-note">아래 예시는 실제 앱 캡처를 올린 것이 아니라, 화면 패턴을 설명하기 위해 직접 만든 HTML/CSS 목업입니다. 모바일에서는 가로로 스와이프해서 볼 수 있습니다.</p>
         </div>
-        <div class="phone-grid">
+        <div class="view-hint" aria-hidden="true">Swipe horizontally on mobile → <span>모바일에서는 좌우로 넘겨보세요</span></div>
+        <div class="phone-grid" aria-label="Example mobile UI cards">
           <article class="phone-card">
             <div class="phone light fintech">
               <div class="status"></div>
@@ -87,6 +105,22 @@ quality gates: integrity · coverage · relevance · assets</pre>
             </div>
             <h3>Fintech signup</h3>
             <p>Signup + identity verification with fixed CTA, helper copy, and trust cues.</p>
+          </article>
+
+          <article class="phone-card">
+            <div class="phone light onboarding">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>맞춤 설정</strong></div>
+              <div class="spark-card">AI</div>
+              <h3>내 취향에 맞게<br/>홈을 준비했어요</h3>
+              <p class="subcopy">관심 카테고리를 고르면 첫 화면이 더 정확해집니다.</p>
+              <div class="pill-row"><b>혜택</b><b>투자</b><b>여행</b></div>
+              <div class="step-card"><span>01</span><strong>관심사 선택</strong></div>
+              <div class="step-card muted"><span>02</span><strong>알림 허용</strong></div>
+              <button>내게 맞게 설정</button>
+            </div>
+            <h3>Personalized onboarding</h3>
+            <p>Preference chips, progressive setup, and clear value proposition.</p>
           </article>
 
           <article class="phone-card">
@@ -106,6 +140,22 @@ quality gates: integrity · coverage · relevance · assets</pre>
           </article>
 
           <article class="phone-card">
+            <div class="phone light delivery">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>주문 현황</strong></div>
+              <div class="delivery-map"><i></i><i></i><i></i></div>
+              <h3>라이더가 픽업했어요</h3>
+              <p class="subcopy">예상 도착 18:42 · 문 앞에 놓아주세요</p>
+              <div class="timeline"><b class="done"></b><span>주문 접수</span></div>
+              <div class="timeline"><b class="done"></b><span>조리 완료</span></div>
+              <div class="timeline"><b></b><span>배달 중</span></div>
+              <button>라이더에게 메시지</button>
+            </div>
+            <h3>Delivery tracking</h3>
+            <p>Map preview, ETA, progress timeline, and contextual support CTA.</p>
+          </article>
+
+          <article class="phone-card">
             <div class="phone light mobility">
               <div class="status"></div>
               <div class="map"><i></i><i></i><i></i></div>
@@ -120,6 +170,107 @@ quality gates: integrity · coverage · relevance · assets</pre>
             <h3>Mobility booking</h3>
             <p>Map-first booking with bottom sheet, route choices, reserve/payment CTA.</p>
           </article>
+
+          <article class="phone-card">
+            <div class="phone dark finance">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>송금</strong></div>
+              <div class="balance-card"><small>보낼 수 있는 금액</small><strong>2,480,000원</strong></div>
+              <h3>얼마를 보낼까요?</h3>
+              <div class="amount-input">120,000원</div>
+              <div class="quick-actions"><b>1만</b><b>5만</b><b>10만</b></div>
+              <div class="receiver-card"><span></span><div><b>김하나</b><em>국민 1234</em></div></div>
+              <button>안전하게 송금</button>
+            </div>
+            <h3>Finance transfer</h3>
+            <p>Balance context, amount editing, trusted receiver card, and secure CTA.</p>
+          </article>
+
+          <article class="phone-card">
+            <div class="phone light health">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>진료 예약</strong></div>
+              <h3>이번 주 가능한<br/>시간을 찾았어요</h3>
+              <p class="subcopy">피부과 · 서울 강남구 · 별점 4.8</p>
+              <div class="calendar-row"><b>월</b><b class="active">화</b><b>수</b><b>목</b></div>
+              <div class="slot active">오전 10:30 <span>바로 예약</span></div>
+              <div class="slot">오후 02:00 <span>대기 가능</span></div>
+              <div class="doctor-card"><span></span><div><b>이서연 원장</b><em>진료 12년</em></div></div>
+              <button>예약 확정하기</button>
+            </div>
+            <h3>Healthcare booking</h3>
+            <p>Provider trust, date chips, slot states, and confirmation CTA.</p>
+          </article>
+
+          <article class="phone-card">
+            <div class="phone dark social">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>커뮤니티</strong></div>
+              <div class="story-row"><i></i><i></i><i></i><i></i></div>
+              <div class="feed-card"><strong>오늘의 인기 글</strong><p>퇴근 후 20분 루틴으로 정리한 생산성 팁</p><em>댓글 42 · 저장 128</em></div>
+              <div class="chat-preview"><b></b><span>새 메시지 3개가 도착했어요</span></div>
+              <button>피드 둘러보기</button>
+            </div>
+            <h3>Social feed</h3>
+            <p>Stories, content card, saved/comment signals, and re-entry prompt.</p>
+          </article>
+        </div>
+      </section>
+
+
+      <section id="fonts" class="section font-profiles">
+        <div class="section-head narrow">
+          <p class="eyebrow">Font profiles</p>
+          <h2>Typography belongs in the UI brief too.</h2>
+          <p>Each generated brief can include a font profile: confirmed brand font when known, or a safe free Korean font fallback when the exact service font is unknown.</p>
+          <p class="kr-note">서비스마다 폰트가 다르기 때문에, 실제 UI 브리프에는 폰트명, 다운로드/CSS 주소, fallback stack, 사용 이유를 함께 넣도록 설계했습니다.</p>
+        </div>
+        <div class="font-grid">
+          <article class="font-card">
+            <span class="font-badge">Default</span>
+            <h3 style="font-family: Pretendard, system-ui, sans-serif">Pretendard</h3>
+            <p>Neutral Korean app UI default for fintech, productivity, commerce, and general service screens.</p>
+            <div class="font-links"><a href="https://github.com/orioncactus/pretendard">Project</a><a href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">CSS</a></div>
+          </article>
+          <article class="font-card">
+            <span class="font-badge">Modern</span>
+            <h3>SUIT</h3>
+            <p>Clean and compact Korean UI font profile for onboarding, settings, dashboards, and dense product screens.</p>
+            <div class="font-links"><a href="https://github.com/sunn-us/SUIT">Project</a><a href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css">CSS</a></div>
+          </article>
+          <article class="font-card">
+            <span class="font-badge">Safe fallback</span>
+            <h3>Noto Sans KR</h3>
+            <p>Reliable multi-weight Korean fallback for Android/Web when brand typography is unknown or unavailable.</p>
+            <div class="font-links"><a href="https://fonts.google.com/noto/specimen/Noto+Sans+KR">Project</a><a href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">CSS</a></div>
+          </article>
+          <article class="font-card">
+            <span class="font-badge">Tech/editorial</span>
+            <h3>IBM Plex Sans KR</h3>
+            <p>Good for tech, AI, analytics, editorial, and product screens that need a slightly distinctive tone.</p>
+            <div class="font-links"><a href="https://fonts.google.com/specimen/IBM+Plex+Sans+KR">Project</a><a href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">CSS</a></div>
+          </article>
+          <article class="font-card">
+            <span class="font-badge">Friendly</span>
+            <h3>Spoqa Han Sans Neo</h3>
+            <p>Friendly Korean UI profile often suitable for food, lifestyle, local commerce, and consumer service flows.</p>
+            <div class="font-links"><a href="https://github.com/spoqa/spoqa-han-sans">Project</a><a href="https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans/css/SpoqaHanSansNeo.css">CSS</a></div>
+          </article>
+          <article class="font-card">
+            <span class="font-badge">Brand-like</span>
+            <h3>Wanted Sans</h3>
+            <p>Polished Korean UI profile for recruiting, SaaS, productivity, and professional service products.</p>
+            <div class="font-links"><a href="https://github.com/wanteddev/wanted-sans">Project</a><a href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans/packages/wanted-sans/fonts/webfonts/variable/complete/WantedSansVariable.min.css">CSS</a></div>
+          </article>
+        </div>
+        <div class="font-schema">
+          <strong>Brief field example</strong>
+          <pre>font_profile:
+  family: "Pretendard"
+  css_url: "https://cdn.jsdelivr.net/.../pretendard.css"
+  fallback: "-apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Noto Sans KR, sans-serif"
+  confidence: "recommended fallback"
+  reason: "Neutral Korean mobile UI with strong numeric readability"</pre>
         </div>
       </section>
 
@@ -143,6 +294,7 @@ quality gates: integrity · coverage · relevance · assets</pre>
           <p class="eyebrow">Quality, not volume</p>
           <h2>Checks whether references will actually improve the UI.</h2>
           <p>For multi-step prompts like <code>회원가입과 결제</code>, the retriever detects multiple target screens and excludes unrelated evidence if relevant rows exist.</p>
+          <p class="kr-note">단순히 화면 수를 늘리는 것이 아니라, 요청한 화면에 실제로 도움이 되는 레퍼런스인지 검사합니다.</p>
         </div>
         <div class="score-card">
           <div class="score"><span>0.95+</span><p>excellent target</p></div>

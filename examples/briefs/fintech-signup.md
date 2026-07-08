@@ -22,6 +22,18 @@
 - Bottom CTA remains fixed and clear
 - Trust cues are subtle, not visually loud
 
+
+## Typography / font profile
+
+```yaml
+font_profile:
+  family: Pretendard
+  css_url: https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css
+  fallback: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif
+  confidence: recommended fallback
+  reason: Neutral Korean fintech UI with strong numeric readability.
+```
+
 ## Code/Figma prompt
 
 Create a production-quality native mobile signup verification screen for a Korean fintech app. Use safe-area padding, 44pt+ touch targets, high text contrast, visible labels, inline helper text, timer/resend affordance, and a fixed bottom primary CTA. Prefer exact Korean UI copy over placeholder text.

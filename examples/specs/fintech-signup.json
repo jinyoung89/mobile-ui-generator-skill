@@ -22,5 +22,12 @@
     "touch_target",
     "korean_copy",
     "valid_json_spec"
-  ]
+  ],
+  "font_profile": {
+    "family": "Pretendard",
+    "css_url": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css",
+    "fallback": "-apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Noto Sans KR\", sans-serif",
+    "confidence": "recommended fallback",
+    "reason": "Neutral Korean fintech UI with strong numeric readability."
+  }
 }

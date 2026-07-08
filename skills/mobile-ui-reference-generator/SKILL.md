@@ -62,12 +62,40 @@ A good brief includes:
 - inferred domain and target screen types;
 - reference evidence table;
 - asset references with colors/local paths;
+- font profile with source/download URL and fallback stack;
 - image/code/Figma prompt text;
 - negative prompt;
 - valid JSON UI spec;
 - quality score report.
 
-### 4. Quality gate
+
+### 5. Add a font profile
+
+For real mobile UX/UI work, include typography in the brief. If a service-specific font is confirmed by the user, public brand docs, or design assets, use it. Otherwise choose a free/public Korean UI font profile and include the URL.
+
+Starter font profiles:
+
+| Profile | Use when | URL |
+|---|---|---|
+| Pretendard | neutral Korean app UI, fintech, commerce, productivity | https://github.com/orioncactus/pretendard |
+| SUIT | compact modern UI, onboarding/settings/dashboard | https://github.com/sunn-us/SUIT |
+| Noto Sans KR | safe Android/Web fallback | https://fonts.google.com/noto/specimen/Noto+Sans+KR |
+| IBM Plex Sans KR | tech, AI, analytics, editorial/product UI | https://fonts.google.com/specimen/IBM+Plex+Sans+KR |
+| Spoqa Han Sans Neo | friendly consumer/local commerce UI | https://github.com/spoqa/spoqa-han-sans |
+| Wanted Sans | SaaS, recruiting, productivity, professional services | https://github.com/wanteddev/wanted-sans |
+
+Recommended `font_profile` shape:
+
+```yaml
+font_profile:
+  family: Pretendard
+  css_url: https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css
+  fallback: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif
+  confidence: recommended fallback
+  reason: Neutral Korean mobile UI with strong numeric readability.
+```
+
+### 6. Quality gate
 
 Score or manually check:
 
@@ -86,6 +114,8 @@ Score or manually check:
 - Select assets from the same target screen types or same reference apps before falling back.
 - Keep MP4/SVG/JSON/Lottie-like media as media metadata; do not force them through image-only analysis.
 - Keep private connector details out of public briefs unless the user explicitly asks to include them.
+- Do not invent service-specific font names; use confirmed brand typography or a declared fallback font profile.
+- Include iOS/Android/Web fallback font stacks and license-check notes for any downloadable font.
 
 ## Do not
 
