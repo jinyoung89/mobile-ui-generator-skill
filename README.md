@@ -24,11 +24,12 @@
 It focuses on generation-ready structure:
 
 1. choose the target app domain and screen flow;
-2. define layout, hierarchy, components, states, and CTAs;
-3. write locale-appropriate UI copy;
-4. choose a language mode: English or Korean;
-5. add a service-appropriate font profile;
-6. produce Markdown briefs and JSON UI specs for design, code, Figma, or image-generation agents.
+2. select concrete mobile UI patterns such as phone verification, PLP/PDP, checkout, map bottom sheet, chat composer, review writing, ranking, reward, FAQ, or empty-state recovery;
+3. define layout archetype, navigation model, hierarchy, components, states, interactions, and CTAs;
+4. write locale-appropriate UI copy;
+5. choose a language mode: English or Korean;
+6. add a service-appropriate font profile;
+7. produce Markdown briefs and JSON UI specs for design, code, Figma, or image-generation agents.
 
 The skill does **not** run image generation unless the user explicitly asks for it.
 
@@ -56,6 +57,25 @@ Do not mix English and Korean in the same user-facing output unless the user req
 | Mobility/travel | `map_location`, `reservation_booking`, `route`, `stay_booking`, `ticket` |
 | Education/game | `lesson_home`, `quiz`, `progress`, `game_lobby`, `reward` |
 | Support | `customer_support`, `faq`, `empty_state`, `error_recovery` |
+
+## Pattern system
+
+The skill now treats mobile UI as a pattern system, not just a screen name. A generated brief should identify concrete patterns and the decisions each pattern requires.
+
+| Pattern group | Examples |
+|---|---|
+| Acquisition/auth | splash, onboarding, permission, login, signup, phone verification, identity verification, terms agreement |
+| Home/navigation | main home, bottom tabs, top app bar, menu, my page, membership |
+| Search/listing | search, filter/sort, category browse, PLP, comparison, nearby discovery |
+| Detail/content | PDP, content viewer, media viewer, bookmark/wishlist, announcement |
+| Commerce/payment | cart, checkout, simple payment, coupon/points, order complete, order history, review, review writing |
+| Finance | account overview, transfer, transaction history, card detail, portfolio, security auth |
+| Booking/location | map location, route navigation, reservation booking, map bottom sheet, delivery tracking, stay booking |
+| Social/creation | feed, chat, notification, profile, writing/posting, camera/upload |
+| Engagement | gamification, ranking, points/rewards, event promotion, quest progress |
+| Support/states | customer support, FAQ, inquiry, empty state, error state, loading skeleton, success state |
+
+Each pattern should specify component inventory, state matrix, interaction model, copy requirements, and mobile constraints.
 
 ## Service domains
 
@@ -110,6 +130,7 @@ Rules:
 |---|---|
 | `mobile-ui-brief.md` | Human-readable UX/UI generation brief |
 | `mobile-ui-brief.json` | Machine-readable UI spec |
+| `pattern_system` | Pattern groups, layout archetype, components, interactions, and state matrix |
 | `font_profile` | Font family, CSS URL, fallback stack, and reason |
 | `copy_system` | Locale-specific UI copy guidelines |
 | `implementation_prompt` | Prompt for code, Figma, design-system, or image-generation agents |
@@ -159,6 +180,17 @@ examples/specs/                   # public sample UI specs
 docs/index.html                   # static showcase page
 docs/assets/                      # public SVG artwork
 ```
+
+## Pattern coverage workflow
+
+Patterns are maintained as an expanding public-safe library. New observations should first be normalized into generic pattern IDs, then added to `skills/mobile-ui-generator/references/mobile-pattern-library.md`. Run:
+
+```bash
+python3 scripts/validate_patterns.py
+python3 scripts/validate_site.py
+```
+
+The current library covers 55+ detailed mobile patterns plus domain modifiers.
 
 ## License
 

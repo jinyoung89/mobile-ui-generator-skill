@@ -85,12 +85,30 @@ def main() -> None:
 
     data = parse_site_data()
     examples = data["examples"]
+    categories = data["exampleCategories"]
     font_by_slug = data["fontBySlug"]
     fonts = data["fonts"]
     translations = data["translations"]
 
     if len(examples) != 19:
         fail(f"expected 19 examples, got {len(examples)}")
+    if len(categories) < 10:
+        fail(f"expected at least 10 example categories, got {len(categories)}")
+    category_ids = {category["id"] for category in categories}
+    if "all" not in category_ids:
+        fail("example categories must include all")
+    category_usage = {category_id: 0 for category_id in category_ids if category_id != "all"}
+    for item in examples:
+        if len(item) < 4 or "categories" not in item[3]:
+            fail(f"example {item[0]} missing category metadata")
+        for category_id in item[3]["categories"]:
+            if category_id not in category_ids:
+                fail(f"example {item[0]} uses unknown category {category_id}")
+            if category_id in category_usage:
+                category_usage[category_id] += 1
+    empty_categories = sorted(key for key, count in category_usage.items() if count == 0)
+    if empty_categories:
+        fail(f"empty example categories: {empty_categories}")
     used_fonts = {font_by_slug[item[0]]["label"] for item in examples}
     if len(used_fonts) < 6:
         fail(f"expected at least 6 font profiles in examples, got {sorted(used_fonts)}")
@@ -118,6 +136,8 @@ def main() -> None:
         assert_contains(html, 'og:image:width" content="1200"', f"{lang} og width")
         assert_contains(html, 'og:image:height" content="630"', f"{lang} og height")
         assert_contains(html, 'id="exampleCards"', f"{lang} static cards")
+        assert_contains(html, 'id="exampleCategoryFilters"', f"{lang} category filters")
+        assert_contains(html, 'id="exampleSummary"', f"{lang} example summary")
         assert_contains(html, 'id="fontCards"', f"{lang} static fonts")
         assert_contains(html, 'class="phone-card"', f"{lang} static card markup")
         ld = json_ld(html)

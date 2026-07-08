@@ -1,18 +1,73 @@
 {
   "language_mode": "ko",
   "domain": "fintech",
+  "flow": "signup",
   "screen_types": [
     "signup",
     "identity_verification"
   ],
+  "target_patterns": [
+    "signup",
+    "phone_verification",
+    "terms_agreement",
+    "fixed_bottom_cta"
+  ],
+  "layout_archetype": "single_task_form",
+  "navigation_model": "top_app_bar_with_back",
   "tone": [
     "trustworthy",
     "clear",
     "low_friction"
   ],
+  "pattern_system": {
+    "primary_patterns": [
+      "signup",
+      "phone_verification",
+      "terms_agreement",
+      "fixed_bottom_cta"
+    ],
+    "required_components": [
+      "top_back",
+      "large_title",
+      "phone_input",
+      "verification_code_input",
+      "timer",
+      "resend_button",
+      "terms_checkbox",
+      "fixed_bottom_cta"
+    ],
+    "state_matrix": {
+      "screen": [
+        "default",
+        "loading",
+        "error",
+        "success"
+      ],
+      "phone_input": [
+        "empty",
+        "focused",
+        "filled",
+        "invalid",
+        "disabled"
+      ],
+      "verification_code_input": [
+        "empty",
+        "focused",
+        "invalid",
+        "expired",
+        "locked"
+      ],
+      "cta": [
+        "disabled",
+        "enabled",
+        "loading"
+      ]
+    }
+  },
   "layout": {
     "safe_area": true,
     "fixed_bottom_cta": true,
+    "keyboard_aware": true,
     "sections": [
       "top_navigation",
       "headline",
@@ -31,20 +86,18 @@
     "terms_checkbox",
     "fixed_bottom_cta"
   ],
-  "states": [
-    "default",
-    "focused",
-    "invalid",
-    "loading",
-    "success"
-  ],
   "copy": {
     "title": "휴대폰 번호로 시작할게요",
     "subtitle": "안전한 가입을 위해 본인 명의 번호를 확인합니다.",
     "phone_label": "휴대폰 번호",
+    "phone_placeholder": "010 1234 5678",
     "code_label": "인증번호",
     "code_placeholder": "6자리 숫자 입력",
+    "timer": "02:58",
+    "resend": "인증번호 다시 받기",
     "terms": "필수 약관 전체 동의",
+    "invalid_code": "인증번호가 일치하지 않아요.",
+    "expired_code": "인증 시간이 만료됐어요. 다시 받아주세요.",
     "primary_cta": "다음"
   },
   "font_profile": {
@@ -53,5 +106,17 @@
     "fallback": "-apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Noto Sans KR\", sans-serif",
     "confidence": "recommended fallback",
     "reason": "Neutral Korean fintech UI with strong numeric readability."
-  }
+  },
+  "mobile_constraints": [
+    "safe_area",
+    "44pt_touch_targets",
+    "keyboard_aware_layout",
+    "readable_korean_line_breaks"
+  ],
+  "avoid": [
+    "playful_visual_tone",
+    "unclear_legal_copy",
+    "cta_enabled_before_required_inputs",
+    "missing_error_recovery"
+  ]
 }

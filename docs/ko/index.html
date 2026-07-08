@@ -132,6 +132,62 @@
           <h2 data-i18n="views.title">화면 흐름과 서비스 카테고리를 넓게 다룹니다.</h2>
           <p data-i18n="views.desc">아래 예시는 화면 구조, 타이포그래피, 인터랙션 패턴을 보여주기 위해 직접 만든 HTML/CSS 데모입니다.</p>
         </div>
+        <div class="example-toolbar" aria-label="카테고리">
+          <div>
+            <strong data-i18n="views.filter.label">카테고리</strong>
+            <p id="exampleSummary">표시 중 19 / 19 · 12 카테고리 · 6 폰트 프로필</p>
+          </div>
+          <div id="exampleCategoryFilters" class="category-filter" role="list">
+          <button type="button" class="category-chip" data-category="all" aria-pressed="true">
+            <span>전체</span>
+            <em>19</em>
+          </button>
+          <button type="button" class="category-chip" data-category="onboarding" aria-pressed="false">
+            <span>온보딩</span>
+            <em>1</em>
+          </button>
+          <button type="button" class="category-chip" data-category="auth" aria-pressed="false">
+            <span>인증</span>
+            <em>2</em>
+          </button>
+          <button type="button" class="category-chip" data-category="home" aria-pressed="false">
+            <span>홈</span>
+            <em>1</em>
+          </button>
+          <button type="button" class="category-chip" data-category="commerce" aria-pressed="false">
+            <span>커머스</span>
+            <em>3</em>
+          </button>
+          <button type="button" class="category-chip" data-category="finance" aria-pressed="false">
+            <span>금융</span>
+            <em>3</em>
+          </button>
+          <button type="button" class="category-chip" data-category="booking" aria-pressed="false">
+            <span>예약</span>
+            <em>4</em>
+          </button>
+          <button type="button" class="category-chip" data-category="delivery" aria-pressed="false">
+            <span>배달</span>
+            <em>2</em>
+          </button>
+          <button type="button" class="category-chip" data-category="social-content" aria-pressed="false">
+            <span>소셜·콘텐츠</span>
+            <em>3</em>
+          </button>
+          <button type="button" class="category-chip" data-category="game-education" aria-pressed="false">
+            <span>게임·교육</span>
+            <em>2</em>
+          </button>
+          <button type="button" class="category-chip" data-category="settings-support" aria-pressed="false">
+            <span>설정·지원</span>
+            <em>3</em>
+          </button>
+          <button type="button" class="category-chip" data-category="empty-state" aria-pressed="false">
+            <span>빈 상태</span>
+            <em>1</em>
+          </button>
+          </div>
+        </div>
         <div id="exampleCards" class="phone-grid" tabindex="0" aria-label="모바일 UI 예시 카드" data-i18n-aria-label="aria.cards">
           <article class="phone-card" aria-label="핀테크 회원가입">
             <div class="phone light fintech font-pretendard" lang="ko">
@@ -481,8 +537,8 @@
           <h2 data-i18n="outputs.title">AI 디자인/코드 에이전트에 명확하게 전달되도록 설계했습니다.</h2>
         </div>
         <div class="cards feature-cards">
-          <article><span>01</span><h3 data-i18n="out.1.title">화면 브리프</h3><p data-i18n="out.1.desc">목표, 사용자 의도, 레이아웃 구조, 컴포넌트 위계, 인터랙션 메모.</p></article>
-          <article><span>02</span><h3 data-i18n="out.2.title">JSON UI 스펙</h3><p data-i18n="out.2.desc">화면 유형, 섹션, 컴포넌트, 상태, 카피, 토큰을 기계가 읽을 수 있게 정리.</p></article>
+          <article><span>01</span><h3 data-i18n="out.1.title">패턴 시스템</h3><p data-i18n="out.1.desc">패턴 그룹, 레이아웃 아키타입, 컴포넌트 목록, 인터랙션 모델, 상태 매트릭스.</p></article>
+          <article><span>02</span><h3 data-i18n="out.2.title">화면 브리프</h3><p data-i18n="out.2.desc">목표, 사용자 의도, 위계, 섹션, 고정/스티키 영역, 카피 방향.</p></article>
           <article><span>03</span><h3 data-i18n="out.3.title">언어 모드</h3><p data-i18n="out.3.desc">영어 또는 한국어를 선택합니다. 요청하지 않으면 두 언어를 섞지 않습니다.</p></article>
           <article><span>04</span><h3 data-i18n="out.4.title">폰트 프로필</h3><p data-i18n="out.4.desc">추천 폰트, CSS URL, fallback stack, 라이선스 확인 메모.</p></article>
           <article><span>05</span><h3 data-i18n="out.5.title">구현 전달문</h3><p data-i18n="out.5.desc">코딩 에이전트, Figma 에이전트, 디자인 시스템 구현용 프롬프트.</p></article>

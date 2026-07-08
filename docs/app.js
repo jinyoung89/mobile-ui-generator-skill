@@ -4,7 +4,8 @@
   const data = window.MobileUIGeneratorData;
   if (!data) return;
 
-  const { translations, examples, fontBySlug, fonts } = data;
+  const { translations, examples, fontBySlug, fonts, exampleCategories } = data;
+  let selectedCategory = 'all';
 
   const escapeHTML = (value) =>
     String(value).replace(/[&<>"']/g, (character) =>
@@ -17,19 +18,58 @@
       })[character],
     );
 
+  function visibleExamples() {
+    if (selectedCategory === 'all') return examples;
+    return examples.filter(([, , , meta]) => meta.categories.includes(selectedCategory));
+  }
+
+  function renderExampleSummary(lang) {
+    const summary = document.getElementById('exampleSummary');
+    if (!summary) return;
+
+    const visibleCount = visibleExamples().length;
+    const fontCount = new Set(examples.map(([slug]) => fontBySlug[slug]?.label).filter(Boolean)).size;
+    summary.textContent = `${translations['views.summary.showing'][lang]} ${visibleCount} / ${examples.length} · ${exampleCategories.length} ${translations['views.summary.categories'][lang]} · ${fontCount} ${translations['views.summary.fonts'][lang]}`;
+  }
+
+  function renderCategoryFilters(lang) {
+    const container = document.getElementById('exampleCategoryFilters');
+    if (!container) return;
+
+    container.innerHTML = exampleCategories
+      .map((category) => {
+        const count = category.id === 'all'
+          ? examples.length
+          : examples.filter(([, , , meta]) => meta.categories.includes(category.id)).length;
+        return `<button type="button" class="category-chip" data-category="${escapeHTML(category.id)}" aria-pressed="${String(selectedCategory === category.id)}">
+          <span>${escapeHTML(category.label[lang])}</span>
+          <em>${count}</em>
+        </button>`;
+      })
+      .join('');
+
+    container.querySelectorAll('[data-category]').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedCategory = button.dataset.category || 'all';
+        renderCategoryFilters(lang);
+        renderExamples(lang);
+      });
+    });
+  }
+
   function renderExamples(lang) {
     const container = document.getElementById('exampleCards');
     if (!container) return;
 
-    container.innerHTML = examples
-      .map(([slug, theme, copyByLang]) => {
+    container.innerHTML = visibleExamples()
+      .map(([slug, theme, copyByLang, meta]) => {
         const copy = copyByLang[lang];
         const font = fontBySlug[slug] || fontBySlug.fintech;
         const items = copy.items
           .map((item) => `<div class="mock-row">${escapeHTML(item)}</div>`)
           .join('');
 
-        return `<article class="phone-card" aria-label="${escapeHTML(copy.cardTitle)}">
+        return `<article class="phone-card" aria-label="${escapeHTML(copy.cardTitle)}" data-categories="${escapeHTML(meta.categories.join(' '))}" data-mode="${escapeHTML(meta.mode)}">
           <div class="phone ${escapeHTML(theme)} ${escapeHTML(font.className)}" lang="${escapeHTML(lang)}">
             <div class="status"></div>
             <div class="topbar"><span></span><strong>${escapeHTML(copy.nav)}</strong></div>
@@ -45,6 +85,7 @@
         </article>`;
       })
       .join('');
+    renderExampleSummary(lang);
   }
 
   function renderFonts(lang) {
@@ -102,6 +143,7 @@
       button.setAttribute('aria-pressed', String(button.dataset.setLang === nextLang));
     });
 
+    renderCategoryFilters(nextLang);
     renderExamples(nextLang);
     renderFonts(nextLang);
 
