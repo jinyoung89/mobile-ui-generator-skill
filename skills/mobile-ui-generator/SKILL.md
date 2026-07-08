@@ -1,7 +1,7 @@
 ---
 name: mobile-ui-generator
 description: Generate service-aware mobile UX/UI briefs, JSON specs, pattern systems, font profiles, copy systems, and implementation prompts for app screens and flows. Use for onboarding, signup, checkout, account cancellation, home screens, fintech, commerce, games, education, messenger, healthcare, travel, Korean mobile UI generation, and mobile UI pattern design.
-version: 0.3.0
+version: 0.3.1
 author: jinyoung89
 license: MIT
 tags: [mobile-ui, ux-ui, design, mobile-patterns, prompt-engineering, font-profile, korean-ui]
@@ -46,38 +46,45 @@ Produce one or more of the following depending on the request:
 
 Do **not** run image generation unless the user explicitly requests image generation.
 
-## 1. Choose language mode first
+## 1. Start from product intent, screen flow, and UI patterns
 
-Ask or infer the output language. If unclear, use the user's language.
+Do **not** start by choosing language. Start by understanding the product task and the mobile UI pattern that solves it.
 
-| Mode | Output behavior |
-|---|---|
-| `en` | English narrative and English UI copy |
-| `ko` | Korean narrative and Korean UI copy |
+Extract these design inputs first:
 
-Rules:
-
-- Do not mix English and Korean in the same user-facing output unless the user asks for bilingual output.
-- Product names, font names, framework names, and brand names may remain in their original language.
-- For Korean UI, prefer natural Korean microcopy over literal translation.
-
-## 2. Identify target domain, flow, and UI patterns
-
-Extract three layers from the request:
-
-1. **Domain** — fintech, commerce, mobility, education, game, messenger, healthcare, travel, content, support, etc.
-2. **Screen flow** — onboarding, signup, home, search, list, detail, checkout, booking, chat, settings, cancellation, etc.
-3. **UI pattern group** — concrete pattern such as `phone_verification`, `bottom_sheet_map`, `PLP_filter_sort`, `review_write`, `points_rewards`, `empty_state_recovery`, etc.
+1. **User job** — what the user is trying to complete now.
+2. **Domain** — fintech, commerce, mobility, education, game, messenger, healthcare, travel, content, support, etc.
+3. **Screen flow** — onboarding, signup, home, search, list, detail, checkout, booking, chat, settings, cancellation, etc.
+4. **Primary UI pattern group** — concrete pattern such as `phone_verification`, `bottom_sheet_map`, `PLP_filter_sort`, `review_write`, `points_rewards`, `empty_state_recovery`, etc.
+5. **Risk/trust level** — money, health, identity, privacy, destructive action, or casual browsing.
+6. **Completion state** — what success, failure, loading, empty, and recovery look like.
 
 Examples:
 
-- `한국 핀테크 앱 회원가입 휴대폰 인증 화면` => `fintech`, `signup`, `identity_verification`, `phone_verification`, `terms_agreement`, `fixed_bottom_cta`
-- `커머스 상품상세 장바구니 결제 화면` => `commerce`, `product_detail`, `cart`, `checkout`, `coupon_payment`, `legal_notice`, `amount_cta`
-- `모빌리티 지도 예약 결제 화면` => `mobility`, `map_location`, `reservation_booking`, `bottom_sheet_route`, `eta_price_card`, `payment_cta`
-- `게임 앱 메인 로비와 출석 보상 화면` => `game`, `home`, `game_lobby`, `daily_reward`, `quest_progress`, `ranking`
-- `교육 앱 오늘의 학습과 퀴즈 화면` => `education`, `lesson_home`, `progress`, `quiz`, `resume_learning`, `wrong_answer_review`
-- `메신저 앱 채팅방과 메시지 입력 화면` => `messenger`, `chat`, `message_bubbles`, `composer`, `attachment_menu`, `safe_area_keyboard`
-- `서비스 탈퇴 전 확인 화면` => `account`, `account_cancellation`, `risk_disclosure`, `benefit_loss`, `destructive_cta`
+- `한국 핀테크 앱 회원가입 휴대폰 인증 화면` => `fintech`, `signup`, `identity_verification`, `phone_verification`, `terms_agreement`, `fixed_bottom_cta`, high trust.
+- `커머스 상품상세 장바구니 결제 화면` => `commerce`, `product_detail`, `cart`, `checkout`, `coupon_payment`, `legal_notice`, `amount_cta`, purchase confidence.
+- `모빌리티 지도 예약 결제 화면` => `mobility`, `map_location`, `reservation_booking`, `bottom_sheet_map`, `eta_price_card`, `payment_cta`, location clarity.
+- `게임 앱 메인 로비와 출석 보상 화면` => `game`, `home`, `game_lobby`, `daily_reward`, `quest_progress`, `ranking`, motivation/reward.
+- `교육 앱 오늘의 학습과 퀴즈 화면` => `education`, `lesson_home`, `progress`, `quiz`, `resume_learning`, `wrong_answer_review`, learning recovery.
+- `메신저 앱 채팅방과 메시지 입력 화면` => `messenger`, `chat`, `message_bubbles`, `composer`, `attachment_menu`, `safe_area_keyboard`, continuous conversation.
+- `서비스 탈퇴 전 확인 화면` => `account`, `account_cancellation`, `risk_disclosure`, `benefit_loss`, `destructive_cta`, irreversible action.
+
+## 2. Build the pattern system before writing copy
+
+For any non-trivial request, consult `references/mobile-pattern-library.md` and select 2-5 relevant patterns.
+
+For each selected pattern, specify:
+
+- `layout_archetype` — e.g. `single_task_form`, `map_plus_sheet`, `feed_stream`, `media_first_detail`, `list_filter_sheet`, `chat_thread`.
+- `navigation_model` — top app bar, bottom tabs, modal, bottom sheet, stepper, or full-screen flow.
+- `required_components` — only the components needed for the selected pattern.
+- `state_matrix` — default, loading, empty, error, success, disabled, permission, network, destructive, etc.
+- `interaction_model` — gestures, keyboard behavior, bottom-sheet states, form validation, confirmation, retry, undo.
+- `visual_hierarchy` — what must be seen first, second, and last.
+- `mobile_constraints` — safe area, 44pt+ touch targets, keyboard-aware layout, fixed CTA, reduced motion.
+- `anti_patterns` — concrete mistakes to avoid.
+
+Completion criterion: the brief should let a design/code agent build a screen without guessing the main layout, components, states, or interactions.
 
 ## 3. Mobile UI pattern catalog
 
@@ -270,7 +277,24 @@ Adapt the interface to the service category:
 - **Travel/reservation**: visual appeal, date/guest summary, price, cancellation confidence, itinerary state.
 - **Support/help center**: common issue routing, FAQ chips, bot/agent escalation, response time expectation.
 
-## 8. Typography / font profile
+## 8. Output language and UI copy system
+
+Choose language mode only after the design pattern and flow are clear. Language mode controls the narrative language and UI microcopy; it is not the first design decision.
+
+| Mode | Output behavior |
+|---|---|
+| `en` | English narrative and English UI copy |
+| `ko` | Korean narrative and Korean UI copy |
+
+Rules:
+
+- Do not mix English and Korean in the same user-facing output unless the user asks for bilingual output.
+- Product names, font names, framework names, and brand names may remain in their original language.
+- For Korean UI, prefer natural Korean microcopy over literal translation.
+- Tie copy to the selected pattern: verification copy differs from checkout copy, map copy, review copy, support copy, and destructive-action copy.
+- Include error, empty, loading, success, and permission copy when those states exist.
+
+## 9. Typography / font profile
 
 For real mobile UX/UI work, include typography. If a service-specific font is confirmed by the user or public brand/design docs, use it. Otherwise choose a free/public Korean UI font profile.
 
@@ -303,7 +327,7 @@ Rules:
 - Include iOS, Android, and Web fallback font stacks.
 - Include a license-check note for commercial use.
 
-## 9. Mobile UX constraints
+## 10. Mobile UX constraints
 
 Always consider:
 
@@ -316,7 +340,7 @@ Always consider:
 - empty, success, failure, and permission-denied states;
 - haptic/animation notes when useful, with reduced-motion fallback.
 
-## 10. Output format
+## 11. Output format
 
 For a substantial screen request, produce this structure:
 
@@ -324,10 +348,10 @@ For a substantial screen request, produce this structure:
 # Mobile UI Brief
 
 ## Intent
-- language_mode:
 - domain:
 - flow:
 - target_patterns:
+- language_mode:
 
 ## Pattern system
 - layout_archetype:
@@ -362,10 +386,10 @@ Machine-readable shape:
 
 ```json
 {
-  "language_mode": "ko",
   "domain": "fintech",
   "flow": "signup",
   "target_patterns": ["signup", "phone_verification", "terms_agreement", "fixed_bottom_cta"],
+  "language_mode": "ko",
   "layout_archetype": "single_task_form",
   "navigation_model": "top_app_bar_with_back",
   "font_profile": {
