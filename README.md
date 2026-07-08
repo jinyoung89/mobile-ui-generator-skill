@@ -151,16 +151,33 @@ Quality is not the number of screenshots. The skill checks whether references ac
 
 ## Example mobile views
 
-The website includes eight HTML/CSS mobile views produced from the skill's current brief templates, not from an image generator or uploaded app screenshots. On mobile, the cards can be swiped horizontally.
+The website includes nineteen HTML/CSS mobile views produced from the skill's current brief templates, not from an image generator or uploaded app screenshots. The examples are presented as a horizontal carousel on both desktop and mobile.
 
-- fintech signup / phone verification;
-- personalized onboarding;
-- commerce checkout;
+Screen-flow examples:
+
+- onboarding / preference setup;
+- signup / identity verification;
+- account cancellation / withdrawal;
+- main home dashboard;
+- checkout / payment;
 - delivery tracking;
-- mobility booking;
-- finance transfer;
-- healthcare booking;
-- social feed.
+- booking and reservation;
+- settings and permissions;
+- empty state and search recovery.
+
+Service-domain examples:
+
+- fintech / transfer;
+- commerce / checkout;
+- mobility / map booking;
+- healthcare / appointment booking;
+- game / lobby and rewards;
+- education / lesson progress;
+- messenger / chat;
+- content / media viewer;
+- travel / stay booking;
+- subscription / paywall;
+- customer support / chatbot.
 
 Open the showcase:
 

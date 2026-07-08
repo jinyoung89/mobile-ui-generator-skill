@@ -50,6 +50,10 @@ Examples:
 - `한국 핀테크 앱 회원가입 휴대폰 인증 화면` => `fintech`, `signup`, `identity_verification`
 - `커머스 상품상세 장바구니 결제 화면` => `commerce`, `product_detail`, `cart`, `payment`
 - `모빌리티 지도 예약 결제 화면` => `mobility`, `map_location`, `reservation_booking`, `payment`
+- `게임 앱 메인 로비와 출석 보상 화면` => `game`, `home`, `points_rewards`
+- `교육 앱 오늘의 학습과 퀴즈 화면` => `education`, `home`, `lesson`, `quiz`
+- `메신저 앱 채팅방과 메시지 입력 화면` => `messenger`, `chat`
+- `서비스 탈퇴 전 확인 화면` => `account`, `cancellation`, `terms`
 
 ### 2. Retrieve references and assets
 
