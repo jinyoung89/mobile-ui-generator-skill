@@ -183,10 +183,11 @@ docs/assets/                      # public SVG artwork
 
 ## Skill reference architecture
 
-The installed skill is not just a single prompt. It includes a design reference set under `skills/mobile-ui-generator/references/`:
+The installed skill is not just a single prompt. It includes a design reference set under `skills/mobile-ui-generator/references/`. The public skill contains generalized design guidance only; underlying reference screens and origin details stay private:
 
 | Reference | Purpose |
 |---|---|
+| `evidence-and-sanitization.md` | Public-safe policy for using private/local collected reference analysis without revealing origins |
 | `design-principles.md` | Mobile design decision order, hierarchy, typography, color, motion, accessibility |
 | `mobile-pattern-library.md` | 60+ mobile UI patterns with components, states, interactions, copy, accessibility, anti-patterns |
 | `visual-style-taxonomy.md` | Mobile visual style selection, color moods, style combinations, anti-patterns |

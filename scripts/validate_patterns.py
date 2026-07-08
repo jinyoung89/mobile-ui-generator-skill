@@ -21,6 +21,13 @@ REF_DIR = SKILL_DIR / "references"
 PATTERN_REF = REF_DIR / "mobile-pattern-library.md"
 
 REQUIRED_REFERENCES = {
+    "evidence-and-sanitization.md": [
+        "Public-safe statement",
+        "What must stay private",
+        "Public conversion pipeline",
+        "Evidence levels",
+        "Update checklist",
+    ],
     "design-principles.md": [
         "Decision order",
         "Visual hierarchy",
@@ -151,12 +158,14 @@ BLOCKED_PUBLIC_TERMS = [
 ]
 
 SKILL_MUST_CONTAIN = [
+    "evidence-and-sanitization.md",
     "design-principles.md",
     "mobile-pattern-library.md",
     "visual-style-taxonomy.md",
     "domain-playbooks.md",
     "component-state-checklist.md",
     "quality-review-checklist.md",
+    "private/local analysis of curated mobile UI screens",
     "Start from product intent",
     "Build the pattern system before writing copy",
     "Language mode is a copy/output setting",

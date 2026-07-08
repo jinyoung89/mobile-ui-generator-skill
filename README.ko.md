@@ -35,10 +35,11 @@
 
 ## 스킬 reference 구조
 
-설치되는 스킬은 단일 프롬프트가 아니라 `skills/mobile-ui-generator/references/` 아래의 디자인 reference 세트를 포함합니다.
+설치되는 스킬은 단일 프롬프트가 아니라 `skills/mobile-ui-generator/references/` 아래의 디자인 reference 세트를 포함합니다. 공개 스킬에는 일반화된 디자인 가이드만 포함하고, 원본 reference와 출처 정보는 공개하지 않습니다.
 
 | Reference | 역할 |
 |---|---|
+| `evidence-and-sanitization.md` | private/local reference 분석을 출처 노출 없이 공개 지식으로 일반화하는 정책 |
 | `design-principles.md` | 모바일 디자인 판단 순서, 위계, 레이아웃, 타이포그래피, 컬러, 모션, 접근성 |
 | `mobile-pattern-library.md` | 60개 이상의 모바일 UI 패턴과 컴포넌트, 상태, 인터랙션, 카피, 접근성, 금지 패턴 |
 | `visual-style-taxonomy.md` | 모바일 시각 스타일 선택, 컬러 무드, 스타일 조합, anti-pattern |

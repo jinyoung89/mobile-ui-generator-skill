@@ -1,6 +1,6 @@
 # Mobile Pattern Library
 
-This reference distills mobile UI observations into public-safe design patterns. It intentionally avoids non-public source material, collection mechanics, provider names, or source-specific identifiers. Use it as a pattern checklist when generating mobile UI briefs and specs.
+This reference distills curated mobile UI reference analysis into public-safe design patterns. It intentionally avoids origin/source identifiers, collection mechanics, provider names, URLs, and local traceability. Use it as a pattern checklist when generating mobile UI briefs and specs.
 
 ## How to use this file
 

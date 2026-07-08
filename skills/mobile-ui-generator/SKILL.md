@@ -19,10 +19,11 @@ Do **not** run image generation unless the user explicitly asks for image genera
 
 ## Reference files
 
-Use these files as the skill's design knowledge base:
+Use these files as the skill's design knowledge base. The references may be improved from private/local analysis of curated mobile UI screens, but public files must expose only generalized design knowledge:
 
 | Reference | Use for |
 |---|---|
+| `references/evidence-and-sanitization.md` | How private/local collected reference analysis is generalized without revealing where it came from |
 | `references/design-principles.md` | Core mobile design decision order, hierarchy, layout, typography, color, motion, accessibility |
 | `references/mobile-pattern-library.md` | 60+ detailed mobile UI patterns with components, states, interactions, copy requirements, accessibility, anti-patterns |
 | `references/visual-style-taxonomy.md` | Mobile visual styles, color moods, style combinations, and style anti-patterns |
@@ -32,10 +33,11 @@ Use these files as the skill's design knowledge base:
 
 Load only the references needed for the task, but for substantial design generation use at least:
 
-1. `design-principles.md`
-2. `mobile-pattern-library.md`
-3. `component-state-checklist.md`
-4. `quality-review-checklist.md`
+1. `evidence-and-sanitization.md`
+2. `design-principles.md`
+3. `mobile-pattern-library.md`
+4. `component-state-checklist.md`
+5. `quality-review-checklist.md`
 
 Add `visual-style-taxonomy.md` when style, visual identity, color, typography, mood, or polish matters.
 Add `domain-playbooks.md` when the request names a domain or app category.
@@ -332,4 +334,4 @@ Revise the answer if it only contains generic visual adjectives, lacks states, l
 - [ ] Accessibility and mobile constraints are explicit.
 - [ ] Output language is selected after design structure.
 - [ ] Final answer passes the quality gate.
-- [ ] No non-public source material, collection mechanics, or source-specific identifiers are exposed.
+- [ ] No origin/source identifiers, collection mechanics, local paths, or underlying reference material are exposed.

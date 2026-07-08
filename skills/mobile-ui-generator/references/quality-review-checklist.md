@@ -192,4 +192,4 @@ Before final response, verify:
 - [ ] Did I define the visual system beyond “modern/minimal”?
 - [ ] Did I include states and accessibility?
 - [ ] Did I avoid inventing proprietary brand facts?
-- [ ] Did I avoid exposing non-public source material?
+- [ ] Did I avoid exposing origin/source identifiers, local paths, or underlying reference material?
