@@ -1,11 +1,26 @@
 {
-  "query": "한국 핀테크 앱 회원가입 휴대폰 인증 화면",
+  "language_mode": "ko",
   "domain": "fintech",
-  "target_screen_types": [
+  "screen_types": [
     "signup",
     "identity_verification"
   ],
-  "layout": "top navigation, large task title, phone/SMS fields, helper copy, fixed bottom CTA",
+  "tone": [
+    "trustworthy",
+    "clear",
+    "low_friction"
+  ],
+  "layout": {
+    "safe_area": true,
+    "fixed_bottom_cta": true,
+    "sections": [
+      "top_navigation",
+      "headline",
+      "form",
+      "helper_copy",
+      "cta"
+    ]
+  },
   "components": [
     "top_back",
     "large_title",
@@ -13,16 +28,25 @@
     "verification_code_input",
     "timer",
     "resend_button",
+    "terms_checkbox",
     "fixed_bottom_cta"
   ],
-  "quality_gates": [
-    "reference_relevance",
-    "asset_fit",
-    "safe_area",
-    "touch_target",
-    "korean_copy",
-    "valid_json_spec"
+  "states": [
+    "default",
+    "focused",
+    "invalid",
+    "loading",
+    "success"
   ],
+  "copy": {
+    "title": "휴대폰 번호로 시작할게요",
+    "subtitle": "안전한 가입을 위해 본인 명의 번호를 확인합니다.",
+    "phone_label": "휴대폰 번호",
+    "code_label": "인증번호",
+    "code_placeholder": "6자리 숫자 입력",
+    "terms": "필수 약관 전체 동의",
+    "primary_cta": "다음"
+  },
   "font_profile": {
     "family": "Pretendard",
     "css_url": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css",

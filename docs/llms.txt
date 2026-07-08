@@ -1,0 +1,10 @@
+# Mobile UI Generator Skill
+
+Mobile UI Generator Skill is an AI-agent skill for generating service-aware mobile UX/UI briefs, JSON specs, font profiles, copy systems, and implementation prompts.
+
+Website: https://jinyoung89.github.io/mobile-ui-generator-skill/
+Korean: https://jinyoung89.github.io/mobile-ui-generator-skill/ko/
+Repository: https://github.com/jinyoung89/mobile-ui-generator-skill
+Skill: skills/mobile-ui-generator/SKILL.md
+
+Primary topics: mobile UI generation, UX/UI briefs, Korean mobile UI, font profiles, JSON UI specs, AI agent skills.

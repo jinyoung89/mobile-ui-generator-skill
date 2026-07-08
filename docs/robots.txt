@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jinyoung89.github.io/mobile-ui-generator-skill/sitemap.xml

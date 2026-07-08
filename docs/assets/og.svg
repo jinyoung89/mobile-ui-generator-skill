@@ -28,10 +28,10 @@
   </g>
 
   <text x="86" y="126" fill="#B7FFE9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" letter-spacing="2">MOBILE UI GENERATOR SKILL</text>
-  <text x="86" y="210" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" letter-spacing="-2.6">Reference-backed</text>
-  <text x="86" y="284" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" letter-spacing="-2.6">mobile UI briefs</text>
-  <text x="88" y="342" fill="#C7D2FE" font-family="Arial, Helvetica, sans-serif" font-size="25">Private corpus · 56,665 rows · 349 apps</text>
-  <text x="88" y="377" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="23">Prompt specs, asset cues, and quality gates for agents</text>
+  <text x="86" y="210" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" letter-spacing="-2.6">Service-aware</text>
+  <text x="86" y="284" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800" letter-spacing="-2.6">mobile UX/UI</text>
+  <text x="88" y="342" fill="#C7D2FE" font-family="Arial, Helvetica, sans-serif" font-size="25">Briefs · JSON specs · font profiles · implementation prompts</text>
+  <text x="88" y="377" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="23">English or Korean output mode, selected by the user</text>
 
   <rect x="88" y="400" width="620" height="82" rx="20" fill="#111827" stroke="#2DD4BF" stroke-opacity="0.45"/>
   <text x="116" y="431" fill="#9CA3AF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">npx skills add</text>
