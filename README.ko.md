@@ -5,7 +5,7 @@
 # Mobile UI Generator Skill — 한국어
 
 <p align="center">
-  <em>AI 에이전트가 모바일 UX/UI 화면을 더 구체적으로 만들 수 있도록 브리프, JSON 스펙, 폰트 프로필, 구현 프롬프트를 생성하는 스킬입니다.</em>
+  <em>AI 에이전트가 모바일 UX/UI 화면을 패턴, 디자인 시스템, 상태, 컴포넌트까지 포함해 구체적으로 생성하도록 돕는 스킬입니다.</em>
 </p>
 
 <p align="center">
@@ -18,44 +18,40 @@
 
 ## 무엇인가요?
 
-**Mobile UI Generator Skill**은 AI 에이전트가 실제 제품 흐름에 맞는 모바일 UX/UI를 만들도록 돕는 스킬입니다.
+**Mobile UI Generator Skill**은 AI 에이전트가 실제 제품 흐름에 맞는 모바일 UX/UI를 만들도록 돕는 디자인 중심 스킬입니다.
 
-생성 결과에는 다음이 포함될 수 있습니다.
+이 스킬은 단순히 “모던한 모바일 화면”을 말하지 않고, 다음을 명시하도록 설계했습니다.
 
-1. 앱 도메인과 화면 흐름 선택
-2. 휴대폰 인증, PLP/PDP, 결제, 지도 바텀시트, 채팅 입력창, 리뷰쓰기, 랭킹, 리워드, FAQ, 빈 상태 복구 같은 구체적인 모바일 UI 패턴 선택
-3. 레이아웃 아키타입, 내비게이션 모델, 컴포넌트, 상태, 인터랙션, CTA 정의
-4. 선택한 언어에 맞는 UI 카피 작성
-5. 영어 또는 한국어 중 하나의 언어 모드 선택
-6. 서비스 성격에 맞는 폰트 프로필 추가
-7. 디자인/코드/Figma/이미지 생성 에이전트에 전달할 Markdown 브리프와 JSON 스펙 생성
+1. 사용자 과업과 앱 도메인
+2. 화면 흐름과 위험/신뢰 수준
+3. 휴대폰 인증, PLP/PDP, 결제, 지도 바텀시트, 채팅 입력창, 리뷰쓰기, 랭킹, 리워드, FAQ, 빈 상태 복구 같은 구체적인 모바일 UI 패턴
+4. 레이아웃 아키타입과 내비게이션 모델
+5. 컴포넌트 인벤토리와 상태 매트릭스
+6. 시각 스타일, 타이포그래피, 컬러, 모션, 아이콘/에셋 가이드
+7. 접근성, safe area, 터치 타깃, 키보드 대응
+8. 디자인/코드/Figma/이미지 생성 에이전트에 전달할 Markdown 브리프와 JSON 스펙
 
 이미지 생성은 사용자가 명시적으로 요청할 때만 수행하는 것을 원칙으로 합니다.
 
-## 언어 모드
+## 스킬 reference 구조
 
-문서 기본은 영어이지만, 생성 결과는 선택한 언어 하나로 나와야 합니다.
+설치되는 스킬은 단일 프롬프트가 아니라 `skills/mobile-ui-generator/references/` 아래의 디자인 reference 세트를 포함합니다.
 
-| Mode | 용도 | 규칙 |
-|---|---|---|
-| `en` | 영어 서비스 또는 영어 문서 | 설명과 UI 카피를 영어로 작성 |
-| `ko` | 한국어 서비스 | 설명과 UI 카피를 한국어로 작성 |
-
-사용자가 요청하지 않는 한 영어와 한국어를 한 화면에 섞지 않습니다. 단, 브랜드명이나 제품명은 예외입니다.
-
-## 화면 카테고리
-
-| 흐름 | 화면 유형 |
+| Reference | 역할 |
 |---|---|
-| 유입 | `splash`, `onboarding`, `permission`, `preference_setup` |
-| 인증 | `login`, `signup`, `identity_verification`, `terms` |
-| 계정 | `profile`, `settings`, `notification_permission`, `account_cancellation` |
-| 커머스 | `product_list`, `product_detail`, `cart`, `checkout`, `payment`, `order_complete` |
-| 금융 | `account_home`, `transfer`, `wallet`, `investment_portfolio`, `card_detail` |
-| 소셜/콘텐츠 | `feed`, `chat`, `notification`, `creator_profile`, `content_viewer` |
-| 모빌리티/여행 | `map_location`, `reservation_booking`, `route`, `stay_booking`, `ticket` |
-| 교육/게임 | `lesson_home`, `quiz`, `progress`, `game_lobby`, `reward` |
-| 지원 | `customer_support`, `faq`, `empty_state`, `error_recovery` |
+| `design-principles.md` | 모바일 디자인 판단 순서, 위계, 레이아웃, 타이포그래피, 컬러, 모션, 접근성 |
+| `mobile-pattern-library.md` | 60개 이상의 모바일 UI 패턴과 컴포넌트, 상태, 인터랙션, 카피, 접근성, 금지 패턴 |
+| `visual-style-taxonomy.md` | 모바일 시각 스타일 선택, 컬러 무드, 스타일 조합, anti-pattern |
+| `domain-playbooks.md` | 핀테크, 커머스, 모빌리티, 헬스케어, 교육, 게임, 미디어, IoT 등 도메인별 가이드 |
+| `component-state-checklist.md` | 구현 가능한 스펙을 위한 컴포넌트 인벤토리와 상태 매트릭스 |
+| `quality-review-checklist.md` | 디자인 적합성, 시각 시스템, 상태, 접근성, 핸드오프 품질 검증 |
+
+검증:
+
+```bash
+python3 scripts/validate_patterns.py
+python3 scripts/validate_site.py
+```
 
 ## 패턴 시스템
 
@@ -80,6 +76,17 @@
 
 핀테크, 커머스, 모빌리티, 배달, 헬스케어, 교육, 게임, 메신저, 소셜, 콘텐츠, 여행, SaaS, 고객센터 등 다양한 앱 성격에 맞춰 화면 톤과 레이아웃을 조정합니다.
 
+## 언어와 카피
+
+언어 모드는 첫 번째 디자인 판단이 아니라, 패턴과 화면 구조를 정한 뒤 적용하는 **카피/출력 설정**입니다.
+
+| Mode | 용도 | 규칙 |
+|---|---|---|
+| `en` | 영어 서비스 또는 영어 문서 | 설명과 UI 카피를 영어로 작성 |
+| `ko` | 한국어 서비스 | 설명과 UI 카피를 한국어로 작성 |
+
+사용자가 요청하지 않는 한 영어와 한국어를 한 화면에 섞지 않습니다. 단, 브랜드명이나 제품명은 예외입니다.
+
 ## 폰트 프로필
 
 모바일 UI에서는 폰트, 숫자 가독성, 자간이 중요합니다. 확인된 브랜드 폰트가 있으면 그 폰트를 사용하고, 정확한 폰트를 모르면 무료/공개 한국어 UI 폰트를 추천합니다.
@@ -93,20 +100,9 @@
 | Spoqa Han Sans Neo | 친근한 소비자 서비스, 로컬 커머스, 푸드/라이프스타일 | https://github.com/spoqa/spoqa-han-sans |
 | Wanted Sans | SaaS, 채용, 생산성, 전문 서비스 | https://github.com/wanteddev/wanted-sans |
 
-예시:
-
-```yaml
-font_profile:
-  family: Pretendard
-  css_url: https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css
-  fallback: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif
-  confidence: recommended fallback
-  reason: 한국 모바일 UI와 숫자 가독성에 무난한 기본 폰트.
-```
-
 ## 웹사이트 예시
 
-웹사이트의 예시 UI는 직접 만든 HTML/CSS 데모입니다. 실제 앱 캡처도 아니고 이미지 생성 결과도 아닙니다. 데스크톱과 모바일 모두 가로 캐러셀로 볼 수 있습니다.
+웹사이트의 예시 UI는 직접 만든 HTML/CSS 데모입니다. 실제 앱 캡처도 아니고 이미지 생성 결과도 아닙니다.
 
 ```text
 https://jinyoung89.github.io/mobile-ui-generator-skill/

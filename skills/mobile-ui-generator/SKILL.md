@@ -1,302 +1,168 @@
 ---
 name: mobile-ui-generator
-description: Generate service-aware mobile UX/UI briefs, JSON specs, pattern systems, font profiles, copy systems, and implementation prompts for app screens and flows. Use for onboarding, signup, checkout, account cancellation, home screens, fintech, commerce, games, education, messenger, healthcare, travel, Korean mobile UI generation, and mobile UI pattern design.
-version: 0.3.1
+description: Use when generating, designing, specifying, reviewing, or handing off mobile app UX/UI screens and flows. Produces pattern-aware mobile UI briefs, JSON specs, design-system guidance, component/state matrices, font profiles, copy systems, and implementation prompts for fintech, commerce, mobility, healthcare, education, games, messaging, travel, AI, support, and Korean mobile UI.
+version: 0.4.0
 author: jinyoung89
 license: MIT
-tags: [mobile-ui, ux-ui, design, mobile-patterns, prompt-engineering, font-profile, korean-ui]
+tags: [mobile-ui, ux-ui, design, mobile-patterns, design-system, font-profile, korean-ui]
 ---
 
 # Mobile UI Generator
 
-Use this skill when a user asks an agent to generate, design, code, or specify a mobile app screen or flow.
+## Overview
 
-This skill is about **mobile UX/UI generation**. It should produce clear design briefs, pattern-aware UI specs, and implementation-ready prompts for agent handoff.
+Use this skill when a user asks an agent to generate, design, code, review, or specify a **mobile app screen or flow**.
 
-The skill should not merely name a screen type. It must translate the requested app domain and screen flow into concrete mobile design decisions: layout archetype, navigation model, component inventory, states, interactions, copy, typography, and handoff constraints.
+This is a design-first skill. It should not produce generic “modern mobile UI” advice. It must choose concrete mobile UI patterns, define layout and interaction decisions, specify component/state coverage, and produce implementation-ready handoff artifacts.
+
+Do **not** run image generation unless the user explicitly asks for image generation.
 
 ## Reference files
 
-- `references/mobile-pattern-library.md` — public-safe mobile UI pattern library distilled from observed mobile screen structures. Use this file when choosing patterns, required components, state matrices, interactions, copy requirements, and anti-patterns.
+Use these files as the skill's design knowledge base:
 
-The reference library intentionally contains **generalized design knowledge only**. It must not include non-public source material, collection mechanics, provider names, or source-specific identifiers.
+| Reference | Use for |
+|---|---|
+| `references/design-principles.md` | Core mobile design decision order, hierarchy, layout, typography, color, motion, accessibility |
+| `references/mobile-pattern-library.md` | 60+ detailed mobile UI patterns with components, states, interactions, copy requirements, accessibility, anti-patterns |
+| `references/visual-style-taxonomy.md` | Mobile visual styles, color moods, style combinations, and style anti-patterns |
+| `references/domain-playbooks.md` | Domain-specific pattern, style, typography, color, trust, and anti-pattern guidance |
+| `references/component-state-checklist.md` | Component inventories and state matrices for navigation, inputs, commerce, finance, maps, feedback, CTAs |
+| `references/quality-review-checklist.md` | Pre-delivery quality gate for pattern fit, visual system, interaction, states, accessibility, and handoff |
 
-## Pattern coverage loop
+Load only the references needed for the task, but for substantial design generation use at least:
 
-When a new or under-modeled mobile pattern is discovered:
+1. `design-principles.md`
+2. `mobile-pattern-library.md`
+3. `component-state-checklist.md`
+4. `quality-review-checklist.md`
 
-1. Capture it in a private/local backlog first. Do not publish source-specific identifiers or collection mechanics.
-2. Normalize it into a generic pattern ID, e.g. `gift_send_receive`, `analytics_report`, `voice_interaction`, or `device_control`.
-3. Add the public-safe checklist to `references/mobile-pattern-library.md` with `user_intent`, `layout`, `required_components`, `states`, `interactions`, `copy_requirements`, `accessibility`, and `anti_patterns`.
-4. If it changes the always-needed process, update this `SKILL.md`; otherwise keep the detail in the reference file.
-5. Run `python3 scripts/validate_patterns.py` and `python3 scripts/validate_site.py` before publishing.
+Add `visual-style-taxonomy.md` when style, visual identity, color, typography, mood, or polish matters.
+Add `domain-playbooks.md` when the request names a domain or app category.
 
-Completion criterion: every newly added pattern has a concrete state matrix and at least one anti-pattern, and no public file exposes non-public source material.
+## Workflow
 
-## Core outputs
+### 1. Start from product intent and mobile pattern fit
 
-Produce one or more of the following depending on the request:
+Do **not** start with language, colors, or fonts. Start by extracting:
 
-- `mobile-ui-brief.md` — human-readable UX/UI generation brief;
-- `mobile-ui-brief.json` — machine-readable UI spec;
-- `pattern_system` — screen pattern groups, layout archetype, components, interactions, and states;
-- `font_profile` — font family, CSS/download URL, fallback stack, and reason;
-- `copy_system` — language-specific UI copy guidelines;
-- `implementation_prompt` — prompt for a code, Figma, design-system, or image-generation agent.
-
-Do **not** run image generation unless the user explicitly requests image generation.
-
-## 1. Start from product intent, screen flow, and UI patterns
-
-Do **not** start by choosing language. Start by understanding the product task and the mobile UI pattern that solves it.
-
-Extract these design inputs first:
-
-1. **User job** — what the user is trying to complete now.
-2. **Domain** — fintech, commerce, mobility, education, game, messenger, healthcare, travel, content, support, etc.
-3. **Screen flow** — onboarding, signup, home, search, list, detail, checkout, booking, chat, settings, cancellation, etc.
-4. **Primary UI pattern group** — concrete pattern such as `phone_verification`, `bottom_sheet_map`, `PLP_filter_sort`, `review_write`, `points_rewards`, `empty_state_recovery`, etc.
-5. **Risk/trust level** — money, health, identity, privacy, destructive action, or casual browsing.
-6. **Completion state** — what success, failure, loading, empty, and recovery look like.
+- user job;
+- app domain;
+- target screen/flow;
+- primary UI pattern group;
+- risk/trust level;
+- completion, failure, empty, loading, and recovery states.
 
 Examples:
 
-- `한국 핀테크 앱 회원가입 휴대폰 인증 화면` => `fintech`, `signup`, `identity_verification`, `phone_verification`, `terms_agreement`, `fixed_bottom_cta`, high trust.
-- `커머스 상품상세 장바구니 결제 화면` => `commerce`, `product_detail`, `cart`, `checkout`, `coupon_payment`, `legal_notice`, `amount_cta`, purchase confidence.
-- `모빌리티 지도 예약 결제 화면` => `mobility`, `map_location`, `reservation_booking`, `bottom_sheet_map`, `eta_price_card`, `payment_cta`, location clarity.
-- `게임 앱 메인 로비와 출석 보상 화면` => `game`, `home`, `game_lobby`, `daily_reward`, `quest_progress`, `ranking`, motivation/reward.
-- `교육 앱 오늘의 학습과 퀴즈 화면` => `education`, `lesson_home`, `progress`, `quiz`, `resume_learning`, `wrong_answer_review`, learning recovery.
-- `메신저 앱 채팅방과 메시지 입력 화면` => `messenger`, `chat`, `message_bubbles`, `composer`, `attachment_menu`, `safe_area_keyboard`, continuous conversation.
-- `서비스 탈퇴 전 확인 화면` => `account`, `account_cancellation`, `risk_disclosure`, `benefit_loss`, `destructive_cta`, irreversible action.
+| Request | Pattern interpretation |
+|---|---|
+| Korean fintech signup phone verification | `fintech`, `signup`, `phone_verification`, `terms_agreement`, `fixed_bottom_cta`, high trust |
+| Commerce product detail to checkout | `commerce`, `PDP`, `cart`, `checkout`, `coupon_points`, `review`, purchase confidence |
+| Mobility map booking | `mobility`, `map_location`, `bottom_sheet_map`, `reservation_booking`, `payment_cta`, location clarity |
+| Game lobby with attendance reward | `game`, `game_lobby`, `daily_reward`, `quest_progress`, `ranking`, motivation/reward |
+| Chat room with media attachments | `messenger`, `chat`, `media_capture`, `safe_area_keyboard`, continuous conversation |
+| Account cancellation | `account_cancellation`, `risk_disclosure`, `benefit_loss`, `destructive_cta`, irreversible action |
 
-## 2. Build the pattern system before writing copy
+Completion criterion: the selected patterns should make the screen's layout, components, interactions, and states predictable.
 
-For any non-trivial request, consult `references/mobile-pattern-library.md` and select 2-5 relevant patterns.
+### 2. Build the pattern system before writing copy
+
+For any non-trivial request, select 2-5 relevant patterns from `references/mobile-pattern-library.md`.
 
 For each selected pattern, specify:
 
-- `layout_archetype` — e.g. `single_task_form`, `map_plus_sheet`, `feed_stream`, `media_first_detail`, `list_filter_sheet`, `chat_thread`.
-- `navigation_model` — top app bar, bottom tabs, modal, bottom sheet, stepper, or full-screen flow.
-- `required_components` — only the components needed for the selected pattern.
-- `state_matrix` — default, loading, empty, error, success, disabled, permission, network, destructive, etc.
-- `interaction_model` — gestures, keyboard behavior, bottom-sheet states, form validation, confirmation, retry, undo.
-- `visual_hierarchy` — what must be seen first, second, and last.
-- `mobile_constraints` — safe area, 44pt+ touch targets, keyboard-aware layout, fixed CTA, reduced motion.
+- `layout_archetype` — e.g. `single_task_form`, `map_plus_sheet`, `feed_stream`, `media_first_detail`, `list_filter_sheet`, `chat_thread`, `calendar_slots`, `settings_list`;
+- `navigation_model` — top app bar, bottom tabs, modal, bottom sheet, stepper, full-screen flow;
+- `required_components` — components actually needed by the pattern;
+- `state_matrix` — default, loading, empty, error, success, disabled, permission, network, destructive, stale data;
+- `interaction_model` — gestures, keyboard behavior, sheet states, validation, confirmation, retry, undo;
+- `visual_hierarchy` — what the user sees first, second, and last;
+- `mobile_constraints` — safe area, touch targets, keyboard-aware layout, fixed CTA, reduced motion;
 - `anti_patterns` — concrete mistakes to avoid.
 
-Completion criterion: the brief should let a design/code agent build a screen without guessing the main layout, components, states, or interactions.
+Completion criterion: a design/code agent can build the screen without guessing the main UI structure.
 
-## 3. Mobile UI pattern catalog
+### 3. Choose domain and visual direction
 
-Use this catalog as the quick index, then consult `references/mobile-pattern-library.md` for the detailed checklist. Extend it when the user describes a more specific service.
+When the app category is known, consult `references/domain-playbooks.md`.
 
-### Acquisition / onboarding
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `splash` | app launch, brand impression | brand mark, loading duration, fallback state, transition into onboarding/home |
-| `onboarding_intro` | first-run value explanation | 1 idea per screen, illustration/media slot, skip/next affordance, progress dots |
-| `preference_setup` | personalization | chips, multi-select state, progressive disclosure, default recommendations |
-| `permission_request` | notification/location/camera access | explain why before OS prompt, allow later path, denied state |
-| `tutorial_coachmark` | explaining new feature | overlay hierarchy, dismiss target, never block core task for too long |
-
-### Auth / identity / terms
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `login` | returning users | social login, phone/email login, password reset, biometric option |
-| `signup` | new users | minimal fields, trust copy, progress state, duplicate account handling |
-| `phone_verification` | SMS verification | tel keyboard, timer, resend, code error state, auto-submit behavior |
-| `identity_verification` | fintech/regulated apps | legal copy, security reassurance, document/phone/certificate route |
-| `terms_agreement` | legal consent | required vs optional groups, expand detail, all-agree behavior |
-| `account_cancellation` | withdrawal/delete account | benefit loss, irreversible warnings, reason field, cooling-off or rejoin policy, destructive CTA hierarchy |
-
-### Home / navigation / menu
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `main_home` | app landing after login | primary metric/task, shortcuts, personalized module, banner, re-entry path |
-| `bottom_tabs` | main app navigation | 3-5 tabs, active state, badge count, safe-area spacing |
-| `top_app_bar` | contextual navigation | back/title/actions, search entry, sticky/collapsing behavior |
-| `menu_drawer` | secondary navigation | grouped menu, account area, settings/support access |
-| `my_page` | user profile/account hub | profile summary, benefits, orders/history, settings, support, logout |
-| `membership` | loyalty/subscription hub | tier, benefits, points, renewal/upgrade CTA |
-
-### Search / discovery / listing
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `search` | keyword discovery | search field, recent terms, suggestions, voice/camera option if relevant |
-| `filter_sort` | list refinement | filter chips, sort, applied count, reset, bottom-sheet filter on mobile |
-| `category_browse` | browsing hierarchy | category chips/grid, selected state, horizontal scroll, empty category state |
-| `PLP` | product/listing page | card density, image ratio, price/rating badges, wishlist, pagination/infinite scroll |
-| `comparison` | compare products/plans | sticky headers, 2-4 item limit, difference highlighting |
-| `nearby` | local discovery | map/list toggle, distance, open status, location permission fallback |
-
-### Detail / content / viewer
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `PDP` | product detail | media gallery, price, options, delivery/return, reviews, sticky purchase CTA |
-| `content_viewer` | article/video/audio | media hero, progress, metadata, engagement actions, next content path |
-| `image_video_viewer` | photo/video browsing | full-screen mode, gestures, caption, share/save actions |
-| `bookmark_wishlist` | saved items | saved state, folders/collections, remove undo, empty state |
-| `announcement` | notices | priority badge, date, read/unread, attachment/link handling |
-
-### Commerce / payment / order
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `cart` | pre-checkout | item edit, quantity, shipping, coupon, price summary |
-| `checkout` | purchase confirmation | address, payment method, coupon/points, legal copy, total amount CTA |
-| `simple_payment` | one-tap/easy pay | saved method, biometric/auth step, failure recovery, receipt |
-| `coupon_points` | discounts/loyalty | available vs unavailable, apply all, expiration, constraints |
-| `order_complete` | success | receipt summary, next action, delivery tracking, share/save |
-| `order_history` | purchase history | status filters, reorder, refund/exchange, invoice/receipt |
-| `review` | review browsing | rating summary, photo reviews, filter by rating/topic |
-| `review_write` | review creation | star rating, text/photo upload, incentive note, validation |
-
-### Finance / wallet / records
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `account_overview` | balance/asset home | masked balances, account cards, primary actions, security state |
-| `transfer` | send money | recipient, amount keypad, fee, memo, confirmation, fraud warning |
-| `transaction_history` | 내역/history | date grouping, category, search/filter, receipt/detail drilldown |
-| `card_detail` | card/wallet | spending, benefits, limits, lock/report lost, card art |
-| `investment_portfolio` | holdings | gain/loss color semantics, chart, risk notice, asset allocation |
-| `security_auth` | finance auth | biometric/PIN/certificate, timeout, retry lock, fallback support |
-
-### Booking / map / mobility / travel
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `map_location` | map-first UX | current location, marker clustering, search, permission denied state |
-| `route_navigation` | directions/길찾기 | origin/destination, ETA, route options, step preview |
-| `reservation_booking` | booking slot | calendar, time slot state, provider/resource, cancellation policy |
-| `bottom_sheet_map` | map + details | collapsed/half/full states, drag handle, CTA pinned in sheet |
-| `delivery_tracking` | order/rider/package | ETA, progress timeline, map, contact/support, issue report |
-| `stay_booking` | hotel/travel | date/guest summary, room card, price breakdown, cancellation confidence |
-
-### Social / messaging / creation
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `feed` | social/content feed | content card hierarchy, reactions, comments, save/share, infinite scroll |
-| `chat` | messaging | bubble alignment, timestamps, composer, attachments, keyboard safe area |
-| `notification` | alerts | read/unread, grouping, actionability, permission re-entry |
-| `profile` | user/creator page | avatar, stats, follow/message, content tabs |
-| `write_post` | 글쓰기/content creation | title/body/media, draft save, visibility, validation, publish CTA |
-| `media_capture` | camera/recording/upload | permission, preview, retake, progress, compression/error |
-
-### Engagement / rewards / game
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `gamification` | habit, education, commerce, games | progress, levels, streak, feedback animation, reward clarity |
-| `ranking` | leaderboard | rank delta, period filter, current user highlight, fairness note |
-| `points_rewards` | loyalty/rewards | earn/burn, expiration, tier, reward redemption CTA |
-| `event_promotion` | 기획전/이벤트 | hero banner, period, benefit, participation CTA, terms |
-| `quest_progress` | game/learning tasks | task list, completion state, reward preview, claim CTA |
-
-### Support / help / system states
-
-| Pattern | Use for | Required design decisions |
-|---|---|---|
-| `customer_support` | help entry | FAQ chips, bot/agent route, recent inquiry, escalation path |
-| `faq` | self-service | category, search, expand/collapse, helpful feedback |
-| `inquiry` | 문의하기 | category, attachments, contact info, response time expectation |
-| `empty_state` | no content/search result | cause, helpful copy, alternate path, primary recovery action |
-| `error_state` | failure | what happened, retry, fallback, support link, avoid blame copy |
-| `loading_skeleton` | async content | skeleton matching final layout, avoid spinner-only for long loads |
-| `success_state` | task complete | confirmation, summary, next best action, receipt/share if relevant |
-
-## 4. Layout archetypes
-
-Choose one or more archetypes and explain why:
-
-| Archetype | Best for | Notes |
-|---|---|---|
-| `single_task_form` | signup, verification, transfer | one task, strong title, visible labels, fixed bottom CTA |
-| `feed_stream` | social/content/home | repeated cards, pagination/infinite scroll, content actions |
-| `dashboard_cards` | finance/home/health | summary metric, cards, shortcuts, alerts |
-| `map_plus_sheet` | mobility/nearby/delivery | map context + draggable bottom sheet + pinned CTA |
-| `media_first_detail` | PDP/content/travel | image/video hero + detail sections + sticky CTA |
-| `list_filter_sheet` | PLP/history/search | list with chip filters and bottom-sheet refinement |
-| `chat_thread` | messenger/support | message list, composer, keyboard-safe bottom area |
-| `calendar_slots` | booking/healthcare | date strip, slot states, provider/resource info |
-| `settings_list` | settings/account/help | grouped list, toggles, destructive actions separated |
-| `empty_recovery` | empty/error/no result | illustration, plain explanation, alternate path |
-
-## 5. Component inventory checklist
-
-When generating a screen, include only the components that fit the selected pattern.
-
-- Navigation: status bar, top app bar, back button, close button, bottom tabs, segmented tabs.
-- Inputs: text field, phone field, search field, amount keypad, checkbox, radio, toggle, picker, slider.
-- Selection: chips, category grid, filter sheet, sort menu, option cards, plan cards.
-- Commerce: product card, price row, coupon row, payment method, order summary, receipt.
-- Social/content: feed card, avatar, reaction buttons, comment entry, share/save, media viewer.
-- Map/booking: map marker, route card, ETA, calendar strip, time slot, bottom sheet.
-- Feedback: toast, snackbar, inline error, banner alert, skeleton, progress bar, empty state.
-- Trust/legal: terms link, privacy helper, risk notice, fee disclosure, cancellation policy.
-- CTA: primary, secondary, destructive, disabled, loading, sticky/fixed bottom.
-
-## 6. State matrix requirements
-
-For each important component, specify states. At minimum:
+When visual polish or style is requested, consult `references/visual-style-taxonomy.md` and define:
 
 ```yaml
-states:
+visual_system:
+  style_direction:
+  typography_direction:
+  color_direction:
+  spacing_radius_elevation:
+  motion_direction:
+  icon_asset_guidance:
+  anti_patterns:
+```
+
+Style should serve the domain and task:
+
+- fintech/health/identity/destructive actions need clarity and trust over decoration;
+- education/games/rewards can use more playful visual feedback;
+- content/media/travel can be more image-led;
+- analytics/business tools need data clarity and tabular numbers;
+- AI/generation flows need transparent progress, edit/apply paths, and review affordances.
+
+Completion criterion: the style choice includes what to use and what to avoid.
+
+### 4. Define components and states
+
+Consult `references/component-state-checklist.md`.
+
+Every substantial spec should include:
+
+```yaml
+component_inventory:
+  navigation:
+  inputs:
+  selection:
+  content_or_cards:
+  feedback:
+  trust_or_legal:
+  cta:
+state_matrix:
   screen: [default, loading, empty, error, success]
   input: [empty, focused, filled, invalid, disabled]
-  cta: [enabled, disabled, loading, destructive]
-  network: [offline, retrying, timeout]
+  cta: [disabled, enabled, pressed, loading, success]
+  network: [offline, timeout, retrying]
   permission: [not_requested, granted, denied, ask_later]
 ```
 
-Examples:
+Adapt states to the pattern:
 
-- `phone_verification`: invalid code, timer expired, resend available, too many attempts, auto-submit success.
-- `checkout`: coupon unavailable, payment failed, address missing, terms unchecked, order success.
-- `map_location`: permission denied, GPS loading, no nearby results, route recalculating.
-- `chat`: sending, failed to send, attachment uploading, keyboard open, unread separator.
+- `phone_verification`: invalid code, expired timer, resend available, too many attempts, verified;
+- `checkout`: missing address, coupon unavailable, payment failed, payment loading, order success;
+- `map_location`: permission denied, locating, no nearby results, route recalculating;
+- `chat`: sending, failed to send, attachment uploading, keyboard open, unread separator;
+- `analytics_report`: loading, no data, filtered empty, stale data, chart error.
 
-## 7. Domain-specific design guidance
+Completion criterion: no important component exists only in the happy path.
 
-Adapt the interface to the service category:
+### 5. Set output language and copy after the design model
 
-- **Fintech/banking**: trust, numeric clarity, low-risk CTA wording, strong confirmation states, security cues, fee/risk disclosure.
-- **Commerce/marketplace**: product summary, price hierarchy, coupon/payment rows, review/social proof, legal notice near CTA.
-- **Mobility/delivery**: map or route preview, ETA, status timeline, bottom sheet, contextual support action.
-- **Healthcare/booking**: provider trust, schedule clarity, cancellation policy, privacy-sensitive copy, confirmation step.
-- **Education**: progress, module structure, encouragement, resume CTA, quiz/wrong-answer recovery.
-- **Game**: high-energy visual hierarchy, rewards, level/progress, ranking, limited-time cues, strong feedback.
-- **Messenger/social**: readable conversation rhythm, composer affordance, media attachments, safe-area spacing.
-- **Content/media**: media hero, metadata, engagement actions, next-content path, viewer controls.
-- **Travel/reservation**: visual appeal, date/guest summary, price, cancellation confidence, itinerary state.
-- **Support/help center**: common issue routing, FAQ chips, bot/agent escalation, response time expectation.
+Language mode is a copy/output setting, not the first design decision.
 
-## 8. Output language and UI copy system
-
-Choose language mode only after the design pattern and flow are clear. Language mode controls the narrative language and UI microcopy; it is not the first design decision.
-
-| Mode | Output behavior |
+| Mode | Behavior |
 |---|---|
 | `en` | English narrative and English UI copy |
 | `ko` | Korean narrative and Korean UI copy |
 
 Rules:
 
-- Do not mix English and Korean in the same user-facing output unless the user asks for bilingual output.
+- Use the user's language if not specified.
+- Do not mix English and Korean in user-facing UI copy unless explicitly requested.
 - Product names, font names, framework names, and brand names may remain in their original language.
-- For Korean UI, prefer natural Korean microcopy over literal translation.
-- Tie copy to the selected pattern: verification copy differs from checkout copy, map copy, review copy, support copy, and destructive-action copy.
-- Include error, empty, loading, success, and permission copy when those states exist.
+- Korean UI copy should be natural, short, and pattern-aware.
+- Include state copy for errors, empty states, loading, success, permissions, destructive actions, and support paths.
 
-## 9. Typography / font profile
+### 6. Add typography and font profile
 
-For real mobile UX/UI work, include typography. If a service-specific font is confirmed by the user or public brand/design docs, use it. Otherwise choose a free/public Korean UI font profile.
+If a service-specific font is confirmed by the user or public brand/design docs, use it. Otherwise choose a safe public Korean UI font profile.
 
 Starter profiles:
 
@@ -313,44 +179,50 @@ Recommended shape:
 
 ```yaml
 font_profile:
-  family: Pretendard
-  css_url: https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css
-  fallback: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif
-  confidence: recommended fallback
-  reason: Neutral Korean mobile UI with strong numeric readability.
+  family:
+  css_url:
+  fallback:
+  confidence:
+  reason:
+  license_note:
 ```
 
-Rules:
+Do not invent proprietary brand fonts.
 
-- Do not invent service-specific font names.
-- Use confirmed brand typography only when the user provides it or public brand/design docs confirm it.
-- Include iOS, Android, and Web fallback font stacks.
-- Include a license-check note for commercial use.
+### 7. Run quality review before final output
 
-## 10. Mobile UX constraints
+Use `references/quality-review-checklist.md` before finalizing.
 
-Always consider:
+Minimum quality gate:
 
-- safe-area insets and bottom navigation/CTA zones;
-- 44pt+ touch targets;
-- keyboard behavior for forms and chat composer;
-- fixed CTA behavior and scrollable content boundaries;
-- readable Korean line breaks and `word-break: keep-all` behavior when relevant;
-- contrast, focus states, disabled/loading/error states;
-- empty, success, failure, and permission-denied states;
-- haptic/animation notes when useful, with reduced-motion fallback.
+```yaml
+quality_gate:
+  selected_patterns: present
+  layout_archetype: present
+  component_inventory: present
+  state_matrix: present
+  visual_system: present
+  interaction_model: present
+  accessibility_notes: present
+  anti_patterns: present
+  implementation_prompt: present_when_requested
+```
 
-## 11. Output format
+Revise the answer if it only contains generic visual adjectives, lacks states, lacks component inventory, or lacks domain-specific decisions.
 
-For a substantial screen request, produce this structure:
+## Output formats
+
+### Markdown brief
 
 ```markdown
 # Mobile UI Brief
 
 ## Intent
+- user_job:
 - domain:
 - flow:
 - target_patterns:
+- risk_level:
 - language_mode:
 
 ## Pattern system
@@ -359,45 +231,62 @@ For a substantial screen request, produce this structure:
 - primary_components:
 - state_matrix:
 - interaction_model:
+- anti_patterns:
 
 ## Screen spec
-- hierarchy:
+- visual_hierarchy:
 - sections:
 - fixed/sticky regions:
-- empty/error/loading states:
+- empty/error/loading/success states:
+
+## Visual system
+- style_direction:
+- typography_direction:
+- color_direction:
+- spacing/radius/elevation:
+- motion_direction:
+- icon/asset guidance:
 
 ## Copy system
 - title:
 - helper copy:
 - CTA:
-- error/success messages:
+- error/success/empty/loading/permission copy:
 
-## Visual system
-- font_profile:
-- color direction:
-- spacing/radius/elevation:
-- icon/asset guidance:
+## Accessibility and mobile constraints
+- safe area:
+- touch targets:
+- keyboard behavior:
+- reduced motion:
+- screen reader labels:
 
 ## Implementation prompt
 ...
 ```
 
-Machine-readable shape:
+### JSON spec
 
 ```json
 {
   "domain": "fintech",
   "flow": "signup",
   "target_patterns": ["signup", "phone_verification", "terms_agreement", "fixed_bottom_cta"],
+  "risk_level": "high_trust",
   "language_mode": "ko",
   "layout_archetype": "single_task_form",
   "navigation_model": "top_app_bar_with_back",
+  "visual_system": {
+    "style_direction": "minimal_swiss + data_dense_professional",
+    "typography_direction": "numeric-readable Korean UI sans",
+    "color_direction": "navy, trust blue, neutral surfaces, semantic error/success",
+    "motion_direction": "subtle 150-250ms validation and submit feedback"
+  },
   "font_profile": {
     "family": "Pretendard",
     "css_url": "https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css",
     "fallback": "-apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Noto Sans KR, sans-serif"
   },
-  "components": [
+  "component_inventory": [
     "top_back",
     "large_title",
     "phone_input",
@@ -417,17 +306,30 @@ Machine-readable shape:
     "subtitle": "안전한 가입을 위해 본인 명의 번호를 확인합니다.",
     "primary_cta": "다음"
   },
-  "mobile_constraints": ["safe_area", "44pt_touch_targets", "keyboard_aware_layout", "fixed_bottom_cta"]
+  "mobile_constraints": ["safe_area", "44pt_touch_targets", "keyboard_aware_layout", "fixed_bottom_cta"],
+  "anti_patterns": ["playful_visual_tone", "ambiguous_legal_copy", "happy_path_only"]
 }
 ```
 
-## Do not
+## Common pitfalls
 
-- Do not run image generation unless explicitly requested.
-- Do not mix languages unless requested.
-- Do not invent real brand fonts or proprietary design facts.
-- Do not output generic UI advice without selecting concrete patterns.
-- Do not describe generated designs as being based on non-public collection or analysis. Use the generalized pattern library instead.
-- Do not skip states; mobile UI quality depends on empty/loading/error/success/permission states.
-- Do not present implementation mechanics as user-facing product features.
-- Do not upload unpublished screenshots, credentials, or project files that the user has not explicitly approved for sharing.
+1. **Starting with language, font, or color.** Start with user job, domain, flow, and pattern fit.
+2. **Generic modern UI.** Always name concrete patterns and anti-patterns.
+3. **Happy-path-only output.** Include loading, empty, error, success, disabled, and permission states where relevant.
+4. **No component inventory.** A spec without components is not implementation-ready.
+5. **Visual style without domain fit.** Style must match trust level and task pressure.
+6. **Copy without state coverage.** Include state-specific copy.
+7. **Unverified brand claims.** Do not invent proprietary brand fonts, design systems, or private facts.
+8. **Unrequested image generation.** Never generate images unless explicitly requested.
+
+## Verification checklist
+
+- [ ] Relevant reference files consulted.
+- [ ] User job, domain, flow, pattern group, and risk level stated.
+- [ ] Pattern system includes layout, navigation, components, states, interactions, and anti-patterns.
+- [ ] Visual system includes style, typography, color, spacing/elevation, motion, and icon/asset guidance.
+- [ ] Component-state matrix covers non-happy paths.
+- [ ] Accessibility and mobile constraints are explicit.
+- [ ] Output language is selected after design structure.
+- [ ] Final answer passes the quality gate.
+- [ ] No non-public source material, collection mechanics, or source-specific identifiers are exposed.

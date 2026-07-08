@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Validate public-safe mobile pattern coverage.
+"""Validate public-safe mobile UI skill reference coverage.
 
-This script checks that the skill reference contains the generic pattern IDs we
-expect the public skill to support. It intentionally avoids any source-specific
-collection details.
+Checks the actual skill package, not just the website:
+- SKILL.md is design-first and links every required reference file.
+- Detailed mobile pattern library covers expected pattern IDs.
+- Design references cover principles, style taxonomy, domain playbooks,
+  component/state guidance, and quality review.
+- Public files avoid source-specific collection terms.
 """
 from __future__ import annotations
 
@@ -12,11 +15,57 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-REFERENCE = ROOT / "skills/mobile-ui-generator/references/mobile-pattern-library.md"
-SKILL = ROOT / "skills/mobile-ui-generator/SKILL.md"
+SKILL_DIR = ROOT / "skills/mobile-ui-generator"
+SKILL = SKILL_DIR / "SKILL.md"
+REF_DIR = SKILL_DIR / "references"
+PATTERN_REF = REF_DIR / "mobile-pattern-library.md"
+
+REQUIRED_REFERENCES = {
+    "design-principles.md": [
+        "Decision order",
+        "Visual hierarchy",
+        "Typography system",
+        "Color system",
+        "Accessibility baseline",
+    ],
+    "mobile-pattern-library.md": [
+        "Pattern anatomy",
+        "phone_verification",
+        "checkout",
+        "bottom_sheet_map",
+        "analytics_report",
+    ],
+    "visual-style-taxonomy.md": [
+        "Style selection rule",
+        "minimal_swiss",
+        "glass_layered",
+        "ai_native",
+        "Visual anti-patterns",
+    ],
+    "domain-playbooks.md": [
+        "Fintech / banking / wallet",
+        "Commerce / marketplace / store",
+        "Healthcare / clinic / booking",
+        "IoT / smart home / device control",
+        "Domain selection checklist",
+    ],
+    "component-state-checklist.md": [
+        "Global state matrix",
+        "Top app bar",
+        "Bottom sheet",
+        "CTA rules",
+        "Handoff checklist",
+    ],
+    "quality-review-checklist.md": [
+        "Review levels",
+        "Product and pattern fit",
+        "State coverage",
+        "Output quality gate",
+        "Final self-check",
+    ],
+}
 
 EXPECTED_PATTERN_IDS = [
-    # acquisition/auth
     "splash",
     "onboarding_intro",
     "preference_setup",
@@ -28,7 +77,6 @@ EXPECTED_PATTERN_IDS = [
     "identity_verification",
     "terms_agreement",
     "account_cancellation",
-    # home/search/detail
     "main_home",
     "bottom_tabs",
     "my_page",
@@ -37,7 +85,6 @@ EXPECTED_PATTERN_IDS = [
     "PLP",
     "PDP",
     "bookmark_wishlist",
-    # commerce/finance/booking
     "cart",
     "checkout",
     "simple_payment",
@@ -50,7 +97,6 @@ EXPECTED_PATTERN_IDS = [
     "bottom_sheet_map",
     "reservation_booking",
     "delivery_tracking",
-    # social/support/engagement
     "feed",
     "chat",
     "write_post",
@@ -62,7 +108,6 @@ EXPECTED_PATTERN_IDS = [
     "faq",
     "empty_state",
     "error_state",
-    # expansion patterns
     "application_request_flow",
     "generate_create_flow",
     "lookup_query_flow",
@@ -94,8 +139,7 @@ EXPECTED_DOMAIN_MODIFIERS = [
     "business_tool_domain",
 ]
 
-# Keep these split so public code search does not surface source or collection terms
-# as project copy. The joined values are used only at validation runtime.
+# Split terms so public code search does not surface source/collection phrases as project copy.
 BLOCKED_PUBLIC_TERMS = [
     "ui" + "bowl",
     "crawl" + "er",
@@ -106,27 +150,63 @@ BLOCKED_PUBLIC_TERMS = [
     "private" + " datasets",
 ]
 
+SKILL_MUST_CONTAIN = [
+    "design-principles.md",
+    "mobile-pattern-library.md",
+    "visual-style-taxonomy.md",
+    "domain-playbooks.md",
+    "component-state-checklist.md",
+    "quality-review-checklist.md",
+    "Start from product intent",
+    "Build the pattern system before writing copy",
+    "Language mode is a copy/output setting",
+    "quality_gate",
+]
+
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}", file=sys.stderr)
     raise SystemExit(1)
 
 
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
 def main() -> None:
-    if not REFERENCE.exists():
-        fail(f"missing {REFERENCE.relative_to(ROOT)}")
-    reference = REFERENCE.read_text(encoding="utf-8")
-    skill = SKILL.read_text(encoding="utf-8")
+    if not SKILL.exists():
+        fail("missing SKILL.md")
+    if not PATTERN_REF.exists():
+        fail("missing mobile pattern reference")
 
-    pattern_ids = re.findall(r"^### `([^`]+)`", reference, flags=re.M)
-    if len(pattern_ids) < 55:
-        fail(f"expected at least 55 detailed patterns, got {len(pattern_ids)}")
+    skill = read(SKILL)
+    for needle in SKILL_MUST_CONTAIN:
+        if needle not in skill:
+            fail(f"SKILL.md missing {needle!r}")
+    if "Choose language mode first" in skill:
+        fail("SKILL.md regressed to language-first flow")
 
-    missing_patterns = [pid for pid in EXPECTED_PATTERN_IDS if f"### `{pid}`" not in reference]
+    reference_texts = {}
+    for rel, needles in REQUIRED_REFERENCES.items():
+        path = REF_DIR / rel
+        if not path.exists():
+            fail(f"missing reference file: {rel}")
+        text = read(path)
+        reference_texts[rel] = text
+        for needle in needles:
+            if needle not in text:
+                fail(f"{rel} missing required content {needle!r}")
+
+    pattern_ref = reference_texts["mobile-pattern-library.md"]
+    pattern_ids = re.findall(r"^### `([^`]+)`", pattern_ref, flags=re.M)
+    if len(pattern_ids) < 60:
+        fail(f"expected at least 60 detailed patterns, got {len(pattern_ids)}")
+
+    missing_patterns = [pid for pid in EXPECTED_PATTERN_IDS if f"### `{pid}`" not in pattern_ref]
     if missing_patterns:
         fail(f"missing pattern IDs: {missing_patterns}")
 
-    missing_domains = [modifier for modifier in EXPECTED_DOMAIN_MODIFIERS if modifier not in reference]
+    missing_domains = [modifier for modifier in EXPECTED_DOMAIN_MODIFIERS if modifier not in pattern_ref]
     if missing_domains:
         fail(f"missing domain modifiers: {missing_domains}")
 
@@ -138,18 +218,20 @@ def main() -> None:
         "accessibility",
         "anti_patterns",
     ]:
-        if required not in reference:
-            fail(f"reference missing field {required}")
+        if required not in pattern_ref:
+            fail(f"pattern reference missing field {required}")
 
-    if "references/mobile-pattern-library.md" not in skill:
-        fail("SKILL.md must link the pattern reference")
-
-    public_text = "\n".join([reference, skill]).lower()
+    all_public_text = "\n".join([skill, *reference_texts.values()]).lower()
     for term in BLOCKED_PUBLIC_TERMS:
-        if term.lower() in public_text:
+        if term.lower() in all_public_text:
             fail(f"blocked public term found: {term}")
 
-    print(f"pattern validation passed: {len(pattern_ids)} patterns, {len(EXPECTED_DOMAIN_MODIFIERS)} domain modifiers")
+    print(
+        "pattern validation passed: "
+        f"{len(pattern_ids)} patterns, "
+        f"{len(EXPECTED_DOMAIN_MODIFIERS)} domain modifiers, "
+        f"{len(REQUIRED_REFERENCES)} reference files"
+    )
 
 
 if __name__ == "__main__":

@@ -181,6 +181,26 @@ docs/index.html                   # static showcase page
 docs/assets/                      # public SVG artwork
 ```
 
+## Skill reference architecture
+
+The installed skill is not just a single prompt. It includes a design reference set under `skills/mobile-ui-generator/references/`:
+
+| Reference | Purpose |
+|---|---|
+| `design-principles.md` | Mobile design decision order, hierarchy, typography, color, motion, accessibility |
+| `mobile-pattern-library.md` | 60+ mobile UI patterns with components, states, interactions, copy, accessibility, anti-patterns |
+| `visual-style-taxonomy.md` | Mobile visual style selection, color moods, style combinations, anti-patterns |
+| `domain-playbooks.md` | Domain-specific guidance for fintech, commerce, mobility, healthcare, education, games, media, IoT, and more |
+| `component-state-checklist.md` | Component inventory and state matrix rules for implementation-ready specs |
+| `quality-review-checklist.md` | Pre-delivery quality gate for design fit, visual system, states, accessibility, and handoff |
+
+Validation:
+
+```bash
+python3 scripts/validate_patterns.py
+python3 scripts/validate_site.py
+```
+
 ## Pattern coverage workflow
 
 Patterns are maintained as an expanding public-safe library. New observations should first be normalized into generic pattern IDs, then added to `skills/mobile-ui-generator/references/mobile-pattern-library.md`. Run:
