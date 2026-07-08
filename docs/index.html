@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mobile UI Generator Skill turns real mobile app references into asset-aware UI briefs and JSON specs." />
+  <meta property="og:title" content="Mobile UI Generator Skill" />
+  <meta property="og:description" content="Reference-backed mobile UI briefs from 56,665 indexed screens." />
+  <meta property="og:image" content="assets/og.svg" />
+  <title>Mobile UI Generator Skill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Mobile UI Generator home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Mobile UI Generator</span>
+      </a>
+      <div class="nav-links">
+        <a href="#views">Views</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#quality">Quality</a>
+        <a href="https://github.com/jinyoung89/mobile-ui-generator-skill">GitHub</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero section-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Agent Skill · Mobile UI Reference Bank</p>
+          <h1>Stop asking agents to invent mobile UI from memory.</h1>
+          <p class="lede">Build reference-backed Korean mobile signup, checkout, onboarding, booking, social, and finance briefs from real app screen patterns, assets, and quality gates.</p>
+          <div class="command" role="group" aria-label="Install command">
+            <span>$</span>
+            <code>npx skills add jinyoung89/mobile-ui-generator-skill</code>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/jinyoung89/mobile-ui-generator-skill">View on GitHub</a>
+            <a class="button secondary" href="#views">See mobile views</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Pipeline statistics">
+          <div class="stat-grid">
+            <div><strong>56,665</strong><span>indexed screens/media</span></div>
+            <div><strong>349</strong><span>apps/services</span></div>
+            <div><strong>62</strong><span>real patterns</span></div>
+            <div><strong>45+</strong><span>screen types</span></div>
+          </div>
+          <div class="terminal-card">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <pre>build reference index
+indexed_images: 56,665
+unique_apps: 349
+quality gates: integrity · coverage · relevance · assets</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="compat strip" aria-label="Compatible agents">
+        <span>Works with agents that read SKILL.md</span>
+        <b>Codex</b><b>Claude Code</b><b>Cursor</b><b>OpenCode</b><b>Gemini CLI</b><b>Hermes</b>
+      </section>
+
+      <section id="views" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Generated from our brief templates</p>
+          <h2>Mobile views the skill can brief precisely.</h2>
+          <p>These are HTML/CSS mobile views derived from the current taxonomy and prompt/spec templates. No image-generation provider is used.</p>
+        </div>
+        <div class="phone-grid">
+          <article class="phone-card">
+            <div class="phone light fintech">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>본인인증</strong></div>
+              <h3>휴대폰 번호로<br/>시작할게요</h3>
+              <p class="subcopy">안전한 가입을 위해 본인 명의 번호를 확인합니다.</p>
+              <label>휴대폰 번호</label>
+              <div class="input">010 1234 5678</div>
+              <label>인증번호</label>
+              <div class="input muted">6자리 숫자 입력 <em>02:58</em></div>
+              <div class="check-row"><span></span> 필수 약관 전체 동의</div>
+              <button>다음</button>
+            </div>
+            <h3>Fintech signup</h3>
+            <p>Signup + identity verification with fixed CTA, helper copy, and trust cues.</p>
+          </article>
+
+          <article class="phone-card">
+            <div class="phone dark commerce">
+              <div class="status"></div>
+              <div class="topbar"><span></span><strong>결제하기</strong></div>
+              <div class="product-art"></div>
+              <h3>오가닉 린넨 셔츠</h3>
+              <div class="row"><span>상품 금액</span><b>48,000원</b></div>
+              <div class="row"><span>쿠폰</span><b>-5,000원</b></div>
+              <div class="pay-card">카카오페이 · 현대카드</div>
+              <div class="notice">결제 진행 시 구매조건에 동의합니다.</div>
+              <button>43,000원 결제하기</button>
+            </div>
+            <h3>Commerce checkout</h3>
+            <p>Product summary, coupon row, payment method card, legal notice, amount CTA.</p>
+          </article>
+
+          <article class="phone-card">
+            <div class="phone light mobility">
+              <div class="status"></div>
+              <div class="map"><i></i><i></i><i></i></div>
+              <div class="sheet">
+                <h3>강남역에서 성수까지</h3>
+                <p class="subcopy">오늘 18:30 · 예상 27분</p>
+                <div class="route-row"><b>택시</b><span>14,200원</span></div>
+                <div class="route-row"><b>카셰어링</b><span>예약 가능</span></div>
+                <button>예약하고 결제하기</button>
+              </div>
+            </div>
+            <h3>Mobility booking</h3>
+            <p>Map-first booking with bottom sheet, route choices, reserve/payment CTA.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="pipeline" class="section cards-section">
+        <div class="section-head narrow">
+          <p class="eyebrow">Pipeline</p>
+          <h2>From a private reference corpus to agent-ready specs.</h2>
+        </div>
+        <div class="cards">
+          <article><span>01</span><h3>Private reference import</h3><p>Uses locally authorized reference metadata. Raw sources, credentials, and provider connectors are not published.</p></article>
+          <article><span>02</span><h3>Image/media index</h3><p>Builds a metadata-only JSONL index before downloading. Avoids repeated API scans.</p></article>
+          <article><span>03</span><h3>Screen taxonomy</h3><p>Normalizes real pattern names into signup, payment, PDP, map, chat, settings, and more.</p></article>
+          <article><span>04</span><h3>Asset extraction</h3><p>Tracks icons, splash images, crops, MP4/SVG/JSON media metadata, and color palettes.</p></article>
+          <article><span>05</span><h3>Brief compiler</h3><p>Writes Markdown and JSON specs with reference evidence, assets, native constraints, and copy guidance.</p></article>
+          <article><span>06</span><h3>Quality gates</h3><p>Scores integrity, coverage, prompt completeness, reference relevance, and asset fit.</p></article>
+        </div>
+      </section>
+
+      <section id="quality" class="section quality">
+        <div>
+          <p class="eyebrow">Quality, not volume</p>
+          <h2>Checks whether references will actually improve the UI.</h2>
+          <p>For multi-step prompts like <code>회원가입과 결제</code>, the retriever detects multiple target screens and excludes unrelated evidence if relevant rows exist.</p>
+        </div>
+        <div class="score-card">
+          <div class="score"><span>0.95+</span><p>excellent target</p></div>
+          <ul>
+            <li>Media integrity and duplicates</li>
+            <li>Domain/screen coverage balance</li>
+            <li>Reference relevance</li>
+            <li>Asset fit by app and screen</li>
+            <li>Valid JSON UI spec</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

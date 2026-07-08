@@ -1,0 +1,32 @@
+# Local/private crawl output
+/data/
+/output/
+
+# Private local pipeline / provider adapters (not for public repo)
+/src/
+/tests/
+/pyproject.toml
+/docs/LOCAL_WORKFLOW.md
+*.har
+*.secret
+*.session
+*credentials*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+
+# macOS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Build artifacts
+/dist/
+/build/
+/site/

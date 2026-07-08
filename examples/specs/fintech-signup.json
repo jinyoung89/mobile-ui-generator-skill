@@ -1,0 +1,26 @@
+{
+  "query": "한국 핀테크 앱 회원가입 휴대폰 인증 화면",
+  "domain": "fintech",
+  "target_screen_types": [
+    "signup",
+    "identity_verification"
+  ],
+  "layout": "top navigation, large task title, phone/SMS fields, helper copy, fixed bottom CTA",
+  "components": [
+    "top_back",
+    "large_title",
+    "phone_input",
+    "verification_code_input",
+    "timer",
+    "resend_button",
+    "fixed_bottom_cta"
+  ],
+  "quality_gates": [
+    "reference_relevance",
+    "asset_fit",
+    "safe_area",
+    "touch_target",
+    "korean_copy",
+    "valid_json_spec"
+  ]
+}
