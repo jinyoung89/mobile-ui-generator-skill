@@ -34,14 +34,11 @@
       .join('')}</ul>`;
   }
 
-  function chips(items) {
-    return `<div class="artifact-chips">${(items || [])
-      .map((item) => `<span>${escapeHTML(item)}</span>`)
-      .join('')}</div>`;
-  }
-
-  function briefRows(brief) {
-    return Object.entries(brief || {})
+  function uxRows(brief) {
+    const entries = Object.entries(brief || {}).filter(([key]) =>
+      ['goal', 'hierarchy', 'layout', 'interaction'].includes(key),
+    );
+    return entries
       .map(([key, value]) => `<div><b>${escapeHTML(key.replace(/_/g, ' '))}</b><p>${escapeHTML(value)}</p></div>`)
       .join('');
   }
@@ -57,19 +54,15 @@
         const components = localized(item.components, lang);
         const states = localized(item.states, lang);
         const sourcePrompt = localized(item.sourcePrompt, lang);
-        const prompt = localized(item.implementationPrompt, lang);
-        const spec = localized(item.spec, lang);
         const fontReason = localized(item.fontProfile?.reason, lang);
         const appType = localized(item.appType, lang);
         const preview = localized(item.preview, lang);
-        const specCode = JSON.stringify(spec, null, 2);
 
         return `<article class="skill-output-card" aria-label="${escapeHTML(title)}">
           <div class="artifact-card-head">
             <span>${escapeHTML(t('examples.generatedLabel', lang))}</span>
             <h3>${escapeHTML(title)}</h3>
             <p><b>${escapeHTML(t('examples.promptLabel', lang))}</b> ${escapeHTML(sourcePrompt)}</p>
-            ${chips(item.artifactTypes)}
           </div>
 
           <figure class="artifact-preview">
@@ -77,17 +70,15 @@
             <figcaption>${escapeHTML(t('examples.previewCaption', lang))}</figcaption>
           </figure>
 
-          <section class="artifact-section pattern-section">
+          <section class="artifact-section direction-section">
             <h4>${escapeHTML(t('examples.patternLabel', lang))}</h4>
-            <dl>
-              <div><dt>app_type</dt><dd>${escapeHTML(appType)}</dd></div>
-              <div><dt>ui_patterns</dt><dd>${escapeHTML((item.uiPatterns || []).join(', '))}</dd></div>
-            </dl>
+            <p><b>${escapeHTML(appType)}</b></p>
+            <p>${escapeHTML(brief.layout || '')}</p>
           </section>
 
-          <section class="artifact-section">
+          <section class="artifact-section ux-section">
             <h4>${escapeHTML(t('examples.briefLabel', lang))}</h4>
-            <div class="brief-rows">${briefRows(brief)}</div>
+            <div class="brief-rows">${uxRows(brief)}</div>
           </section>
 
           <section class="artifact-split">
@@ -102,19 +93,8 @@
           </section>
 
           <section class="artifact-section font-artifact">
-            <h4>font_profile</h4>
+            <h4>Visual tone</h4>
             <p><b>${escapeHTML(item.fontProfile.family)}</b> · ${escapeHTML(fontReason)}</p>
-            <code>${escapeHTML(item.fontProfile.css_url)}</code>
-          </section>
-
-          <section class="artifact-section">
-            <h4>${escapeHTML(t('examples.specLabel', lang))}</h4>
-            <pre>${escapeHTML(specCode)}</pre>
-          </section>
-
-          <section class="artifact-section implementation-artifact">
-            <h4>${escapeHTML(t('examples.promptOutLabel', lang))}</h4>
-            <p>${escapeHTML(prompt)}</p>
           </section>
         </article>`;
       })

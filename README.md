@@ -137,16 +137,14 @@ Rules:
 
 ## Website examples
 
-The website shows actual skill-output artifacts instead of decorative UI mockups. Each example demonstrates the kind of output an agent should produce after applying `SKILL.md` and the reference files:
+The website focuses on prompt-to-UI results. Each example starts with a user request and shows the mobile screen, visual hierarchy, interaction states, and UX decisions the skill can produce. Internal JSON/spec details stay in the repository for agents and validation rather than dominating the public page.
 
-- input prompt;
-- app type and UI pattern system;
-- screen brief excerpt;
-- component inventory;
-- state matrix;
-- font profile;
-- JSON UI spec excerpt;
-- implementation prompt excerpt.
+- requested prompt;
+- generated mobile UI preview;
+- UX goal and hierarchy;
+- visible components;
+- handled states;
+- visual/font tone.
 
 Current showcased scenarios include Korean fintech phone verification, commerce checkout, mobility map booking, and account cancellation.
 

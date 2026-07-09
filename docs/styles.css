@@ -298,13 +298,17 @@ a{
   margin-bottom:12px;
   color:#fff
 }
-.font-schema pre{
-  margin:0;
-  overflow:auto;
-  color:#c8fff0;
-  font:500 13px/1.65 Geist Mono,monospace;
-  white-space:pre
+.type-sample{
+  display:grid;
+  gap:8px;
+  padding:18px;
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(128,255,219,.08));
+  border:1px solid rgba(255,255,255,.08)
 }
+.type-sample span{color:#80ffdb;font:800 12px/1 Geist Mono,monospace;letter-spacing:.08em;text-transform:uppercase}
+.type-sample b{color:#fff;font-size:clamp(28px,5vw,44px);line-height:1;letter-spacing:-.05em}
+.type-sample p{margin:0;color:#c6d2ea;line-height:1.55}
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -385,11 +389,11 @@ a{
 .skill-output-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:24px
+  gap:26px
 }
 .skill-output-card{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);
   gap:18px;
   padding:22px;
   border:1px solid rgba(255,255,255,.09);
@@ -421,9 +425,7 @@ a{
   color:#c6d2ea;
   line-height:1.62
 }
-.artifact-card-head b{color:#fff}
-.artifact-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.artifact-chips span{padding:7px 10px;border-radius:999px;background:rgba(239,255,248,.1);color:#e8fff7;font:800 12px/1 Geist,system-ui,sans-serif}
+.artifact-card-head b,.artifact-section b{color:#fff}
 .artifact-preview{
   grid-column:1/-1;
   margin:0;
@@ -438,7 +440,7 @@ a{
   height:auto;
   aspect-ratio:1200/760;
   border-radius:22px;
-  object-fit:cover;
+  object-fit:contain;
   background:#0b1020
 }
 .artifact-preview figcaption{
@@ -449,19 +451,14 @@ a{
 }
 .artifact-section{padding:18px;border-radius:22px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);min-width:0}
 .artifact-section h4{margin:0 0 12px}
-.artifact-section dl,.artifact-section p,.artifact-section ul{margin:0}
-.artifact-section dl{display:grid;gap:10px}
-.artifact-section dl div{display:grid;grid-template-columns:120px 1fr;gap:12px}
-.artifact-section dt{color:#93a4c7;font:800 12px/1.4 Geist Mono,monospace}
-.artifact-section dd{margin:0;font-weight:800}
+.artifact-section p,.artifact-section ul{margin:0}
 .brief-rows{display:grid;gap:12px}
 .brief-rows b{display:block;margin-bottom:4px;color:#fff;text-transform:capitalize}
-.artifact-split{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.artifact-split,.font-artifact{grid-column:1/-1}
+.artifact-split{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;grid-column:1/-1}
 .artifact-list{display:grid;gap:8px;padding-left:18px}
-.font-artifact code{display:block;margin-top:12px;padding:10px;border-radius:12px;background:#0d1324;color:#c8fff0;font:700 12px/1.5 Geist Mono,monospace;overflow-wrap:anywhere}
-.artifact-section pre{margin:0;max-height:310px;overflow:auto;white-space:pre;color:#dffcf3;font:600 12px/1.6 Geist Mono,monospace}
-.implementation-artifact{border-color:rgba(128,255,219,.18);background:rgba(128,255,219,.07)}
+.direction-section{border-color:rgba(128,255,219,.18);background:rgba(128,255,219,.07)}
+.ux-section{background:rgba(255,255,255,.055)}
+.font-artifact{border-color:rgba(255,209,102,.18);background:rgba(255,209,102,.07)}
 @media (max-width:900px){
   .shell{
     width:min(100% - 32px,1180px)
@@ -515,9 +512,6 @@ a{
   .hero-panel{
     padding:16px;
     border-radius:24px
-  }
-  .font-schema pre{
-    font-size:12px
   }
   .strip{
     border-radius:24px;

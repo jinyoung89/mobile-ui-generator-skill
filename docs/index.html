@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Generate service-aware mobile UX/UI briefs, JSON specs, font profiles, copy systems, and implementation prompts for AI agents." />
+  <meta name="description" content="Turn mobile app prompts into concrete UI/UX screens, visual hierarchy, interaction states, copy, typography, and mobile constraints." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="author" content="jinyoung89" />
   <meta name="application-name" content="Mobile UI Generator Skill" />
   <meta name="theme-color" content="#070A12" />
-  <meta name="keywords" content="mobile UI generator, AI UI design, UX UI prompt, Korean mobile UI, mobile app design, UI JSON spec, font profile, AI agent skill" />
-  <title>Mobile UI Generator Skill - AI Mobile UX/UI Briefs &amp; JSON Specs</title>
+  <meta name="keywords" content="mobile UI generator, AI UI design, UX UI prompt, Korean mobile UI, mobile app design, prompt to UI, UX states, AI agent skill" />
+  <title>Mobile UI Generator Skill - Prompt to Mobile UI/UX Screens</title>
   <link rel="canonical" href="https://jinyoung89.github.io/mobile-ui-generator-skill/" />
   <link rel="alternate" hreflang="en" href="https://jinyoung89.github.io/mobile-ui-generator-skill/" />
   <link rel="alternate" hreflang="ko" href="https://jinyoung89.github.io/mobile-ui-generator-skill/ko/" />
@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://jinyoung89.github.io/mobile-ui-generator-skill/" />
   <meta property="og:site_name" content="Mobile UI Generator Skill" />
   <meta property="og:title" content="Mobile UI Generator Skill" />
-  <meta property="og:description" content="Generate service-aware mobile UX/UI briefs, JSON specs, font profiles, copy systems, and implementation prompts for AI agents." />
+  <meta property="og:description" content="Turn mobile app prompts into concrete UI/UX screens, visual hierarchy, interaction states, copy, typography, and mobile constraints." />
   <meta property="og:image" content="https://jinyoung89.github.io/mobile-ui-generator-skill/assets/og.png" />
   <meta property="og:image:secure_url" content="https://jinyoung89.github.io/mobile-ui-generator-skill/assets/og.png" />
   <meta property="og:image:type" content="image/png" />
@@ -29,15 +29,15 @@
   <meta property="og:locale:alternate" content="ko_KR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mobile UI Generator Skill" />
-  <meta name="twitter:description" content="Generate service-aware mobile UX/UI briefs, JSON specs, font profiles, copy systems, and implementation prompts for AI agents." />
+  <meta name="twitter:description" content="Turn mobile app prompts into concrete UI/UX screens, visual hierarchy, interaction states, copy, typography, and mobile constraints." />
   <meta name="twitter:image" content="https://jinyoung89.github.io/mobile-ui-generator-skill/assets/og.png" />
   <meta name="twitter:image:alt" content="Mobile UI Generator Skill banner showing service-aware mobile UX/UI briefs" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Mobile UI Generator Skill - AI Mobile UX/UI Briefs & JSON Specs",
-  "description": "Generate service-aware mobile UX/UI briefs, JSON specs, font profiles, copy systems, and implementation prompts for AI agents.",
+  "name": "Mobile UI Generator Skill - Prompt to Mobile UI/UX Screens",
+  "description": "Turn mobile app prompts into concrete UI/UX screens, visual hierarchy, interaction states, copy, typography, and mobile constraints.",
   "url": "https://jinyoung89.github.io/mobile-ui-generator-skill/",
   "inLanguage": "en",
   "isPartOf": {
@@ -48,7 +48,7 @@
   "mainEntity": {
     "@type": "SoftwareSourceCode",
     "name": "Mobile UI Generator Skill",
-    "description": "An AI agent skill for generating service-aware mobile UX/UI briefs, JSON specs, font profiles, copy systems, and implementation prompts.",
+    "description": "An AI agent skill for generating concrete mobile UI/UX screens, visual hierarchy, interaction states, copy, typography, and mobile constraints from prompts.",
     "codeRepository": "https://github.com/jinyoung89/mobile-ui-generator-skill",
     "license": "https://opensource.org/license/mit",
     "programmingLanguage": [
@@ -77,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=skill-outputs-v3" />
+  <link rel="stylesheet" href="styles.css?v=prompt-ui-v1" />
 </head>
 <body data-lang="en">
   <div class="shell">
@@ -103,8 +103,8 @@
       <section class="hero section-grid">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">Agent Skill · Mobile UX/UI Generator</p>
-          <h1 data-i18n="hero.title">Generate mobile UX/UI screens with service-specific detail.</h1>
-          <p class="lede" data-i18n="hero.lede">Create mobile screen briefs, JSON specs, font profiles, copy, layout guidance, and implementation prompts for apps across fintech, commerce, education, games, messaging, travel, healthcare, and more.</p>
+          <h1 data-i18n="hero.title">Turn a mobile app prompt into a concrete UI/UX screen.</h1>
+          <p class="lede" data-i18n="hero.lede">Describe the screen you need. The skill shapes the generated mobile UI: hierarchy, components, states, copy, typography, and native mobile constraints.</p>
           <div class="command" role="group" aria-label="Install command" data-i18n-aria-label="aria.install">
             <span>$</span>
             <code>npx skills add jinyoung89/mobile-ui-generator-skill</code>
@@ -115,10 +115,10 @@
           </div>
         </div>
         <div class="hero-panel product-panel" aria-label="Generated outputs" data-i18n-aria-label="aria.outputs">
-          <article><strong data-i18n="panel.1.title">Screen flow</strong><p data-i18n="panel.1.desc">Signup, onboarding, home, checkout, cancellation, booking, chat, and more.</p></article>
-          <article><strong data-i18n="panel.2.title">UI spec</strong><p data-i18n="panel.2.desc">Layout, components, states, CTAs, copy, accessibility, and native constraints.</p></article>
-          <article><strong data-i18n="panel.3.title">Font profile</strong><p data-i18n="panel.3.desc">Brand typography when known, or safe Korean UI font fallbacks with CSS URLs.</p></article>
-          <article><strong data-i18n="panel.4.title">Implementation prompt</strong><p data-i18n="panel.4.desc">Ready for code, Figma, design-system, or image-generation agents when explicitly requested.</p></article>
+          <article><strong data-i18n="panel.1.title">Prompted screen</strong><p data-i18n="panel.1.desc">Start from a plain-language mobile app request.</p></article>
+          <article><strong data-i18n="panel.2.title">Generated UI</strong><p data-i18n="panel.2.desc">Mobile screen layout, hierarchy, visible components, and CTA placement.</p></article>
+          <article><strong data-i18n="panel.3.title">UX states</strong><p data-i18n="panel.3.desc">Loading, error, empty, permission, recovery, and destructive-action states.</p></article>
+          <article><strong data-i18n="panel.4.title">Visual system</strong><p data-i18n="panel.4.desc">Typography, spacing, tone, accessibility, and mobile platform constraints.</p></article>
         </div>
       </section>
 
@@ -130,15 +130,15 @@
       <section id="views" class="section">
         <div class="section-head">
           <p class="eyebrow" data-i18n="views.eyebrow">Actual skill output examples</p>
-          <h2 data-i18n="views.title">Examples show what the skill outputs — not decorative mockups.</h2>
-          <p data-i18n="views.desc">Each card is a sample artifact generated by applying the skill workflow: app type and UI patterns first, then components, states, font profile, JSON spec, and implementation prompt.</p>
+          <h2 data-i18n="views.title">Ask for a screen and see the UI/UX result the skill can produce.</h2>
+          <p data-i18n="views.desc">The examples focus on what users see: the requested prompt, generated mobile screen, visual hierarchy, interaction states, and UX decisions.</p>
         </div>
         <div id="exampleCards" class="skill-output-grid" aria-label="Generated skill output examples" data-i18n-aria-label="aria.examples">
           <article class="skill-output-card">
             <div class="artifact-card-head">
               <span>Generated artifact</span>
               <h3>Korean fintech phone verification</h3>
-              <p>JavaScript renders real skill output examples here: brief, JSON spec, state matrix, font profile, and implementation prompt.</p>
+              <p>JavaScript renders prompt-to-generated-UI examples here.</p>
             </div>
           </article>
         </div>
@@ -147,8 +147,8 @@
       <section id="fonts" class="section font-profiles">
         <div class="section-head narrow">
           <p class="eyebrow" data-i18n="fonts.eyebrow">Font profiles</p>
-          <h2 data-i18n="fonts.title">Typography is part of the generated UI.</h2>
-          <p data-i18n="fonts.desc">The skill can include a font family, CSS/download URL, fallback stack, and reason. Use confirmed brand fonts when available; otherwise choose a safe free Korean UI font.</p>
+          <h2 data-i18n="fonts.title">Typography changes the feel of the generated screen.</h2>
+          <p data-i18n="fonts.desc">The skill chooses readable Korean UI typefaces, fallback tone, and the reason each font fits the screen. It does not invent proprietary brand fonts.</p>
         </div>
         <div id="fontCards" class="font-grid" aria-label="Font profile cards" data-i18n-aria-label="aria.fonts">
           <article class="font-card">
@@ -207,20 +207,19 @@
           </article>
         </div>
         <div class="font-schema">
-          <strong data-i18n="schema.label">Brief field example</strong>
-          <pre>font_profile:
-  family: "Pretendard"
-  css_url: "https://cdn.jsdelivr.net/.../pretendard.css"
-  fallback: "-apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Noto Sans KR, sans-serif"
-  confidence: "recommended fallback"
-  reason: "Neutral Korean mobile UI with strong numeric readability"</pre>
+          <strong data-i18n="schema.label">Typography result preview</strong>
+          <div class="type-sample">
+            <span>Pretendard</span>
+            <b>Pay ₩68,400</b>
+            <p>Clean Korean UI typography with readable numbers, calm spacing, and safe mobile fallbacks.</p>
+          </div>
         </div>
       </section>
 
       <section id="references" class="section reference-section">
         <div class="section-head narrow">
           <p class="eyebrow" data-i18n="refs.eyebrow">Reference knowledge base</p>
-          <h2 data-i18n="refs.title">Pattern guidance is updated from screen analysis, not just demo mockups.</h2>
+          <h2 data-i18n="refs.title">Pattern guidance is updated from real screen analysis.</h2>
           <p data-i18n="refs.desc">The public skill includes generalized references for taxonomy, component states, pattern coverage, asset roles, anti-patterns, and delivery quality. Source material stays out of public files.</p>
         </div>
         <div class="reference-grid" aria-label="Skill reference files" data-i18n-aria-label="aria.references">
@@ -258,14 +257,14 @@
       <section id="outputs" class="section cards-section">
         <div class="section-head narrow">
           <p class="eyebrow" data-i18n="outputs.eyebrow">What the skill generates</p>
-          <h2 data-i18n="outputs.title">Designed for clear handoff to AI design and code agents.</h2>
+          <h2 data-i18n="outputs.title">Generates the UX/UI decisions behind the visible screen.</h2>
         </div>
         <div class="cards feature-cards">
           <article><span>01</span><h3 data-i18n="out.1.title">Pattern system</h3><p data-i18n="out.1.desc">Pattern groups, layout archetype, component inventory, interaction model, and state matrix.</p></article>
           <article><span>02</span><h3 data-i18n="out.2.title">Screen brief</h3><p data-i18n="out.2.desc">Goal, user intent, hierarchy, sections, fixed/sticky regions, and copy direction.</p></article>
           <article><span>03</span><h3 data-i18n="out.3.title">Language mode</h3><p data-i18n="out.3.desc">Choose English or Korean output. The skill should not mix both languages unless asked.</p></article>
           <article><span>04</span><h3 data-i18n="out.4.title">Font profile</h3><p data-i18n="out.4.desc">Recommended font, CSS URL, fallback stack, and license-check reminder.</p></article>
-          <article><span>05</span><h3 data-i18n="out.5.title">Implementation handoff</h3><p data-i18n="out.5.desc">Prompt text for coding agents, Figma agents, or design-system implementation.</p></article>
+          <article><span>05</span><h3 data-i18n="out.5.title">Design handoff</h3><p data-i18n="out.5.desc">Clear notes for turning the generated UI into production without losing UX intent.</p></article>
           <article><span>06</span><h3 data-i18n="out.6.title">Mobile constraints</h3><p data-i18n="out.6.desc">Safe areas, touch targets, fixed CTAs, keyboard behavior, and accessibility.</p></article>
         </div>
       </section>
@@ -275,7 +274,7 @@
   <noscript>
     <p class="noscript-note">Mobile UI Generator Skill includes generated artifact examples on this page. Enable JavaScript to render the full examples and switch languages.</p>
   </noscript>
-  <script src="site-data.js?v=skill-outputs-v3" defer></script>
-  <script src="app.js?v=skill-outputs-v3" defer></script>
+  <script src="site-data.js?v=prompt-ui-v1" defer></script>
+  <script src="app.js?v=prompt-ui-v1" defer></script>
 </body>
 </html>
