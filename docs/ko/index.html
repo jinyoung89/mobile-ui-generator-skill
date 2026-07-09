@@ -77,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="../styles.css?v=visual-template-v2" />
+  <link rel="stylesheet" href="../styles.css?v=category-gallery-v1" />
 </head>
 <body data-lang="ko">
   <div class="shell">
@@ -129,19 +129,37 @@
 
       <section id="views" class="section">
         <div class="section-head">
-          <p class="eyebrow" data-i18n="views.eyebrow">실제 스킬 산출물 예시</p>
-          <h2 data-i18n="views.title">어떤 요청을 했을 때 어떤 UI/UX 결과가 나오는지 보여줍니다.</h2>
-          <p data-i18n="views.desc">예시는 코드가 아니라 사용자가 보게 될 결과 화면에 집중합니다. 요청 프롬프트, 생성된 모바일 화면, 시각적 위계, 인터랙션 상태, UX 결정을 함께 보여줍니다.</p>
+          <p class="eyebrow" data-i18n="views.eyebrow">모바일 화면 예시</p>
+          <h2 data-i18n="views.title">앱 카테고리와 UX 패턴으로 예시를 둘러봅니다.</h2>
+          <p data-i18n="views.desc">갤러리는 생성 가능한 모바일 화면 구조를 시각적으로 보여줍니다. 앱이 하는 일로 먼저 보고, 필요한 UX 패턴/기능 단위로 다시 좁혀보세요.</p>
         </div>
-        <div id="exampleCards" class="skill-output-grid" aria-label="생성된 스킬 산출물 예시" data-i18n-aria-label="aria.examples">
-          <article class="skill-output-card">
-            <div class="artifact-card-head">
-              <span>생성 산출물</span>
-              <h3>한국 핀테크 휴대폰 본인인증</h3>
-              <p>JavaScript가 프롬프트에서 생성된 UI 결과 예시를 렌더링합니다.</p>
+        <div class="example-toolbar" aria-label="예시 필터" data-i18n-aria-label="views.filter.label">
+          <div class="filter-intro">
+            <strong id="exampleSummary">예시 표시 중</strong>
+            <p data-i18n="views.desc">앱 종류는 서비스가 무엇을 하는지, UI 패턴은 그 서비스를 구성하는 기능 단위입니다.</p>
+          </div>
+          <div class="filter-stack">
+            <div class="filter-group">
+              <div><b data-i18n="views.appFilter.label">앱 종류</b><small data-i18n="views.appFilter.help">서비스 카테고리: 앱이 하는 일</small></div>
+              <div id="exampleAppFilters" class="category-filter" aria-label="앱 종류 필터"></div>
             </div>
-          </article>
+            <div class="filter-group">
+              <div><b data-i18n="views.patternFilter.label">UI 패턴</b><small data-i18n="views.patternFilter.help">기능 단위: 화면이 하는 일</small></div>
+              <div id="examplePatternFilters" class="category-filter" aria-label="UI 패턴 필터"></div>
+            </div>
+          </div>
         </div>
+        <div id="exampleCards" class="phone-grid" tabindex="0" aria-label="앱 카테고리와 UI 패턴 예시 갤러리" data-i18n-aria-label="aria.examples">
+          <article class="phone-card placeholder-phone"><div class="phone trust-blue"><main class="screen empty-screen"><h3>예시 로딩 중</h3><p>JavaScript가 모바일 UI 예시 갤러리를 렌더링합니다.</p></main></div></article>
+        </div>
+        <section class="featured-results" aria-label="대표 프롬프트 결과 프리뷰" data-i18n-aria-label="aria.featuredExamples">
+          <div class="section-head narrow">
+            <p class="eyebrow" data-i18n="featured.eyebrow">대표 프롬프트 결과</p>
+            <h2 data-i18n="featured.title">프롬프트 결과 프리뷰는 보조로 두고, 갤러리를 먼저 보여줍니다.</h2>
+            <p data-i18n="featured.desc">아래 대표 프리뷰는 하나의 프롬프트가 완성된 모바일 UI/UX 방향으로 바뀌는 모습을 보여줍니다. 메인 예시는 위에서 앱 카테고리와 UX 패턴으로 훑어볼 수 있습니다.</p>
+          </div>
+          <div id="featuredSkillOutputs" class="featured-output-grid"></div>
+        </section>
       </section>
 
       <section id="fonts" class="section font-profiles">
@@ -281,7 +299,7 @@
   <noscript>
     <p class="noscript-note">Mobile UI Generator Skill includes generated artifact examples on this page. Enable JavaScript to render the full examples and switch languages.</p>
   </noscript>
-  <script src="../site-data.js?v=visual-template-v2" defer></script>
-  <script src="../app.js?v=visual-template-v2" defer></script>
+  <script src="../site-data.js?v=category-gallery-v1" defer></script>
+  <script src="../app.js?v=category-gallery-v1" defer></script>
 </body>
 </html>

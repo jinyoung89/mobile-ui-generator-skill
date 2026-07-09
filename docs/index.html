@@ -77,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=visual-template-v2" />
+  <link rel="stylesheet" href="styles.css?v=category-gallery-v1" />
 </head>
 <body data-lang="en">
   <div class="shell">
@@ -129,19 +129,37 @@
 
       <section id="views" class="section">
         <div class="section-head">
-          <p class="eyebrow" data-i18n="views.eyebrow">Actual skill output examples</p>
-          <h2 data-i18n="views.title">Ask for a screen and see the UI/UX result the skill can produce.</h2>
-          <p data-i18n="views.desc">The examples focus on what users see: the requested prompt, generated mobile screen, visual hierarchy, interaction states, and UX decisions.</p>
+          <p class="eyebrow" data-i18n="views.eyebrow">Example mobile views</p>
+          <h2 data-i18n="views.title">Browse examples by app category and UX pattern.</h2>
+          <p data-i18n="views.desc">The gallery shows many generated mobile screen structures visually. Filter by what the app does, then by the UX pattern or functional unit you want to inspect.</p>
         </div>
-        <div id="exampleCards" class="skill-output-grid" aria-label="Generated skill output examples" data-i18n-aria-label="aria.examples">
-          <article class="skill-output-card">
-            <div class="artifact-card-head">
-              <span>Generated artifact</span>
-              <h3>Korean fintech phone verification</h3>
-              <p>JavaScript renders prompt-to-generated-UI examples here.</p>
+        <div class="example-toolbar" aria-label="Example filters" data-i18n-aria-label="views.filter.label">
+          <div class="filter-intro">
+            <strong id="exampleSummary">Showing examples</strong>
+            <p data-i18n="views.desc">App type means what the service does. UI pattern means the functional unit inside the service.</p>
+          </div>
+          <div class="filter-stack">
+            <div class="filter-group">
+              <div><b data-i18n="views.appFilter.label">App type</b><small data-i18n="views.appFilter.help">Service category: what the app does</small></div>
+              <div id="exampleAppFilters" class="category-filter" aria-label="App type filters"></div>
             </div>
-          </article>
+            <div class="filter-group">
+              <div><b data-i18n="views.patternFilter.label">UI pattern</b><small data-i18n="views.patternFilter.help">Functional unit: what the screen does</small></div>
+              <div id="examplePatternFilters" class="category-filter" aria-label="UI pattern filters"></div>
+            </div>
+          </div>
         </div>
+        <div id="exampleCards" class="phone-grid" tabindex="0" aria-label="App category and UI pattern example gallery" data-i18n-aria-label="aria.examples">
+          <article class="phone-card placeholder-phone"><div class="phone trust-blue"><main class="screen empty-screen"><h3>Loading examples</h3><p>JavaScript renders the visual mobile UI gallery here.</p></main></div></article>
+        </div>
+        <section class="featured-results" aria-label="Featured prompt result previews" data-i18n-aria-label="aria.featuredExamples">
+          <div class="section-head narrow">
+            <p class="eyebrow" data-i18n="featured.eyebrow">Featured prompt results</p>
+            <h2 data-i18n="featured.title">Prompt-to-screen previews stay available, but the gallery leads.</h2>
+            <p data-i18n="featured.desc">These larger previews show how a single prompt turns into a complete mobile UI/UX direction. The main examples above remain browsable by app category and UX pattern.</p>
+          </div>
+          <div id="featuredSkillOutputs" class="featured-output-grid"></div>
+        </section>
       </section>
 
       <section id="fonts" class="section font-profiles">
@@ -281,7 +299,7 @@
   <noscript>
     <p class="noscript-note">Mobile UI Generator Skill includes generated artifact examples on this page. Enable JavaScript to render the full examples and switch languages.</p>
   </noscript>
-  <script src="site-data.js?v=visual-template-v2" defer></script>
-  <script src="app.js?v=visual-template-v2" defer></script>
+  <script src="site-data.js?v=category-gallery-v1" defer></script>
+  <script src="app.js?v=category-gallery-v1" defer></script>
 </body>
 </html>

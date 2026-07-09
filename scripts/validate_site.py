@@ -93,6 +93,27 @@ def validate_skill_outputs(data: dict) -> None:
     if not data.get("previewVersion"):
         fail("site data must include previewVersion for SVG cache busting")
 
+    examples = data.get("examples", [])
+    app_categories = data.get("appCategories", [])
+    ui_pattern_categories = data.get("uiPatternCategories", [])
+    font_by_slug = data.get("fontBySlug", {})
+    if len(examples) < 38:
+        fail(f"expected at least 38 visual gallery examples, got {len(examples)}")
+    if len(app_categories) < 20:
+        fail(f"expected broad app category coverage, got {len(app_categories)}")
+    if len(ui_pattern_categories) < 30:
+        fail(f"expected broad UI pattern coverage, got {len(ui_pattern_categories)}")
+    if not font_by_slug:
+        fail("visual gallery needs fontBySlug metadata")
+    for item in examples:
+        for key in ["slug", "layout", "theme", "appCategories", "uiPatterns", "copy"]:
+            if key not in item:
+                fail(f"visual example missing {key}: {item}")
+        for lang in ["en", "ko"]:
+            copy = item["copy"].get(lang)
+            if not isinstance(copy, dict) or "cardTitle" not in copy or "cardDesc" not in copy:
+                fail(f"visual example {item['slug']} lacks {lang} card copy")
+
     for key, value in translations.items():
         if "en" not in value or "ko" not in value:
             fail(f"translation key {key} lacks en/ko")
@@ -101,15 +122,18 @@ def validate_skill_outputs(data: dict) -> None:
         "views.eyebrow",
         "views.title",
         "views.desc",
+        "views.appFilter.label",
+        "views.patternFilter.label",
+        "views.summary.showing",
+        "views.summary.apps",
+        "views.summary.patterns",
+        "views.summary.fonts",
         "examples.generatedLabel",
-        "examples.promptLabel",
-        "examples.patternLabel",
-        "examples.briefLabel",
-        "examples.componentsLabel",
-        "examples.statesLabel",
-        "examples.specLabel",
-        "examples.promptOutLabel",
         "aria.examples",
+        "aria.featuredExamples",
+        "featured.eyebrow",
+        "featured.title",
+        "featured.desc",
         "schema.label",
     ]
     for key in required_translation_keys:
@@ -194,17 +218,19 @@ def main() -> None:
         assert_contains(html, f'hreflang="en" href="{BASE}"', f"{lang} hreflang en")
         assert_contains(html, f'hreflang="ko" href="{BASE}ko/"', f"{lang} hreflang ko")
         assert_contains(html, 'og:image" content="https://jinyoung89.github.io/mobile-ui-generator-skill/assets/og.png"', f"{lang} og image")
-        assert_contains(html, 'id="exampleCards"', f"{lang} generated examples")
-        assert_contains(html, 'class="skill-output-grid"', f"{lang} skill output grid")
+        assert_contains(html, 'id="exampleCards"', f"{lang} visual examples")
+        assert_contains(html, 'id="exampleAppFilters"', f"{lang} app type filters")
+        assert_contains(html, 'id="examplePatternFilters"', f"{lang} UI pattern filters")
+        assert_contains(html, 'id="exampleSummary"', f"{lang} gallery summary")
+        assert_contains(html, 'class="phone-grid"', f"{lang} phone gallery grid")
+        assert_contains(html, 'id="featuredSkillOutputs"', f"{lang} featured SVG outputs")
+        assert_contains(html, 'class="featured-output-grid"', f"{lang} featured output grid")
         assert_contains(html, 'data-i18n="views.title"', f"{lang} generated examples copy")
         assert_contains(html, 'id="fontCards"', f"{lang} static fonts")
         assert_contains(html, 'id="references"', f"{lang} references section")
         assert_contains(html, 'references/pattern-analysis-insights.md', f"{lang} pattern analysis reference")
         assert_contains(html, 'references/visual-composition-contract.md', f"{lang} visual composition reference")
         assert_not_contains(html, 'hand-built HTML/CSS demos', f"{lang} old mock copy")
-        assert_not_contains(html, 'class="phone-card"', f"{lang} old phone mock markup")
-        assert_not_contains(html, 'id="exampleAppFilters"', f"{lang} old app filter markup")
-        assert_not_contains(html, 'id="examplePatternFilters"', f"{lang} old pattern filter markup")
         ld = json_ld(html)
         if ld.get("url") != page_url or ld.get("inLanguage") != lang:
             fail(f"{lang} JSON-LD url/language mismatch")
@@ -212,22 +238,22 @@ def main() -> None:
             fail(f"{lang} missing OG locale {locale}")
 
     css = read(DOCS / "styles.css")
-    assert_contains(css, ".skill-output-grid", "skill output grid styles")
-    assert_contains(css, ".skill-output-card", "skill output card styles")
-    assert_contains(css, ".artifact-preview", "skill output preview styles")
-    assert_not_contains(css, ".phone-card", "old phone mock CSS")
-    assert_not_contains(css, ".phone-grid", "old phone carousel CSS")
+    assert_contains(css, ".phone-grid", "visual phone gallery styles")
+    assert_contains(css, ".phone-card", "visual phone card styles")
+    assert_contains(css, ".category-chip", "dual-axis filter styles")
+    assert_contains(css, ".featured-output-grid", "featured SVG output grid styles")
+    assert_contains(css, ".featured-preview", "featured SVG preview styles")
     if "mock-visual" in read(DOCS / "app.js") or "mock-visual" in css:
         fail("old mock-visual renderer/styles must be removed")
 
     app_js = read(DOCS / "app.js")
-    assert_contains(app_js, "renderSkillOutputs", "skill output renderer")
-    assert_contains(app_js, "artifact-preview", "skill output preview renderer")
+    assert_contains(app_js, "renderExamples", "visual gallery renderer")
+    assert_contains(app_js, "renderFilterGroup", "dual-axis filter renderer")
+    assert_contains(app_js, "phoneFrame", "phone preview renderer")
+    assert_contains(app_js, "renderFeaturedOutputs", "featured SVG output renderer")
     assert_contains(app_js, "<img", "preview image element")
     assert_contains(app_js, "withAssetVersion", "preview asset cache busting")
     assert_contains(app_js, "previewVersion", "preview asset version key")
-    assert_not_contains(app_js, "renderAuth", "old phone renderer")
-    assert_not_contains(app_js, "phoneFrame", "old phone frame renderer")
 
     ET.parse(DOCS / "sitemap.xml")
     sitemap = read(DOCS / "sitemap.xml")
