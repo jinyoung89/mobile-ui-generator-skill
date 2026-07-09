@@ -77,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="../styles.css?v=expanded-taxonomy-v3" />
+  <link rel="stylesheet" href="../styles.css?v=reference-section-v1" />
 </head>
 <body data-lang="ko">
   <div class="shell">
@@ -89,6 +89,7 @@
       <div class="nav-links">
         <a href="#views" data-i18n="nav.views">예시</a>
         <a href="#fonts" data-i18n="nav.fonts">폰트</a>
+        <a href="#references" data-i18n="nav.references">레퍼런스</a>
         <a href="#outputs" data-i18n="nav.outputs">산출물</a>
         <a href="https://github.com/jinyoung89/mobile-ui-generator-skill" data-i18n="nav.github">GitHub</a>
         <div class="language-toggle" role="group" aria-label="언어 선택" data-i18n-aria-label="aria.language">
@@ -243,6 +244,44 @@
         </div>
       </section>
 
+      <section id="references" class="section reference-section">
+        <div class="section-head narrow">
+          <p class="eyebrow" data-i18n="refs.eyebrow">레퍼런스 지식 베이스</p>
+          <h2 data-i18n="refs.title">단순 데모가 아니라 화면 분석에서 뽑은 패턴 지식을 반영합니다.</h2>
+          <p data-i18n="refs.desc">공개 스킬에는 택소노미, 컴포넌트 상태, 패턴 커버리지, 에셋 역할, 안티패턴, 전달 품질을 일반화한 레퍼런스만 포함합니다. 출처 자료는 공개 파일에 넣지 않습니다.</p>
+        </div>
+        <div class="reference-grid" aria-label="스킬 레퍼런스 파일" data-i18n-aria-label="aria.references">
+          <article class="reference-card">
+            <span>01</span>
+            <h3 data-i18n="refs.1.title">패턴 분석 인사이트</h3>
+            <code>references/pattern-analysis-insights.md</code>
+            <p data-i18n="refs.1.desc">모바일 UI 화면 분석에서 뽑은 공개-safe 개선사항: 부족한 앱 타입, 상태 처리, 에셋 역할, 반복 안티패턴.</p>
+            <a href="https://github.com/jinyoung89/mobile-ui-generator-skill/blob/main/skills/mobile-ui-generator/references/pattern-analysis-insights.md" data-i18n="refs.open">레퍼런스 열기</a>
+          </article>
+          <article class="reference-card">
+            <span>02</span>
+            <h3 data-i18n="refs.2.title">택소노미 필터 모델</h3>
+            <code>references/taxonomy-filter-model.md</code>
+            <p data-i18n="refs.2.desc">앱 종류와 UI 패턴을 분리해 예시와 생성 스펙을 두 축으로 계속 확장할 수 있게 합니다.</p>
+            <a href="https://github.com/jinyoung89/mobile-ui-generator-skill/blob/main/skills/mobile-ui-generator/references/taxonomy-filter-model.md" data-i18n="refs.open">레퍼런스 열기</a>
+          </article>
+          <article class="reference-card">
+            <span>03</span>
+            <h3 data-i18n="refs.3.title">모바일 패턴 라이브러리</h3>
+            <code>references/mobile-pattern-library.md</code>
+            <p data-i18n="refs.3.desc">컴포넌트, 상태, 인터랙션, 카피 요구사항, 접근성 메모, 안티패턴을 포함한 재사용 모바일 패턴입니다.</p>
+            <a href="https://github.com/jinyoung89/mobile-ui-generator-skill/blob/main/skills/mobile-ui-generator/references/mobile-pattern-library.md" data-i18n="refs.open">레퍼런스 열기</a>
+          </article>
+          <article class="reference-card">
+            <span>04</span>
+            <h3 data-i18n="refs.4.title">품질 리뷰 체크리스트</h3>
+            <code>references/quality-review-checklist.md</code>
+            <p data-i18n="refs.4.desc">패턴 적합성, 시각 시스템, 인터랙션 상태, 접근성, 구현 전달 품질을 배포 전 점검합니다.</p>
+            <a href="https://github.com/jinyoung89/mobile-ui-generator-skill/blob/main/skills/mobile-ui-generator/references/quality-review-checklist.md" data-i18n="refs.open">레퍼런스 열기</a>
+          </article>
+        </div>
+      </section>
+
       <section id="outputs" class="section cards-section">
         <div class="section-head narrow">
           <p class="eyebrow" data-i18n="outputs.eyebrow">스킬이 생성하는 것</p>
@@ -263,7 +302,7 @@
   <noscript>
     <p class="noscript-note">Mobile UI Generator Skill includes static examples on this page. Enable JavaScript only if you want to switch languages without navigating.</p>
   </noscript>
-  <script src="../site-data.js?v=expanded-taxonomy-v3" defer></script>
-  <script src="../app.js?v=expanded-taxonomy-v3" defer></script>
+  <script src="../site-data.js?v=reference-section-v1" defer></script>
+  <script src="../app.js?v=reference-section-v1" defer></script>
 </body>
 </html>

@@ -151,6 +151,13 @@ def main() -> None:
         if "en" not in value or "ko" not in value:
             fail(f"translation key {key} lacks en/ko")
     for key in (
+        "nav.references",
+        "refs.eyebrow",
+        "refs.title",
+        "refs.desc",
+        "refs.1.title",
+        "refs.1.desc",
+        "refs.open",
         "views.filter.label",
         "views.appFilter.label",
         "views.appFilter.help",
@@ -159,6 +166,7 @@ def main() -> None:
         "views.summary.apps",
         "views.summary.patterns",
         "aria.cards",
+        "aria.references",
     ):
         if key not in translations:
             fail(f"missing translation {key}")
@@ -187,6 +195,9 @@ def main() -> None:
         assert_contains(html, 'id="examplePatternFilters"', f"{lang} UI pattern filters")
         assert_contains(html, 'id="exampleSummary"', f"{lang} example summary")
         assert_contains(html, 'id="fontCards"', f"{lang} static fonts")
+        assert_contains(html, 'id="references"', f"{lang} references section")
+        assert_contains(html, 'references/pattern-analysis-insights.md', f"{lang} pattern analysis reference")
+        assert_contains(html, 'references/taxonomy-filter-model.md', f"{lang} taxonomy reference")
         assert_contains(html, 'class="phone-card"', f"{lang} static card markup")
         if "mock-visual" in html:
             fail(f"{lang} page still contains old mock-visual markup")

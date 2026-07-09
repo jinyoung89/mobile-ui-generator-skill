@@ -12,6 +12,10 @@ window.MobileUIGeneratorData = Object.freeze({
       "en": "Outputs",
       "ko": "산출물"
     },
+    "nav.references": {
+      "en": "References",
+      "ko": "레퍼런스"
+    },
     "nav.github": {
       "en": "GitHub",
       "ko": "GitHub"
@@ -116,6 +120,54 @@ window.MobileUIGeneratorData = Object.freeze({
       "en": "Designed for clear handoff to AI design and code agents.",
       "ko": "AI 디자인/코드 에이전트에 명확하게 전달되도록 설계했습니다."
     },
+    "refs.eyebrow": {
+      "en": "Reference knowledge base",
+      "ko": "레퍼런스 지식 베이스"
+    },
+    "refs.title": {
+      "en": "Pattern guidance is updated from screen analysis, not just demo mockups.",
+      "ko": "단순 데모가 아니라 화면 분석에서 뽑은 패턴 지식을 반영합니다."
+    },
+    "refs.desc": {
+      "en": "The public skill includes generalized references for taxonomy, component states, pattern coverage, asset roles, anti-patterns, and delivery quality. Source material stays out of public files.",
+      "ko": "공개 스킬에는 택소노미, 컴포넌트 상태, 패턴 커버리지, 에셋 역할, 안티패턴, 전달 품질을 일반화한 레퍼런스만 포함합니다. 출처 자료는 공개 파일에 넣지 않습니다."
+    },
+    "refs.1.title": {
+      "en": "Pattern analysis insights",
+      "ko": "패턴 분석 인사이트"
+    },
+    "refs.1.desc": {
+      "en": "Public-safe refinements distilled from mobile UI screen analysis: missing app types, state handling, asset roles, and recurring anti-patterns.",
+      "ko": "모바일 UI 화면 분석에서 뽑은 공개-safe 개선사항: 부족한 앱 타입, 상태 처리, 에셋 역할, 반복 안티패턴."
+    },
+    "refs.2.title": {
+      "en": "Taxonomy filter model",
+      "ko": "택소노미 필터 모델"
+    },
+    "refs.2.desc": {
+      "en": "Separates app type from UI pattern so examples and generated specs can grow on two independent axes.",
+      "ko": "앱 종류와 UI 패턴을 분리해 예시와 생성 스펙을 두 축으로 계속 확장할 수 있게 합니다."
+    },
+    "refs.3.title": {
+      "en": "Mobile pattern library",
+      "ko": "모바일 패턴 라이브러리"
+    },
+    "refs.3.desc": {
+      "en": "Reusable mobile patterns with components, states, interactions, copy requirements, accessibility notes, and anti-patterns.",
+      "ko": "컴포넌트, 상태, 인터랙션, 카피 요구사항, 접근성 메모, 안티패턴을 포함한 재사용 모바일 패턴입니다."
+    },
+    "refs.4.title": {
+      "en": "Quality review checklist",
+      "ko": "품질 리뷰 체크리스트"
+    },
+    "refs.4.desc": {
+      "en": "A pre-delivery gate for pattern fit, visual system, interaction states, accessibility, and implementation handoff.",
+      "ko": "패턴 적합성, 시각 시스템, 인터랙션 상태, 접근성, 구현 전달 품질을 배포 전 점검합니다."
+    },
+    "refs.open": {
+      "en": "Open reference",
+      "ko": "레퍼런스 열기"
+    },
     "out.1.title": {
       "en": "Pattern system",
       "ko": "패턴 시스템"
@@ -191,6 +243,10 @@ window.MobileUIGeneratorData = Object.freeze({
     "aria.fonts": {
       "en": "Font profile cards",
       "ko": "폰트 프로필 카드"
+    },
+    "aria.references": {
+      "en": "Skill reference files",
+      "ko": "스킬 레퍼런스 파일"
     },
     "views.filter.label": {
       "en": "Filters",

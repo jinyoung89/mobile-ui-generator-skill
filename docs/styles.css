@@ -597,6 +597,58 @@ a{
   line-height:1.62;
   margin:0
 }
+.reference-section{
+  border-top:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07)
+}
+.reference-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px
+}
+.reference-card{
+  min-height:100%;
+  padding:24px;
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(128,255,219,.11),rgba(255,255,255,.04));
+  border:1px solid rgba(128,255,219,.16)
+}
+.reference-card span{
+  color:#80ffdb;
+  font:800 13px/1 Geist Mono,monospace
+}
+.reference-card h3{
+  margin:16px 0 10px;
+  color:#fff;
+  font-size:22px;
+  letter-spacing:-.035em
+}
+.reference-card code{
+  display:inline-flex;
+  max-width:100%;
+  padding:7px 9px;
+  border-radius:10px;
+  background:rgba(8,17,29,.7);
+  color:#c8fff0;
+  font:700 12px/1.35 Geist Mono,monospace;
+  overflow-wrap:anywhere
+}
+.reference-card p{
+  margin:14px 0 18px;
+  color:#b8c4df;
+  line-height:1.62
+}
+.reference-card a{
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:0 13px;
+  border-radius:999px;
+  background:#effff8;
+  color:#08111d;
+  font-weight:800;
+  font-size:13px
+}
 @media (max-width:900px){
   .shell{
     width:min(100% - 32px,1180px)
@@ -627,7 +679,7 @@ a{
   .product-panel{
     grid-template-columns:1fr
   }
-  .font-grid,.cards{
+  .font-grid,.cards,.reference-grid{
     grid-template-columns:1fr
   }
   .phone-grid{
