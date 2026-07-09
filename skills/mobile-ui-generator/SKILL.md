@@ -25,6 +25,7 @@ Use these files as the skill's design knowledge base. The references may be impr
 |---|---|
 | `references/evidence-and-sanitization.md` | How private/local collected reference analysis is generalized without revealing where it came from |
 | `references/taxonomy-filter-model.md` | Separates app type/service category filters from UI pattern/functional-unit filters |
+| `references/pattern-analysis-insights.md` | Public-safe refinements distilled from curated mobile UI reference analysis: gaps, component/state updates, asset roles, and recurring anti-patterns |
 | `references/design-principles.md` | Core mobile design decision order, hierarchy, layout, typography, color, motion, accessibility |
 | `references/mobile-pattern-library.md` | 60+ detailed mobile UI patterns with components, states, interactions, copy requirements, accessibility, anti-patterns |
 | `references/visual-style-taxonomy.md` | Mobile visual styles, color moods, style combinations, and style anti-patterns |
@@ -40,10 +41,11 @@ Load only the references needed for the task, but for substantial design generat
 
 1. `evidence-and-sanitization.md`
 2. `taxonomy-filter-model.md`
-3. `design-principles.md`
-4. `mobile-pattern-library.md`
-5. `component-state-checklist.md`
-6. `quality-review-checklist.md`
+3. `pattern-analysis-insights.md`
+4. `design-principles.md`
+5. `mobile-pattern-library.md`
+6. `component-state-checklist.md`
+7. `quality-review-checklist.md`
 
 Add `visual-style-taxonomy.md` when style, visual identity, color, typography, mood, or polish matters.
 Add `domain-playbooks.md` when the request names a domain or app category.

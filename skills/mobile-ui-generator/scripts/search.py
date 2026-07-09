@@ -27,6 +27,7 @@ REFERENCE_DIR = ROOT / "references"
 AREA_FILES = {
     "evidence": ["evidence-and-sanitization.md"],
     "taxonomy": ["taxonomy-filter-model.md"],
+    "analysis": ["pattern-analysis-insights.md"],
     "principles": ["design-principles.md"],
     "patterns": ["mobile-pattern-library.md"],
     "styles": ["visual-style-taxonomy.md"],
@@ -55,6 +56,13 @@ SYNONYMS = {
     "accessibility": ["a11y", "contrast", "touch", "screen reader", "접근성"],
     "empty": ["empty_state", "no results", "no data", "빈 상태"],
     "error": ["error_state", "retry", "failure", "recovery", "오류"],
+    "utility": ["bill", "payment", "receipt", "deadline", "공공", "요금"],
+    "insurance": ["claim", "document_review", "comparison", "보험", "청구"],
+    "career": ["job", "application_request_flow", "resume", "채용", "지원"],
+    "creator": ["upload_create", "media_capture", "ai", "publish", "크리에이터", "업로드"],
+    "grocery": ["cart", "coupon_points", "delivery", "substitution", "장보기", "리테일"],
+    "ticket": ["qr", "reservation", "checkout", "gate", "티켓", "이벤트"],
+    "smart_home": ["device_control", "alert", "permission", "iot", "스마트홈"],
 }
 
 TOKEN_RE = re.compile(r"[a-z0-9_]+|[가-힣]+", re.I)

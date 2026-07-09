@@ -42,6 +42,14 @@ REQUIRED_REFERENCES = {
         "Filter composition rules",
         "never render taxonomy labels as user UI",
     ],
+    "pattern-analysis-insights.md": [
+        "Pattern Analysis Insights",
+        "App-type coverage gaps",
+        "Search and filter screens need both query and scope state",
+        "Payment, points, and benefit screens need transparent calculation",
+        "Asset and image-role guidance",
+        "Never paste raw images",
+    ],
     "design-principles.md": [
         "Decision order",
         "Visual hierarchy",
@@ -205,6 +213,7 @@ BLOCKED_PUBLIC_TERMS = [
 SKILL_MUST_CONTAIN = [
     "evidence-and-sanitization.md",
     "taxonomy-filter-model.md",
+    "pattern-analysis-insights.md",
     "design-principles.md",
     "mobile-pattern-library.md",
     "visual-style-taxonomy.md",
