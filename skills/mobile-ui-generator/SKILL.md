@@ -1,7 +1,7 @@
 ---
 name: mobile-ui-generator
 description: Use when generating, designing, specifying, reviewing, or handing off mobile app UX/UI screens and flows. Produces pattern-aware mobile UI briefs, JSON specs, design-system guidance, component/state matrices, font profiles, copy systems, and implementation prompts for fintech, commerce, mobility, healthcare, education, games, messaging, travel, AI, support, and Korean mobile UI.
-version: 0.4.0
+version: 0.5.0
 author: jinyoung89
 license: MIT
 tags: [mobile-ui, ux-ui, design, mobile-patterns, design-system, font-profile, korean-ui]
@@ -30,6 +30,10 @@ Use these files as the skill's design knowledge base. The references may be impr
 | `references/domain-playbooks.md` | Domain-specific pattern, style, typography, color, trust, and anti-pattern guidance |
 | `references/component-state-checklist.md` | Component inventories and state matrices for navigation, inputs, commerce, finance, maps, feedback, CTAs |
 | `references/quality-review-checklist.md` | Pre-delivery quality gate for pattern fit, visual system, interaction, states, accessibility, and handoff |
+| `scripts/search.py` | Skill-local search over references by query, area, or exact pattern ID |
+| `templates/mobile-ui-brief.md` | Markdown brief structure for design handoff |
+| `templates/mobile-ui-spec.json` | JSON spec structure for implementation handoff |
+| `templates/pattern-observation.md` | Public-safe template for turning private/local observations into generic pattern updates |
 
 Load only the references needed for the task, but for substantial design generation use at least:
 
@@ -41,6 +45,38 @@ Load only the references needed for the task, but for substantial design generat
 
 Add `visual-style-taxonomy.md` when style, visual identity, color, typography, mood, or polish matters.
 Add `domain-playbooks.md` when the request names a domain or app category.
+
+
+## Search and templates
+
+When the skill is installed as files, prefer the local search script before reading every reference manually:
+
+```bash
+python3 skills/mobile-ui-generator/scripts/search.py "<domain pattern style words>" --area all -n 6
+python3 skills/mobile-ui-generator/scripts/search.py --pattern checkout
+python3 skills/mobile-ui-generator/scripts/search.py "glass dark premium" --area styles -n 3
+python3 skills/mobile-ui-generator/scripts/search.py "empty error loading" --area components -n 5
+```
+
+Search areas:
+
+| Area | Best for |
+|---|---|
+| `patterns` | exact screen and flow anatomy |
+| `domains` | domain-specific pattern/style/trust decisions |
+| `styles` | visual style, color, typography, motion direction |
+| `components` | component inventory and state matrix |
+| `quality` | pre-delivery review rules |
+| `principles` | general mobile design decision rules |
+| `evidence` | public-safe evidence/sanitization policy |
+
+Use templates when producing artifacts:
+
+- `templates/mobile-ui-brief.md` for human-readable design briefs;
+- `templates/mobile-ui-spec.json` for structured implementation specs;
+- `templates/pattern-observation.md` when converting private/local observations into public-safe pattern updates.
+
+Completion criterion: the output can be traced to searched patterns/references and conforms to the selected template when a handoff artifact is requested.
 
 ## Workflow
 

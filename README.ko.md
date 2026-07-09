@@ -46,6 +46,23 @@
 | `domain-playbooks.md` | 핀테크, 커머스, 모빌리티, 헬스케어, 교육, 게임, 미디어, IoT 등 도메인별 가이드 |
 | `component-state-checklist.md` | 구현 가능한 스펙을 위한 컴포넌트 인벤토리와 상태 매트릭스 |
 | `quality-review-checklist.md` | 디자인 적합성, 시각 시스템, 상태, 접근성, 핸드오프 품질 검증 |
+| `scripts/search.py` | 설치된 스킬 reference를 query/area/pattern ID로 검색 |
+| `templates/mobile-ui-brief.md` | 사람이 읽는 모바일 디자인 brief 템플릿 |
+| `templates/mobile-ui-spec.json` | 구현 핸드오프용 JSON spec 템플릿 |
+| `templates/pattern-observation.md` | 앞으로 패턴을 고도화할 때 쓰는 public-safe 관찰 템플릿 |
+
+### 스킬 내부 검색
+
+설치 후 에이전트가 긴 reference를 전부 읽지 않고 필요한 지식만 찾을 수 있습니다.
+
+```bash
+python3 skills/mobile-ui-generator/scripts/search.py "fintech checkout coupon" --area all -n 5
+python3 skills/mobile-ui-generator/scripts/search.py --pattern phone_verification
+python3 skills/mobile-ui-generator/scripts/search.py "glass dark premium" --area styles -n 3
+python3 skills/mobile-ui-generator/scripts/search.py "empty error loading" --area components -n 5
+```
+
+검색 영역: `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, `all`.
 
 검증:
 

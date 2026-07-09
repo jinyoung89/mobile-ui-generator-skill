@@ -36,10 +36,10 @@ BLOCKED_PUBLIC_COPY = [
     "349" + " apps",
     "0" + ".95",
     "indexed",
-    "수" + "집",
+    "수집" + "처",
     "데이터" + "셋",
     "레퍼런스" + " 품질",
-    "내" + "부",
+    "원본" + " 경로",
 ]
 PRIVATE_RE = re.compile("|".join(re.escape(term) for term in BLOCKED_PUBLIC_COPY), re.I)
 

@@ -1,0 +1,119 @@
+{
+  "intent": {
+    "user_job": "",
+    "domain": "",
+    "flow": "",
+    "risk_level": "",
+    "language_mode": "ko",
+    "target_platform": ""
+  },
+  "pattern_system": {
+    "primary_patterns": [],
+    "supporting_patterns": [],
+    "layout_archetype": "",
+    "navigation_model": "",
+    "cta_model": "",
+    "input_model": "",
+    "pattern_rationale": [],
+    "anti_patterns": []
+  },
+  "information_architecture": [
+    {
+      "priority": 1,
+      "element": "",
+      "reason": ""
+    }
+  ],
+  "screen_structure": {
+    "fixed_regions": {
+      "top": "",
+      "bottom": "",
+      "overlay": ""
+    },
+    "sections": [
+      {
+        "order": 1,
+        "name": "",
+        "purpose": "",
+        "components": []
+      }
+    ]
+  },
+  "component_inventory": {
+    "navigation": [],
+    "inputs_and_selection": [],
+    "content_and_cards": [],
+    "feedback_and_trust": [],
+    "cta": {
+      "primary": "",
+      "secondary": "",
+      "destructive": ""
+    }
+  },
+  "state_matrix": {
+    "screen": ["default", "loading", "empty", "error", "success"],
+    "inputs": ["empty", "focused", "filled", "invalid", "disabled"],
+    "cta": ["disabled", "enabled", "pressed", "loading", "success"],
+    "network": ["offline", "timeout", "retrying"],
+    "permission": ["not_requested", "granted", "denied", "ask_later"],
+    "pattern_specific": []
+  },
+  "visual_system": {
+    "style_direction": "",
+    "typography_direction": "",
+    "font_profile": {
+      "family": "",
+      "css_url": "",
+      "fallback": "",
+      "confidence": "",
+      "reason": "",
+      "license_note": ""
+    },
+    "color_direction": {
+      "primary": "",
+      "accent": "",
+      "surface": "",
+      "semantic": {
+        "success": "",
+        "warning": "",
+        "error": "",
+        "info": ""
+      }
+    },
+    "spacing": "",
+    "radius_elevation": "",
+    "motion_direction": "",
+    "icon_asset_guidance": ""
+  },
+  "copy_system": {
+    "title": "",
+    "subtitle_or_helper": "",
+    "primary_cta": "",
+    "secondary_cta": "",
+    "loading": "",
+    "empty": "",
+    "error": "",
+    "success": "",
+    "permission": "",
+    "destructive_confirmation": ""
+  },
+  "accessibility_and_mobile_constraints": {
+    "touch_targets": ">=44pt iOS / >=48dp Android",
+    "safe_area": "",
+    "keyboard_behavior": "",
+    "screen_reader_labels": [],
+    "contrast_target": "WCAG AA",
+    "reduced_motion": "",
+    "dynamic_text": ""
+  },
+  "implementation_prompt": "",
+  "quality_gate": {
+    "pattern_fit_explicit": false,
+    "layout_implementation_ready": false,
+    "non_happy_paths_covered": false,
+    "domain_style_fit": false,
+    "state_copy_included": false,
+    "accessibility_explicit": false,
+    "public_safe": false
+  }
+}

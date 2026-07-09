@@ -194,6 +194,23 @@ The installed skill is not just a single prompt. It includes a design reference 
 | `domain-playbooks.md` | Domain-specific guidance for fintech, commerce, mobility, healthcare, education, games, media, IoT, and more |
 | `component-state-checklist.md` | Component inventory and state matrix rules for implementation-ready specs |
 | `quality-review-checklist.md` | Pre-delivery quality gate for design fit, visual system, states, accessibility, and handoff |
+| `scripts/search.py` | Search installed skill references by query, area, or exact pattern ID |
+| `templates/mobile-ui-brief.md` | Human-readable mobile design brief template |
+| `templates/mobile-ui-spec.json` | Structured JSON implementation spec template |
+| `templates/pattern-observation.md` | Public-safe observation template for future pattern updates |
+
+### Skill-local search
+
+After installing the skill, agents can query the design knowledge base directly:
+
+```bash
+python3 skills/mobile-ui-generator/scripts/search.py "fintech checkout coupon" --area all -n 5
+python3 skills/mobile-ui-generator/scripts/search.py --pattern phone_verification
+python3 skills/mobile-ui-generator/scripts/search.py "glass dark premium" --area styles -n 3
+python3 skills/mobile-ui-generator/scripts/search.py "empty error loading" --area components -n 5
+```
+
+Search areas: `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, or `all`.
 
 Validation:
 
@@ -211,7 +228,7 @@ python3 scripts/validate_patterns.py
 python3 scripts/validate_site.py
 ```
 
-The current library covers 55+ detailed mobile patterns plus domain modifiers.
+The current library covers 60+ detailed mobile patterns plus domain modifiers, searchable references, and reusable handoff templates.
 
 ## License
 

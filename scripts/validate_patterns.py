@@ -11,14 +11,19 @@ Checks the actual skill package, not just the website:
 from __future__ import annotations
 
 from pathlib import Path
+import json
 import re
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "skills/mobile-ui-generator"
 SKILL = SKILL_DIR / "SKILL.md"
 REF_DIR = SKILL_DIR / "references"
+SCRIPT_DIR = SKILL_DIR / "scripts"
+TEMPLATE_DIR = SKILL_DIR / "templates"
 PATTERN_REF = REF_DIR / "mobile-pattern-library.md"
+SEARCH_SCRIPT = SCRIPT_DIR / "search.py"
 
 REQUIRED_REFERENCES = {
     "evidence-and-sanitization.md": [
@@ -69,6 +74,33 @@ REQUIRED_REFERENCES = {
         "State coverage",
         "Output quality gate",
         "Final self-check",
+    ],
+}
+
+REQUIRED_SUPPORT_FILES = {
+    "scripts/search.py": [
+        "Search the Mobile UI Generator skill references",
+        "--pattern",
+        "--area",
+        "AREA_FILES",
+    ],
+    "templates/mobile-ui-brief.md": [
+        "Mobile UI Brief Template",
+        "Pattern system",
+        "State matrix",
+        "Quality gate",
+    ],
+    "templates/mobile-ui-spec.json": [
+        "pattern_system",
+        "component_inventory",
+        "state_matrix",
+        "quality_gate",
+    ],
+    "templates/pattern-observation.md": [
+        "Pattern Observation Template",
+        "Evidence level",
+        "Public reference update candidate",
+        "Sanitization checklist",
     ],
 }
 
@@ -165,6 +197,10 @@ SKILL_MUST_CONTAIN = [
     "domain-playbooks.md",
     "component-state-checklist.md",
     "quality-review-checklist.md",
+    "scripts/search.py",
+    "templates/mobile-ui-brief.md",
+    "templates/mobile-ui-spec.json",
+    "templates/pattern-observation.md",
     "private/local analysis of curated mobile UI screens",
     "Start from product intent",
     "Build the pattern system before writing copy",
@@ -206,6 +242,22 @@ def main() -> None:
             if needle not in text:
                 fail(f"{rel} missing required content {needle!r}")
 
+    support_texts = {}
+    for rel, needles in REQUIRED_SUPPORT_FILES.items():
+        path = SKILL_DIR / rel
+        if not path.exists():
+            fail(f"missing support file: {rel}")
+        text = read(path)
+        support_texts[rel] = text
+        for needle in needles:
+            if needle not in text:
+                fail(f"{rel} missing required content {needle!r}")
+
+    try:
+        json.loads((TEMPLATE_DIR / "mobile-ui-spec.json").read_text(encoding="utf-8"))
+    except Exception as exc:
+        fail(f"mobile-ui-spec.json is not valid JSON: {exc}")
+
     pattern_ref = reference_texts["mobile-pattern-library.md"]
     pattern_ids = re.findall(r"^### `([^`]+)`", pattern_ref, flags=re.M)
     if len(pattern_ids) < 60:
@@ -239,7 +291,8 @@ def main() -> None:
         "pattern validation passed: "
         f"{len(pattern_ids)} patterns, "
         f"{len(EXPECTED_DOMAIN_MODIFIERS)} domain modifiers, "
-        f"{len(REQUIRED_REFERENCES)} reference files"
+        f"{len(REQUIRED_REFERENCES)} reference files, "
+        f"{len(REQUIRED_SUPPORT_FILES)} support files"
     )
 
 
