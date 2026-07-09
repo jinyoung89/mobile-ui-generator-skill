@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Mobile UI Generator static showcase.
-
-Checks syntax, SEO/i18n metadata, static fallback content, font coverage, and
-public-copy hygiene for the GitHub Pages site.
-"""
+"""Validate the Mobile UI Generator static skill explanation page."""
 from __future__ import annotations
 
 import json
@@ -22,6 +18,7 @@ except Exception:  # pragma: no cover
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 BASE = "https://jinyoung89.github.io/mobile-ui-generator-skill/"
+
 # Keep this public-safe: do not include source/provider names in this repo.
 # Split sensitive phrases so code search does not surface them as project copy.
 BLOCKED_PUBLIC_COPY = [
@@ -79,97 +76,84 @@ def assert_contains(text: str, needle: str, label: str) -> None:
         fail(f"{label} missing {needle!r}")
 
 
+def assert_not_contains(text: str, needle: str, label: str) -> None:
+    if needle in text:
+        fail(f"{label} must not contain {needle!r}")
+
+
+def validate_skill_outputs(data: dict) -> None:
+    translations = data.get("translations", {})
+    outputs = data.get("skillOutputs", [])
+    fonts = data.get("fonts", [])
+
+    if len(outputs) < 4:
+        fail(f"expected at least 4 skill output examples, got {len(outputs)}")
+    if len(fonts) < 6:
+        fail(f"expected at least 6 font profiles, got {len(fonts)}")
+
+    for key, value in translations.items():
+        if "en" not in value or "ko" not in value:
+            fail(f"translation key {key} lacks en/ko")
+
+    required_translation_keys = [
+        "views.eyebrow",
+        "views.title",
+        "views.desc",
+        "examples.generatedLabel",
+        "examples.promptLabel",
+        "examples.patternLabel",
+        "examples.briefLabel",
+        "examples.componentsLabel",
+        "examples.statesLabel",
+        "examples.specLabel",
+        "examples.promptOutLabel",
+        "aria.examples",
+        "schema.label",
+    ]
+    for key in required_translation_keys:
+        if key not in translations:
+            fail(f"missing translation {key}")
+
+    required_fields = {
+        "id",
+        "title",
+        "sourcePrompt",
+        "artifactTypes",
+        "appType",
+        "uiPatterns",
+        "brief",
+        "components",
+        "states",
+        "fontProfile",
+        "spec",
+        "implementationPrompt",
+    }
+    for item in outputs:
+        missing = sorted(required_fields - set(item))
+        if missing:
+            fail(f"skill output {item.get('id', '<missing id>')} missing fields {missing}")
+        for localized_field in ["title", "sourcePrompt", "appType", "brief", "components", "states", "spec", "implementationPrompt"]:
+            value = item[localized_field]
+            if not isinstance(value, dict) or "en" not in value or "ko" not in value:
+                fail(f"skill output {item['id']} field {localized_field} lacks en/ko")
+        if not item["uiPatterns"] or not item["artifactTypes"]:
+            fail(f"skill output {item['id']} needs patterns and artifact types")
+        font = item["fontProfile"]
+        for key in ["family", "css_url", "fallback", "confidence", "reason"]:
+            if key not in font:
+                fail(f"skill output {item['id']} font profile missing {key}")
+        for lang in ["en", "ko"]:
+            spec = item["spec"][lang]
+            if not isinstance(spec, dict) or "layout_archetype" not in spec or "state_matrix" not in spec:
+                fail(f"skill output {item['id']} {lang} spec must include layout_archetype and state_matrix")
+
+
 def main() -> None:
     subprocess.run(["node", "--check", str(DOCS / "app.js")], check=True)
     subprocess.run(["node", "--check", str(DOCS / "site-data.js")], check=True)
 
     data = parse_site_data()
-    examples = data["examples"]
-    app_categories = data["appCategories"]
-    ui_pattern_categories = data["uiPatternCategories"]
-    font_by_slug = data["fontBySlug"]
-    fonts = data["fonts"]
-    translations = data["translations"]
-
-    if len(examples) < 38:
-        fail(f"expected at least 38 examples, got {len(examples)}")
-    if len(app_categories) < 22:
-        fail(f"expected at least 21 app types plus all, got {len(app_categories)}")
-    if len(ui_pattern_categories) < 32:
-        fail(f"expected at least 31 UI patterns plus all, got {len(ui_pattern_categories)}")
-
-    app_ids = {category["id"] for category in app_categories}
-    pattern_ids = {category["id"] for category in ui_pattern_categories}
-    if "all" not in app_ids or "all" not in pattern_ids:
-        fail("app and UI pattern categories must include all")
-
-    app_usage = {category_id: 0 for category_id in app_ids if category_id != "all"}
-    pattern_usage = {category_id: 0 for category_id in pattern_ids if category_id != "all"}
-    layouts = set()
-    for item in examples:
-        slug = item.get("slug", "<missing slug>")
-        required = {"slug", "layout", "theme", "appCategories", "uiPatterns", "mode", "copy"}
-        missing = sorted(required - set(item))
-        if missing:
-            fail(f"example {slug} missing fields {missing}")
-        layouts.add(item["layout"])
-        if not item["appCategories"] or not item["uiPatterns"]:
-            fail(f"example {slug} must include appCategories and uiPatterns")
-        for category_id in item["appCategories"]:
-            if category_id not in app_ids:
-                fail(f"example {slug} uses unknown app category {category_id}")
-            if category_id in app_usage:
-                app_usage[category_id] += 1
-        for category_id in item["uiPatterns"]:
-            if category_id not in pattern_ids:
-                fail(f"example {slug} uses unknown UI pattern {category_id}")
-            if category_id in pattern_usage:
-                pattern_usage[category_id] += 1
-        for lang in ("en", "ko"):
-            copy = item["copy"].get(lang)
-            if not copy or "title" not in copy or "cardTitle" not in copy or "cta" not in copy:
-                fail(f"example {slug} copy lacks required {lang} fields")
-
-    if len(layouts) < 35:
-        fail(f"expected broad layout coverage, got {len(layouts)}")
-    empty_apps = sorted(key for key, count in app_usage.items() if count == 0)
-    empty_patterns = sorted(key for key, count in pattern_usage.items() if count == 0)
-    if empty_apps:
-        fail(f"empty app categories: {empty_apps}")
-    if empty_patterns:
-        fail(f"empty UI pattern categories: {empty_patterns}")
-
-    missing_font_slugs = [item["slug"] for item in examples if item["slug"] not in font_by_slug]
-    if missing_font_slugs:
-        fail(f"missing font profiles for examples: {missing_font_slugs}")
-    used_fonts = {font_by_slug[item["slug"]]["label"] for item in examples}
-    if len(used_fonts) < 6:
-        fail(f"expected at least 6 font profiles in examples, got {sorted(used_fonts)}")
-    if len(fonts) < 6:
-        fail(f"expected at least 6 font cards, got {len(fonts)}")
-    for key, value in translations.items():
-        if "en" not in value or "ko" not in value:
-            fail(f"translation key {key} lacks en/ko")
-    for key in (
-        "nav.references",
-        "refs.eyebrow",
-        "refs.title",
-        "refs.desc",
-        "refs.1.title",
-        "refs.1.desc",
-        "refs.open",
-        "views.filter.label",
-        "views.appFilter.label",
-        "views.appFilter.help",
-        "views.patternFilter.label",
-        "views.patternFilter.help",
-        "views.summary.apps",
-        "views.summary.patterns",
-        "aria.cards",
-        "aria.references",
-    ):
-        if key not in translations:
-            fail(f"missing translation {key}")
+    validate_skill_outputs(data)
 
     pages = {
         "en": DOCS / "index.html",
@@ -188,24 +172,34 @@ def main() -> None:
         assert_contains(html, f'hreflang="en" href="{BASE}"', f"{lang} hreflang en")
         assert_contains(html, f'hreflang="ko" href="{BASE}ko/"', f"{lang} hreflang ko")
         assert_contains(html, 'og:image" content="https://jinyoung89.github.io/mobile-ui-generator-skill/assets/og.png"', f"{lang} og image")
-        assert_contains(html, 'og:image:width" content="1200"', f"{lang} og width")
-        assert_contains(html, 'og:image:height" content="630"', f"{lang} og height")
-        assert_contains(html, 'id="exampleCards"', f"{lang} static cards")
-        assert_contains(html, 'id="exampleAppFilters"', f"{lang} app filters")
-        assert_contains(html, 'id="examplePatternFilters"', f"{lang} UI pattern filters")
-        assert_contains(html, 'id="exampleSummary"', f"{lang} example summary")
+        assert_contains(html, 'id="exampleCards"', f"{lang} generated examples")
+        assert_contains(html, 'class="skill-output-grid"', f"{lang} skill output grid")
+        assert_contains(html, 'data-i18n="views.title"', f"{lang} generated examples copy")
         assert_contains(html, 'id="fontCards"', f"{lang} static fonts")
         assert_contains(html, 'id="references"', f"{lang} references section")
         assert_contains(html, 'references/pattern-analysis-insights.md', f"{lang} pattern analysis reference")
-        assert_contains(html, 'references/taxonomy-filter-model.md', f"{lang} taxonomy reference")
-        assert_contains(html, 'class="phone-card"', f"{lang} static card markup")
-        if "mock-visual" in html:
-            fail(f"{lang} page still contains old mock-visual markup")
+        assert_not_contains(html, 'hand-built HTML/CSS demos', f"{lang} old mock copy")
+        assert_not_contains(html, 'class="phone-card"', f"{lang} old phone mock markup")
+        assert_not_contains(html, 'id="exampleAppFilters"', f"{lang} old app filter markup")
+        assert_not_contains(html, 'id="examplePatternFilters"', f"{lang} old pattern filter markup")
         ld = json_ld(html)
         if ld.get("url") != page_url or ld.get("inLanguage") != lang:
             fail(f"{lang} JSON-LD url/language mismatch")
         if locale not in html:
             fail(f"{lang} missing OG locale {locale}")
+
+    css = read(DOCS / "styles.css")
+    assert_contains(css, ".skill-output-grid", "skill output grid styles")
+    assert_contains(css, ".skill-output-card", "skill output card styles")
+    assert_not_contains(css, ".phone-card", "old phone mock CSS")
+    assert_not_contains(css, ".phone-grid", "old phone carousel CSS")
+    if "mock-visual" in read(DOCS / "app.js") or "mock-visual" in css:
+        fail("old mock-visual renderer/styles must be removed")
+
+    app_js = read(DOCS / "app.js")
+    assert_contains(app_js, "renderSkillOutputs", "skill output renderer")
+    assert_not_contains(app_js, "renderAuth", "old phone renderer")
+    assert_not_contains(app_js, "phoneFrame", "old phone frame renderer")
 
     ET.parse(DOCS / "sitemap.xml")
     sitemap = read(DOCS / "sitemap.xml")
@@ -220,14 +214,6 @@ def main() -> None:
         with Image.open(og_png) as im:
             if im.size != (1200, 630):
                 fail(f"og.png expected 1200x630, got {im.size}")
-
-    css = read(DOCS / "styles.css")
-    if "mock-visual" in read(DOCS / "app.js") or "mock-visual" in css:
-        fail("old mock-visual renderer/styles must be removed")
-    assert_contains(css, "grid-template-columns:repeat(auto-fit,minmax", "phone example grid")
-    assert_contains(css, ".phone>.delivery-map", "scoped delivery map styles")
-    if re.search(r"\.phone-grid\s*\{[^}]*display\s*:\s*flex", css, re.S):
-        fail("phone examples must use a non-clipping responsive grid, not a horizontal flex carousel")
 
     # Public-copy hygiene. Include untracked files when run before commit.
     files = subprocess.run(

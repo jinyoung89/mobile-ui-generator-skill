@@ -135,35 +135,20 @@ Rules:
 | `copy_system` | Locale-specific UI copy guidelines |
 | `implementation_prompt` | Prompt for code, Figma, design-system, or image-generation agents |
 
-## Example mobile views
+## Website examples
 
-The website includes nineteen HTML/CSS mobile UI demos. They are not uploaded app screenshots and not generated images. The examples are shown as a horizontal carousel on desktop and mobile.
+The website shows actual skill-output artifacts instead of decorative UI mockups. Each example demonstrates the kind of output an agent should produce after applying `SKILL.md` and the reference files:
 
-Included flows:
+- input prompt;
+- app type and UI pattern system;
+- screen brief excerpt;
+- component inventory;
+- state matrix;
+- font profile;
+- JSON UI spec excerpt;
+- implementation prompt excerpt.
 
-- onboarding / preference setup;
-- signup / identity verification;
-- account cancellation;
-- main home;
-- checkout / payment;
-- delivery tracking;
-- booking and reservation;
-- settings and permissions;
-- empty state and search recovery.
-
-Included domains:
-
-- fintech / transfer;
-- commerce / checkout;
-- mobility / map booking;
-- healthcare / appointment booking;
-- game / lobby and rewards;
-- education / lesson progress;
-- messenger / chat;
-- content / media viewer;
-- travel / stay booking;
-- subscription / paywall;
-- customer support / chatbot.
+Current showcased scenarios include Korean fintech phone verification, commerce checkout, mobility map booking, and account cancellation.
 
 Open the showcase:
 
