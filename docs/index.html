@@ -132,328 +132,40 @@
           <h2 data-i18n="views.title">A broad set of app flows and service categories.</h2>
           <p data-i18n="views.desc">These are hand-built HTML/CSS demos that show possible screen structures, typography, and interaction patterns.</p>
         </div>
-        <div class="example-toolbar" aria-label="Category">
-          <div>
-            <strong data-i18n="views.filter.label">Category</strong>
-            <p id="exampleSummary">Showing 19 / 19 · 12 categories · 6 font profiles</p>
+<div class="example-toolbar" aria-label="Filters">
+          <div class="filter-intro">
+            <strong data-i18n="views.filter.label">Filters</strong>
+            <p id="exampleSummary">Showing 19 / 19 · 9 app types · 13 UI patterns · 6 font profiles</p>
           </div>
-          <div id="exampleCategoryFilters" class="category-filter" role="list">
-          <button type="button" class="category-chip" data-category="all" aria-pressed="true">
-            <span>All</span>
-            <em>19</em>
-          </button>
-          <button type="button" class="category-chip" data-category="onboarding" aria-pressed="false">
-            <span>Onboarding</span>
-            <em>1</em>
-          </button>
-          <button type="button" class="category-chip" data-category="auth" aria-pressed="false">
-            <span>Auth</span>
-            <em>2</em>
-          </button>
-          <button type="button" class="category-chip" data-category="home" aria-pressed="false">
-            <span>Home</span>
-            <em>1</em>
-          </button>
-          <button type="button" class="category-chip" data-category="commerce" aria-pressed="false">
-            <span>Commerce</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="finance" aria-pressed="false">
-            <span>Finance</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="booking" aria-pressed="false">
-            <span>Booking</span>
-            <em>4</em>
-          </button>
-          <button type="button" class="category-chip" data-category="delivery" aria-pressed="false">
-            <span>Delivery</span>
-            <em>2</em>
-          </button>
-          <button type="button" class="category-chip" data-category="social-content" aria-pressed="false">
-            <span>Social &amp; Content</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="game-education" aria-pressed="false">
-            <span>Game &amp; Education</span>
-            <em>2</em>
-          </button>
-          <button type="button" class="category-chip" data-category="settings-support" aria-pressed="false">
-            <span>Settings &amp; Support</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="empty-state" aria-pressed="false">
-            <span>Empty/Error</span>
-            <em>1</em>
-          </button>
+          <div class="filter-stack">
+            <section class="filter-group" aria-label="App type filter">
+              <div>
+                <b data-i18n="views.appFilter.label">App type</b>
+                <small data-i18n="views.appFilter.help">Service category: what the app does</small>
+              </div>
+              <div id="exampleAppFilters" class="category-filter" role="list"></div>
+            </section>
+            <section class="filter-group" aria-label="UI pattern filter">
+              <div>
+                <b data-i18n="views.patternFilter.label">UI pattern</b>
+                <small data-i18n="views.patternFilter.help">Functional unit: what the screen does</small>
+              </div>
+              <div id="examplePatternFilters" class="category-filter pattern-filter" role="list"></div>
+            </section>
           </div>
         </div>
         <div id="exampleCards" class="phone-grid" tabindex="0" aria-label="Example mobile UI cards" data-i18n-aria-label="aria.cards">
-          <article class="phone-card" aria-label="Fintech signup">
-            <div class="phone light fintech font-pretendard" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Verification</strong></div>
-              <div class="mock-visual fintech"><small>SMS</small></div>
-              <span class="font-chip">Pretendard</span>
-              <h3>Start with your phone number</h3>
-              <p class="subcopy">Confirm identity with a clear, trusted signup step.</p>
-              <div class="mock-list"><div class="mock-row">Phone number</div><div class="mock-row">6-digit code · 02:58</div><div class="mock-row">Agree to required terms</div></div>
-              <span class="mock-button">Continue</span>
+          <article class="phone-card" aria-label="Example loading">
+            <div class="phone placeholder-phone">
+              <div class="status"><span>9:41</span><span>●●●</span></div>
+              <main class="screen empty-screen">
+                <div class="empty-graphic"></div>
+                <h3>Loading examples</h3>
+                <p>JavaScript renders app-type and UI-pattern examples here.</p>
+              </main>
             </div>
-            <h3>Fintech signup</h3>
-            <p>Signup and identity verification with helper copy and a fixed CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Personalized onboarding">
-            <div class="phone light onboarding font-suit" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Setup</strong></div>
-              <div class="mock-visual onboarding"><small>AI</small></div>
-              <span class="font-chip">SUIT</span>
-              <h3>Make the app fit your routine</h3>
-              <p class="subcopy">Use preference chips and progressive setup to explain value fast.</p>
-              <div class="mock-list"><div class="mock-row">Choose interests</div><div class="mock-row">Enable useful alerts</div><div class="mock-row">Preview your home</div></div>
-              <span class="mock-button">Personalize</span>
-            </div>
-            <h3>Personalized onboarding</h3>
-            <p>Preference chips, setup steps, and first-run value proposition.</p>
-          </article>
-          <article class="phone-card" aria-label="Commerce checkout">
-            <div class="phone dark commerce font-spoqa" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Checkout</strong></div>
-              <div class="mock-visual commerce"><small>PAY</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>Review and pay securely</h3>
-              <p class="subcopy">Summarize products, discounts, payment method, and legal copy.</p>
-              <div class="mock-list"><div class="mock-row">Item total $48.00</div><div class="mock-row">Coupon -$5.00</div><div class="mock-row">Card ending 1234</div></div>
-              <span class="mock-button">Pay $43.00</span>
-            </div>
-            <h3>Commerce checkout</h3>
-            <p>Product summary, coupon row, payment card, legal note, and amount CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Main home">
-            <div class="phone light home-screen font-wanted" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Home</strong></div>
-              <div class="mock-visual home-screen"><small>TODAY</small></div>
-              <span class="font-chip">Wanted Sans</span>
-              <h3>Put today’s key actions first</h3>
-              <p class="subcopy">A main screen that prioritizes status, shortcuts, and re-entry.</p>
-              <div class="mock-list"><div class="mock-row">Monthly spend</div><div class="mock-row">Send money</div><div class="mock-row">Benefits</div><div class="mock-row">Weekly report</div></div>
-              <span class="mock-button">View all services</span>
-            </div>
-            <h3>Main home</h3>
-            <p>Role-based home with primary metric, shortcuts, and service entry.</p>
-          </article>
-          <article class="phone-card" aria-label="Delivery tracking">
-            <div class="phone light delivery font-spoqa" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Order</strong></div>
-              <div class="mock-visual delivery"><small>ETA</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>Your rider picked it up</h3>
-              <p class="subcopy">Show progress, ETA, delivery note, and support in context.</p>
-              <div class="mock-list"><div class="mock-row">Order received</div><div class="mock-row">Cooking done</div><div class="mock-row">On the way</div></div>
-              <span class="mock-button">Message rider</span>
-            </div>
-            <h3>Delivery tracking</h3>
-            <p>ETA, map preview, progress timeline, and support CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Mobility booking">
-            <div class="phone light mobility font-noto" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Route</strong></div>
-              <div class="mock-visual mobility"><small>MAP</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>From Gangnam to Seongsu</h3>
-              <p class="subcopy">A map-first booking flow with route choices and payment CTA.</p>
-              <div class="mock-list"><div class="mock-row">Taxi · 27 min</div><div class="mock-row">$14.20 estimated</div><div class="mock-row">Car sharing available</div></div>
-              <span class="mock-button">Reserve and pay</span>
-            </div>
-            <h3>Mobility booking</h3>
-            <p>Map-first reservation with bottom sheet and route/payment choices.</p>
-          </article>
-          <article class="phone-card" aria-label="Finance transfer">
-            <div class="phone dark finance font-pretendard" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Transfer</strong></div>
-              <div class="mock-visual finance"><small>₩</small></div>
-              <span class="font-chip">Pretendard</span>
-              <h3>How much would you like to send?</h3>
-              <p class="subcopy">Make the amount, receiver, and trust cues impossible to miss.</p>
-              <div class="mock-list"><div class="mock-row">Available balance</div><div class="mock-row">Quick amounts</div><div class="mock-row">Receiver card</div></div>
-              <span class="mock-button">Send securely</span>
-            </div>
-            <h3>Finance transfer</h3>
-            <p>Balance context, amount editing, trusted receiver card, and secure CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Account cancellation">
-            <div class="phone light cancellation font-noto" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Close account</strong></div>
-              <div class="mock-visual cancellation"><small>!</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>Review before leaving</h3>
-              <p class="subcopy">Explain irreversible effects and keep destructive actions clear.</p>
-              <div class="mock-list"><div class="mock-row">Purchase history removed</div><div class="mock-row">Benefits cannot be restored</div><div class="mock-row">30-day rejoin limit</div></div>
-              <span class="mock-button">Close account</span>
-            </div>
-            <h3>Account cancellation</h3>
-            <p>Risk disclosure, benefit loss, reason field, and destructive CTA hierarchy.</p>
-          </article>
-          <article class="phone-card" aria-label="Healthcare booking">
-            <div class="phone light health font-suit" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Booking</strong></div>
-              <div class="mock-visual health"><small>4.8</small></div>
-              <span class="font-chip">SUIT</span>
-              <h3>Available times this week</h3>
-              <p class="subcopy">Use trust details, date chips, slot states, and confirmation.</p>
-              <div class="mock-list"><div class="mock-row">Dermatology · Gangnam</div><div class="mock-row">Tue 10:30 available</div><div class="mock-row">Doctor with 12 years</div></div>
-              <span class="mock-button">Confirm booking</span>
-            </div>
-            <h3>Healthcare booking</h3>
-            <p>Provider trust, date chips, slot states, and confirmation CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Social feed">
-            <div class="phone dark social font-wanted" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Community</strong></div>
-              <div class="mock-visual social"><small>HOT</small></div>
-              <span class="font-chip">Wanted Sans</span>
-              <h3>Catch up on popular posts</h3>
-              <p class="subcopy">Balance discovery, comments, saves, and re-entry prompts.</p>
-              <div class="mock-list"><div class="mock-row">Stories</div><div class="mock-row">Top post today</div><div class="mock-row">3 new messages</div></div>
-              <span class="mock-button">Browse feed</span>
-            </div>
-            <h3>Social feed</h3>
-            <p>Stories, content card, social signals, and re-entry prompt.</p>
-          </article>
-          <article class="phone-card" aria-label="Game lobby">
-            <div class="phone dark game font-ibm" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Season lobby</strong></div>
-              <div class="mock-visual game"><small>LV.28</small></div>
-              <span class="font-chip">IBM Plex Sans KR</span>
-              <h3>Today’s dungeon is open</h3>
-              <p class="subcopy">Use character focus, reward pressure, and high-energy action.</p>
-              <div class="mock-list"><div class="mock-row">Daily reward 500 GEM</div><div class="mock-row">Quest progress 3/5</div><div class="mock-row">Limited event</div></div>
-              <span class="mock-button">Start battle</span>
-            </div>
-            <h3>Game lobby</h3>
-            <p>Character focus, daily reward, quest progress, and high-energy CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Education lesson">
-            <div class="phone light education font-noto" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Today’s lesson</strong></div>
-              <div class="mock-visual education"><small>72%</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>Practice fraction addition</h3>
-              <p class="subcopy">Show progress, grade metadata, learning modules, and resume CTA.</p>
-              <div class="mock-list"><div class="mock-row">Concept video</div><div class="mock-row">Practice quiz</div><div class="mock-row">Mistake notebook</div></div>
-              <span class="mock-button">Continue learning</span>
-            </div>
-            <h3>Education lesson</h3>
-            <p>Learning progress, curriculum metadata, module list, and resume CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Messenger chat">
-            <div class="phone light messenger font-spoqa" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Chat</strong></div>
-              <div class="mock-visual messenger"><small>DM</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>Keep the conversation moving</h3>
-              <p class="subcopy">Use readable bubbles, composer affordances, and safe-area spacing.</p>
-              <div class="mock-list"><div class="mock-row">I sent the deck</div><div class="mock-row">Got it, see you at 3</div><div class="mock-row">Great 🙌</div></div>
-              <span class="mock-button">Send message</span>
-            </div>
-            <h3>Messenger chat</h3>
-            <p>Conversation bubbles, reply rhythm, composer affordance, and safe area.</p>
-          </article>
-          <article class="phone-card" aria-label="Content viewer">
-            <div class="phone dark content font-ibm" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Watch</strong></div>
-              <div class="mock-visual content"><small>PLAY</small></div>
-              <span class="font-chip">IBM Plex Sans KR</span>
-              <h3>3-minute market briefing</h3>
-              <p class="subcopy">Make media, metadata, engagement, and next action clear.</p>
-              <div class="mock-list"><div class="mock-row">Today’s 5 issues</div><div class="mock-row">Like · Save · Share</div><div class="mock-row">Next recommendation</div></div>
-              <span class="mock-button">Watch next</span>
-            </div>
-            <h3>Content viewer</h3>
-            <p>Video hero, metadata, engagement actions, and next-content CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Travel booking">
-            <div class="phone light travel font-pretendard" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Stay booking</strong></div>
-              <div class="mock-visual travel"><small>STAY</small></div>
-              <span class="font-chip">Pretendard</span>
-              <h3>Jeju ocean-view stay</h3>
-              <p class="subcopy">Show visual appeal, date summary, price, and cancellation policy.</p>
-              <div class="mock-list"><div class="mock-row">Aug 12–14 · 2 adults</div><div class="mock-row">2 nights total $284</div><div class="mock-row">Free cancellation until Aug 10</div></div>
-              <span class="mock-button">Continue booking</span>
-            </div>
-            <h3>Travel booking</h3>
-            <p>Large visual, date/guest summary, cancellation policy, and price CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Subscription paywall">
-            <div class="phone dark subscription font-wanted" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Membership</strong></div>
-              <div class="mock-visual subscription"><small>PRO</small></div>
-              <span class="font-chip">Wanted Sans</span>
-              <h3>Upgrade to Pro</h3>
-              <p class="subcopy">Compare plans, explain value, and reduce cancellation anxiety.</p>
-              <div class="mock-list"><div class="mock-row">Ad-free</div><div class="mock-row">Unlimited saves</div><div class="mock-row">AI summaries</div></div>
-              <span class="mock-button">Start free trial</span>
-            </div>
-            <h3>Subscription paywall</h3>
-            <p>Plan comparison, reassurance copy, trial CTA, and cancellation clarity.</p>
-          </article>
-          <article class="phone-card" aria-label="Settings &amp; permissions">
-            <div class="phone light settings font-suit" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Permissions</strong></div>
-              <div class="mock-visual settings"><small>SET</small></div>
-              <span class="font-chip">SUIT</span>
-              <h3>Turn on useful alerts</h3>
-              <p class="subcopy">Explain why each permission matters and keep defaults respectful.</p>
-              <div class="mock-list"><div class="mock-row">Order updates on</div><div class="mock-row">Marketing off</div><div class="mock-row">Security alerts on</div></div>
-              <span class="mock-button">Save settings</span>
-            </div>
-            <h3>Settings &amp; permissions</h3>
-            <p>Permission rationale, toggle hierarchy, and privacy-aware defaults.</p>
-          </article>
-          <article class="phone-card" aria-label="Customer support">
-            <div class="phone light support font-spoqa" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Help</strong></div>
-              <div class="mock-visual support"><small>BOT</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>How can we help?</h3>
-              <p class="subcopy">Route frequent issues quickly and offer escalation when needed.</p>
-              <div class="mock-list"><div class="mock-row">Cancel order</div><div class="mock-row">Payment error</div><div class="mock-row">Talk to agent</div></div>
-              <span class="mock-button">Start chat</span>
-            </div>
-            <h3>Customer support</h3>
-            <p>FAQ routing, chatbot entry, common tasks, and escalation CTA.</p>
-          </article>
-          <article class="phone-card" aria-label="Empty state">
-            <div class="phone light empty-state font-noto" lang="en">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>Search</strong></div>
-              <div class="mock-visual empty-state"><small>0</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>No results found</h3>
-              <p class="subcopy">Recover from dead ends with helpful copy and alternate paths.</p>
-              <div class="mock-list"><div class="mock-row">Popular</div><div class="mock-row">New</div><div class="mock-row">Discounted</div></div>
-              <span class="mock-button">See recommendations</span>
-            </div>
-            <h3>Empty state</h3>
-            <p>No-result recovery with illustration, helpful copy, and alternate paths.</p>
+            <h3>Loading examples</h3>
+            <p>Examples are rendered from structured site data.</p>
           </article>
         </div>
       </section>

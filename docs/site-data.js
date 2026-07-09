@@ -77,12 +77,12 @@ window.MobileUIGeneratorData = Object.freeze({
       "ko": "모바일 화면 예시"
     },
     "views.title": {
-      "en": "A broad set of app flows and service categories.",
-      "ko": "화면 흐름과 서비스 카테고리를 넓게 다룹니다."
+      "en": "Browse examples by app type and UI pattern — separately.",
+      "ko": "앱 종류와 UI 패턴을 분리해서 예시를 봅니다."
     },
     "views.desc": {
-      "en": "These are hand-built HTML/CSS demos that show possible screen structures, typography, and interaction patterns.",
-      "ko": "아래 예시는 화면 구조, 타이포그래피, 인터랙션 패턴을 보여주기 위해 직접 만든 HTML/CSS 데모입니다."
+      "en": "App type means what the service does. UI pattern means the functional unit inside the service. Each demo uses a different mobile layout structure, not a repeated banner template.",
+      "ko": "앱 종류는 서비스가 무엇을 하는지, UI 패턴은 그 서비스를 구성하는 기능 단위입니다. 각 예시는 반복 배너 템플릿이 아니라 서로 다른 모바일 레이아웃 구조로 만들었습니다."
     },
     "fonts.eyebrow": {
       "en": "Font profiles",
@@ -193,8 +193,8 @@ window.MobileUIGeneratorData = Object.freeze({
       "ko": "폰트 프로필 카드"
     },
     "views.filter.label": {
-      "en": "Category",
-      "ko": "카테고리"
+      "en": "Filters",
+      "ko": "필터"
     },
     "views.mode.label": {
       "en": "Mode",
@@ -215,854 +215,946 @@ window.MobileUIGeneratorData = Object.freeze({
     "views.summary.showing": {
       "en": "Showing",
       "ko": "표시 중"
+    },
+    "views.appFilter.label": {
+      "en": "App type",
+      "ko": "앱 종류"
+    },
+    "views.patternFilter.label": {
+      "en": "UI pattern",
+      "ko": "UI 패턴"
+    },
+    "views.appFilter.help": {
+      "en": "Service category: what the app does",
+      "ko": "서비스 카테고리: 앱이 하는 일"
+    },
+    "views.patternFilter.help": {
+      "en": "Functional unit: what the screen does",
+      "ko": "기능 단위: 화면이 하는 일"
+    },
+    "views.summary.apps": {
+      "en": "app types",
+      "ko": "앱 종류"
+    },
+    "views.summary.patterns": {
+      "en": "UI patterns",
+      "ko": "UI 패턴"
     }
   },
   "examples": [
-    [
-      "fintech",
-      "light fintech",
-      {
+    {
+      "slug": "fintech-auth",
+      "layout": "auth-form",
+      "theme": "trust-blue",
+      "appCategories": [
+        "finance"
+      ],
+      "uiPatterns": [
+        "auth-verification"
+      ],
+      "mode": "light",
+      "font": "pretendard",
+      "copy": {
         "en": {
+          "cardTitle": "Fintech verification",
+          "cardDesc": "Focused signup with identity, timer, error copy, and safe fixed CTA.",
           "nav": "Verification",
-          "badge": "SMS",
           "title": "Start with your phone number",
           "sub": "Confirm identity with a clear, trusted signup step.",
-          "items": [
-            "Phone number",
-            "6-digit code · 02:58",
-            "Agree to required terms"
-          ],
           "cta": "Continue",
-          "cardTitle": "Fintech signup",
-          "cardDesc": "Signup and identity verification with helper copy and a fixed CTA."
+          "fields": [
+            "Phone number",
+            "6-digit code",
+            "Required terms"
+          ],
+          "note": "Code expires in 02:58"
         },
         "ko": {
+          "cardTitle": "핀테크 본인인증",
+          "cardDesc": "휴대폰 인증, 타이머, 오류 문구, 안전한 고정 CTA를 포함합니다.",
           "nav": "본인인증",
-          "badge": "SMS",
           "title": "휴대폰 번호로 시작할게요",
-          "sub": "신뢰감 있는 가입 흐름에서 본인 명의 번호를 확인합니다.",
-          "items": [
+          "sub": "본인 명의 번호를 확인하고 안전하게 가입합니다.",
+          "cta": "다음",
+          "fields": [
             "휴대폰 번호",
-            "6자리 인증번호 · 02:58",
+            "6자리 인증번호",
             "필수 약관 동의"
           ],
-          "cta": "다음",
-          "cardTitle": "핀테크 회원가입",
-          "cardDesc": "본인인증, 도움말 문구, 고정 CTA를 포함한 가입 화면입니다."
+          "note": "02:58 후 인증번호 만료"
         }
-      },
-      {
-        "categories": [
-          "auth",
-          "finance"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "onboarding",
-      "light onboarding",
-      {
+    },
+    {
+      "slug": "ai-onboarding",
+      "layout": "onboarding-chips",
+      "theme": "soft-mint",
+      "appCategories": [
+        "ai-productivity"
+      ],
+      "uiPatterns": [
+        "onboarding"
+      ],
+      "mode": "light",
+      "font": "suit",
+      "copy": {
         "en": {
-          "nav": "Setup",
-          "badge": "AI",
-          "title": "Make the app fit your routine",
-          "sub": "Use preference chips and progressive setup to explain value fast.",
-          "items": [
-            "Choose interests",
-            "Enable useful alerts",
-            "Preview your home"
-          ],
-          "cta": "Personalize",
           "cardTitle": "Personalized onboarding",
-          "cardDesc": "Preference chips, setup steps, and first-run value proposition."
+          "cardDesc": "Preference chips and progressive setup without heavy forms.",
+          "nav": "Setup",
+          "title": "Make the app fit your routine",
+          "sub": "Choose goals so the first screen starts useful.",
+          "cta": "Personalize",
+          "chips": [
+            "Work faster",
+            "Plan content",
+            "Track ideas"
+          ],
+          "steps": [
+            "1 Goals",
+            "2 Notifications",
+            "3 Preview"
+          ]
         },
         "ko": {
-          "nav": "맞춤 설정",
-          "badge": "AI",
-          "title": "내 취향에 맞게 준비했어요",
-          "sub": "관심사를 고르면 첫 화면과 추천이 더 정확해집니다.",
-          "items": [
-            "관심사 선택",
-            "필요한 알림 허용",
-            "맞춤 홈 미리보기"
-          ],
-          "cta": "내게 맞게 설정",
           "cardTitle": "개인화 온보딩",
-          "cardDesc": "관심사 칩, 단계별 설정, 첫 사용 가치를 보여주는 화면입니다."
+          "cardDesc": "무거운 폼 대신 관심사 칩과 단계별 설정을 보여줍니다.",
+          "nav": "맞춤 설정",
+          "title": "내 루틴에 맞게 준비해요",
+          "sub": "목표를 고르면 첫 화면이 바로 유용해집니다.",
+          "cta": "내게 맞게 설정",
+          "chips": [
+            "업무 빠르게",
+            "콘텐츠 기획",
+            "아이디어 기록"
+          ],
+          "steps": [
+            "1 목표",
+            "2 알림",
+            "3 미리보기"
+          ]
         }
-      },
-      {
-        "categories": [
-          "onboarding"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "commerce",
-      "dark commerce",
-      {
+    },
+    {
+      "slug": "commerce-checkout",
+      "layout": "checkout-summary",
+      "theme": "commerce-dark",
+      "appCategories": [
+        "commerce"
+      ],
+      "uiPatterns": [
+        "checkout-payment"
+      ],
+      "mode": "dark",
+      "font": "spoqa",
+      "copy": {
         "en": {
+          "cardTitle": "Commerce checkout",
+          "cardDesc": "Order summary with coupon, payment method, legal note, and amount CTA.",
           "nav": "Checkout",
-          "badge": "PAY",
           "title": "Review and pay securely",
-          "sub": "Summarize products, discounts, payment method, and legal copy.",
-          "items": [
+          "sub": "Keep total price, discount, and payment method visible.",
+          "cta": "Pay $43.00",
+          "rows": [
             "Item total $48.00",
             "Coupon -$5.00",
             "Card ending 1234"
           ],
-          "cta": "Pay $43.00",
-          "cardTitle": "Commerce checkout",
-          "cardDesc": "Product summary, coupon row, payment card, legal note, and amount CTA."
+          "total": "$43.00"
         },
         "ko": {
+          "cardTitle": "커머스 결제",
+          "cardDesc": "주문 요약, 쿠폰, 결제수단, 고지, 금액 CTA를 포함합니다.",
           "nav": "결제하기",
-          "badge": "PAY",
           "title": "주문을 확인하고 결제해요",
-          "sub": "상품, 쿠폰, 결제수단, 동의 문구를 한 화면에 정리합니다.",
-          "items": [
+          "sub": "총액, 할인, 결제수단을 한 화면에 유지합니다.",
+          "cta": "43,000원 결제하기",
+          "rows": [
             "상품 금액 48,000원",
             "쿠폰 -5,000원",
             "카드 1234"
           ],
-          "cta": "43,000원 결제하기",
-          "cardTitle": "커머스 결제",
-          "cardDesc": "상품 요약, 쿠폰, 결제수단, 법적 고지, 금액 CTA를 포함합니다."
+          "total": "43,000원"
         }
-      },
-      {
-        "categories": [
-          "commerce"
-        ],
-        "mode": "dark"
       }
-    ],
-    [
-      "home-screen",
-      "light home-screen",
-      {
+    },
+    {
+      "slug": "wallet-home",
+      "layout": "home-dashboard",
+      "theme": "wallet-home",
+      "appCategories": [
+        "finance"
+      ],
+      "uiPatterns": [
+        "home-dashboard"
+      ],
+      "mode": "light",
+      "font": "wanted",
+      "copy": {
         "en": {
+          "cardTitle": "Wallet home dashboard",
+          "cardDesc": "Balance, shortcuts, benefits, and recent activity without banner clutter.",
           "nav": "Home",
-          "badge": "TODAY",
           "title": "Put today’s key actions first",
           "sub": "A main screen that prioritizes status, shortcuts, and re-entry.",
-          "items": [
-            "Monthly spend",
-            "Send money",
-            "Benefits",
-            "Weekly report"
-          ],
           "cta": "View all services",
-          "cardTitle": "Main home",
-          "cardDesc": "Role-based home with primary metric, shortcuts, and service entry."
+          "metric": "$2,840",
+          "actions": [
+            "Send",
+            "Top up",
+            "Benefits",
+            "Report"
+          ],
+          "feed": [
+            "Card bill due tomorrow",
+            "2 new benefits"
+          ]
         },
         "ko": {
+          "cardTitle": "월렛 홈",
+          "cardDesc": "잔액, 바로가기, 혜택, 최근 활동을 배너 없이 정리합니다.",
           "nav": "홈",
-          "badge": "TODAY",
           "title": "오늘 필요한 기능을 먼저 보여줘요",
           "sub": "상태, 바로가기, 재진입 동선을 우선하는 메인 화면입니다.",
-          "items": [
-            "이번 달 소비",
-            "송금",
-            "혜택",
-            "이번 주 리포트"
-          ],
           "cta": "전체 서비스 보기",
-          "cardTitle": "메인 홈",
-          "cardDesc": "핵심 지표, 바로가기, 서비스 진입점을 정리한 홈 화면입니다."
+          "metric": "2,840,000원",
+          "actions": [
+            "송금",
+            "충전",
+            "혜택",
+            "리포트"
+          ],
+          "feed": [
+            "내일 카드값 예정",
+            "새 혜택 2개"
+          ]
         }
-      },
-      {
-        "categories": [
-          "home",
-          "finance"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "delivery",
-      "light delivery",
-      {
+    },
+    {
+      "slug": "food-delivery",
+      "layout": "delivery-tracker",
+      "theme": "delivery-map",
+      "appCategories": [
+        "food-local"
+      ],
+      "uiPatterns": [
+        "delivery-tracking",
+        "chat-media"
+      ],
+      "mode": "light",
+      "font": "spoqa",
+      "copy": {
         "en": {
+          "cardTitle": "Food delivery tracking",
+          "cardDesc": "ETA, progress, map path, and rider contact in one screen.",
           "nav": "Order",
-          "badge": "ETA",
           "title": "Your rider picked it up",
           "sub": "Show progress, ETA, delivery note, and support in context.",
-          "items": [
+          "cta": "Message rider",
+          "steps": [
             "Order received",
             "Cooking done",
             "On the way"
           ],
-          "cta": "Message rider",
-          "cardTitle": "Delivery tracking",
-          "cardDesc": "ETA, map preview, progress timeline, and support CTA."
+          "eta": "12 min"
         },
         "ko": {
+          "cardTitle": "배달 추적",
+          "cardDesc": "도착 시간, 진행 상태, 지도 경로, 연락 동선을 한 화면에 둡니다.",
           "nav": "주문 현황",
-          "badge": "ETA",
           "title": "라이더가 픽업했어요",
           "sub": "예상 도착, 요청사항, 진행 상태를 한눈에 보여줍니다.",
-          "items": [
+          "cta": "라이더에게 메시지",
+          "steps": [
             "주문 접수",
             "조리 완료",
             "배달 중"
           ],
-          "cta": "라이더에게 메시지",
-          "cardTitle": "배달 추적",
-          "cardDesc": "도착 시간, 지도 미리보기, 진행 타임라인, 지원 CTA를 포함합니다."
+          "eta": "12분"
         }
-      },
-      {
-        "categories": [
-          "delivery",
-          "booking"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "mobility",
-      "light mobility",
-      {
+    },
+    {
+      "slug": "mobility-map",
+      "layout": "map-sheet",
+      "theme": "mobility-map",
+      "appCategories": [
+        "mobility-travel"
+      ],
+      "uiPatterns": [
+        "booking-map"
+      ],
+      "mode": "light",
+      "font": "noto",
+      "copy": {
         "en": {
+          "cardTitle": "Mobility booking",
+          "cardDesc": "Map-first reservation with route choices and bottom-sheet payment CTA.",
           "nav": "Route",
-          "badge": "MAP",
           "title": "From Gangnam to Seongsu",
           "sub": "A map-first booking flow with route choices and payment CTA.",
-          "items": [
+          "cta": "Reserve and pay",
+          "routes": [
             "Taxi · 27 min",
             "$14.20 estimated",
-            "Car sharing available"
-          ],
-          "cta": "Reserve and pay",
-          "cardTitle": "Mobility booking",
-          "cardDesc": "Map-first reservation with bottom sheet and route/payment choices."
+            "Car sharing nearby"
+          ]
         },
         "ko": {
+          "cardTitle": "모빌리티 예약",
+          "cardDesc": "지도, 경로 선택, 바텀시트 결제 CTA를 포함합니다.",
           "nav": "경로",
-          "badge": "MAP",
           "title": "강남역에서 성수까지",
           "sub": "지도 중심의 예약 흐름에서 경로와 결제를 함께 보여줍니다.",
-          "items": [
+          "cta": "예약하고 결제하기",
+          "routes": [
             "택시 · 27분",
             "예상 14,200원",
-            "카셰어링 가능"
-          ],
-          "cta": "예약하고 결제하기",
-          "cardTitle": "모빌리티 예약",
-          "cardDesc": "지도, 바텀시트, 경로 선택, 결제 CTA가 포함된 화면입니다."
+            "주변 카셰어링 가능"
+          ]
         }
-      },
-      {
-        "categories": [
-          "booking",
-          "delivery"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "finance",
-      "dark finance",
-      {
+    },
+    {
+      "slug": "finance-transfer",
+      "layout": "transfer-keypad",
+      "theme": "finance-dark",
+      "appCategories": [
+        "finance"
+      ],
+      "uiPatterns": [
+        "checkout-payment",
+        "auth-verification"
+      ],
+      "mode": "dark",
+      "font": "pretendard",
+      "copy": {
         "en": {
-          "nav": "Transfer",
-          "badge": "₩",
-          "title": "How much would you like to send?",
-          "sub": "Make the amount, receiver, and trust cues impossible to miss.",
-          "items": [
-            "Available balance",
-            "Quick amounts",
-            "Receiver card"
-          ],
-          "cta": "Send securely",
           "cardTitle": "Finance transfer",
-          "cardDesc": "Balance context, amount editing, trusted receiver card, and secure CTA."
+          "cardDesc": "Amount keypad, receiver card, balance, and trust confirmation.",
+          "nav": "Transfer",
+          "title": "How much would you like to send?",
+          "sub": "Make amount, receiver, and security cues impossible to miss.",
+          "cta": "Send securely",
+          "amount": "$120",
+          "receiver": "Mina Kim",
+          "quick": [
+            "$10",
+            "$50",
+            "$100"
+          ]
         },
         "ko": {
+          "cardTitle": "금융 송금",
+          "cardDesc": "금액 키패드, 받는 사람, 잔액, 보안 확인을 포함합니다.",
           "nav": "송금",
-          "badge": "₩",
           "title": "얼마를 보낼까요?",
           "sub": "금액, 받는 사람, 보안 단서를 명확하게 보여줍니다.",
-          "items": [
-            "보낼 수 있는 금액",
-            "빠른 금액 선택",
-            "받는 사람 카드"
-          ],
           "cta": "안전하게 송금",
-          "cardTitle": "금융 송금",
-          "cardDesc": "잔액, 금액 입력, 받는 사람 확인, 보안 CTA를 포함합니다."
+          "amount": "120,000원",
+          "receiver": "김민아",
+          "quick": [
+            "1만",
+            "5만",
+            "10만"
+          ]
         }
-      },
-      {
-        "categories": [
-          "finance"
-        ],
-        "mode": "dark"
       }
-    ],
-    [
-      "cancellation",
-      "light cancellation",
-      {
+    },
+    {
+      "slug": "account-cancel",
+      "layout": "danger-confirm",
+      "theme": "danger-light",
+      "appCategories": [
+        "settings-support"
+      ],
+      "uiPatterns": [
+        "settings-support"
+      ],
+      "mode": "light",
+      "font": "suit",
+      "copy": {
         "en": {
+          "cardTitle": "Account cancellation",
+          "cardDesc": "Risk disclosure, reason input, and separated destructive action.",
           "nav": "Close account",
-          "badge": "!",
           "title": "Review before leaving",
           "sub": "Explain irreversible effects and keep destructive actions clear.",
-          "items": [
+          "cta": "Close account",
+          "impacts": [
             "Purchase history removed",
             "Benefits cannot be restored",
             "30-day rejoin limit"
-          ],
-          "cta": "Close account",
-          "cardTitle": "Account cancellation",
-          "cardDesc": "Risk disclosure, benefit loss, reason field, and destructive CTA hierarchy."
+          ]
         },
         "ko": {
+          "cardTitle": "회원 탈퇴",
+          "cardDesc": "위험 고지, 사유 입력, 파괴적 CTA 분리를 포함합니다.",
           "nav": "회원 탈퇴",
-          "badge": "!",
           "title": "탈퇴 전에 확인해주세요",
           "sub": "되돌릴 수 없는 영향을 명확히 설명하고 위험한 CTA를 구분합니다.",
-          "items": [
+          "cta": "계정 탈퇴하기",
+          "impacts": [
             "구매 내역 삭제",
             "혜택 복구 불가",
             "30일 재가입 제한"
-          ],
-          "cta": "계정 탈퇴하기",
-          "cardTitle": "회원 탈퇴",
-          "cardDesc": "위험 고지, 혜택 소멸, 사유 입력, 파괴적 CTA 위계를 포함합니다."
+          ]
         }
-      },
-      {
-        "categories": [
-          "settings-support",
-          "auth"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "health",
-      "light health",
-      {
+    },
+    {
+      "slug": "clinic-booking",
+      "layout": "booking-slots",
+      "theme": "clinic-soft",
+      "appCategories": [
+        "healthcare-wellness"
+      ],
+      "uiPatterns": [
+        "booking-map"
+      ],
+      "mode": "light",
+      "font": "noto",
+      "copy": {
         "en": {
+          "cardTitle": "Healthcare booking",
+          "cardDesc": "Provider trust, date chips, slot states, and confirmation CTA.",
           "nav": "Booking",
-          "badge": "4.8",
           "title": "Available times this week",
           "sub": "Use trust details, date chips, slot states, and confirmation.",
-          "items": [
-            "Dermatology · Gangnam",
-            "Tue 10:30 available",
-            "Doctor with 12 years"
-          ],
           "cta": "Confirm booking",
-          "cardTitle": "Healthcare booking",
-          "cardDesc": "Provider trust, date chips, slot states, and confirmation CTA."
+          "dates": [
+            "Mon",
+            "Tue",
+            "Wed"
+          ],
+          "slots": [
+            "10:30",
+            "14:00",
+            "16:30"
+          ],
+          "provider": "Dermatology · 12 years"
         },
         "ko": {
+          "cardTitle": "헬스케어 예약",
+          "cardDesc": "의료진 신뢰, 날짜 칩, 시간 상태, 확정 CTA를 포함합니다.",
           "nav": "진료 예약",
-          "badge": "4.8",
           "title": "이번 주 가능한 시간을 찾았어요",
           "sub": "의료진 신뢰 정보, 날짜 칩, 예약 상태를 명확히 보여줍니다.",
-          "items": [
-            "피부과 · 강남",
-            "화 10:30 바로 예약",
-            "진료 12년"
-          ],
           "cta": "예약 확정하기",
-          "cardTitle": "헬스케어 예약",
-          "cardDesc": "의료진 신뢰, 날짜 칩, 시간 상태, 확정 CTA를 포함합니다."
+          "dates": [
+            "월",
+            "화",
+            "수"
+          ],
+          "slots": [
+            "10:30",
+            "14:00",
+            "16:30"
+          ],
+          "provider": "피부과 · 진료 12년"
         }
-      },
-      {
-        "categories": [
-          "booking"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "social",
-      "dark social",
-      {
+    },
+    {
+      "slug": "community-feed",
+      "layout": "social-feed",
+      "theme": "social-dark",
+      "appCategories": [
+        "social-content"
+      ],
+      "uiPatterns": [
+        "feed-content"
+      ],
+      "mode": "dark",
+      "font": "pretendard",
+      "copy": {
         "en": {
+          "cardTitle": "Social feed",
+          "cardDesc": "Stories, content card, reactions, comments, and re-entry prompt.",
           "nav": "Community",
-          "badge": "HOT",
           "title": "Catch up on popular posts",
           "sub": "Balance discovery, comments, saves, and re-entry prompts.",
-          "items": [
-            "Stories",
-            "Top post today",
-            "3 new messages"
-          ],
           "cta": "Browse feed",
-          "cardTitle": "Social feed",
-          "cardDesc": "Stories, content card, social signals, and re-entry prompt."
+          "posts": [
+            "Today’s popular post",
+            "3 new messages",
+            "Saved topics"
+          ]
         },
         "ko": {
+          "cardTitle": "소셜 피드",
+          "cardDesc": "스토리, 콘텐츠 카드, 반응, 댓글, 재진입 동선을 포함합니다.",
           "nav": "커뮤니티",
-          "badge": "HOT",
           "title": "인기 글을 빠르게 확인해요",
           "sub": "발견, 댓글, 저장, 재방문 동선을 균형 있게 구성합니다.",
-          "items": [
-            "스토리",
-            "오늘의 인기 글",
-            "새 메시지 3개"
-          ],
           "cta": "피드 둘러보기",
-          "cardTitle": "소셜 피드",
-          "cardDesc": "스토리, 콘텐츠 카드, 소셜 신호, 재진입 동선을 포함합니다."
+          "posts": [
+            "오늘의 인기 글",
+            "새 메시지 3개",
+            "저장한 주제"
+          ]
         }
-      },
-      {
-        "categories": [
-          "social-content"
-        ],
-        "mode": "dark"
       }
-    ],
-    [
-      "game",
-      "dark game",
-      {
+    },
+    {
+      "slug": "game-lobby",
+      "layout": "game-lobby",
+      "theme": "game-neon",
+      "appCategories": [
+        "education-game"
+      ],
+      "uiPatterns": [
+        "analytics-progress",
+        "home-dashboard"
+      ],
+      "mode": "dark",
+      "font": "ibm",
+      "copy": {
         "en": {
+          "cardTitle": "Game lobby",
+          "cardDesc": "Character focus, daily reward, quest progress, and season CTA.",
           "nav": "Season lobby",
-          "badge": "LV.28",
           "title": "Today’s dungeon is open",
           "sub": "Use character focus, reward pressure, and high-energy action.",
-          "items": [
+          "cta": "Enter dungeon",
+          "stats": [
             "Daily reward 500 GEM",
-            "Quest progress 3/5",
-            "Limited event"
-          ],
-          "cta": "Start battle",
-          "cardTitle": "Game lobby",
-          "cardDesc": "Character focus, daily reward, quest progress, and high-energy CTA."
+            "Quest 3/5",
+            "Rank #18"
+          ]
         },
         "ko": {
-          "nav": "시즌 로비",
-          "badge": "LV.28",
-          "title": "오늘의 던전이 열렸어요",
-          "sub": "캐릭터, 보상, 이벤트 압박감을 에너지 있게 보여줍니다.",
-          "items": [
-            "출석 보상 500 GEM",
-            "퀘스트 3/5 완료",
-            "한정 이벤트"
-          ],
-          "cta": "전투 시작",
           "cardTitle": "게임 로비",
-          "cardDesc": "캐릭터, 일일 보상, 퀘스트 진행률, 강한 CTA를 포함합니다."
+          "cardDesc": "캐릭터 중심, 일일 보상, 퀘스트 진도, 시즌 CTA를 포함합니다.",
+          "nav": "시즌 로비",
+          "title": "오늘의 던전이 열렸어요",
+          "sub": "캐릭터, 보상 압박, 강한 액션을 조합합니다.",
+          "cta": "던전 입장",
+          "stats": [
+            "일일 보상 500 GEM",
+            "퀘스트 3/5",
+            "랭킹 #18"
+          ]
         }
-      },
-      {
-        "categories": [
-          "game-education"
-        ],
-        "mode": "dark"
       }
-    ],
-    [
-      "education",
-      "light education",
-      {
+    },
+    {
+      "slug": "learning-progress",
+      "layout": "learning-progress",
+      "theme": "edu-light",
+      "appCategories": [
+        "education-game"
+      ],
+      "uiPatterns": [
+        "analytics-progress",
+        "onboarding"
+      ],
+      "mode": "light",
+      "font": "suit",
+      "copy": {
         "en": {
-          "nav": "Today’s lesson",
-          "badge": "72%",
-          "title": "Practice fraction addition",
-          "sub": "Show progress, grade metadata, learning modules, and resume CTA.",
-          "items": [
-            "Concept video",
-            "Practice quiz",
-            "Mistake notebook"
-          ],
-          "cta": "Continue learning",
-          "cardTitle": "Education lesson",
-          "cardDesc": "Learning progress, curriculum metadata, module list, and resume CTA."
+          "cardTitle": "Learning progress",
+          "cardDesc": "Lesson cards, progress ring, streak, and next action.",
+          "nav": "Learning",
+          "title": "Keep the streak going",
+          "sub": "Show progress and reduce friction to the next lesson.",
+          "cta": "Start lesson",
+          "progress": "68%",
+          "lessons": [
+            "Grammar practice",
+            "Speaking drill",
+            "Review quiz"
+          ]
         },
         "ko": {
-          "nav": "오늘의 학습",
-          "badge": "72%",
-          "title": "분수의 덧셈을 연습해볼까요?",
-          "sub": "진도, 학년 정보, 학습 모듈, 이어하기 CTA를 보여줍니다.",
-          "items": [
-            "개념 영상",
-            "연습 문제",
-            "오답 노트"
-          ],
-          "cta": "이어서 학습하기",
-          "cardTitle": "교육 학습",
-          "cardDesc": "학습 진도, 커리큘럼 정보, 모듈 목록, 이어하기 CTA를 포함합니다."
+          "cardTitle": "학습 진도",
+          "cardDesc": "레슨 카드, 진행률 링, 연속 학습, 다음 액션을 포함합니다.",
+          "nav": "학습",
+          "title": "연속 학습을 이어가요",
+          "sub": "진도를 보여주고 다음 학습으로 쉽게 이어줍니다.",
+          "cta": "학습 시작",
+          "progress": "68%",
+          "lessons": [
+            "문법 연습",
+            "말하기 훈련",
+            "복습 퀴즈"
+          ]
         }
-      },
-      {
-        "categories": [
-          "game-education"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "messenger",
-      "light messenger",
-      {
+    },
+    {
+      "slug": "messenger-chat",
+      "layout": "chat-thread",
+      "theme": "chat-soft",
+      "appCategories": [
+        "social-content"
+      ],
+      "uiPatterns": [
+        "chat-media"
+      ],
+      "mode": "light",
+      "font": "pretendard",
+      "copy": {
         "en": {
-          "nav": "Chat",
-          "badge": "DM",
-          "title": "Keep the conversation moving",
-          "sub": "Use readable bubbles, composer affordances, and safe-area spacing.",
-          "items": [
-            "I sent the deck",
-            "Got it, see you at 3",
-            "Great 🙌"
-          ],
-          "cta": "Send message",
           "cardTitle": "Messenger chat",
-          "cardDesc": "Conversation bubbles, reply rhythm, composer affordance, and safe area."
+          "cardDesc": "Message bubbles, attachment preview, failed send state, and composer.",
+          "nav": "Chat",
+          "title": "Project consultation",
+          "sub": "Send photos and files while keeping recovery visible.",
+          "cta": "Send",
+          "messages": [
+            "Can you send a screenshot?",
+            "Uploading image…",
+            "Failed · retry"
+          ]
         },
         "ko": {
+          "cardTitle": "상담 채팅",
+          "cardDesc": "말풍선, 첨부 미리보기, 전송 실패, 입력창을 포함합니다.",
           "nav": "채팅",
-          "badge": "DM",
-          "title": "대화 흐름을 자연스럽게 이어가요",
-          "sub": "읽기 쉬운 말풍선, 입력창, 안전 영역을 고려합니다.",
-          "items": [
-            "자료 보냈어",
-            "확인했어! 3시에 봐",
-            "좋아 🙌"
-          ],
-          "cta": "메시지 보내기",
-          "cardTitle": "메신저 채팅",
-          "cardDesc": "말풍선, 답장 리듬, 입력창, 안전 영역을 포함합니다."
+          "title": "프로젝트 상담",
+          "sub": "사진과 파일을 보내고 복구 동선을 바로 보여줍니다.",
+          "cta": "보내기",
+          "messages": [
+            "화면 캡처를 보내주세요",
+            "이미지 업로드 중…",
+            "전송 실패 · 재시도"
+          ]
         }
-      },
-      {
-        "categories": [
-          "social-content"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "content",
-      "dark content",
-      {
+    },
+    {
+      "slug": "media-player",
+      "layout": "media-player",
+      "theme": "media-dark",
+      "appCategories": [
+        "social-content"
+      ],
+      "uiPatterns": [
+        "detail-content"
+      ],
+      "mode": "dark",
+      "font": "ibm",
+      "copy": {
         "en": {
-          "nav": "Watch",
-          "badge": "PLAY",
-          "title": "3-minute market briefing",
-          "sub": "Make media, metadata, engagement, and next action clear.",
-          "items": [
-            "Today’s 5 issues",
-            "Like · Save · Share",
-            "Next recommendation"
-          ],
-          "cta": "Watch next",
-          "cardTitle": "Content viewer",
-          "cardDesc": "Video hero, metadata, engagement actions, and next-content CTA."
+          "cardTitle": "Media player",
+          "cardDesc": "Immersive player, queue, controls, and saved state.",
+          "nav": "Now playing",
+          "title": "Evening focus mix",
+          "sub": "Keep media controls reachable without hiding the queue.",
+          "cta": "Save playlist",
+          "tracks": [
+            "Midnight signal",
+            "Soft static",
+            "City lights"
+          ]
         },
         "ko": {
-          "nav": "콘텐츠",
-          "badge": "PLAY",
-          "title": "3분 경제 뉴스",
-          "sub": "영상, 메타데이터, 참여 액션, 다음 콘텐츠를 명확히 배치합니다.",
-          "items": [
-            "오늘의 5가지 이슈",
-            "좋아요 · 저장 · 공유",
-            "다음 추천"
-          ],
-          "cta": "다음 콘텐츠 보기",
-          "cardTitle": "콘텐츠 뷰어",
-          "cardDesc": "영상 히어로, 메타데이터, 참여 액션, 다음 CTA를 포함합니다."
+          "cardTitle": "미디어 플레이어",
+          "cardDesc": "몰입형 플레이어, 큐, 컨트롤, 저장 상태를 포함합니다.",
+          "nav": "재생 중",
+          "title": "저녁 집중 믹스",
+          "sub": "재생 컨트롤과 다음 목록을 함께 보여줍니다.",
+          "cta": "플레이리스트 저장",
+          "tracks": [
+            "Midnight signal",
+            "Soft static",
+            "City lights"
+          ]
         }
-      },
-      {
-        "categories": [
-          "social-content"
-        ],
-        "mode": "dark"
       }
-    ],
-    [
-      "travel",
-      "light travel",
-      {
+    },
+    {
+      "slug": "travel-itinerary",
+      "layout": "travel-itinerary",
+      "theme": "travel-sun",
+      "appCategories": [
+        "mobility-travel"
+      ],
+      "uiPatterns": [
+        "booking-map",
+        "detail-content"
+      ],
+      "mode": "light",
+      "font": "noto",
+      "copy": {
         "en": {
-          "nav": "Stay booking",
-          "badge": "STAY",
-          "title": "Jeju ocean-view stay",
-          "sub": "Show visual appeal, date summary, price, and cancellation policy.",
-          "items": [
-            "Aug 12–14 · 2 adults",
-            "2 nights total $284",
-            "Free cancellation until Aug 10"
-          ],
-          "cta": "Continue booking",
-          "cardTitle": "Travel booking",
-          "cardDesc": "Large visual, date/guest summary, cancellation policy, and price CTA."
+          "cardTitle": "Travel itinerary",
+          "cardDesc": "Trip timeline, booking cards, weather, and next reservation.",
+          "nav": "Trip",
+          "title": "Seoul weekend plan",
+          "sub": "Combine booking details with a simple travel timeline.",
+          "cta": "Open voucher",
+          "days": [
+            "Sat · Hotel check-in",
+            "Sun · Museum 11:00",
+            "Mon · Flight 19:20"
+          ]
         },
         "ko": {
-          "nav": "숙소 예약",
-          "badge": "STAY",
-          "title": "제주 오션뷰 스테이",
-          "sub": "비주얼, 일정, 가격, 취소 정책을 함께 보여줍니다.",
-          "items": [
-            "8월 12일-14일 · 성인 2명",
-            "2박 총액 284,000원",
-            "8/10까지 무료 취소"
-          ],
-          "cta": "예약 진행하기",
-          "cardTitle": "여행 예약",
-          "cardDesc": "큰 비주얼, 일정/인원 요약, 취소 정책, 가격 CTA를 포함합니다."
+          "cardTitle": "여행 일정",
+          "cardDesc": "여행 타임라인, 예약 카드, 날씨, 다음 예약을 포함합니다.",
+          "nav": "여행",
+          "title": "서울 주말 일정",
+          "sub": "예약 정보와 여행 타임라인을 한 화면에 정리합니다.",
+          "cta": "바우처 열기",
+          "days": [
+            "토 · 호텔 체크인",
+            "일 · 미술관 11:00",
+            "월 · 항공 19:20"
+          ]
         }
-      },
-      {
-        "categories": [
-          "booking",
-          "commerce"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "subscription",
-      "dark subscription",
-      {
+    },
+    {
+      "slug": "subscription-paywall",
+      "layout": "paywall",
+      "theme": "premium-dark",
+      "appCategories": [
+        "commerce"
+      ],
+      "uiPatterns": [
+        "checkout-payment",
+        "detail-content"
+      ],
+      "mode": "dark",
+      "font": "wanted",
+      "copy": {
         "en": {
-          "nav": "Membership",
-          "badge": "PRO",
-          "title": "Upgrade to Pro",
-          "sub": "Compare plans, explain value, and reduce cancellation anxiety.",
-          "items": [
-            "Ad-free",
-            "Unlimited saves",
-            "AI summaries"
-          ],
-          "cta": "Start free trial",
           "cardTitle": "Subscription paywall",
-          "cardDesc": "Plan comparison, reassurance copy, trial CTA, and cancellation clarity."
+          "cardDesc": "Plan comparison, benefits, trial detail, and cancellation clarity.",
+          "nav": "Premium",
+          "title": "Unlock advanced insights",
+          "sub": "Show value, price, trial, and cancellation policy clearly.",
+          "cta": "Start free trial",
+          "benefits": [
+            "Unlimited reports",
+            "AI summaries",
+            "Cancel anytime"
+          ],
+          "price": "$9.90/mo"
         },
         "ko": {
-          "nav": "멤버십",
-          "badge": "PRO",
-          "title": "Pro로 업그레이드",
-          "sub": "요금제 비교, 가치 설명, 해지 불안을 줄이는 문구를 포함합니다.",
-          "items": [
-            "광고 제거",
-            "무제한 저장",
-            "AI 요약"
-          ],
+          "cardTitle": "구독 결제",
+          "cardDesc": "요금제 비교, 혜택, 체험, 해지 가능성을 명확히 보여줍니다.",
+          "nav": "프리미엄",
+          "title": "고급 인사이트 열기",
+          "sub": "가치, 가격, 체험, 해지 정책을 명확히 보여줍니다.",
           "cta": "무료 체험 시작",
-          "cardTitle": "구독 유도 화면",
-          "cardDesc": "요금제 비교, 안심 문구, 체험 CTA, 해지 안내를 포함합니다."
-        }
-      },
-      {
-        "categories": [
-          "commerce"
-        ],
-        "mode": "dark"
-      }
-    ],
-    [
-      "settings",
-      "light settings",
-      {
-        "en": {
-          "nav": "Permissions",
-          "badge": "SET",
-          "title": "Turn on useful alerts",
-          "sub": "Explain why each permission matters and keep defaults respectful.",
-          "items": [
-            "Order updates on",
-            "Marketing off",
-            "Security alerts on"
+          "benefits": [
+            "무제한 리포트",
+            "AI 요약",
+            "언제든 해지"
           ],
-          "cta": "Save settings",
-          "cardTitle": "Settings & permissions",
-          "cardDesc": "Permission rationale, toggle hierarchy, and privacy-aware defaults."
+          "price": "월 9,900원"
+        }
+      }
+    },
+    {
+      "slug": "settings-permission",
+      "layout": "settings-list",
+      "theme": "settings-clean",
+      "appCategories": [
+        "settings-support"
+      ],
+      "uiPatterns": [
+        "settings-support"
+      ],
+      "mode": "light",
+      "font": "suit",
+      "copy": {
+        "en": {
+          "cardTitle": "Permission settings",
+          "cardDesc": "Grouped rows, permission status, help text, and recovery action.",
+          "nav": "Settings",
+          "title": "Manage useful alerts",
+          "sub": "Group controls and explain why each permission matters.",
+          "cta": "Update settings",
+          "groups": [
+            "Notifications on",
+            "Location while using",
+            "Camera disabled"
+          ]
         },
         "ko": {
-          "nav": "권한 설정",
-          "badge": "SET",
-          "title": "중요한 알림을 놓치지 않게",
-          "sub": "권한이 필요한 이유와 기본값을 사용자가 이해하게 합니다.",
-          "items": [
-            "주문/예약 알림 켜짐",
-            "마케팅 혜택 꺼짐",
-            "보안 알림 켜짐"
-          ],
+          "cardTitle": "권한 설정",
+          "cardDesc": "그룹 행, 권한 상태, 도움말, 복구 액션을 포함합니다.",
+          "nav": "설정",
+          "title": "필요한 알림을 관리해요",
+          "sub": "각 권한이 필요한 이유를 함께 설명합니다.",
           "cta": "설정 저장",
-          "cardTitle": "설정과 권한",
-          "cardDesc": "권한 설명, 토글 위계, 개인정보 친화 기본값을 포함합니다."
+          "groups": [
+            "알림 켜짐",
+            "사용 중 위치 허용",
+            "카메라 꺼짐"
+          ]
         }
-      },
-      {
-        "categories": [
-          "settings-support"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "support",
-      "light support",
-      {
+    },
+    {
+      "slug": "support-faq",
+      "layout": "support-faq",
+      "theme": "support-light",
+      "appCategories": [
+        "settings-support"
+      ],
+      "uiPatterns": [
+        "settings-support",
+        "search-list"
+      ],
+      "mode": "light",
+      "font": "pretendard",
+      "copy": {
         "en": {
-          "nav": "Help",
-          "badge": "BOT",
+          "cardTitle": "Support FAQ",
+          "cardDesc": "Search, category shortcuts, accordion questions, and contact escalation.",
+          "nav": "Help center",
           "title": "How can we help?",
-          "sub": "Route frequent issues quickly and offer escalation when needed.",
-          "items": [
-            "Cancel order",
-            "Payment error",
-            "Talk to agent"
-          ],
-          "cta": "Start chat",
-          "cardTitle": "Customer support",
-          "cardDesc": "FAQ routing, chatbot entry, common tasks, and escalation CTA."
+          "sub": "Let users self-serve first, then escalate to support.",
+          "cta": "Contact support",
+          "faqs": [
+            "Payment issue",
+            "Change booking",
+            "Account help"
+          ]
         },
         "ko": {
+          "cardTitle": "고객센터 FAQ",
+          "cardDesc": "검색, 카테고리, 아코디언 질문, 문의 전환을 포함합니다.",
           "nav": "고객센터",
-          "badge": "BOT",
           "title": "무엇을 도와드릴까요?",
-          "sub": "자주 묻는 문제를 빠르게 안내하고 필요하면 상담 연결을 제공합니다.",
-          "items": [
-            "주문 취소",
-            "결제 오류",
-            "상담원 연결"
-          ],
-          "cta": "채팅 시작",
-          "cardTitle": "고객센터",
-          "cardDesc": "FAQ 라우팅, 챗봇 진입, 자주 쓰는 작업, 상담 연결 CTA를 포함합니다."
+          "sub": "먼저 스스로 해결하고 필요하면 문의로 이어갑니다.",
+          "cta": "문의하기",
+          "faqs": [
+            "결제 문제",
+            "예약 변경",
+            "계정 도움말"
+          ]
         }
-      },
-      {
-        "categories": [
-          "settings-support"
-        ],
-        "mode": "light"
       }
-    ],
-    [
-      "empty-state",
-      "light empty-state",
-      {
+    },
+    {
+      "slug": "empty-results",
+      "layout": "empty-state",
+      "theme": "empty-calm",
+      "appCategories": [
+        "ai-productivity",
+        "settings-support"
+      ],
+      "uiPatterns": [
+        "empty-error",
+        "search-list"
+      ],
+      "mode": "light",
+      "font": "noto",
+      "copy": {
         "en": {
+          "cardTitle": "Search empty state",
+          "cardDesc": "No-results state with suggestion chips, reset action, and recovery copy.",
           "nav": "Search",
-          "badge": "0",
-          "title": "No results found",
-          "sub": "Recover from dead ends with helpful copy and alternate paths.",
-          "items": [
-            "Popular",
-            "New",
-            "Discounted"
-          ],
-          "cta": "See recommendations",
-          "cardTitle": "Empty state",
-          "cardDesc": "No-result recovery with illustration, helpful copy, and alternate paths."
+          "title": "No matching results",
+          "sub": "Explain what happened and offer a useful next step.",
+          "cta": "Reset filters",
+          "suggestions": [
+            "Try shorter keyword",
+            "Remove price filter",
+            "Browse popular items"
+          ]
         },
         "ko": {
-          "nav": "검색",
-          "badge": "0",
-          "title": "검색 결과가 없어요",
-          "sub": "막힌 흐름을 도움말 문구와 대체 경로로 회복합니다.",
-          "items": [
-            "인기",
-            "신규",
-            "할인"
-          ],
-          "cta": "추천 보기",
           "cardTitle": "검색 빈 상태",
-          "cardDesc": "결과 없음 상황에서 안내 문구, 일러스트, 대체 경로를 제공합니다."
+          "cardDesc": "결과 없음, 추천 칩, 필터 초기화, 복구 문구를 포함합니다.",
+          "nav": "검색",
+          "title": "일치하는 결과가 없어요",
+          "sub": "왜 막혔는지 설명하고 다음 행동을 제안합니다.",
+          "cta": "필터 초기화",
+          "suggestions": [
+            "짧은 검색어 사용",
+            "가격 필터 제거",
+            "인기 항목 보기"
+          ]
         }
-      },
-      {
-        "categories": [
-          "empty-state"
-        ],
-        "mode": "light"
       }
-    ]
+    }
   ],
   "fontBySlug": {
-    "fintech": {
-      "className": "font-pretendard",
-      "label": "Pretendard"
+    "fintech-auth": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
     },
-    "onboarding": {
-      "className": "font-suit",
-      "label": "SUIT"
+    "ai-onboarding": {
+      "label": "SUIT",
+      "className": "font-suit"
     },
-    "commerce": {
-      "className": "font-spoqa",
-      "label": "Spoqa Han Sans Neo"
+    "commerce-checkout": {
+      "label": "Spoqa Han Sans Neo",
+      "className": "font-spoqa"
     },
-    "home-screen": {
-      "className": "font-wanted",
-      "label": "Wanted Sans"
+    "wallet-home": {
+      "label": "Wanted Sans",
+      "className": "font-wanted"
     },
-    "delivery": {
-      "className": "font-spoqa",
-      "label": "Spoqa Han Sans Neo"
+    "food-delivery": {
+      "label": "Spoqa Han Sans Neo",
+      "className": "font-spoqa"
     },
-    "mobility": {
-      "className": "font-noto",
-      "label": "Noto Sans KR"
+    "mobility-map": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
     },
-    "finance": {
-      "className": "font-pretendard",
-      "label": "Pretendard"
+    "finance-transfer": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
     },
-    "cancellation": {
-      "className": "font-noto",
-      "label": "Noto Sans KR"
+    "account-cancel": {
+      "label": "SUIT",
+      "className": "font-suit"
     },
-    "health": {
-      "className": "font-suit",
-      "label": "SUIT"
+    "clinic-booking": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
     },
-    "social": {
-      "className": "font-wanted",
-      "label": "Wanted Sans"
+    "community-feed": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
     },
-    "game": {
-      "className": "font-ibm",
-      "label": "IBM Plex Sans KR"
+    "game-lobby": {
+      "label": "IBM Plex Sans KR",
+      "className": "font-ibm"
     },
-    "education": {
-      "className": "font-noto",
-      "label": "Noto Sans KR"
+    "learning-progress": {
+      "label": "SUIT",
+      "className": "font-suit"
     },
-    "messenger": {
-      "className": "font-spoqa",
-      "label": "Spoqa Han Sans Neo"
+    "messenger-chat": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
     },
-    "content": {
-      "className": "font-ibm",
-      "label": "IBM Plex Sans KR"
+    "media-player": {
+      "label": "IBM Plex Sans KR",
+      "className": "font-ibm"
     },
-    "travel": {
-      "className": "font-pretendard",
-      "label": "Pretendard"
+    "travel-itinerary": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
     },
-    "subscription": {
-      "className": "font-wanted",
-      "label": "Wanted Sans"
+    "subscription-paywall": {
+      "label": "Wanted Sans",
+      "className": "font-wanted"
     },
-    "settings": {
-      "className": "font-suit",
-      "label": "SUIT"
+    "settings-permission": {
+      "label": "SUIT",
+      "className": "font-suit"
     },
-    "support": {
-      "className": "font-spoqa",
-      "label": "Spoqa Han Sans Neo"
+    "support-faq": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
     },
-    "empty-state": {
-      "className": "font-noto",
-      "label": "Noto Sans KR"
+    "empty-results": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
     }
   },
   "fonts": [
@@ -1149,45 +1241,23 @@ window.MobileUIGeneratorData = Object.freeze({
     {
       "id": "all",
       "label": {
-        "en": "All",
-        "ko": "전체"
+        "en": "All app types",
+        "ko": "전체 앱"
       },
       "desc": {
-        "en": "Every example",
-        "ko": "모든 예시"
+        "en": "Every service category",
+        "ko": "모든 서비스 종류"
       }
     },
     {
-      "id": "onboarding",
+      "id": "finance",
       "label": {
-        "en": "Onboarding",
-        "ko": "온보딩"
+        "en": "Finance & trust",
+        "ko": "금융·신뢰"
       },
       "desc": {
-        "en": "First-run and setup",
-        "ko": "첫 사용과 설정"
-      }
-    },
-    {
-      "id": "auth",
-      "label": {
-        "en": "Auth",
-        "ko": "인증"
-      },
-      "desc": {
-        "en": "Signup and verification",
-        "ko": "회원가입과 본인인증"
-      }
-    },
-    {
-      "id": "home",
-      "label": {
-        "en": "Home",
-        "ko": "홈"
-      },
-      "desc": {
-        "en": "Main dashboards",
-        "ko": "메인 화면"
+        "en": "Banking, wallet, payment, insurance",
+        "ko": "은행, 지갑, 결제, 보험"
       }
     },
     {
@@ -1197,85 +1267,353 @@ window.MobileUIGeneratorData = Object.freeze({
         "ko": "커머스"
       },
       "desc": {
-        "en": "Checkout and product flows",
-        "ko": "상품과 결제 흐름"
+        "en": "Shopping, marketplace, subscription",
+        "ko": "쇼핑, 마켓, 구독"
       }
     },
     {
-      "id": "finance",
+      "id": "food-local",
       "label": {
-        "en": "Finance",
-        "ko": "금융"
+        "en": "Food & local",
+        "ko": "푸드·로컬"
       },
       "desc": {
-        "en": "Transfer and money UX",
-        "ko": "송금과 금융 UX"
+        "en": "Delivery, local goods, nearby services",
+        "ko": "배달, 로컬 상품, 주변 서비스"
       }
     },
     {
-      "id": "booking",
+      "id": "mobility-travel",
       "label": {
-        "en": "Booking",
-        "ko": "예약"
+        "en": "Mobility & travel",
+        "ko": "이동·여행"
       },
       "desc": {
-        "en": "Mobility, travel, healthcare",
-        "ko": "모빌리티·여행·헬스케어"
+        "en": "Maps, booking, itinerary, tickets",
+        "ko": "지도, 예약, 일정, 티켓"
       }
     },
     {
-      "id": "delivery",
+      "id": "healthcare-wellness",
       "label": {
-        "en": "Delivery",
-        "ko": "배달"
+        "en": "Health & wellness",
+        "ko": "헬스케어·웰니스"
       },
       "desc": {
-        "en": "Tracking and ETA",
-        "ko": "추적과 도착 예정"
+        "en": "Clinic, fitness, care, mental health",
+        "ko": "병원, 피트니스, 케어, 멘탈헬스"
       }
     },
     {
       "id": "social-content",
       "label": {
-        "en": "Social & Content",
+        "en": "Social & content",
         "ko": "소셜·콘텐츠"
       },
       "desc": {
-        "en": "Feed, chat, media",
-        "ko": "피드·채팅·미디어"
+        "en": "Community, chat, media, editorial",
+        "ko": "커뮤니티, 채팅, 미디어, 콘텐츠"
       }
     },
     {
-      "id": "game-education",
+      "id": "ai-productivity",
       "label": {
-        "en": "Game & Education",
-        "ko": "게임·교육"
+        "en": "AI & productivity",
+        "ko": "AI·생산성"
       },
       "desc": {
-        "en": "Learning and rewards",
-        "ko": "학습과 보상"
+        "en": "Assistant, editor, analytics, work tools",
+        "ko": "어시스턴트, 편집, 분석, 업무툴"
+      }
+    },
+    {
+      "id": "education-game",
+      "label": {
+        "en": "Education & game",
+        "ko": "교육·게임"
+      },
+      "desc": {
+        "en": "Learning, quests, rewards, progress",
+        "ko": "학습, 퀘스트, 리워드, 진도"
       }
     },
     {
       "id": "settings-support",
       "label": {
-        "en": "Settings & Support",
+        "en": "Settings & support",
         "ko": "설정·지원"
       },
       "desc": {
-        "en": "Permissions and help",
-        "ko": "권한과 고객지원"
+        "en": "Permissions, support, recovery states",
+        "ko": "권한, 고객지원, 복구 상태"
+      }
+    }
+  ],
+  "appCategories": [
+    {
+      "id": "all",
+      "label": {
+        "en": "All app types",
+        "ko": "전체 앱"
+      },
+      "desc": {
+        "en": "Every service category",
+        "ko": "모든 서비스 종류"
       }
     },
     {
-      "id": "empty-state",
+      "id": "finance",
       "label": {
-        "en": "Empty/Error",
-        "ko": "빈 상태"
+        "en": "Finance & trust",
+        "ko": "금융·신뢰"
       },
       "desc": {
-        "en": "Recovery moments",
-        "ko": "막힌 흐름 회복"
+        "en": "Banking, wallet, payment, insurance",
+        "ko": "은행, 지갑, 결제, 보험"
+      }
+    },
+    {
+      "id": "commerce",
+      "label": {
+        "en": "Commerce",
+        "ko": "커머스"
+      },
+      "desc": {
+        "en": "Shopping, marketplace, subscription",
+        "ko": "쇼핑, 마켓, 구독"
+      }
+    },
+    {
+      "id": "food-local",
+      "label": {
+        "en": "Food & local",
+        "ko": "푸드·로컬"
+      },
+      "desc": {
+        "en": "Delivery, local goods, nearby services",
+        "ko": "배달, 로컬 상품, 주변 서비스"
+      }
+    },
+    {
+      "id": "mobility-travel",
+      "label": {
+        "en": "Mobility & travel",
+        "ko": "이동·여행"
+      },
+      "desc": {
+        "en": "Maps, booking, itinerary, tickets",
+        "ko": "지도, 예약, 일정, 티켓"
+      }
+    },
+    {
+      "id": "healthcare-wellness",
+      "label": {
+        "en": "Health & wellness",
+        "ko": "헬스케어·웰니스"
+      },
+      "desc": {
+        "en": "Clinic, fitness, care, mental health",
+        "ko": "병원, 피트니스, 케어, 멘탈헬스"
+      }
+    },
+    {
+      "id": "social-content",
+      "label": {
+        "en": "Social & content",
+        "ko": "소셜·콘텐츠"
+      },
+      "desc": {
+        "en": "Community, chat, media, editorial",
+        "ko": "커뮤니티, 채팅, 미디어, 콘텐츠"
+      }
+    },
+    {
+      "id": "ai-productivity",
+      "label": {
+        "en": "AI & productivity",
+        "ko": "AI·생산성"
+      },
+      "desc": {
+        "en": "Assistant, editor, analytics, work tools",
+        "ko": "어시스턴트, 편집, 분석, 업무툴"
+      }
+    },
+    {
+      "id": "education-game",
+      "label": {
+        "en": "Education & game",
+        "ko": "교육·게임"
+      },
+      "desc": {
+        "en": "Learning, quests, rewards, progress",
+        "ko": "학습, 퀘스트, 리워드, 진도"
+      }
+    },
+    {
+      "id": "settings-support",
+      "label": {
+        "en": "Settings & support",
+        "ko": "설정·지원"
+      },
+      "desc": {
+        "en": "Permissions, support, recovery states",
+        "ko": "권한, 고객지원, 복구 상태"
+      }
+    }
+  ],
+  "uiPatternCategories": [
+    {
+      "id": "all",
+      "label": {
+        "en": "All patterns",
+        "ko": "전체 패턴"
+      },
+      "desc": {
+        "en": "Every UI pattern",
+        "ko": "모든 UI 패턴"
+      }
+    },
+    {
+      "id": "onboarding",
+      "label": {
+        "en": "Onboarding",
+        "ko": "온보딩"
+      },
+      "desc": {
+        "en": "First-run setup and preference selection",
+        "ko": "첫 사용 설정과 취향 선택"
+      }
+    },
+    {
+      "id": "auth-verification",
+      "label": {
+        "en": "Auth & verification",
+        "ko": "인증"
+      },
+      "desc": {
+        "en": "Login, signup, phone/identity verification",
+        "ko": "로그인, 가입, 휴대폰/본인인증"
+      }
+    },
+    {
+      "id": "home-dashboard",
+      "label": {
+        "en": "Home & dashboard",
+        "ko": "홈·대시보드"
+      },
+      "desc": {
+        "en": "Main home, cards, metrics, shortcuts",
+        "ko": "메인 홈, 카드, 지표, 바로가기"
+      }
+    },
+    {
+      "id": "search-list",
+      "label": {
+        "en": "Search & list",
+        "ko": "검색·목록"
+      },
+      "desc": {
+        "en": "Search, filters, PLP, category browsing",
+        "ko": "검색, 필터, 목록, 카테고리"
+      }
+    },
+    {
+      "id": "detail-content",
+      "label": {
+        "en": "Detail & content",
+        "ko": "상세·콘텐츠"
+      },
+      "desc": {
+        "en": "PDP, viewer, media, article detail",
+        "ko": "상세, 뷰어, 미디어, 글 상세"
+      }
+    },
+    {
+      "id": "checkout-payment",
+      "label": {
+        "en": "Checkout & payment",
+        "ko": "결제"
+      },
+      "desc": {
+        "en": "Cart, checkout, coupons, pay CTA",
+        "ko": "장바구니, 결제, 쿠폰, 결제 CTA"
+      }
+    },
+    {
+      "id": "booking-map",
+      "label": {
+        "en": "Booking & map",
+        "ko": "예약·지도"
+      },
+      "desc": {
+        "en": "Map, bottom sheet, slots, booking",
+        "ko": "지도, 바텀시트, 시간 선택, 예약"
+      }
+    },
+    {
+      "id": "delivery-tracking",
+      "label": {
+        "en": "Delivery tracking",
+        "ko": "배달 추적"
+      },
+      "desc": {
+        "en": "ETA, progress, rider/support contact",
+        "ko": "도착 예정, 진행상태, 연락"
+      }
+    },
+    {
+      "id": "chat-media",
+      "label": {
+        "en": "Chat & media",
+        "ko": "채팅·미디어"
+      },
+      "desc": {
+        "en": "Messages, attachments, media composer",
+        "ko": "메시지, 첨부, 미디어 입력"
+      }
+    },
+    {
+      "id": "feed-content",
+      "label": {
+        "en": "Feed & community",
+        "ko": "피드·커뮤니티"
+      },
+      "desc": {
+        "en": "Feed, comments, reactions, save",
+        "ko": "피드, 댓글, 반응, 저장"
+      }
+    },
+    {
+      "id": "analytics-progress",
+      "label": {
+        "en": "Analytics & progress",
+        "ko": "리포트·진도"
+      },
+      "desc": {
+        "en": "Charts, progress, streaks, report states",
+        "ko": "차트, 진도, 스트릭, 리포트"
+      }
+    },
+    {
+      "id": "settings-support",
+      "label": {
+        "en": "Settings & support",
+        "ko": "설정·지원"
+      },
+      "desc": {
+        "en": "Settings, FAQ, support, permissions",
+        "ko": "설정, FAQ, 지원, 권한"
+      }
+    },
+    {
+      "id": "empty-error",
+      "label": {
+        "en": "Empty & error",
+        "ko": "빈 상태·오류"
+      },
+      "desc": {
+        "en": "No results, failure, recovery CTA",
+        "ko": "결과 없음, 실패, 복구 CTA"
       }
     }
   ]

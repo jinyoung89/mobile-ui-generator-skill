@@ -132,328 +132,40 @@
           <h2 data-i18n="views.title">화면 흐름과 서비스 카테고리를 넓게 다룹니다.</h2>
           <p data-i18n="views.desc">아래 예시는 화면 구조, 타이포그래피, 인터랙션 패턴을 보여주기 위해 직접 만든 HTML/CSS 데모입니다.</p>
         </div>
-        <div class="example-toolbar" aria-label="카테고리">
-          <div>
-            <strong data-i18n="views.filter.label">카테고리</strong>
-            <p id="exampleSummary">표시 중 19 / 19 · 12 카테고리 · 6 폰트 프로필</p>
+<div class="example-toolbar" aria-label="필터">
+          <div class="filter-intro">
+            <strong data-i18n="views.filter.label">필터</strong>
+            <p id="exampleSummary">19 / 19개 표시 · 앱 종류 9개 · UI 패턴 13개 · 폰트 6개</p>
           </div>
-          <div id="exampleCategoryFilters" class="category-filter" role="list">
-          <button type="button" class="category-chip" data-category="all" aria-pressed="true">
-            <span>전체</span>
-            <em>19</em>
-          </button>
-          <button type="button" class="category-chip" data-category="onboarding" aria-pressed="false">
-            <span>온보딩</span>
-            <em>1</em>
-          </button>
-          <button type="button" class="category-chip" data-category="auth" aria-pressed="false">
-            <span>인증</span>
-            <em>2</em>
-          </button>
-          <button type="button" class="category-chip" data-category="home" aria-pressed="false">
-            <span>홈</span>
-            <em>1</em>
-          </button>
-          <button type="button" class="category-chip" data-category="commerce" aria-pressed="false">
-            <span>커머스</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="finance" aria-pressed="false">
-            <span>금융</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="booking" aria-pressed="false">
-            <span>예약</span>
-            <em>4</em>
-          </button>
-          <button type="button" class="category-chip" data-category="delivery" aria-pressed="false">
-            <span>배달</span>
-            <em>2</em>
-          </button>
-          <button type="button" class="category-chip" data-category="social-content" aria-pressed="false">
-            <span>소셜·콘텐츠</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="game-education" aria-pressed="false">
-            <span>게임·교육</span>
-            <em>2</em>
-          </button>
-          <button type="button" class="category-chip" data-category="settings-support" aria-pressed="false">
-            <span>설정·지원</span>
-            <em>3</em>
-          </button>
-          <button type="button" class="category-chip" data-category="empty-state" aria-pressed="false">
-            <span>빈 상태</span>
-            <em>1</em>
-          </button>
+          <div class="filter-stack">
+            <section class="filter-group" aria-label="앱 종류 필터">
+              <div>
+                <b data-i18n="views.appFilter.label">앱 종류</b>
+                <small data-i18n="views.appFilter.help">서비스가 무엇을 하는지에 따른 분류</small>
+              </div>
+              <div id="exampleAppFilters" class="category-filter" role="list"></div>
+            </section>
+            <section class="filter-group" aria-label="UI 패턴 필터">
+              <div>
+                <b data-i18n="views.patternFilter.label">UI 패턴</b>
+                <small data-i18n="views.patternFilter.help">화면이 수행하는 기능 단위</small>
+              </div>
+              <div id="examplePatternFilters" class="category-filter pattern-filter" role="list"></div>
+            </section>
           </div>
         </div>
         <div id="exampleCards" class="phone-grid" tabindex="0" aria-label="모바일 UI 예시 카드" data-i18n-aria-label="aria.cards">
-          <article class="phone-card" aria-label="핀테크 회원가입">
-            <div class="phone light fintech font-pretendard" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>본인인증</strong></div>
-              <div class="mock-visual fintech"><small>SMS</small></div>
-              <span class="font-chip">Pretendard</span>
-              <h3>휴대폰 번호로 시작할게요</h3>
-              <p class="subcopy">신뢰감 있는 가입 흐름에서 본인 명의 번호를 확인합니다.</p>
-              <div class="mock-list"><div class="mock-row">휴대폰 번호</div><div class="mock-row">6자리 인증번호 · 02:58</div><div class="mock-row">필수 약관 동의</div></div>
-              <span class="mock-button">다음</span>
+          <article class="phone-card" aria-label="예시 로딩 중">
+            <div class="phone placeholder-phone">
+              <div class="status"><span>9:41</span><span>●●●</span></div>
+              <main class="screen empty-screen">
+                <div class="empty-graphic"></div>
+                <h3>예시를 불러오는 중</h3>
+                <p>JavaScript가 앱 종류와 UI 패턴 예시를 렌더링합니다.</p>
+              </main>
             </div>
-            <h3>핀테크 회원가입</h3>
-            <p>본인인증, 도움말 문구, 고정 CTA를 포함한 가입 화면입니다.</p>
-          </article>
-          <article class="phone-card" aria-label="개인화 온보딩">
-            <div class="phone light onboarding font-suit" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>맞춤 설정</strong></div>
-              <div class="mock-visual onboarding"><small>AI</small></div>
-              <span class="font-chip">SUIT</span>
-              <h3>내 취향에 맞게 준비했어요</h3>
-              <p class="subcopy">관심사를 고르면 첫 화면과 추천이 더 정확해집니다.</p>
-              <div class="mock-list"><div class="mock-row">관심사 선택</div><div class="mock-row">필요한 알림 허용</div><div class="mock-row">맞춤 홈 미리보기</div></div>
-              <span class="mock-button">내게 맞게 설정</span>
-            </div>
-            <h3>개인화 온보딩</h3>
-            <p>관심사 칩, 단계별 설정, 첫 사용 가치를 보여주는 화면입니다.</p>
-          </article>
-          <article class="phone-card" aria-label="커머스 결제">
-            <div class="phone dark commerce font-spoqa" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>결제하기</strong></div>
-              <div class="mock-visual commerce"><small>PAY</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>주문을 확인하고 결제해요</h3>
-              <p class="subcopy">상품, 쿠폰, 결제수단, 동의 문구를 한 화면에 정리합니다.</p>
-              <div class="mock-list"><div class="mock-row">상품 금액 48,000원</div><div class="mock-row">쿠폰 -5,000원</div><div class="mock-row">카드 1234</div></div>
-              <span class="mock-button">43,000원 결제하기</span>
-            </div>
-            <h3>커머스 결제</h3>
-            <p>상품 요약, 쿠폰, 결제수단, 법적 고지, 금액 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="메인 홈">
-            <div class="phone light home-screen font-wanted" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>홈</strong></div>
-              <div class="mock-visual home-screen"><small>TODAY</small></div>
-              <span class="font-chip">Wanted Sans</span>
-              <h3>오늘 필요한 기능을 먼저 보여줘요</h3>
-              <p class="subcopy">상태, 바로가기, 재진입 동선을 우선하는 메인 화면입니다.</p>
-              <div class="mock-list"><div class="mock-row">이번 달 소비</div><div class="mock-row">송금</div><div class="mock-row">혜택</div><div class="mock-row">이번 주 리포트</div></div>
-              <span class="mock-button">전체 서비스 보기</span>
-            </div>
-            <h3>메인 홈</h3>
-            <p>핵심 지표, 바로가기, 서비스 진입점을 정리한 홈 화면입니다.</p>
-          </article>
-          <article class="phone-card" aria-label="배달 추적">
-            <div class="phone light delivery font-spoqa" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>주문 현황</strong></div>
-              <div class="mock-visual delivery"><small>ETA</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>라이더가 픽업했어요</h3>
-              <p class="subcopy">예상 도착, 요청사항, 진행 상태를 한눈에 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">주문 접수</div><div class="mock-row">조리 완료</div><div class="mock-row">배달 중</div></div>
-              <span class="mock-button">라이더에게 메시지</span>
-            </div>
-            <h3>배달 추적</h3>
-            <p>도착 시간, 지도 미리보기, 진행 타임라인, 지원 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="모빌리티 예약">
-            <div class="phone light mobility font-noto" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>경로</strong></div>
-              <div class="mock-visual mobility"><small>MAP</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>강남역에서 성수까지</h3>
-              <p class="subcopy">지도 중심의 예약 흐름에서 경로와 결제를 함께 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">택시 · 27분</div><div class="mock-row">예상 14,200원</div><div class="mock-row">카셰어링 가능</div></div>
-              <span class="mock-button">예약하고 결제하기</span>
-            </div>
-            <h3>모빌리티 예약</h3>
-            <p>지도, 바텀시트, 경로 선택, 결제 CTA가 포함된 화면입니다.</p>
-          </article>
-          <article class="phone-card" aria-label="금융 송금">
-            <div class="phone dark finance font-pretendard" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>송금</strong></div>
-              <div class="mock-visual finance"><small>₩</small></div>
-              <span class="font-chip">Pretendard</span>
-              <h3>얼마를 보낼까요?</h3>
-              <p class="subcopy">금액, 받는 사람, 보안 단서를 명확하게 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">보낼 수 있는 금액</div><div class="mock-row">빠른 금액 선택</div><div class="mock-row">받는 사람 카드</div></div>
-              <span class="mock-button">안전하게 송금</span>
-            </div>
-            <h3>금융 송금</h3>
-            <p>잔액, 금액 입력, 받는 사람 확인, 보안 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="회원 탈퇴">
-            <div class="phone light cancellation font-noto" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>회원 탈퇴</strong></div>
-              <div class="mock-visual cancellation"><small>!</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>탈퇴 전에 확인해주세요</h3>
-              <p class="subcopy">되돌릴 수 없는 영향을 명확히 설명하고 위험한 CTA를 구분합니다.</p>
-              <div class="mock-list"><div class="mock-row">구매 내역 삭제</div><div class="mock-row">혜택 복구 불가</div><div class="mock-row">30일 재가입 제한</div></div>
-              <span class="mock-button">계정 탈퇴하기</span>
-            </div>
-            <h3>회원 탈퇴</h3>
-            <p>위험 고지, 혜택 소멸, 사유 입력, 파괴적 CTA 위계를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="헬스케어 예약">
-            <div class="phone light health font-suit" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>진료 예약</strong></div>
-              <div class="mock-visual health"><small>4.8</small></div>
-              <span class="font-chip">SUIT</span>
-              <h3>이번 주 가능한 시간을 찾았어요</h3>
-              <p class="subcopy">의료진 신뢰 정보, 날짜 칩, 예약 상태를 명확히 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">피부과 · 강남</div><div class="mock-row">화 10:30 바로 예약</div><div class="mock-row">진료 12년</div></div>
-              <span class="mock-button">예약 확정하기</span>
-            </div>
-            <h3>헬스케어 예약</h3>
-            <p>의료진 신뢰, 날짜 칩, 시간 상태, 확정 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="소셜 피드">
-            <div class="phone dark social font-wanted" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>커뮤니티</strong></div>
-              <div class="mock-visual social"><small>HOT</small></div>
-              <span class="font-chip">Wanted Sans</span>
-              <h3>인기 글을 빠르게 확인해요</h3>
-              <p class="subcopy">발견, 댓글, 저장, 재방문 동선을 균형 있게 구성합니다.</p>
-              <div class="mock-list"><div class="mock-row">스토리</div><div class="mock-row">오늘의 인기 글</div><div class="mock-row">새 메시지 3개</div></div>
-              <span class="mock-button">피드 둘러보기</span>
-            </div>
-            <h3>소셜 피드</h3>
-            <p>스토리, 콘텐츠 카드, 소셜 신호, 재진입 동선을 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="게임 로비">
-            <div class="phone dark game font-ibm" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>시즌 로비</strong></div>
-              <div class="mock-visual game"><small>LV.28</small></div>
-              <span class="font-chip">IBM Plex Sans KR</span>
-              <h3>오늘의 던전이 열렸어요</h3>
-              <p class="subcopy">캐릭터, 보상, 이벤트 압박감을 에너지 있게 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">출석 보상 500 GEM</div><div class="mock-row">퀘스트 3/5 완료</div><div class="mock-row">한정 이벤트</div></div>
-              <span class="mock-button">전투 시작</span>
-            </div>
-            <h3>게임 로비</h3>
-            <p>캐릭터, 일일 보상, 퀘스트 진행률, 강한 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="교육 학습">
-            <div class="phone light education font-noto" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>오늘의 학습</strong></div>
-              <div class="mock-visual education"><small>72%</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>분수의 덧셈을 연습해볼까요?</h3>
-              <p class="subcopy">진도, 학년 정보, 학습 모듈, 이어하기 CTA를 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">개념 영상</div><div class="mock-row">연습 문제</div><div class="mock-row">오답 노트</div></div>
-              <span class="mock-button">이어서 학습하기</span>
-            </div>
-            <h3>교육 학습</h3>
-            <p>학습 진도, 커리큘럼 정보, 모듈 목록, 이어하기 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="메신저 채팅">
-            <div class="phone light messenger font-spoqa" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>채팅</strong></div>
-              <div class="mock-visual messenger"><small>DM</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>대화 흐름을 자연스럽게 이어가요</h3>
-              <p class="subcopy">읽기 쉬운 말풍선, 입력창, 안전 영역을 고려합니다.</p>
-              <div class="mock-list"><div class="mock-row">자료 보냈어</div><div class="mock-row">확인했어! 3시에 봐</div><div class="mock-row">좋아 🙌</div></div>
-              <span class="mock-button">메시지 보내기</span>
-            </div>
-            <h3>메신저 채팅</h3>
-            <p>말풍선, 답장 리듬, 입력창, 안전 영역을 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="콘텐츠 뷰어">
-            <div class="phone dark content font-ibm" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>콘텐츠</strong></div>
-              <div class="mock-visual content"><small>PLAY</small></div>
-              <span class="font-chip">IBM Plex Sans KR</span>
-              <h3>3분 경제 뉴스</h3>
-              <p class="subcopy">영상, 메타데이터, 참여 액션, 다음 콘텐츠를 명확히 배치합니다.</p>
-              <div class="mock-list"><div class="mock-row">오늘의 5가지 이슈</div><div class="mock-row">좋아요 · 저장 · 공유</div><div class="mock-row">다음 추천</div></div>
-              <span class="mock-button">다음 콘텐츠 보기</span>
-            </div>
-            <h3>콘텐츠 뷰어</h3>
-            <p>영상 히어로, 메타데이터, 참여 액션, 다음 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="여행 예약">
-            <div class="phone light travel font-pretendard" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>숙소 예약</strong></div>
-              <div class="mock-visual travel"><small>STAY</small></div>
-              <span class="font-chip">Pretendard</span>
-              <h3>제주 오션뷰 스테이</h3>
-              <p class="subcopy">비주얼, 일정, 가격, 취소 정책을 함께 보여줍니다.</p>
-              <div class="mock-list"><div class="mock-row">8월 12일-14일 · 성인 2명</div><div class="mock-row">2박 총액 284,000원</div><div class="mock-row">8/10까지 무료 취소</div></div>
-              <span class="mock-button">예약 진행하기</span>
-            </div>
-            <h3>여행 예약</h3>
-            <p>큰 비주얼, 일정/인원 요약, 취소 정책, 가격 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="구독 유도 화면">
-            <div class="phone dark subscription font-wanted" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>멤버십</strong></div>
-              <div class="mock-visual subscription"><small>PRO</small></div>
-              <span class="font-chip">Wanted Sans</span>
-              <h3>Pro로 업그레이드</h3>
-              <p class="subcopy">요금제 비교, 가치 설명, 해지 불안을 줄이는 문구를 포함합니다.</p>
-              <div class="mock-list"><div class="mock-row">광고 제거</div><div class="mock-row">무제한 저장</div><div class="mock-row">AI 요약</div></div>
-              <span class="mock-button">무료 체험 시작</span>
-            </div>
-            <h3>구독 유도 화면</h3>
-            <p>요금제 비교, 안심 문구, 체험 CTA, 해지 안내를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="설정과 권한">
-            <div class="phone light settings font-suit" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>권한 설정</strong></div>
-              <div class="mock-visual settings"><small>SET</small></div>
-              <span class="font-chip">SUIT</span>
-              <h3>중요한 알림을 놓치지 않게</h3>
-              <p class="subcopy">권한이 필요한 이유와 기본값을 사용자가 이해하게 합니다.</p>
-              <div class="mock-list"><div class="mock-row">주문/예약 알림 켜짐</div><div class="mock-row">마케팅 혜택 꺼짐</div><div class="mock-row">보안 알림 켜짐</div></div>
-              <span class="mock-button">설정 저장</span>
-            </div>
-            <h3>설정과 권한</h3>
-            <p>권한 설명, 토글 위계, 개인정보 친화 기본값을 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="고객센터">
-            <div class="phone light support font-spoqa" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>고객센터</strong></div>
-              <div class="mock-visual support"><small>BOT</small></div>
-              <span class="font-chip">Spoqa Han Sans Neo</span>
-              <h3>무엇을 도와드릴까요?</h3>
-              <p class="subcopy">자주 묻는 문제를 빠르게 안내하고 필요하면 상담 연결을 제공합니다.</p>
-              <div class="mock-list"><div class="mock-row">주문 취소</div><div class="mock-row">결제 오류</div><div class="mock-row">상담원 연결</div></div>
-              <span class="mock-button">채팅 시작</span>
-            </div>
-            <h3>고객센터</h3>
-            <p>FAQ 라우팅, 챗봇 진입, 자주 쓰는 작업, 상담 연결 CTA를 포함합니다.</p>
-          </article>
-          <article class="phone-card" aria-label="검색 빈 상태">
-            <div class="phone light empty-state font-noto" lang="ko">
-              <div class="status"></div>
-              <div class="topbar"><span></span><strong>검색</strong></div>
-              <div class="mock-visual empty-state"><small>0</small></div>
-              <span class="font-chip">Noto Sans KR</span>
-              <h3>검색 결과가 없어요</h3>
-              <p class="subcopy">막힌 흐름을 도움말 문구와 대체 경로로 회복합니다.</p>
-              <div class="mock-list"><div class="mock-row">인기</div><div class="mock-row">신규</div><div class="mock-row">할인</div></div>
-              <span class="mock-button">추천 보기</span>
-            </div>
-            <h3>검색 빈 상태</h3>
-            <p>결과 없음 상황에서 안내 문구, 일러스트, 대체 경로를 제공합니다.</p>
+            <h3>예시를 불러오는 중</h3>
+            <p>구조화된 사이트 데이터에서 예시를 렌더링합니다.</p>
           </article>
         </div>
       </section>
