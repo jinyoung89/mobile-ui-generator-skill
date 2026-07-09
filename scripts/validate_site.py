@@ -221,8 +221,13 @@ def main() -> None:
             if im.size != (1200, 630):
                 fail(f"og.png expected 1200x630, got {im.size}")
 
-    if "mock-visual" in read(DOCS / "app.js") or "mock-visual" in read(DOCS / "styles.css"):
+    css = read(DOCS / "styles.css")
+    if "mock-visual" in read(DOCS / "app.js") or "mock-visual" in css:
         fail("old mock-visual renderer/styles must be removed")
+    assert_contains(css, "grid-template-columns:repeat(auto-fit,minmax", "phone example grid")
+    assert_contains(css, ".phone>.delivery-map", "scoped delivery map styles")
+    if re.search(r"\.phone-grid\s*\{[^}]*display\s*:\s*flex", css, re.S):
+        fail("phone examples must use a non-clipping responsive grid, not a horizontal flex carousel")
 
     # Public-copy hygiene. Include untracked files when run before commit.
     files = subprocess.run(
