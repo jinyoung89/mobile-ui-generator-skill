@@ -245,6 +245,97 @@
     return phoneFrame(example, lang, `<main class="screen empty-screen"><div class="empty-graphic"></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${chips(c.suggestions, 'suggestion-row')}</main><button class="phone-cta subtle">${escapeHTML(c.cta)}</button>`);
   }
 
+
+  function renderProductDetail(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen product-detail-screen"><div class="product-hero"><b>${escapeHTML(c.hero)}</b></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${chips(c.options, 'option-row')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderCartReview(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen cart-review-screen"><div class="cart-total"><small>${escapeHTML(lang === 'ko' ? '예상 결제금액' : 'Estimated total')}</small><b>${escapeHTML(c.total)}</b></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.rows, 'cart-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderCouponWallet(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen coupon-screen"><div class="coupon-meter"><small>${escapeHTML(c.title)}</small><b>${escapeHTML(c.metric)}</b></div><p>${escapeHTML(c.sub)}</p>${list(c.offers, 'coupon-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderReviewSheet(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<main class="screen review-screen"><div class="score-card"><b>${escapeHTML(c.score)}</b><span>★★★★★</span></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${chips(c.tags, 'review-tags')}${list(c.reviews, 'review-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderSearchResults(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen search-results-screen"><div class="search-box">${escapeHTML(c.query)}</div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.results, 'result-list')}</main><button class="phone-cta subtle">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderAddressPicker(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="map-canvas address-canvas"><button>${escapeHTML(c.nav)}</button><i></i></div><section class="map-sheet address-sheet"><span></span><strong>${escapeHTML(c.note)}</strong><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.places, 'route-options')}<button>${escapeHTML(c.cta)}</button></section>`);
+  }
+
+  function renderFormWizard(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen form-wizard-screen"><div class="wizard-steps">${(c.steps || []).map((step, index) => `<span class="${index === 0 ? 'active' : ''}">${index + 1}</span>`).join('')}</div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.fields, 'form-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderDocumentReview(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen document-screen"><div class="doc-status">${escapeHTML(c.status)}</div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.documents, 'document-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderAlertCenter(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen alert-screen"><div class="alert-hero"><b>${escapeHTML(c.metric)}</b></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.alerts, 'alert-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderSmartControl(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<main class="screen smart-control-screen"><div class="device-orb"><b>${escapeHTML(c.metric)}</b></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.devices, 'device-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderScheduleTimeline(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen schedule-screen"><div class="provider-card"><b>${escapeHTML(c.provider)}</b><span>♥</span></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${chips(c.dates, 'date-row')}${list(c.slots, 'schedule-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderServiceStatus(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<main class="screen service-status-screen"><div class="service-eta">${escapeHTML(c.eta)}</div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p><div class="timeline">${(c.steps || []).map((step, index) => `<div><i class="${index < 2 ? 'done' : ''}"></i><span>${escapeHTML(step)}</span></div>`).join('')}</div></main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderTicketPass(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<main class="screen ticket-screen"><div class="ticket-card"><small>${escapeHTML(c.nav)}</small><h3>${escapeHTML(c.title)}</h3><b>${escapeHTML(c.code)}</b></div><p>${escapeHTML(c.sub)}</p>${list(c.details, 'ticket-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderMediaUpload(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen upload-screen"><div class="upload-drop"><b>${escapeHTML(c.note)}</b></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.assets, 'asset-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderAICompose(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<main class="screen ai-compose-screen"><div class="prompt-card"><small>${escapeHTML(c.nav)}</small><b>${escapeHTML(c.prompt)}</b></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${chips(c.suggestions, 'suggestion-row')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderComparison(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen comparison-screen"><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p><div class="comparison-options">${(c.options || []).map((option, index) => `<div class="${index === 1 ? 'recommended' : ''}">${escapeHTML(option)}</div>`).join('')}</div></main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderReferral(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<main class="screen referral-screen"><div class="gift-card">${chips(c.chips, 'referral-chips')}</div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${list(c.steps, 'referral-list')}</main><button class="phone-cta">${escapeHTML(c.cta)}</button>`);
+  }
+
+  function renderProfileSecurity(example, lang) {
+    const c = example.copy[lang];
+    return phoneFrame(example, lang, `<div class="topbar"><span></span><strong>${escapeHTML(c.nav)}</strong></div><main class="screen profile-security-screen"><div class="avatar-lock"></div><h3>${escapeHTML(c.title)}</h3><p>${escapeHTML(c.sub)}</p>${(c.groups || []).map((item, index) => `<div class="setting-row"><span>${escapeHTML(item)}</span><i>${index === 2 ? 'Off' : 'On'}</i></div>`).join('')}</main><button class="phone-cta subtle">${escapeHTML(c.cta)}</button>`);
+  }
+
   const renderers = {
     'auth-form': renderAuth,
     'onboarding-chips': renderOnboarding,
@@ -265,6 +356,25 @@
     'settings-list': renderSettings,
     'support-faq': renderSupport,
     'empty-state': renderEmpty,
+    'product-detail': renderProductDetail,
+    'cart-review': renderCartReview,
+    'coupon-wallet': renderCouponWallet,
+    'review-sheet': renderReviewSheet,
+    'search-results': renderSearchResults,
+    'address-picker': renderAddressPicker,
+    'form-wizard': renderFormWizard,
+    'document-review': renderDocumentReview,
+    'alert-center': renderAlertCenter,
+    'smart-control': renderSmartControl,
+    'schedule-timeline': renderScheduleTimeline,
+    'service-status': renderServiceStatus,
+    'ticket-pass': renderTicketPass,
+    'media-upload': renderMediaUpload,
+    'ai-compose': renderAICompose,
+    'comparison-table': renderComparison,
+    'referral-card': renderReferral,
+    'profile-security': renderProfileSecurity,
+    'fitness-progress': renderLearning,
   };
 
   function renderExamples(lang) {

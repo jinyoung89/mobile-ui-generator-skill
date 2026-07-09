@@ -1077,6 +1077,903 @@ window.MobileUIGeneratorData = Object.freeze({
           ]
         }
       }
+    },
+    {
+      "slug": "beauty-product-detail",
+      "layout": "product-detail",
+      "theme": "beauty-card",
+      "appCategories": [
+        "beauty-fashion",
+        "commerce"
+      ],
+      "uiPatterns": [
+        "product-detail",
+        "detail-content",
+        "checkout-payment"
+      ],
+      "mode": "light",
+      "font": "Wanted Sans",
+      "copy": {
+        "en": {
+          "nav": "Skin match",
+          "title": "Hydrating serum set",
+          "sub": "Show ingredients, shade fit, benefits, and bundle options before purchase.",
+          "hero": "98% match",
+          "options": [
+            "Sensitive skin safe",
+            "Morning routine",
+            "Bundle saves 18%"
+          ],
+          "cardTitle": "Beauty product detail",
+          "cardDesc": "Ingredient trust, skin-fit badges, options, and purchase CTA.",
+          "cta": "Add set"
+        },
+        "ko": {
+          "nav": "피부 맞춤",
+          "title": "수분 세럼 세트",
+          "sub": "성분, 피부 타입, 혜택, 번들 옵션을 구매 전에 보여줍니다.",
+          "hero": "98% 맞춤",
+          "options": [
+            "민감 피부 가능",
+            "아침 루틴",
+            "번들 18% 절약"
+          ],
+          "cardTitle": "뷰티 상품 상세",
+          "cardDesc": "성분 신뢰, 피부 맞춤 배지, 옵션, 구매 CTA를 포함합니다.",
+          "cta": "세트 담기"
+        }
+      }
+    },
+    {
+      "slug": "grocery-cart",
+      "layout": "cart-review",
+      "theme": "grocery-soft",
+      "appCategories": [
+        "grocery-retail",
+        "commerce"
+      ],
+      "uiPatterns": [
+        "cart-order",
+        "checkout-payment",
+        "loyalty-rewards"
+      ],
+      "mode": "light",
+      "font": "Spoqa Han Sans Neo",
+      "copy": {
+        "en": {
+          "nav": "Cart",
+          "title": "Tonight’s basket",
+          "sub": "Keep substitutions, coupons, delivery window, and cold-chain notes visible.",
+          "total": "$68.40",
+          "rows": [
+            "Organic eggs · 1 pack",
+            "Romaine lettuce · substitute allowed",
+            "Coupon applied · -$7.00",
+            "Delivery 7–8 PM"
+          ],
+          "cardTitle": "Grocery cart",
+          "cardDesc": "Cart, substitution, coupon, delivery slot, and total confirmation.",
+          "cta": "Place order"
+        },
+        "ko": {
+          "nav": "장바구니",
+          "title": "오늘 저녁 장보기",
+          "sub": "대체상품, 쿠폰, 배송 시간, 냉장 안내를 함께 보여줍니다.",
+          "total": "68,400원",
+          "rows": [
+            "유정란 · 1팩",
+            "로메인 · 대체 허용",
+            "쿠폰 적용 · -7,000원",
+            "배송 19–20시"
+          ],
+          "cardTitle": "장보기 장바구니",
+          "cardDesc": "상품, 대체, 쿠폰, 배송 슬롯, 총액 확인을 포함합니다.",
+          "cta": "주문하기"
+        }
+      }
+    },
+    {
+      "slug": "loyalty-wallet",
+      "layout": "coupon-wallet",
+      "theme": "reward-mint",
+      "appCategories": [
+        "commerce",
+        "food-local"
+      ],
+      "uiPatterns": [
+        "loyalty-rewards",
+        "home-dashboard"
+      ],
+      "mode": "light",
+      "font": "SUIT",
+      "copy": {
+        "en": {
+          "nav": "Rewards",
+          "title": "Coupons ready today",
+          "sub": "Separate usable, expiring, and locked benefits.",
+          "metric": "7 benefits",
+          "offers": [
+            "Free delivery expires tonight",
+            "2 stamps until free drink",
+            "Birthday coupon unlocked"
+          ],
+          "cardTitle": "Coupon wallet",
+          "cardDesc": "Reward balance, expiring coupons, and next benefit guidance.",
+          "cta": "Use benefit"
+        },
+        "ko": {
+          "nav": "리워드",
+          "title": "오늘 쓸 수 있는 쿠폰",
+          "sub": "사용 가능, 만료 임박, 잠긴 혜택을 분리합니다.",
+          "metric": "혜택 7개",
+          "offers": [
+            "오늘 자정 무료배송 만료",
+            "무료 음료까지 스탬프 2개",
+            "생일 쿠폰 열림"
+          ],
+          "cardTitle": "쿠폰 지갑",
+          "cardDesc": "리워드 잔액, 만료 쿠폰, 다음 혜택 안내를 포함합니다.",
+          "cta": "혜택 쓰기"
+        }
+      }
+    },
+    {
+      "slug": "review-rating",
+      "layout": "review-sheet",
+      "theme": "review-warm",
+      "appCategories": [
+        "food-local",
+        "social-content"
+      ],
+      "uiPatterns": [
+        "review-rating",
+        "feed-content"
+      ],
+      "mode": "light",
+      "font": "Pretendard",
+      "copy": {
+        "en": {
+          "nav": "Review",
+          "title": "How was the visit?",
+          "sub": "Let users rate quickly, then add optional detail only when needed.",
+          "score": "4.8",
+          "tags": [
+            "Kind staff",
+            "Clean space",
+            "Fast pickup"
+          ],
+          "reviews": [
+            "“Pickup was ready early.”",
+            "“Clear vegan labels.”"
+          ],
+          "cardTitle": "Review and rating",
+          "cardDesc": "Fast score input, tags, optional detail, and review preview.",
+          "cta": "Submit review"
+        },
+        "ko": {
+          "nav": "리뷰",
+          "title": "방문은 어땠나요?",
+          "sub": "먼저 빠르게 평가하고, 필요할 때만 상세 입력을 받습니다.",
+          "score": "4.8",
+          "tags": [
+            "친절해요",
+            "매장이 깨끗해요",
+            "픽업이 빨라요"
+          ],
+          "reviews": [
+            "“예정보다 빨리 준비됐어요.”",
+            "“비건 표시가 명확해요.”"
+          ],
+          "cardTitle": "리뷰와 평점",
+          "cardDesc": "빠른 별점, 태그, 선택 상세, 리뷰 미리보기를 포함합니다.",
+          "cta": "리뷰 등록"
+        }
+      }
+    },
+    {
+      "slug": "housing-listing",
+      "layout": "search-results",
+      "theme": "housing-light",
+      "appCategories": [
+        "real-estate-housing"
+      ],
+      "uiPatterns": [
+        "marketplace-listing",
+        "search-list",
+        "saved-favorites"
+      ],
+      "mode": "light",
+      "font": "Noto Sans KR",
+      "copy": {
+        "en": {
+          "nav": "Homes",
+          "title": "Apartments near the station",
+          "sub": "Show commute, deposit, room type, saved state, and verified listing cues.",
+          "query": "Seongsu · 2 rooms",
+          "results": [
+            "8 min walk · $1,200 deposit",
+            "Sunny studio · verified photos",
+            "Pet-friendly loft · saved"
+          ],
+          "cardTitle": "Housing listing",
+          "cardDesc": "Marketplace results with trust badges, saved state, and quick comparison.",
+          "cta": "Compare saved"
+        },
+        "ko": {
+          "nav": "집 찾기",
+          "title": "역 근처 매물",
+          "sub": "통근, 보증금, 방 타입, 저장 상태, 검증 단서를 함께 보여줍니다.",
+          "query": "성수 · 투룸",
+          "results": [
+            "도보 8분 · 보증금 1,200만",
+            "채광 좋은 원룸 · 사진 검증",
+            "반려동물 가능 로프트 · 저장됨"
+          ],
+          "cardTitle": "주거 매물 목록",
+          "cardDesc": "신뢰 배지, 저장 상태, 빠른 비교가 있는 마켓플레이스 목록입니다.",
+          "cta": "저장 매물 비교"
+        }
+      }
+    },
+    {
+      "slug": "address-picker",
+      "layout": "address-picker",
+      "theme": "housing-map",
+      "appCategories": [
+        "real-estate-housing",
+        "mobility-travel"
+      ],
+      "uiPatterns": [
+        "address-picker",
+        "booking-map"
+      ],
+      "mode": "light",
+      "font": "Noto Sans KR",
+      "copy": {
+        "en": {
+          "nav": "Address",
+          "title": "Confirm the entrance",
+          "sub": "Ask for building, gate, and delivery note before a driver is assigned.",
+          "note": "Pin moved 12m from road",
+          "places": [
+            "Main gate",
+            "Parking entrance",
+            "Lobby desk"
+          ],
+          "cardTitle": "Address picker",
+          "cardDesc": "Map pin, entrance choices, delivery note, and confirmation CTA.",
+          "cta": "Use this entrance"
+        },
+        "ko": {
+          "nav": "주소",
+          "title": "입구를 확인해주세요",
+          "sub": "배정 전에 건물, 출입구, 전달 메모를 확인합니다.",
+          "note": "도로에서 핀을 12m 이동",
+          "places": [
+            "정문",
+            "주차장 입구",
+            "로비 데스크"
+          ],
+          "cardTitle": "주소 선택",
+          "cardDesc": "지도 핀, 입구 선택, 전달 메모, 확인 CTA를 포함합니다.",
+          "cta": "이 입구 사용"
+        }
+      }
+    },
+    {
+      "slug": "job-application",
+      "layout": "form-wizard",
+      "theme": "career-blue",
+      "appCategories": [
+        "career-work"
+      ],
+      "uiPatterns": [
+        "form-wizard",
+        "profile-account",
+        "document-review"
+      ],
+      "mode": "light",
+      "font": "SUIT",
+      "copy": {
+        "en": {
+          "nav": "Apply",
+          "title": "Complete your application",
+          "sub": "Break profile, portfolio, and availability into recoverable steps.",
+          "steps": [
+            "Profile 80% done",
+            "Portfolio attached",
+            "Interview slots open"
+          ],
+          "fields": [
+            "Preferred role",
+            "Portfolio URL",
+            "Available date"
+          ],
+          "cardTitle": "Job application wizard",
+          "cardDesc": "Multi-step career form with autosave, portfolio, and scheduling cues.",
+          "cta": "Continue application"
+        },
+        "ko": {
+          "nav": "지원하기",
+          "title": "지원서를 완성해요",
+          "sub": "프로필, 포트폴리오, 가능 일정을 복구 가능한 단계로 나눕니다.",
+          "steps": [
+            "프로필 80% 완료",
+            "포트폴리오 첨부됨",
+            "면접 가능 시간 열림"
+          ],
+          "fields": [
+            "희망 직무",
+            "포트폴리오 URL",
+            "가능 날짜"
+          ],
+          "cardTitle": "채용 지원 단계 입력",
+          "cardDesc": "자동저장, 포트폴리오, 일정 단서가 있는 단계형 지원서입니다.",
+          "cta": "지원 계속하기"
+        }
+      }
+    },
+    {
+      "slug": "insurance-claim",
+      "layout": "document-review",
+      "theme": "claim-paper",
+      "appCategories": [
+        "insurance-legal"
+      ],
+      "uiPatterns": [
+        "document-review",
+        "form-wizard",
+        "notifications-alerts"
+      ],
+      "mode": "light",
+      "font": "Pretendard",
+      "copy": {
+        "en": {
+          "nav": "Claim",
+          "title": "Review claim documents",
+          "sub": "Show missing files, review status, and next action without legal overload.",
+          "status": "2 of 4 ready",
+          "documents": [
+            "Receipt uploaded",
+            "Diagnosis pending",
+            "Bank account verified"
+          ],
+          "cardTitle": "Insurance claim review",
+          "cardDesc": "Document checklist, missing state, review status, and recovery CTA.",
+          "cta": "Upload missing file"
+        },
+        "ko": {
+          "nav": "청구",
+          "title": "청구 서류를 확인해요",
+          "sub": "부담스러운 법률 문구보다 누락 서류, 상태, 다음 행동을 먼저 보여줍니다.",
+          "status": "4개 중 2개 준비",
+          "documents": [
+            "영수증 업로드됨",
+            "진단서 필요",
+            "계좌 확인 완료"
+          ],
+          "cardTitle": "보험 청구 서류 검토",
+          "cardDesc": "서류 체크리스트, 누락 상태, 심사 상태, 복구 CTA를 포함합니다.",
+          "cta": "누락 서류 올리기"
+        }
+      }
+    },
+    {
+      "slug": "utility-bill-alert",
+      "layout": "alert-center",
+      "theme": "utility-clean",
+      "appCategories": [
+        "public-utility"
+      ],
+      "uiPatterns": [
+        "notifications-alerts",
+        "checkout-payment",
+        "document-review"
+      ],
+      "mode": "light",
+      "font": "Noto Sans KR",
+      "copy": {
+        "en": {
+          "nav": "Bills",
+          "title": "Electricity bill is due",
+          "sub": "Give amount, deadline, usage reason, and safe payment path.",
+          "metric": "Due in 3 days",
+          "alerts": [
+            "Usage rose 14% from last month",
+            "Auto-pay card expires soon",
+            "Receipt can be downloaded"
+          ],
+          "cardTitle": "Utility bill alert",
+          "cardDesc": "Deadline, amount, usage context, and payment/recovery actions.",
+          "cta": "Pay bill"
+        },
+        "ko": {
+          "nav": "요금",
+          "title": "전기요금 납부 예정",
+          "sub": "금액, 마감일, 사용량 이유, 안전한 납부 경로를 함께 제공합니다.",
+          "metric": "3일 남음",
+          "alerts": [
+            "지난달보다 사용량 14% 증가",
+            "자동납부 카드 곧 만료",
+            "영수증 다운로드 가능"
+          ],
+          "cardTitle": "생활요금 알림",
+          "cardDesc": "기한, 금액, 사용 맥락, 납부/복구 액션을 포함합니다.",
+          "cta": "요금 납부"
+        }
+      }
+    },
+    {
+      "slug": "smart-home-control",
+      "layout": "smart-control",
+      "theme": "iot-dark",
+      "appCategories": [
+        "smart-home-iot"
+      ],
+      "uiPatterns": [
+        "live-status",
+        "home-dashboard",
+        "notifications-alerts"
+      ],
+      "mode": "light",
+      "font": "IBM Plex Sans KR",
+      "copy": {
+        "en": {
+          "nav": "Home",
+          "title": "Living room is active",
+          "sub": "Surface device status, scenes, warnings, and one-handed toggles.",
+          "metric": "6 devices on",
+          "devices": [
+            "Air purifier · auto",
+            "Light strip · 48%",
+            "Door lock · secure"
+          ],
+          "cardTitle": "Smart home control",
+          "cardDesc": "Device status, scenes, live alerts, and reachable controls.",
+          "cta": "Run night scene"
+        },
+        "ko": {
+          "nav": "홈",
+          "title": "거실 기기가 켜져 있어요",
+          "sub": "기기 상태, 장면, 경고, 한 손 토글을 함께 배치합니다.",
+          "metric": "기기 6개 켜짐",
+          "devices": [
+            "공기청정기 · 자동",
+            "조명 · 48%",
+            "도어락 · 안전"
+          ],
+          "cardTitle": "스마트홈 제어",
+          "cardDesc": "기기 상태, 장면, 실시간 알림, 접근 쉬운 컨트롤을 포함합니다.",
+          "cta": "나이트 모드 실행"
+        }
+      }
+    },
+    {
+      "slug": "pet-care-schedule",
+      "layout": "schedule-timeline",
+      "theme": "pet-soft",
+      "appCategories": [
+        "pet-family",
+        "healthcare-wellness"
+      ],
+      "uiPatterns": [
+        "calendar-schedule",
+        "booking-map",
+        "notifications-alerts"
+      ],
+      "mode": "light",
+      "font": "Spoqa Han Sans Neo",
+      "copy": {
+        "en": {
+          "nav": "Pet care",
+          "title": "Mango’s care plan",
+          "sub": "Bring vaccine, grooming, walk, and sitter reminders into one timeline.",
+          "provider": "Mango · 4 years",
+          "dates": [
+            "Today",
+            "Fri",
+            "Sun"
+          ],
+          "slots": [
+            "Walk 18:00",
+            "Grooming 11:30",
+            "Vet vaccine 15:00"
+          ],
+          "cardTitle": "Pet care schedule",
+          "cardDesc": "Pet timeline with care reminders, bookings, and health tasks.",
+          "cta": "Book next care"
+        },
+        "ko": {
+          "nav": "반려 케어",
+          "title": "망고의 케어 일정",
+          "sub": "접종, 미용, 산책, 돌봄 알림을 하나의 타임라인으로 모읍니다.",
+          "provider": "망고 · 4살",
+          "dates": [
+            "오늘",
+            "금",
+            "일"
+          ],
+          "slots": [
+            "산책 18:00",
+            "미용 11:30",
+            "접종 15:00"
+          ],
+          "cardTitle": "반려동물 일정",
+          "cardDesc": "케어 알림, 예약, 건강 할 일이 있는 반려 타임라인입니다.",
+          "cta": "다음 케어 예약"
+        }
+      }
+    },
+    {
+      "slug": "car-service-status",
+      "layout": "service-status",
+      "theme": "auto-slate",
+      "appCategories": [
+        "automotive"
+      ],
+      "uiPatterns": [
+        "live-status",
+        "booking-map",
+        "document-review"
+      ],
+      "mode": "light",
+      "font": "Pretendard",
+      "copy": {
+        "en": {
+          "nav": "Service",
+          "title": "Maintenance in progress",
+          "sub": "Show each garage step, expected pickup time, and invoice preview.",
+          "eta": "Pickup 17:40",
+          "steps": [
+            "Inspection done",
+            "Brake pad ordered",
+            "Wash queued"
+          ],
+          "cardTitle": "Car service status",
+          "cardDesc": "Live maintenance status, ETA, document preview, and contact CTA.",
+          "cta": "Message garage"
+        },
+        "ko": {
+          "nav": "정비",
+          "title": "정비가 진행 중이에요",
+          "sub": "정비 단계, 픽업 예정 시간, 견적서를 한 화면에 보여줍니다.",
+          "eta": "17:40 픽업",
+          "steps": [
+            "점검 완료",
+            "브레이크 패드 주문",
+            "세차 대기"
+          ],
+          "cardTitle": "차량 정비 상태",
+          "cardDesc": "실시간 정비 상태, ETA, 문서 미리보기, 연락 CTA를 포함합니다.",
+          "cta": "정비소에 문의"
+        }
+      }
+    },
+    {
+      "slug": "event-ticket-pass",
+      "layout": "ticket-pass",
+      "theme": "ticket-purple",
+      "appCategories": [
+        "events-ticketing"
+      ],
+      "uiPatterns": [
+        "saved-favorites",
+        "checkout-payment",
+        "detail-content"
+      ],
+      "mode": "light",
+      "font": "Wanted Sans",
+      "copy": {
+        "en": {
+          "nav": "Ticket",
+          "title": "Friday live pass",
+          "sub": "Keep QR, seat, gate, transfer, and refund rules visible.",
+          "code": "A12 · Gate 3",
+          "details": [
+            "Opens 18:30",
+            "Seat B-14",
+            "Transfer until 17:00"
+          ],
+          "cardTitle": "Event ticket pass",
+          "cardDesc": "Ticket detail with QR-style code, gate, saved state, and transfer rules.",
+          "cta": "Open pass"
+        },
+        "ko": {
+          "nav": "티켓",
+          "title": "금요일 라이브 패스",
+          "sub": "QR, 좌석, 게이트, 양도, 환불 규칙을 눈에 띄게 배치합니다.",
+          "code": "A12 · 3번 게이트",
+          "details": [
+            "18:30 입장",
+            "B-14 좌석",
+            "17:00까지 양도 가능"
+          ],
+          "cardTitle": "이벤트 티켓 패스",
+          "cardDesc": "QR형 코드, 게이트, 저장 상태, 양도 규칙이 있는 티켓 상세입니다.",
+          "cta": "패스 열기"
+        }
+      }
+    },
+    {
+      "slug": "fitness-plan",
+      "layout": "fitness-progress",
+      "theme": "fitness-green",
+      "appCategories": [
+        "fitness-sports"
+      ],
+      "uiPatterns": [
+        "analytics-progress",
+        "calendar-schedule",
+        "home-dashboard"
+      ],
+      "mode": "light",
+      "font": "SUIT",
+      "copy": {
+        "en": {
+          "nav": "Training",
+          "title": "Week 4 strength plan",
+          "sub": "Combine progress, recovery, next workout, and coach notes.",
+          "progress": "68%",
+          "lessons": [
+            "Lower body · 42 min",
+            "Recovery score · good",
+            "Coach note ready"
+          ],
+          "cardTitle": "Fitness progress",
+          "cardDesc": "Workout progress, calendar rhythm, recovery, and next CTA.",
+          "cta": "Start workout"
+        },
+        "ko": {
+          "nav": "트레이닝",
+          "title": "4주차 근력 플랜",
+          "sub": "진도, 회복, 다음 운동, 코치 메모를 함께 보여줍니다.",
+          "progress": "68%",
+          "lessons": [
+            "하체 운동 · 42분",
+            "회복 점수 · 좋음",
+            "코치 메모 도착"
+          ],
+          "cardTitle": "피트니스 진도",
+          "cardDesc": "운동 진도, 일정 리듬, 회복 상태, 다음 CTA를 포함합니다.",
+          "cta": "운동 시작"
+        }
+      }
+    },
+    {
+      "slug": "creator-upload",
+      "layout": "media-upload",
+      "theme": "creator-dark",
+      "appCategories": [
+        "creator-tools",
+        "social-content"
+      ],
+      "uiPatterns": [
+        "upload-media",
+        "ai-compose",
+        "detail-content"
+      ],
+      "mode": "light",
+      "font": "IBM Plex Sans KR",
+      "copy": {
+        "en": {
+          "nav": "Upload",
+          "title": "Prepare your short-form post",
+          "sub": "Show asset status, caption draft, rights check, and scheduled publish.",
+          "note": "3 assets ready",
+          "assets": [
+            "Cover image cropped",
+            "Caption draft generated",
+            "Audio license checked"
+          ],
+          "cardTitle": "Creator upload",
+          "cardDesc": "Media upload status, AI caption, rights check, and scheduling.",
+          "cta": "Schedule post"
+        },
+        "ko": {
+          "nav": "업로드",
+          "title": "숏폼 게시 준비",
+          "sub": "소스 상태, 캡션 초안, 권리 확인, 예약 발행을 보여줍니다.",
+          "note": "소스 3개 준비",
+          "assets": [
+            "커버 이미지 크롭됨",
+            "캡션 초안 생성됨",
+            "오디오 라이선스 확인"
+          ],
+          "cardTitle": "크리에이터 업로드",
+          "cardDesc": "미디어 업로드 상태, AI 캡션, 권리 확인, 예약 발행을 포함합니다.",
+          "cta": "게시 예약"
+        }
+      }
+    },
+    {
+      "slug": "ai-compose-draft",
+      "layout": "ai-compose",
+      "theme": "ai-ink",
+      "appCategories": [
+        "ai-productivity",
+        "creator-tools"
+      ],
+      "uiPatterns": [
+        "ai-compose",
+        "detail-content",
+        "saved-favorites"
+      ],
+      "mode": "light",
+      "font": "Pretendard",
+      "copy": {
+        "en": {
+          "nav": "Draft",
+          "title": "Turn notes into a launch post",
+          "sub": "Keep source notes, tone, alternatives, and edit controls close together.",
+          "prompt": "Write a friendly launch update",
+          "suggestions": [
+            "Make it shorter",
+            "Add Korean version",
+            "Save as reusable prompt"
+          ],
+          "cardTitle": "AI compose draft",
+          "cardDesc": "AI writing prompt, tone chips, alternatives, and save controls.",
+          "cta": "Generate draft"
+        },
+        "ko": {
+          "nav": "초안",
+          "title": "메모를 출시 글로 바꿔요",
+          "sub": "원본 메모, 톤, 대안, 편집 컨트롤을 가까이 배치합니다.",
+          "prompt": "친근한 출시 소식 작성",
+          "suggestions": [
+            "더 짧게",
+            "한국어 버전 추가",
+            "프롬프트로 저장"
+          ],
+          "cardTitle": "AI 작성 초안",
+          "cardDesc": "AI 작성 프롬프트, 톤 칩, 대안, 저장 컨트롤을 포함합니다.",
+          "cta": "초안 생성"
+        }
+      }
+    },
+    {
+      "slug": "plan-comparison",
+      "layout": "comparison-table",
+      "theme": "compare-clean",
+      "appCategories": [
+        "insurance-legal",
+        "commerce"
+      ],
+      "uiPatterns": [
+        "comparison-decision",
+        "checkout-payment",
+        "detail-content"
+      ],
+      "mode": "light",
+      "font": "Noto Sans KR",
+      "copy": {
+        "en": {
+          "nav": "Compare",
+          "title": "Choose the right plan",
+          "sub": "Keep monthly cost, coverage, exclusions, and recommendation transparent.",
+          "options": [
+            "Basic · $9 · essentials",
+            "Plus · $18 · best fit",
+            "Pro · $29 · full cover"
+          ],
+          "cardTitle": "Plan comparison",
+          "cardDesc": "Side-by-side plan choice with recommendation and caveats.",
+          "cta": "Choose Plus"
+        },
+        "ko": {
+          "nav": "비교",
+          "title": "맞는 플랜을 고르세요",
+          "sub": "월 비용, 보장 범위, 제외 항목, 추천 이유를 투명하게 보여줍니다.",
+          "options": [
+            "기본 · 9천원 · 필수",
+            "플러스 · 1.8만원 · 추천",
+            "프로 · 2.9만원 · 전체 보장"
+          ],
+          "cardTitle": "플랜 비교",
+          "cardDesc": "추천과 주의사항이 있는 나란히 비교 선택 화면입니다.",
+          "cta": "플러스 선택"
+        }
+      }
+    },
+    {
+      "slug": "referral-invite",
+      "layout": "referral-card",
+      "theme": "referral-pink",
+      "appCategories": [
+        "social-content",
+        "commerce"
+      ],
+      "uiPatterns": [
+        "referral-invite",
+        "loyalty-rewards",
+        "feed-content"
+      ],
+      "mode": "light",
+      "font": "Wanted Sans",
+      "copy": {
+        "en": {
+          "nav": "Invite",
+          "title": "Invite friends, unlock credits",
+          "sub": "Show reward rules, progress, share options, and fraud-safe limits.",
+          "chips": [
+            "3 invited",
+            "2 completed",
+            "+$12 ready"
+          ],
+          "steps": [
+            "Share your link",
+            "Friend makes first order",
+            "Both receive credits"
+          ],
+          "cardTitle": "Referral invite",
+          "cardDesc": "Invitation progress, reward rules, share actions, and limits.",
+          "cta": "Share invite"
+        },
+        "ko": {
+          "nav": "초대",
+          "title": "친구 초대하고 크레딧 받기",
+          "sub": "보상 규칙, 진행률, 공유 옵션, 안전 제한을 함께 보여줍니다.",
+          "chips": [
+            "3명 초대",
+            "2명 완료",
+            "12,000원 대기"
+          ],
+          "steps": [
+            "링크 공유",
+            "친구 첫 주문",
+            "둘 다 크레딧 수령"
+          ],
+          "cardTitle": "추천 초대",
+          "cardDesc": "초대 진행률, 보상 규칙, 공유 액션, 제한 안내를 포함합니다.",
+          "cta": "초대 공유"
+        }
+      }
+    },
+    {
+      "slug": "profile-security",
+      "layout": "profile-security",
+      "theme": "security-clean",
+      "appCategories": [
+        "settings-support",
+        "finance"
+      ],
+      "uiPatterns": [
+        "profile-account",
+        "permission-consent",
+        "settings-support"
+      ],
+      "mode": "light",
+      "font": "SUIT",
+      "copy": {
+        "en": {
+          "nav": "Account",
+          "title": "Security checkup",
+          "sub": "Separate profile, login device, consent, and recovery methods.",
+          "groups": [
+            "Passkey enabled",
+            "Device login review",
+            "Marketing consent off",
+            "Recovery email verified"
+          ],
+          "cardTitle": "Profile security",
+          "cardDesc": "Account profile, permission consent, device review, and recovery settings.",
+          "cta": "Review account"
+        },
+        "ko": {
+          "nav": "계정",
+          "title": "보안 점검",
+          "sub": "프로필, 로그인 기기, 동의, 복구 수단을 분리해서 보여줍니다.",
+          "groups": [
+            "패스키 사용 중",
+            "기기 로그인 검토",
+            "마케팅 동의 꺼짐",
+            "복구 이메일 확인됨"
+          ],
+          "cardTitle": "프로필 보안",
+          "cardDesc": "계정 프로필, 권한 동의, 기기 검토, 복구 설정을 포함합니다.",
+          "cta": "계정 점검"
+        }
+      }
     }
   ],
   "fontBySlug": {
@@ -1155,6 +2052,82 @@ window.MobileUIGeneratorData = Object.freeze({
     "empty-results": {
       "label": "Noto Sans KR",
       "className": "font-noto"
+    },
+    "beauty-product-detail": {
+      "label": "Wanted Sans",
+      "className": "font-wanted"
+    },
+    "grocery-cart": {
+      "label": "Spoqa Han Sans Neo",
+      "className": "font-spoqa"
+    },
+    "loyalty-wallet": {
+      "label": "SUIT",
+      "className": "font-suit"
+    },
+    "review-rating": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
+    },
+    "housing-listing": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
+    },
+    "address-picker": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
+    },
+    "job-application": {
+      "label": "SUIT",
+      "className": "font-suit"
+    },
+    "insurance-claim": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
+    },
+    "utility-bill-alert": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
+    },
+    "smart-home-control": {
+      "label": "IBM Plex Sans KR",
+      "className": "font-ibm"
+    },
+    "pet-care-schedule": {
+      "label": "Spoqa Han Sans Neo",
+      "className": "font-spoqa"
+    },
+    "car-service-status": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
+    },
+    "event-ticket-pass": {
+      "label": "Wanted Sans",
+      "className": "font-wanted"
+    },
+    "fitness-plan": {
+      "label": "SUIT",
+      "className": "font-suit"
+    },
+    "creator-upload": {
+      "label": "IBM Plex Sans KR",
+      "className": "font-ibm"
+    },
+    "ai-compose-draft": {
+      "label": "Pretendard",
+      "className": "font-pretendard"
+    },
+    "plan-comparison": {
+      "label": "Noto Sans KR",
+      "className": "font-noto"
+    },
+    "referral-invite": {
+      "label": "Wanted Sans",
+      "className": "font-wanted"
+    },
+    "profile-security": {
+      "label": "SUIT",
+      "className": "font-suit"
     }
   },
   "fonts": [
@@ -1241,100 +2214,204 @@ window.MobileUIGeneratorData = Object.freeze({
     {
       "id": "all",
       "label": {
-        "en": "All app types",
-        "ko": "전체 앱"
-      },
-      "desc": {
-        "en": "Every service category",
-        "ko": "모든 서비스 종류"
+        "en": "All patterns",
+        "ko": "전체 패턴"
       }
     },
     {
-      "id": "finance",
+      "id": "onboarding",
       "label": {
-        "en": "Finance & trust",
-        "ko": "금융·신뢰"
-      },
-      "desc": {
-        "en": "Banking, wallet, payment, insurance",
-        "ko": "은행, 지갑, 결제, 보험"
+        "en": "Onboarding",
+        "ko": "온보딩"
       }
     },
     {
-      "id": "commerce",
+      "id": "auth-verification",
       "label": {
-        "en": "Commerce",
-        "ko": "커머스"
-      },
-      "desc": {
-        "en": "Shopping, marketplace, subscription",
-        "ko": "쇼핑, 마켓, 구독"
+        "en": "Auth & verification",
+        "ko": "인증"
       }
     },
     {
-      "id": "food-local",
+      "id": "home-dashboard",
       "label": {
-        "en": "Food & local",
-        "ko": "푸드·로컬"
-      },
-      "desc": {
-        "en": "Delivery, local goods, nearby services",
-        "ko": "배달, 로컬 상품, 주변 서비스"
+        "en": "Home & dashboard",
+        "ko": "홈·대시보드"
       }
     },
     {
-      "id": "mobility-travel",
+      "id": "search-list",
       "label": {
-        "en": "Mobility & travel",
-        "ko": "이동·여행"
-      },
-      "desc": {
-        "en": "Maps, booking, itinerary, tickets",
-        "ko": "지도, 예약, 일정, 티켓"
+        "en": "Search & list",
+        "ko": "검색·목록"
       }
     },
     {
-      "id": "healthcare-wellness",
+      "id": "marketplace-listing",
       "label": {
-        "en": "Health & wellness",
-        "ko": "헬스케어·웰니스"
-      },
-      "desc": {
-        "en": "Clinic, fitness, care, mental health",
-        "ko": "병원, 피트니스, 케어, 멘탈헬스"
+        "en": "Marketplace listing",
+        "ko": "마켓플레이스 목록"
       }
     },
     {
-      "id": "social-content",
+      "id": "detail-content",
       "label": {
-        "en": "Social & content",
-        "ko": "소셜·콘텐츠"
-      },
-      "desc": {
-        "en": "Community, chat, media, editorial",
-        "ko": "커뮤니티, 채팅, 미디어, 콘텐츠"
+        "en": "Detail & content",
+        "ko": "상세·콘텐츠"
       }
     },
     {
-      "id": "ai-productivity",
+      "id": "product-detail",
       "label": {
-        "en": "AI & productivity",
-        "ko": "AI·생산성"
-      },
-      "desc": {
-        "en": "Assistant, editor, analytics, work tools",
-        "ko": "어시스턴트, 편집, 분석, 업무툴"
+        "en": "Product detail",
+        "ko": "상품 상세"
       }
     },
     {
-      "id": "education-game",
+      "id": "cart-order",
       "label": {
-        "en": "Education & game",
-        "ko": "교육·게임"
-      },
-      "desc": {
-        "en": "Learning, quests, rewards, progress",
-        "ko": "학습, 퀘스트, 리워드, 진도"
+        "en": "Cart & order",
+        "ko": "장바구니·주문"
+      }
+    },
+    {
+      "id": "checkout-payment",
+      "label": {
+        "en": "Checkout & payment",
+        "ko": "결제"
+      }
+    },
+    {
+      "id": "booking-map",
+      "label": {
+        "en": "Booking & map",
+        "ko": "예약·지도"
+      }
+    },
+    {
+      "id": "address-picker",
+      "label": {
+        "en": "Address picker",
+        "ko": "주소 선택"
+      }
+    },
+    {
+      "id": "calendar-schedule",
+      "label": {
+        "en": "Calendar & schedule",
+        "ko": "캘린더·일정"
+      }
+    },
+    {
+      "id": "delivery-tracking",
+      "label": {
+        "en": "Delivery tracking",
+        "ko": "배달 추적"
+      }
+    },
+    {
+      "id": "live-status",
+      "label": {
+        "en": "Live status",
+        "ko": "실시간 상태"
+      }
+    },
+    {
+      "id": "chat-media",
+      "label": {
+        "en": "Chat & media",
+        "ko": "채팅·미디어"
+      }
+    },
+    {
+      "id": "upload-media",
+      "label": {
+        "en": "Upload & media",
+        "ko": "업로드·미디어"
+      }
+    },
+    {
+      "id": "ai-compose",
+      "label": {
+        "en": "AI compose",
+        "ko": "AI 작성"
+      }
+    },
+    {
+      "id": "feed-content",
+      "label": {
+        "en": "Feed & community",
+        "ko": "피드·커뮤니티"
+      }
+    },
+    {
+      "id": "review-rating",
+      "label": {
+        "en": "Review & rating",
+        "ko": "리뷰·평점"
+      }
+    },
+    {
+      "id": "referral-invite",
+      "label": {
+        "en": "Referral & invite",
+        "ko": "추천·초대"
+      }
+    },
+    {
+      "id": "analytics-progress",
+      "label": {
+        "en": "Analytics & progress",
+        "ko": "리포트·진도"
+      }
+    },
+    {
+      "id": "comparison-decision",
+      "label": {
+        "en": "Compare & decide",
+        "ko": "비교·선택"
+      }
+    },
+    {
+      "id": "loyalty-rewards",
+      "label": {
+        "en": "Loyalty & rewards",
+        "ko": "리워드·쿠폰"
+      }
+    },
+    {
+      "id": "notifications-alerts",
+      "label": {
+        "en": "Notifications & alerts",
+        "ko": "알림·공지"
+      }
+    },
+    {
+      "id": "form-wizard",
+      "label": {
+        "en": "Form wizard",
+        "ko": "단계형 입력"
+      }
+    },
+    {
+      "id": "document-review",
+      "label": {
+        "en": "Document review",
+        "ko": "문서 검토"
+      }
+    },
+    {
+      "id": "profile-account",
+      "label": {
+        "en": "Profile & account",
+        "ko": "프로필·계정"
+      }
+    },
+    {
+      "id": "permission-consent",
+      "label": {
+        "en": "Permission & consent",
+        "ko": "권한·동의"
       }
     },
     {
@@ -1342,10 +2419,20 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Settings & support",
         "ko": "설정·지원"
-      },
-      "desc": {
-        "en": "Permissions, support, recovery states",
-        "ko": "권한, 고객지원, 복구 상태"
+      }
+    },
+    {
+      "id": "saved-favorites",
+      "label": {
+        "en": "Saved & favorites",
+        "ko": "저장·즐겨찾기"
+      }
+    },
+    {
+      "id": "empty-error",
+      "label": {
+        "en": "Empty & error",
+        "ko": "빈 상태·오류"
       }
     }
   ],
@@ -1355,10 +2442,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "All app types",
         "ko": "전체 앱"
-      },
-      "desc": {
-        "en": "Every service category",
-        "ko": "모든 서비스 종류"
       }
     },
     {
@@ -1366,10 +2449,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Finance & trust",
         "ko": "금융·신뢰"
-      },
-      "desc": {
-        "en": "Banking, wallet, payment, insurance",
-        "ko": "은행, 지갑, 결제, 보험"
       }
     },
     {
@@ -1377,10 +2456,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Commerce",
         "ko": "커머스"
-      },
-      "desc": {
-        "en": "Shopping, marketplace, subscription",
-        "ko": "쇼핑, 마켓, 구독"
       }
     },
     {
@@ -1388,10 +2463,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Food & local",
         "ko": "푸드·로컬"
-      },
-      "desc": {
-        "en": "Delivery, local goods, nearby services",
-        "ko": "배달, 로컬 상품, 주변 서비스"
       }
     },
     {
@@ -1399,10 +2470,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Mobility & travel",
         "ko": "이동·여행"
-      },
-      "desc": {
-        "en": "Maps, booking, itinerary, tickets",
-        "ko": "지도, 예약, 일정, 티켓"
       }
     },
     {
@@ -1410,10 +2477,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Health & wellness",
         "ko": "헬스케어·웰니스"
-      },
-      "desc": {
-        "en": "Clinic, fitness, care, mental health",
-        "ko": "병원, 피트니스, 케어, 멘탈헬스"
       }
     },
     {
@@ -1421,10 +2484,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Social & content",
         "ko": "소셜·콘텐츠"
-      },
-      "desc": {
-        "en": "Community, chat, media, editorial",
-        "ko": "커뮤니티, 채팅, 미디어, 콘텐츠"
       }
     },
     {
@@ -1432,10 +2491,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "AI & productivity",
         "ko": "AI·생산성"
-      },
-      "desc": {
-        "en": "Assistant, editor, analytics, work tools",
-        "ko": "어시스턴트, 편집, 분석, 업무툴"
       }
     },
     {
@@ -1443,10 +2498,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Education & game",
         "ko": "교육·게임"
-      },
-      "desc": {
-        "en": "Learning, quests, rewards, progress",
-        "ko": "학습, 퀘스트, 리워드, 진도"
       }
     },
     {
@@ -1454,10 +2505,90 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Settings & support",
         "ko": "설정·지원"
-      },
-      "desc": {
-        "en": "Permissions, support, recovery states",
-        "ko": "권한, 고객지원, 복구 상태"
+      }
+    },
+    {
+      "id": "beauty-fashion",
+      "label": {
+        "en": "Beauty & fashion",
+        "ko": "뷰티·패션"
+      }
+    },
+    {
+      "id": "grocery-retail",
+      "label": {
+        "en": "Grocery & retail",
+        "ko": "장보기·리테일"
+      }
+    },
+    {
+      "id": "real-estate-housing",
+      "label": {
+        "en": "Real estate & housing",
+        "ko": "부동산·주거"
+      }
+    },
+    {
+      "id": "career-work",
+      "label": {
+        "en": "Career & work",
+        "ko": "커리어·업무"
+      }
+    },
+    {
+      "id": "insurance-legal",
+      "label": {
+        "en": "Insurance & legal",
+        "ko": "보험·법률"
+      }
+    },
+    {
+      "id": "public-utility",
+      "label": {
+        "en": "Public & utility",
+        "ko": "공공·생활요금"
+      }
+    },
+    {
+      "id": "smart-home-iot",
+      "label": {
+        "en": "Smart home & IoT",
+        "ko": "스마트홈·IoT"
+      }
+    },
+    {
+      "id": "pet-family",
+      "label": {
+        "en": "Pet & family",
+        "ko": "반려·가족"
+      }
+    },
+    {
+      "id": "automotive",
+      "label": {
+        "en": "Automotive",
+        "ko": "차량·정비"
+      }
+    },
+    {
+      "id": "events-ticketing",
+      "label": {
+        "en": "Events & tickets",
+        "ko": "이벤트·티켓"
+      }
+    },
+    {
+      "id": "fitness-sports",
+      "label": {
+        "en": "Fitness & sports",
+        "ko": "피트니스·스포츠"
+      }
+    },
+    {
+      "id": "creator-tools",
+      "label": {
+        "en": "Creator tools",
+        "ko": "크리에이터 도구"
       }
     }
   ],
@@ -1467,10 +2598,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "All patterns",
         "ko": "전체 패턴"
-      },
-      "desc": {
-        "en": "Every UI pattern",
-        "ko": "모든 UI 패턴"
       }
     },
     {
@@ -1478,10 +2605,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Onboarding",
         "ko": "온보딩"
-      },
-      "desc": {
-        "en": "First-run setup and preference selection",
-        "ko": "첫 사용 설정과 취향 선택"
       }
     },
     {
@@ -1489,10 +2612,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Auth & verification",
         "ko": "인증"
-      },
-      "desc": {
-        "en": "Login, signup, phone/identity verification",
-        "ko": "로그인, 가입, 휴대폰/본인인증"
       }
     },
     {
@@ -1500,10 +2619,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Home & dashboard",
         "ko": "홈·대시보드"
-      },
-      "desc": {
-        "en": "Main home, cards, metrics, shortcuts",
-        "ko": "메인 홈, 카드, 지표, 바로가기"
       }
     },
     {
@@ -1511,10 +2626,13 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Search & list",
         "ko": "검색·목록"
-      },
-      "desc": {
-        "en": "Search, filters, PLP, category browsing",
-        "ko": "검색, 필터, 목록, 카테고리"
+      }
+    },
+    {
+      "id": "marketplace-listing",
+      "label": {
+        "en": "Marketplace listing",
+        "ko": "마켓플레이스 목록"
       }
     },
     {
@@ -1522,10 +2640,20 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Detail & content",
         "ko": "상세·콘텐츠"
-      },
-      "desc": {
-        "en": "PDP, viewer, media, article detail",
-        "ko": "상세, 뷰어, 미디어, 글 상세"
+      }
+    },
+    {
+      "id": "product-detail",
+      "label": {
+        "en": "Product detail",
+        "ko": "상품 상세"
+      }
+    },
+    {
+      "id": "cart-order",
+      "label": {
+        "en": "Cart & order",
+        "ko": "장바구니·주문"
       }
     },
     {
@@ -1533,10 +2661,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Checkout & payment",
         "ko": "결제"
-      },
-      "desc": {
-        "en": "Cart, checkout, coupons, pay CTA",
-        "ko": "장바구니, 결제, 쿠폰, 결제 CTA"
       }
     },
     {
@@ -1544,10 +2668,20 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Booking & map",
         "ko": "예약·지도"
-      },
-      "desc": {
-        "en": "Map, bottom sheet, slots, booking",
-        "ko": "지도, 바텀시트, 시간 선택, 예약"
+      }
+    },
+    {
+      "id": "address-picker",
+      "label": {
+        "en": "Address picker",
+        "ko": "주소 선택"
+      }
+    },
+    {
+      "id": "calendar-schedule",
+      "label": {
+        "en": "Calendar & schedule",
+        "ko": "캘린더·일정"
       }
     },
     {
@@ -1555,10 +2689,13 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Delivery tracking",
         "ko": "배달 추적"
-      },
-      "desc": {
-        "en": "ETA, progress, rider/support contact",
-        "ko": "도착 예정, 진행상태, 연락"
+      }
+    },
+    {
+      "id": "live-status",
+      "label": {
+        "en": "Live status",
+        "ko": "실시간 상태"
       }
     },
     {
@@ -1566,10 +2703,20 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Chat & media",
         "ko": "채팅·미디어"
-      },
-      "desc": {
-        "en": "Messages, attachments, media composer",
-        "ko": "메시지, 첨부, 미디어 입력"
+      }
+    },
+    {
+      "id": "upload-media",
+      "label": {
+        "en": "Upload & media",
+        "ko": "업로드·미디어"
+      }
+    },
+    {
+      "id": "ai-compose",
+      "label": {
+        "en": "AI compose",
+        "ko": "AI 작성"
       }
     },
     {
@@ -1577,10 +2724,20 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Feed & community",
         "ko": "피드·커뮤니티"
-      },
-      "desc": {
-        "en": "Feed, comments, reactions, save",
-        "ko": "피드, 댓글, 반응, 저장"
+      }
+    },
+    {
+      "id": "review-rating",
+      "label": {
+        "en": "Review & rating",
+        "ko": "리뷰·평점"
+      }
+    },
+    {
+      "id": "referral-invite",
+      "label": {
+        "en": "Referral & invite",
+        "ko": "추천·초대"
       }
     },
     {
@@ -1588,10 +2745,55 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Analytics & progress",
         "ko": "리포트·진도"
-      },
-      "desc": {
-        "en": "Charts, progress, streaks, report states",
-        "ko": "차트, 진도, 스트릭, 리포트"
+      }
+    },
+    {
+      "id": "comparison-decision",
+      "label": {
+        "en": "Compare & decide",
+        "ko": "비교·선택"
+      }
+    },
+    {
+      "id": "loyalty-rewards",
+      "label": {
+        "en": "Loyalty & rewards",
+        "ko": "리워드·쿠폰"
+      }
+    },
+    {
+      "id": "notifications-alerts",
+      "label": {
+        "en": "Notifications & alerts",
+        "ko": "알림·공지"
+      }
+    },
+    {
+      "id": "form-wizard",
+      "label": {
+        "en": "Form wizard",
+        "ko": "단계형 입력"
+      }
+    },
+    {
+      "id": "document-review",
+      "label": {
+        "en": "Document review",
+        "ko": "문서 검토"
+      }
+    },
+    {
+      "id": "profile-account",
+      "label": {
+        "en": "Profile & account",
+        "ko": "프로필·계정"
+      }
+    },
+    {
+      "id": "permission-consent",
+      "label": {
+        "en": "Permission & consent",
+        "ko": "권한·동의"
       }
     },
     {
@@ -1599,10 +2801,13 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Settings & support",
         "ko": "설정·지원"
-      },
-      "desc": {
-        "en": "Settings, FAQ, support, permissions",
-        "ko": "설정, FAQ, 지원, 권한"
+      }
+    },
+    {
+      "id": "saved-favorites",
+      "label": {
+        "en": "Saved & favorites",
+        "ko": "저장·즐겨찾기"
       }
     },
     {
@@ -1610,10 +2815,6 @@ window.MobileUIGeneratorData = Object.freeze({
       "label": {
         "en": "Empty & error",
         "ko": "빈 상태·오류"
-      },
-      "desc": {
-        "en": "No results, failure, recovery CTA",
-        "ko": "결과 없음, 실패, 복구 CTA"
       }
     }
   ]

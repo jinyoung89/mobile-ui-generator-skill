@@ -91,12 +91,12 @@ def main() -> None:
     fonts = data["fonts"]
     translations = data["translations"]
 
-    if len(examples) != 19:
-        fail(f"expected 19 examples, got {len(examples)}")
-    if len(app_categories) < 9:
-        fail(f"expected at least 9 app categories, got {len(app_categories)}")
-    if len(ui_pattern_categories) < 13:
-        fail(f"expected at least 13 UI pattern categories, got {len(ui_pattern_categories)}")
+    if len(examples) < 38:
+        fail(f"expected at least 38 examples, got {len(examples)}")
+    if len(app_categories) < 22:
+        fail(f"expected at least 21 app types plus all, got {len(app_categories)}")
+    if len(ui_pattern_categories) < 32:
+        fail(f"expected at least 31 UI patterns plus all, got {len(ui_pattern_categories)}")
 
     app_ids = {category["id"] for category in app_categories}
     pattern_ids = {category["id"] for category in ui_pattern_categories}
@@ -130,8 +130,8 @@ def main() -> None:
             if not copy or "title" not in copy or "cardTitle" not in copy or "cta" not in copy:
                 fail(f"example {slug} copy lacks required {lang} fields")
 
-    if len(layouts) < 18:
-        fail(f"expected diverse layouts, got {len(layouts)}")
+    if len(layouts) < 35:
+        fail(f"expected broad layout coverage, got {len(layouts)}")
     empty_apps = sorted(key for key, count in app_usage.items() if count == 0)
     empty_patterns = sorted(key for key, count in pattern_usage.items() if count == 0)
     if empty_apps:
@@ -139,6 +139,9 @@ def main() -> None:
     if empty_patterns:
         fail(f"empty UI pattern categories: {empty_patterns}")
 
+    missing_font_slugs = [item["slug"] for item in examples if item["slug"] not in font_by_slug]
+    if missing_font_slugs:
+        fail(f"missing font profiles for examples: {missing_font_slugs}")
     used_fonts = {font_by_slug[item["slug"]]["label"] for item in examples}
     if len(used_fonts) < 6:
         fail(f"expected at least 6 font profiles in examples, got {sorted(used_fonts)}")
