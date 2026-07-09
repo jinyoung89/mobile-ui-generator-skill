@@ -183,6 +183,25 @@ Reject or revise output if:
 - It does not reference relevant patterns.
 - It uses image generation without explicit request.
 
+
+## Internal metadata visibility
+
+Internal taxonomy labels are useful for specs, but they must not appear as visible app UI copy.
+
+Fail the output if the prototype/screenshot visibly includes:
+
+- `High trust`, `medium_purchase`, or other risk labels;
+- raw pattern IDs like `phone_verification`, `bottom_sheet_map`, `PDP`, `ai_native`;
+- app type IDs like `food_delivery` or `wallet_payment`;
+- style IDs like `minimal_swiss` or `glass_layered`.
+
+Replace with natural user-facing language:
+
+- `phone_verification` → "안전한 본인 확인";
+- `checkout` + `coupon_points` → "쿠폰 적용 가능";
+- `bottom_sheet_map` → "가까운 경로 선택";
+- `analytics_report` → "방금 업데이트됨".
+
 ## Final self-check
 
 Before final response, verify:
@@ -193,3 +212,4 @@ Before final response, verify:
 - [ ] Did I include states and accessibility?
 - [ ] Did I avoid inventing proprietary brand facts?
 - [ ] Did I avoid exposing origin/source identifiers, local paths, or underlying reference material?
+- [ ] Did I keep internal taxonomy/debug labels out of visible UI copy?

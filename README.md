@@ -188,6 +188,7 @@ The installed skill is not just a single prompt. It includes a design reference 
 | Reference | Purpose |
 |---|---|
 | `evidence-and-sanitization.md` | Public-safe policy for using private/local collected reference analysis without revealing origins |
+| `taxonomy-filter-model.md` | Defines the two filter axes: app type/service category vs UI pattern/functional unit |
 | `design-principles.md` | Mobile design decision order, hierarchy, typography, color, motion, accessibility |
 | `mobile-pattern-library.md` | 60+ mobile UI patterns with components, states, interactions, copy, accessibility, anti-patterns |
 | `visual-style-taxonomy.md` | Mobile visual style selection, color moods, style combinations, anti-patterns |
@@ -198,6 +199,13 @@ The installed skill is not just a single prompt. It includes a design reference 
 | `templates/mobile-ui-brief.md` | Human-readable mobile design brief template |
 | `templates/mobile-ui-spec.json` | Structured JSON implementation spec template |
 | `templates/pattern-observation.md` | Public-safe observation template for future pattern updates |
+
+### Two filter axes
+
+- `app_type`: what the service does, e.g. `wallet_payment`, `food_delivery`, `pet_care`, `travel_booking`, `ai_productivity`.
+- `ui_pattern`: functional units inside the service, e.g. `phone_verification`, `search`, `checkout`, `bottom_sheet_map`, `review_write`.
+
+Internal taxonomy labels are for specs and QA only. They should not appear as visible user-facing UI copy.
 
 ### Skill-local search
 
@@ -210,7 +218,7 @@ python3 skills/mobile-ui-generator/scripts/search.py "glass dark premium" --area
 python3 skills/mobile-ui-generator/scripts/search.py "empty error loading" --area components -n 5
 ```
 
-Search areas: `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, or `all`.
+Search areas: `taxonomy`, `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, or `all`.
 
 Validation:
 

@@ -26,6 +26,7 @@ REFERENCE_DIR = ROOT / "references"
 
 AREA_FILES = {
     "evidence": ["evidence-and-sanitization.md"],
+    "taxonomy": ["taxonomy-filter-model.md"],
     "principles": ["design-principles.md"],
     "patterns": ["mobile-pattern-library.md"],
     "styles": ["visual-style-taxonomy.md"],
@@ -44,6 +45,12 @@ SYNONYMS = {
     "ai": ["generate_create_flow", "ai_assistant_panel", "generation", "assistant", "생성"],
     "game": ["gamification", "ranking", "points_rewards", "reward", "quest", "게임"],
     "analytics": ["report", "chart", "data", "dashboard", "통계", "리포트"],
+    "app_type": ["service", "category", "domain", "서비스", "앱종류", "앱 종류", "카테고리"],
+    "ui_pattern": ["feature", "function", "pattern", "기능단위", "기능 단위", "패턴"],
+    "food": ["food_delivery", "menu_detail", "cart", "delivery_tracking", "배달", "음식"],
+    "pet": ["pet_care", "pet_profile_setup", "care_record", "반려동물"],
+    "travel": ["travel_booking", "itinerary_view", "calendar_slots", "여행", "예약"],
+    "healthcare": ["clinic_booking", "pharmacy_health_record", "mental_health", "헬스케어", "병원"],
     "style": ["visual", "typography", "color", "motion", "mood", "스타일"],
     "accessibility": ["a11y", "contrast", "touch", "screen reader", "접근성"],
     "empty": ["empty_state", "no results", "no data", "빈 상태"],

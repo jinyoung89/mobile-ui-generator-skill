@@ -33,6 +33,15 @@ REQUIRED_REFERENCES = {
         "Evidence levels",
         "Update checklist",
     ],
+    "taxonomy-filter-model.md": [
+        "Core distinction",
+        "app_type",
+        "ui_pattern",
+        "App type filters",
+        "UI pattern filters",
+        "Filter composition rules",
+        "never render taxonomy labels as user UI",
+    ],
     "design-principles.md": [
         "Decision order",
         "Visual hierarchy",
@@ -80,6 +89,7 @@ REQUIRED_REFERENCES = {
 REQUIRED_SUPPORT_FILES = {
     "scripts/search.py": [
         "Search the Mobile UI Generator skill references",
+        "taxonomy",
         "--pattern",
         "--area",
         "AREA_FILES",
@@ -91,6 +101,9 @@ REQUIRED_SUPPORT_FILES = {
         "Quality gate",
     ],
     "templates/mobile-ui-spec.json": [
+        "app_type",
+        "ui_pattern_filters",
+        "internal_metadata_visibility",
         "pattern_system",
         "component_inventory",
         "state_matrix",
@@ -191,6 +204,7 @@ BLOCKED_PUBLIC_TERMS = [
 
 SKILL_MUST_CONTAIN = [
     "evidence-and-sanitization.md",
+    "taxonomy-filter-model.md",
     "design-principles.md",
     "mobile-pattern-library.md",
     "visual-style-taxonomy.md",
@@ -201,8 +215,12 @@ SKILL_MUST_CONTAIN = [
     "templates/mobile-ui-brief.md",
     "templates/mobile-ui-spec.json",
     "templates/pattern-observation.md",
+    "taxonomy-filter-model.md",
+    "app_type",
+    "ui_patterns",
+    "Internal metadata vs user-facing UI",
     "private/local analysis of curated mobile UI screens",
-    "Start from product intent",
+    "Start from app type and UI pattern fit",
     "Build the pattern system before writing copy",
     "Language mode is a copy/output setting",
     "quality_gate",

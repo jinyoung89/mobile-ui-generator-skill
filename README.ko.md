@@ -40,6 +40,7 @@
 | Reference | 역할 |
 |---|---|
 | `evidence-and-sanitization.md` | private/local reference 분석을 출처 노출 없이 공개 지식으로 일반화하는 정책 |
+| `taxonomy-filter-model.md` | 앱 종류/서비스 카테고리 필터와 UI 패턴/기능 단위 필터를 구분 |
 | `design-principles.md` | 모바일 디자인 판단 순서, 위계, 레이아웃, 타이포그래피, 컬러, 모션, 접근성 |
 | `mobile-pattern-library.md` | 60개 이상의 모바일 UI 패턴과 컴포넌트, 상태, 인터랙션, 카피, 접근성, 금지 패턴 |
 | `visual-style-taxonomy.md` | 모바일 시각 스타일 선택, 컬러 무드, 스타일 조합, anti-pattern |
@@ -50,6 +51,13 @@
 | `templates/mobile-ui-brief.md` | 사람이 읽는 모바일 디자인 brief 템플릿 |
 | `templates/mobile-ui-spec.json` | 구현 핸드오프용 JSON spec 템플릿 |
 | `templates/pattern-observation.md` | 앞으로 패턴을 고도화할 때 쓰는 public-safe 관찰 템플릿 |
+
+### 두 가지 필터 축
+
+- `app_type`: 서비스가 무엇을 하는지, 예: `wallet_payment`, `food_delivery`, `pet_care`, `travel_booking`, `ai_productivity`.
+- `ui_pattern`: 서비스를 구성하는 기능 단위, 예: `phone_verification`, `search`, `checkout`, `bottom_sheet_map`, `review_write`.
+
+내부 taxonomy 라벨은 spec/QA용이고 실제 사용자 UI에 보이면 안 됩니다.
 
 ### 스킬 내부 검색
 
@@ -62,7 +70,7 @@ python3 skills/mobile-ui-generator/scripts/search.py "glass dark premium" --area
 python3 skills/mobile-ui-generator/scripts/search.py "empty error loading" --area components -n 5
 ```
 
-검색 영역: `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, `all`.
+검색 영역: `taxonomy`, `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, `all`.
 
 검증:
 

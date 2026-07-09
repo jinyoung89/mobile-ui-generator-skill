@@ -7,7 +7,8 @@ Use this template when producing a design brief for a mobile app screen or flow.
 | Field | Value |
 |---|---|
 | User job | `<what the user is trying to accomplish>` |
-| Domain | `<fintech / commerce / mobility / healthcare / education / game / messenger / content / travel / etc.>` |
+| App type / service category | `<banking / wallet_payment / food_delivery / travel_booking / pet_care / ai_productivity / etc.>` |
+| Domain | `<more specific domain if needed>` |
 | Flow | `<single screen or multi-step flow>` |
 | Risk/trust level | `<low / medium / high_trust / destructive>` |
 | Language mode | `<ko / en / mixed-by-request>` |
@@ -17,6 +18,7 @@ Use this template when producing a design brief for a mobile app screen or flow.
 
 | Decision | Selection |
 |---|---|
+| UI pattern filters | `<ui_pattern, ui_pattern>` |
 | Primary patterns | `<pattern_id, pattern_id>` |
 | Supporting patterns | `<pattern_id, pattern_id>` |
 | Layout archetype | `<single_task_form / map_plus_sheet / feed_stream / media_first_detail / list_filter_sheet / chat_thread / calendar_slots / settings_list / dashboard_cards>` |
@@ -144,3 +146,4 @@ Create a mobile UI for <domain>/<flow>. Use patterns <pattern_id list>. The scre
 - [ ] Copy includes loading/error/empty/success where relevant.
 - [ ] Accessibility and mobile constraints are explicit.
 - [ ] No origin/source identifiers, local paths, or underlying reference material are exposed.
+- [ ] No internal taxonomy/debug labels are visible in user-facing UI copy.

@@ -1,7 +1,7 @@
 ---
 name: mobile-ui-generator
 description: Use when generating, designing, specifying, reviewing, or handing off mobile app UX/UI screens and flows. Produces pattern-aware mobile UI briefs, JSON specs, design-system guidance, component/state matrices, font profiles, copy systems, and implementation prompts for fintech, commerce, mobility, healthcare, education, games, messaging, travel, AI, support, and Korean mobile UI.
-version: 0.5.0
+version: 0.6.0
 author: jinyoung89
 license: MIT
 tags: [mobile-ui, ux-ui, design, mobile-patterns, design-system, font-profile, korean-ui]
@@ -24,6 +24,7 @@ Use these files as the skill's design knowledge base. The references may be impr
 | Reference | Use for |
 |---|---|
 | `references/evidence-and-sanitization.md` | How private/local collected reference analysis is generalized without revealing where it came from |
+| `references/taxonomy-filter-model.md` | Separates app type/service category filters from UI pattern/functional-unit filters |
 | `references/design-principles.md` | Core mobile design decision order, hierarchy, layout, typography, color, motion, accessibility |
 | `references/mobile-pattern-library.md` | 60+ detailed mobile UI patterns with components, states, interactions, copy requirements, accessibility, anti-patterns |
 | `references/visual-style-taxonomy.md` | Mobile visual styles, color moods, style combinations, and style anti-patterns |
@@ -38,10 +39,11 @@ Use these files as the skill's design knowledge base. The references may be impr
 Load only the references needed for the task, but for substantial design generation use at least:
 
 1. `evidence-and-sanitization.md`
-2. `design-principles.md`
-3. `mobile-pattern-library.md`
-4. `component-state-checklist.md`
-5. `quality-review-checklist.md`
+2. `taxonomy-filter-model.md`
+3. `design-principles.md`
+4. `mobile-pattern-library.md`
+5. `component-state-checklist.md`
+6. `quality-review-checklist.md`
 
 Add `visual-style-taxonomy.md` when style, visual identity, color, typography, mood, or polish matters.
 Add `domain-playbooks.md` when the request names a domain or app category.
@@ -62,6 +64,7 @@ Search areas:
 
 | Area | Best for |
 |---|---|
+| `taxonomy` | app type vs UI pattern filter model |
 | `patterns` | exact screen and flow anatomy |
 | `domains` | domain-specific pattern/style/trust decisions |
 | `styles` | visual style, color, typography, motion direction |
@@ -80,14 +83,20 @@ Completion criterion: the output can be traced to searched patterns/references a
 
 ## Workflow
 
-### 1. Start from product intent and mobile pattern fit
+### 1. Start from app type and UI pattern fit
 
-Do **not** start with language, colors, or fonts. Start by extracting:
+Do **not** start with language, colors, or fonts. First separate the two filter axes from `references/taxonomy-filter-model.md`:
+
+- `app_type` — what kind of service/product the app provides;
+- `ui_patterns` — reusable functional units that compose the requested screen or flow.
+
+Then extract:
 
 - user job;
-- app domain;
+- app type/service category;
+- app domain if more specific than app type;
 - target screen/flow;
-- primary UI pattern group;
+- primary UI pattern group / functional units;
 - risk/trust level;
 - completion, failure, empty, loading, and recovery states.
 
@@ -102,7 +111,7 @@ Examples:
 | Chat room with media attachments | `messenger`, `chat`, `media_capture`, `safe_area_keyboard`, continuous conversation |
 | Account cancellation | `account_cancellation`, `risk_disclosure`, `benefit_loss`, `destructive_cta`, irreversible action |
 
-Completion criterion: the selected patterns should make the screen's layout, components, interactions, and states predictable.
+Completion criterion: app type and UI patterns are both explicit, and the selected patterns make the screen's layout, components, interactions, and states predictable.
 
 ### 2. Build the pattern system before writing copy
 
@@ -248,6 +257,32 @@ quality_gate:
 
 Revise the answer if it only contains generic visual adjectives, lacks states, lacks component inventory, or lacks domain-specific decisions.
 
+
+## Internal metadata vs user-facing UI
+
+Design metadata helps the agent reason, but it must not be rendered as visible UI copy.
+
+Keep these in specs, QA notes, or code comments only:
+
+- `app_type`
+- `ui_pattern`
+- `pattern_id`
+- `risk_level`
+- `style_id`
+- `domain_modifier`
+
+Do not show labels like `High trust · phone_verification`, `PDP · checkout`, or `ai_native` inside the generated app screen. Convert them to natural user-facing copy:
+
+| Internal metadata | User-facing copy |
+|---|---|
+| `high_trust`, `phone_verification` | 안전한 본인 확인 |
+| `checkout`, `coupon_points` | 쿠폰 적용 가능 |
+| `bottom_sheet_map` | 가까운 경로 선택 |
+| `analytics_report`, `stale_data` | 방금 업데이트됨 |
+| `ai_assistant_panel` | 초안 편집 가능 |
+
+Completion criterion: the UI screenshot/prototype does not expose internal taxonomy labels.
+
 ## Output formats
 
 ### Markdown brief
@@ -363,7 +398,7 @@ Revise the answer if it only contains generic visual adjectives, lacks states, l
 ## Verification checklist
 
 - [ ] Relevant reference files consulted.
-- [ ] User job, domain, flow, pattern group, and risk level stated.
+- [ ] User job, app type, domain, flow, UI pattern group, and risk level stated.
 - [ ] Pattern system includes layout, navigation, components, states, interactions, and anti-patterns.
 - [ ] Visual system includes style, typography, color, spacing/elevation, motion, and icon/asset guidance.
 - [ ] Component-state matrix covers non-happy paths.
@@ -371,3 +406,4 @@ Revise the answer if it only contains generic visual adjectives, lacks states, l
 - [ ] Output language is selected after design structure.
 - [ ] Final answer passes the quality gate.
 - [ ] No origin/source identifiers, collection mechanics, local paths, or underlying reference material are exposed.
+- [ ] No internal metadata labels such as `High trust`, `phone_verification`, `PDP`, or `ai_native` are visible as user-facing UI copy.

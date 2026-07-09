@@ -1,6 +1,8 @@
 {
   "intent": {
     "user_job": "",
+    "app_type": "",
+    "app_type_group": "",
     "domain": "",
     "flow": "",
     "risk_level": "",
@@ -8,6 +10,7 @@
     "target_platform": ""
   },
   "pattern_system": {
+    "ui_pattern_filters": [],
     "primary_patterns": [],
     "supporting_patterns": [],
     "layout_archetype": "",
@@ -15,6 +18,9 @@
     "cta_model": "",
     "input_model": "",
     "pattern_rationale": [],
+    "domain_modifiers": [],
+    "user_facing_labels": [],
+    "internal_metadata_visibility": "forbidden_in_user_facing_ui",
     "anti_patterns": []
   },
   "information_architecture": [
@@ -114,6 +120,7 @@
     "domain_style_fit": false,
     "state_copy_included": false,
     "accessibility_explicit": false,
-    "public_safe": false
+    "public_safe": false,
+    "internal_metadata_hidden_from_ui": false
   }
 }
