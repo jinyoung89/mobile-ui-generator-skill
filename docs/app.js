@@ -4,7 +4,7 @@
   const data = window.MobileUIGeneratorData;
   if (!data) return;
 
-  const { translations = {}, skillOutputs = [], fonts = [] } = data;
+  const { translations = {}, skillOutputs = [], fonts = [], previewVersion = '' } = data;
 
   const escapeHTML = (value) =>
     String(value ?? '').replace(/[&<>"']/g, (character) =>
@@ -26,6 +26,11 @@
       return value[lang] ?? value.en ?? value.ko ?? '';
     }
     return value ?? '';
+  }
+
+  function withAssetVersion(src) {
+    if (!previewVersion) return src;
+    return `${src}${src.includes('?') ? '&' : '?'}v=${encodeURIComponent(previewVersion)}`;
   }
 
   function list(items, className = 'artifact-list') {
@@ -66,7 +71,7 @@
           </div>
 
           <figure class="artifact-preview">
-            <img src="${escapeHTML(preview.src)}" alt="${escapeHTML(preview.alt)}" width="1200" height="760" loading="eager" decoding="async">
+            <img src="${escapeHTML(withAssetVersion(preview.src))}" alt="${escapeHTML(preview.alt)}" width="1200" height="760" loading="eager" decoding="async">
             <figcaption>${escapeHTML(t('examples.previewCaption', lang))}</figcaption>
           </figure>
 
@@ -93,7 +98,7 @@
           </section>
 
           <section class="artifact-section font-artifact">
-            <h4>Visual tone</h4>
+            <h4>${escapeHTML(t('examples.visualToneLabel', lang))}</h4>
             <p><b>${escapeHTML(item.fontProfile.family)}</b> · ${escapeHTML(fontReason)}</p>
           </section>
         </article>`;

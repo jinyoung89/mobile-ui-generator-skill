@@ -1,4 +1,5 @@
 window.MobileUIGeneratorData = Object.freeze({
+  "previewVersion": "visual-template-v2",
   "translations": {
     "nav.views": {
       "en": "Examples",
@@ -111,6 +112,10 @@ window.MobileUIGeneratorData = Object.freeze({
     "examples.statesLabel": {
       "en": "Handled states",
       "ko": "대응하는 상태"
+    },
+    "examples.visualToneLabel": {
+      "en": "Visual tone",
+      "ko": "시각 톤"
     },
     "examples.specLabel": {
       "en": "JSON spec excerpt",

@@ -90,6 +90,8 @@ def validate_skill_outputs(data: dict) -> None:
         fail(f"expected at least 4 skill output examples, got {len(outputs)}")
     if len(fonts) < 6:
         fail(f"expected at least 6 font profiles, got {len(fonts)}")
+    if not data.get("previewVersion"):
+        fail("site data must include previewVersion for SVG cache busting")
 
     for key, value in translations.items():
         if "en" not in value or "ko" not in value:
@@ -157,6 +159,11 @@ def validate_skill_outputs(data: dict) -> None:
             asset_text = read(asset_path)
             if "<svg" not in asset_text or "<title" not in asset_text or "<desc" not in asset_text:
                 fail(f"preview asset {src} must be accessible SVG with title/desc")
+            if 'data-template="visual-composition-v2"' not in asset_text or 'data-generated-by="scripts/generate_preview_svgs.py"' not in asset_text:
+                fail(f"preview asset {src} must be generated from the shared visual composition template")
+            for forbidden in ["SCREEN BRIEF", "JSON SPEC", "IMPLEMENTATION PROMPT", "FONT_PROFILE", "font_profile"]:
+                if forbidden in asset_text:
+                    fail(f"preview asset {src} must not expose spec/debug label {forbidden!r}")
 
 
 def main() -> None:
@@ -165,6 +172,10 @@ def main() -> None:
 
     data = parse_site_data()
     validate_skill_outputs(data)
+
+    generator = ROOT / "scripts" / "generate_preview_svgs.py"
+    if not generator.exists():
+        fail("missing shared SVG preview generator")
 
     pages = {
         "en": DOCS / "index.html",
@@ -213,6 +224,8 @@ def main() -> None:
     assert_contains(app_js, "renderSkillOutputs", "skill output renderer")
     assert_contains(app_js, "artifact-preview", "skill output preview renderer")
     assert_contains(app_js, "<img", "preview image element")
+    assert_contains(app_js, "withAssetVersion", "preview asset cache busting")
+    assert_contains(app_js, "previewVersion", "preview asset version key")
     assert_not_contains(app_js, "renderAuth", "old phone renderer")
     assert_not_contains(app_js, "phoneFrame", "old phone frame renderer")
 
