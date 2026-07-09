@@ -106,7 +106,19 @@ Use this template when producing a design brief for a mobile app screen or flow.
 | Motion | `<150-300ms microinteractions, reduced-motion behavior>` |
 | Icon/assets | `<icon family, stroke/fill style, image usage>` |
 
-## 8. Copy system
+## 8. Visual composition
+
+| Decision | Direction |
+|---|---|
+| Canvas / safe area | `<target phone size, top/bottom insets, scroll model>` |
+| Grid / alignment | `<columns, shared edges, gutters, alignment anchors>` |
+| Density | `<low / medium / high, row height minimum, max visible card weights>` |
+| Component proportions | `<field heights, card ratios, sheet height, CTA size>` |
+| Typography scale | `<title/body/label/numeric sizes and wrapping behavior>` |
+| State placement | `<where errors/loading/empty/destructive states appear>` |
+| Rendered QA | `<no overlap, no cropped text, no unintended horizontal scroll, no metadata labels>` |
+
+## 9. Copy system
 
 | Type | Copy |
 |---|---|
@@ -121,7 +133,7 @@ Use this template when producing a design brief for a mobile app screen or flow.
 | Permission | `<permission copy>` |
 | Destructive confirmation | `<confirmation copy if needed>` |
 
-## 9. Accessibility and mobile constraints
+## 10. Accessibility and mobile constraints
 
 - Touch targets: `>=44pt iOS / >=48dp Android`
 - Safe areas: `<top/bottom handling>`
@@ -131,16 +143,17 @@ Use this template when producing a design brief for a mobile app screen or flow.
 - Reduced motion: `<fallback behavior>`
 - Dynamic text: `<wrapping/truncation strategy>`
 
-## 10. Implementation prompt
+## 11. Implementation prompt
 
 ```text
 Create a mobile UI for <domain>/<flow>. Use patterns <pattern_id list>. The screen should use <layout_archetype> with <navigation_model>. Include components <component list>. Cover states <state list>. Visual direction is <style direction>, typography <font>, color <palette>, spacing <scale>, motion <motion>. Avoid <anti-patterns>. UI copy language is <language_mode>.
 ```
 
-## 11. Quality gate
+## 12. Quality gate
 
 - [ ] Pattern fit is explicit and concrete.
 - [ ] Layout can be implemented without guessing.
+- [ ] Visual composition defines grid, density, proportions, and rendered QA.
 - [ ] Components and states cover non-happy paths.
 - [ ] Visual style matches domain and trust level.
 - [ ] Copy includes loading/error/empty/success where relevant.

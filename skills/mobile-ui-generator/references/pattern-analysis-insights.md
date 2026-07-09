@@ -32,6 +32,30 @@ The skill should keep first-class support for these app/service categories, not 
 
 ## Cross-pattern insights from observed mobile screens
 
+### 0. Visual composition must be learned as reusable structure, not just styling
+
+Reusable guidance:
+
+```yaml
+pattern_refinement: visual_composition_from_reference
+extract_from_observations:
+  - alignment anchors and shared left/right edges
+  - repeated spacing rhythm and card padding
+  - component proportions and minimum row heights
+  - typography roles and numeric emphasis
+  - state placement relative to affected controls
+  - safe-area, fixed CTA, keyboard, and sheet behavior
+apply_to_outputs:
+  - include visual_composition for every visible UI output
+  - keep app UI separate from explanatory labels/spec/debug text
+  - prefer reusable layout slots over hand-tuned absolute coordinates
+  - run rendered QA for no overlap, no cropped text, and no unintended horizontal scroll
+anti_patterns:
+  - extracting only component names from reference screens
+  - treating visual polish as optional after the spec
+  - passing static validation while the rendered preview looks misaligned
+```
+
 ### 1. Search and filter screens need both query and scope state
 
 Reusable guidance:

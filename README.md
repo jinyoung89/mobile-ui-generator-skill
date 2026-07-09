@@ -173,6 +173,7 @@ The installed skill is not just a single prompt. It includes a design reference 
 | `evidence-and-sanitization.md` | Public-safe policy for using private/local collected reference analysis without revealing origins |
 | `taxonomy-filter-model.md` | Defines the two filter axes: app type/service category vs UI pattern/functional unit |
 | `design-principles.md` | Mobile design decision order, hierarchy, typography, color, motion, accessibility |
+| `visual-composition-contract.md` | Alignment, spacing, density, proportions, safe-area, and rendered visual QA rules for visible UI outputs |
 | `mobile-pattern-library.md` | 60+ mobile UI patterns with components, states, interactions, copy, accessibility, anti-patterns |
 | `visual-style-taxonomy.md` | Mobile visual style selection, color moods, style combinations, anti-patterns |
 | `domain-playbooks.md` | Domain-specific guidance for fintech, commerce, mobility, healthcare, education, games, media, IoT, and more |

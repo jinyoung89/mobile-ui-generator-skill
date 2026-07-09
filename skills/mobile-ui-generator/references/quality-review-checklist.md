@@ -74,7 +74,7 @@ Red flags:
 - Finance/health status conveyed only through color.
 - Generic AI purple gradient used as the whole visual idea.
 
-## 5. Layout and spacing quality
+## 5. Layout, spacing, and visual composition quality
 
 - [ ] Safe-area top/bottom is respected.
 - [ ] Fixed CTA/header/tab bar reserves scroll inset.
@@ -82,12 +82,19 @@ Red flags:
 - [ ] Touch targets are at least 44pt/48dp target area.
 - [ ] Small-phone and large-phone behavior is considered.
 - [ ] Lists/cards do not require horizontal scrolling unless pattern-specific carousel is intended.
+- [ ] A `visual_composition` block is present for any visible UI/screenshot/mock/preview.
+- [ ] Repeated cards, fields, rows, and CTAs share the same padding, radius, and alignment anchors.
+- [ ] Text blocks have intentional line length and do not appear cropped, crowded, or randomly placed.
+- [ ] The rendered preview was inspected, not only the data/spec.
 
 Red flags:
 
 - Content hidden behind sticky footer.
 - Bottom sheet covers key map controls.
 - Dense rows are too small to tap.
+- Hand-positioned SVG/absolute elements with no shared grid.
+- Mixed app UI, debug labels, and explanatory labels inside the same phone frame.
+- Visual examples that pass static validation but look unbalanced or misaligned in browser QA.
 
 ## 6. Interaction and motion quality
 
@@ -165,6 +172,7 @@ A generated answer should include, at minimum:
 quality_gate:
   selected_patterns: present
   layout_archetype: present
+  visual_composition: present_for_visible_ui
   component_inventory: present
   state_matrix: present
   visual_system: present

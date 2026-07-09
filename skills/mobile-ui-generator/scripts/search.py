@@ -29,6 +29,7 @@ AREA_FILES = {
     "taxonomy": ["taxonomy-filter-model.md"],
     "analysis": ["pattern-analysis-insights.md"],
     "principles": ["design-principles.md"],
+    "composition": ["visual-composition-contract.md"],
     "patterns": ["mobile-pattern-library.md"],
     "styles": ["visual-style-taxonomy.md"],
     "domains": ["domain-playbooks.md"],

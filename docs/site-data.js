@@ -188,6 +188,14 @@ window.MobileUIGeneratorData = Object.freeze({
       "en": "A pre-delivery gate for pattern fit, visual system, interaction states, accessibility, and implementation handoff.",
       "ko": "패턴 적합성, 시각 시스템, 인터랙션 상태, 접근성, 구현 전달 품질을 배포 전 점검합니다."
     },
+    "refs.5.title": {
+      "en": "Visual composition contract",
+      "ko": "시각 구성 계약"
+    },
+    "refs.5.desc": {
+      "en": "Alignment, spacing, density, proportions, safe-area, and rendered QA rules that prevent visually broken UI previews.",
+      "ko": "깨진 UI 프리뷰를 막기 위한 정렬, 간격, 밀도, 비율, safe-area, 렌더링 QA 규칙입니다."
+    },
     "refs.open": {
       "en": "Open reference",
       "ko": "레퍼런스 열기"

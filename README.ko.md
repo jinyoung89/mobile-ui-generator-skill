@@ -42,6 +42,7 @@
 | `evidence-and-sanitization.md` | private/local reference 분석을 출처 노출 없이 공개 지식으로 일반화하는 정책 |
 | `taxonomy-filter-model.md` | 앱 종류/서비스 카테고리 필터와 UI 패턴/기능 단위 필터를 구분 |
 | `design-principles.md` | 모바일 디자인 판단 순서, 위계, 레이아웃, 타이포그래피, 컬러, 모션, 접근성 |
+| `visual-composition-contract.md` | 보이는 UI 결과의 정렬, 간격, 밀도, 비율, safe-area, 렌더링 QA 규칙 |
 | `mobile-pattern-library.md` | 60개 이상의 모바일 UI 패턴과 컴포넌트, 상태, 인터랙션, 카피, 접근성, 금지 패턴 |
 | `visual-style-taxonomy.md` | 모바일 시각 스타일 선택, 컬러 무드, 스타일 조합, anti-pattern |
 | `domain-playbooks.md` | 핀테크, 커머스, 모빌리티, 헬스케어, 교육, 게임, 미디어, IoT 등 도메인별 가이드 |

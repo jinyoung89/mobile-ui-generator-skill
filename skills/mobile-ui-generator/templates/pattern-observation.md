@@ -42,6 +42,10 @@ Use this template for private/local analysis notes before updating public refere
 - Color/surface pattern: `<public-safe description>`
 - Typography pattern: `<public-safe description>`
 - Spacing/density: `<public-safe description>`
+- Alignment/grid: `<shared edges, column model, anchor behavior>`
+- Component proportions: `<row heights, card aspect, sheet height, CTA size>`
+- Text wrapping/line length: `<where copy wraps well or breaks>`
+- Safe-area/fixed-region behavior: `<top/bottom inset, keyboard, sticky CTA>`
 - Radius/elevation: `<public-safe description>`
 - Motion/feedback: `<public-safe description>`
 - Icon/asset style: `<public-safe description>`

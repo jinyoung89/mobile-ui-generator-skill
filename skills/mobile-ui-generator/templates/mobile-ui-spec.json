@@ -91,6 +91,40 @@
     "motion_direction": "",
     "icon_asset_guidance": ""
   },
+  "visual_composition": {
+    "canvas": {
+      "target_device": "",
+      "safe_area": "",
+      "scroll_model": ""
+    },
+    "grid": {
+      "columns": "",
+      "horizontal_padding": "",
+      "vertical_rhythm": "",
+      "alignment_anchor": ""
+    },
+    "density": {
+      "level": "",
+      "row_height_min": "",
+      "max_primary_actions": 1
+    },
+    "typography_scale": {
+      "title": "",
+      "body": "",
+      "label": "",
+      "numeric_emphasis": "",
+      "line_length": ""
+    },
+    "surface_model": "",
+    "state_placement": "",
+    "visual_qa": {
+      "no_overlap": false,
+      "no_cropped_text": false,
+      "no_unintended_horizontal_scroll": false,
+      "no_internal_metadata_visible": false,
+      "rendered_preview_checked": false
+    }
+  },
   "copy_system": {
     "title": "",
     "subtitle_or_helper": "",
@@ -116,6 +150,8 @@
   "quality_gate": {
     "pattern_fit_explicit": false,
     "layout_implementation_ready": false,
+    "visual_composition_defined": false,
+    "rendered_visual_qa_checked": false,
     "non_happy_paths_covered": false,
     "domain_style_fit": false,
     "state_copy_included": false,

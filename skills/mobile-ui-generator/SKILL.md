@@ -27,6 +27,7 @@ Use these files as the skill's design knowledge base. The references may be impr
 | `references/taxonomy-filter-model.md` | Separates app type/service category filters from UI pattern/functional-unit filters |
 | `references/pattern-analysis-insights.md` | Public-safe refinements distilled from curated mobile UI reference analysis: gaps, component/state updates, asset roles, and recurring anti-patterns |
 | `references/design-principles.md` | Core mobile design decision order, hierarchy, layout, typography, color, motion, accessibility |
+| `references/visual-composition-contract.md` | Required alignment, spacing, density, proportions, safe-area, and rendered visual QA rules for any visible UI output |
 | `references/mobile-pattern-library.md` | 60+ detailed mobile UI patterns with components, states, interactions, copy requirements, accessibility, anti-patterns |
 | `references/visual-style-taxonomy.md` | Mobile visual styles, color moods, style combinations, and style anti-patterns |
 | `references/domain-playbooks.md` | Domain-specific pattern, style, typography, color, trust, and anti-pattern guidance |
@@ -43,9 +44,10 @@ Load only the references needed for the task, but for substantial design generat
 2. `taxonomy-filter-model.md`
 3. `pattern-analysis-insights.md`
 4. `design-principles.md`
-5. `mobile-pattern-library.md`
-6. `component-state-checklist.md`
-7. `quality-review-checklist.md`
+5. `visual-composition-contract.md`
+6. `mobile-pattern-library.md`
+7. `component-state-checklist.md`
+8. `quality-review-checklist.md`
 
 Add `visual-style-taxonomy.md` when style, visual identity, color, typography, mood, or polish matters.
 Add `domain-playbooks.md` when the request names a domain or app category.
@@ -135,7 +137,6 @@ Completion criterion: a design/code agent can build the screen without guessing 
 ### 3. Choose domain and visual direction
 
 When the app category is known, consult `references/domain-playbooks.md`.
-
 When visual polish or style is requested, consult `references/visual-style-taxonomy.md` and define:
 
 ```yaml
@@ -158,6 +159,27 @@ Style should serve the domain and task:
 - AI/generation flows need transparent progress, edit/apply paths, and review affordances.
 
 Completion criterion: the style choice includes what to use and what to avoid.
+
+### 3b. Define visual composition before any visible mock or preview
+
+If the output will be seen as a UI screen, screenshot, SVG, Figma frame, HTML/CSS mock, or image-generation prompt, consult `references/visual-composition-contract.md` and include:
+
+```yaml
+visual_composition:
+  canvas:
+  grid:
+  density:
+  typography:
+  surface_model:
+  state_placement:
+  visual_qa:
+```
+
+Do not treat this as optional polish. Pattern names and state lists are not enough; the generated screen must also define alignment anchors, spacing rhythm, component proportions, readable type scale, safe-area behavior, and rendered QA checks.
+
+Reject/revise any visual output that has arbitrary hand-positioned elements, inconsistent padding, clipped text, internal metadata visible as UI copy, crowded phone frames, or no browser/screenshot QA.
+
+Completion criterion: a design/code/image agent can reproduce a visually aligned screen without guessing the grid, density, or hierarchy.
 
 ### 4. Define components and states
 
@@ -248,6 +270,7 @@ Minimum quality gate:
 quality_gate:
   selected_patterns: present
   layout_archetype: present
+  visual_composition: present_for_visible_ui
   component_inventory: present
   state_matrix: present
   visual_system: present
@@ -322,6 +345,14 @@ Completion criterion: the UI screenshot/prototype does not expose internal taxon
 - motion_direction:
 - icon/asset guidance:
 
+## Visual composition
+- canvas and safe-area:
+- alignment grid and anchors:
+- density and row heights:
+- component proportions:
+- state placement:
+- rendered visual QA checks:
+
 ## Copy system
 - title:
 - helper copy:
@@ -355,6 +386,14 @@ Completion criterion: the UI screenshot/prototype does not expose internal taxon
     "typography_direction": "numeric-readable Korean UI sans",
     "color_direction": "navy, trust blue, neutral surfaces, semantic error/success",
     "motion_direction": "subtle 150-250ms validation and submit feedback"
+  },
+  "visual_composition": {
+    "canvas": "standard_phone with safe-area top and fixed CTA bottom inset",
+    "grid": "single column, 16-20pt side padding, shared left edge for title/fields/helper copy",
+    "density": "medium; form rows 48pt minimum; one primary action",
+    "typography": "22-28pt title, 15-17pt body, 12-14pt labels, readable numeric code/timer",
+    "state_placement": "code errors under input, timer near resend, loading does not hide entered code",
+    "visual_qa": ["no overlap", "no cropped text", "no unintended horizontal scroll", "no internal metadata visible"]
   },
   "font_profile": {
     "family": "Pretendard",

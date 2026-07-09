@@ -45,6 +45,7 @@ REQUIRED_REFERENCES = {
     "pattern-analysis-insights.md": [
         "Pattern Analysis Insights",
         "App-type coverage gaps",
+        "Visual composition must be learned as reusable structure",
         "Search and filter screens need both query and scope state",
         "Payment, points, and benefit screens need transparent calculation",
         "Asset and image-role guidance",
@@ -56,6 +57,14 @@ REQUIRED_REFERENCES = {
         "Typography system",
         "Color system",
         "Accessibility baseline",
+    ],
+    "visual-composition-contract.md": [
+        "Visual Composition Contract",
+        "Required `visual_composition` block",
+        "Screen-analysis to output mapping",
+        "Visual breakage red flags",
+        "Public showcase and preview rule",
+        "Minimum acceptance rule",
     ],
     "mobile-pattern-library.md": [
         "Pattern anatomy",
@@ -98,6 +107,7 @@ REQUIRED_SUPPORT_FILES = {
     "scripts/search.py": [
         "Search the Mobile UI Generator skill references",
         "taxonomy",
+        "composition",
         "--pattern",
         "--area",
         "AREA_FILES",
@@ -113,6 +123,8 @@ REQUIRED_SUPPORT_FILES = {
         "ui_pattern_filters",
         "internal_metadata_visibility",
         "pattern_system",
+        "visual_composition",
+        "rendered_visual_qa_checked",
         "component_inventory",
         "state_matrix",
         "quality_gate",

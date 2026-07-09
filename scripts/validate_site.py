@@ -189,6 +189,7 @@ def main() -> None:
         assert_contains(html, 'id="fontCards"', f"{lang} static fonts")
         assert_contains(html, 'id="references"', f"{lang} references section")
         assert_contains(html, 'references/pattern-analysis-insights.md', f"{lang} pattern analysis reference")
+        assert_contains(html, 'references/visual-composition-contract.md', f"{lang} visual composition reference")
         assert_not_contains(html, 'hand-built HTML/CSS demos', f"{lang} old mock copy")
         assert_not_contains(html, 'class="phone-card"', f"{lang} old phone mock markup")
         assert_not_contains(html, 'id="exampleAppFilters"', f"{lang} old app filter markup")
