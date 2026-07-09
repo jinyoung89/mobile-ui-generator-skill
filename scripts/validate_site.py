@@ -125,6 +125,7 @@ def validate_skill_outputs(data: dict) -> None:
         "components",
         "states",
         "fontProfile",
+        "preview",
         "spec",
         "implementationPrompt",
     }
@@ -146,6 +147,16 @@ def validate_skill_outputs(data: dict) -> None:
             spec = item["spec"][lang]
             if not isinstance(spec, dict) or "layout_archetype" not in spec or "state_matrix" not in spec:
                 fail(f"skill output {item['id']} {lang} spec must include layout_archetype and state_matrix")
+            preview = item["preview"].get(lang)
+            if not isinstance(preview, dict) or "src" not in preview or "alt" not in preview:
+                fail(f"skill output {item['id']} {lang} preview missing src/alt")
+            src = preview["src"].replace("../", "")
+            asset_path = DOCS / src
+            if not asset_path.exists():
+                fail(f"missing preview asset {src}")
+            asset_text = read(asset_path)
+            if "<svg" not in asset_text or "<title" not in asset_text or "<desc" not in asset_text:
+                fail(f"preview asset {src} must be accessible SVG with title/desc")
 
 
 def main() -> None:
@@ -191,6 +202,7 @@ def main() -> None:
     css = read(DOCS / "styles.css")
     assert_contains(css, ".skill-output-grid", "skill output grid styles")
     assert_contains(css, ".skill-output-card", "skill output card styles")
+    assert_contains(css, ".artifact-preview", "skill output preview styles")
     assert_not_contains(css, ".phone-card", "old phone mock CSS")
     assert_not_contains(css, ".phone-grid", "old phone carousel CSS")
     if "mock-visual" in read(DOCS / "app.js") or "mock-visual" in css:
@@ -198,6 +210,8 @@ def main() -> None:
 
     app_js = read(DOCS / "app.js")
     assert_contains(app_js, "renderSkillOutputs", "skill output renderer")
+    assert_contains(app_js, "artifact-preview", "skill output preview renderer")
+    assert_contains(app_js, "<img", "preview image element")
     assert_not_contains(app_js, "renderAuth", "old phone renderer")
     assert_not_contains(app_js, "phoneFrame", "old phone frame renderer")
 

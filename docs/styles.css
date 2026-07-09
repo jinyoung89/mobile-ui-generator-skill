@@ -424,6 +424,29 @@ a{
 .artifact-card-head b{color:#fff}
 .artifact-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .artifact-chips span{padding:7px 10px;border-radius:999px;background:rgba(239,255,248,.1);color:#e8fff7;font:800 12px/1 Geist,system-ui,sans-serif}
+.artifact-preview{
+  grid-column:1/-1;
+  margin:0;
+  padding:10px;
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
+  border:1px solid rgba(128,255,219,.12)
+}
+.artifact-preview img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1200/760;
+  border-radius:22px;
+  object-fit:cover;
+  background:#0b1020
+}
+.artifact-preview figcaption{
+  margin:10px 4px 2px;
+  color:#9fb0d0;
+  font-size:13px;
+  line-height:1.45
+}
 .artifact-section{padding:18px;border-radius:22px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);min-width:0}
 .artifact-section h4{margin:0 0 12px}
 .artifact-section dl,.artifact-section p,.artifact-section ul{margin:0}

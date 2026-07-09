@@ -279,6 +279,14 @@ window.MobileUIGeneratorData = Object.freeze({
     "aria.references": {
       "en": "Skill reference files",
       "ko": "스킬 레퍼런스 파일"
+    },
+    "examples.previewLabel": {
+      "en": "Generated preview image",
+      "ko": "생성 산출물 이미지"
+    },
+    "examples.previewCaption": {
+      "en": "Visual preview rendered from the same brief/spec/state data shown below.",
+      "ko": "아래 브리프/스펙/상태 데이터와 같은 산출물에서 렌더링한 시각 프리뷰입니다."
     }
   },
   "skillOutputs": [
@@ -456,6 +464,16 @@ window.MobileUIGeneratorData = Object.freeze({
       "implementationPrompt": {
         "en": "Build a Korean mobile phone verification screen from the JSON spec. Preserve a single-task flow, fixed safe-area CTA, disabled/enabled CTA states, timer/resend behavior, and inline error messages. Do not add decorative banners that compete with the form.",
         "ko": "JSON 스펙을 기준으로 한국어 모바일 휴대폰 본인인증 화면을 구현하세요. 단일 작업 흐름, safe-area 하단 고정 CTA, CTA 활성/비활성 상태, 타이머/재전송 동작, 인라인 오류 문구를 유지하고 폼과 경쟁하는 장식 배너는 넣지 마세요."
+      },
+      "preview": {
+        "en": {
+          "src": "assets/examples/fintech-phone-verification-en.svg",
+          "alt": "Generated preview image for Korean fintech phone verification: brief, pattern system, JSON spec, components, states, and implementation prompt."
+        },
+        "ko": {
+          "src": "../assets/examples/fintech-phone-verification-ko.svg",
+          "alt": "한국 핀테크 휴대폰 본인인증 산출물 이미지: 브리프, 패턴 시스템, JSON 스펙, 컴포넌트, 상태, 구현 프롬프트 프리뷰."
+        }
       }
     },
     {
@@ -629,6 +647,16 @@ window.MobileUIGeneratorData = Object.freeze({
       "implementationPrompt": {
         "en": "Implement a checkout review screen with transparent price calculation. Keep coupon, points, delivery, and payment method sections separate. The fixed CTA must include the final amount and show loading/failed/success states without hiding the price breakdown.",
         "ko": "투명한 금액 계산을 보여주는 결제 확인 화면을 구현하세요. 쿠폰, 포인트, 배송, 결제수단 섹션을 분리하고, 하단 고정 CTA에는 최종 금액을 포함하세요. 로딩/실패/성공 상태에서도 가격 breakdown을 숨기지 마세요."
+      },
+      "preview": {
+        "en": {
+          "src": "assets/examples/commerce-checkout-en.svg",
+          "alt": "Generated preview image for Commerce checkout with coupon and points: brief, pattern system, JSON spec, components, states, and implementation prompt."
+        },
+        "ko": {
+          "src": "../assets/examples/commerce-checkout-ko.svg",
+          "alt": "쿠폰·포인트가 있는 커머스 결제 산출물 이미지: 브리프, 패턴 시스템, JSON 스펙, 컴포넌트, 상태, 구현 프롬프트 프리뷰."
+        }
       }
     },
     {
@@ -806,6 +834,16 @@ window.MobileUIGeneratorData = Object.freeze({
       "implementationPrompt": {
         "en": "Build a map-plus-sheet booking screen. Keep the map readable, expose sheet states, provide an address-list fallback for denied location permission, and keep the reserve CTA inside the sheet with fare and ETA context.",
         "ko": "지도+시트 예약 화면을 구현하세요. 지도를 읽을 수 있게 유지하고, 시트 상태를 노출하며, 위치 권한 거부 시 주소 목록 fallback을 제공하세요. 예약 CTA는 요금/도착 예상 정보와 함께 시트 안에 유지합니다."
+      },
+      "preview": {
+        "en": {
+          "src": "assets/examples/mobility-map-booking-en.svg",
+          "alt": "Generated preview image for Mobility map booking bottom sheet: brief, pattern system, JSON spec, components, states, and implementation prompt."
+        },
+        "ko": {
+          "src": "../assets/examples/mobility-map-booking-ko.svg",
+          "alt": "모빌리티 지도 예약 바텀시트 산출물 이미지: 브리프, 패턴 시스템, JSON 스펙, 컴포넌트, 상태, 구현 프롬프트 프리뷰."
+        }
       }
     },
     {
@@ -979,6 +1017,16 @@ window.MobileUIGeneratorData = Object.freeze({
       "implementationPrompt": {
         "en": "Implement a full-screen account cancellation review. Do not present deletion as a normal primary CTA. Separate destructive action, require confirmation and reason, include support/escalation path, and preserve failure/retry state copy.",
         "ko": "전체 화면 회원 탈퇴 검토 화면을 구현하세요. 탈퇴를 일반 기본 CTA처럼 보이게 하지 마세요. 파괴적 액션을 분리하고, 확인과 사유를 요구하며, 고객센터/상담 경로와 실패/재시도 상태 문구를 유지하세요."
+      },
+      "preview": {
+        "en": {
+          "src": "assets/examples/account-cancellation-en.svg",
+          "alt": "Generated preview image for Account cancellation with risk disclosure: brief, pattern system, JSON spec, components, states, and implementation prompt."
+        },
+        "ko": {
+          "src": "../assets/examples/account-cancellation-ko.svg",
+          "alt": "위험 고지가 있는 회원 탈퇴 산출물 이미지: 브리프, 패턴 시스템, JSON 스펙, 컴포넌트, 상태, 구현 프롬프트 프리뷰."
+        }
       }
     }
   ],

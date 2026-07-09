@@ -61,6 +61,7 @@
         const spec = localized(item.spec, lang);
         const fontReason = localized(item.fontProfile?.reason, lang);
         const appType = localized(item.appType, lang);
+        const preview = localized(item.preview, lang);
         const specCode = JSON.stringify(spec, null, 2);
 
         return `<article class="skill-output-card" aria-label="${escapeHTML(title)}">
@@ -70,6 +71,11 @@
             <p><b>${escapeHTML(t('examples.promptLabel', lang))}</b> ${escapeHTML(sourcePrompt)}</p>
             ${chips(item.artifactTypes)}
           </div>
+
+          <figure class="artifact-preview">
+            <img src="${escapeHTML(preview.src)}" alt="${escapeHTML(preview.alt)}" width="1200" height="760" loading="eager" decoding="async">
+            <figcaption>${escapeHTML(t('examples.previewCaption', lang))}</figcaption>
+          </figure>
 
           <section class="artifact-section pattern-section">
             <h4>${escapeHTML(t('examples.patternLabel', lang))}</h4>

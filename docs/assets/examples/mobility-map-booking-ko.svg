@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">모빌리티 지도 예약 바텀시트 skill output preview</title>
+  <desc id="desc">Generated visual preview from the Mobile UI Generator skill output data.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#070a12"/><stop offset=".58" stop-color="#101827"/><stop offset="1" stop-color="#0b1f28"/></linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8ec5ff" stop-opacity=".22"/><stop offset="1" stop-color="#80ffdb" stop-opacity=".12"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000" flood-opacity=".30"/></filter>
+    <style>
+      text{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Noto Sans KR','Segoe UI',sans-serif}
+      .pulse{animation:pulse 2.8s ease-in-out infinite; transform-origin:center}
+      @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+      @media (prefers-reduced-motion: reduce){.pulse{animation:none}}
+    </style>
+  </defs>
+  <rect width="1200" height="760" rx="44" fill="url(#bg)"/>
+  <rect x="32" y="32" width="1136" height="696" rx="36" fill="#101622" stroke="#fff" stroke-opacity=".08" filter="url(#shadow)"/>
+  <rect x="56" y="56" width="1088" height="144" rx="28" fill="url(#header)" stroke="#8ec5ff" stroke-opacity=".24"/>
+  <circle class="pulse" cx="88" cy="89" r="7" fill="#8ec5ff"/>
+  <text x="106" y="94" fill="#8ec5ff" font-size="14" font-weight="900" letter-spacing="2.1">생성 스킬 산출물</text>
+  <text x="80" y="140" fill="#fff" font-size="32" font-weight="900">모빌리티 지도 예약 바텀시트</text>
+  <text x="80" y="180" fill="#cbd6ec" font-size="16" font-weight="650">지도, 경로 선택, 위치 권한 fallback, 바텀시트 결제 CTA가 있는 차량 예약 화면을 설계해줘.</text>
+  <text x="760" y="96" fill="#9fb0d0" font-size="13" font-weight="850" letter-spacing="1.6">산출물 프리뷰</text>
+  <rect x="760" y="114" width="112" height="30" rx="15" fill="#8ec5ff" opacity="0.16" stroke="#8ec5ff" stroke-opacity="0.38"/>
+<text x="774" y="134" fill="#effff8" font-size="12" font-weight="850" letter-spacing="0.4">screen brief</text>
+<rect x="882" y="114" width="92" height="30" rx="15" fill="#8ec5ff" opacity="0.16" stroke="#8ec5ff" stroke-opacity="0.38"/>
+<text x="896" y="134" fill="#effff8" font-size="12" font-weight="850" letter-spacing="0.4">JSON spec</text>
+<rect x="984" y="114" width="112" height="30" rx="15" fill="#8ec5ff" opacity="0.16" stroke="#8ec5ff" stroke-opacity="0.38"/>
+<text x="998" y="134" fill="#effff8" font-size="12" font-weight="850" letter-spacing="0.4">state matrix</text>
+  
+  <g class="panel">
+    <rect x="56" y="232" width="340" height="188" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="78" y="266" fill="#8ec5ff" font-size="13" font-weight="900" letter-spacing="1.8">PATTERN SYSTEM</text>
+    <text x="80" y="286" fill="#8fa1c3" font-size="12" font-weight="800">app_type</text>
+<text x="192" y="286" fill="#ffffff" font-size="15" font-weight="850">모빌리티 / 지도</text>
+<text x="80" y="334" fill="#8fa1c3" font-size="12" font-weight="800">ui_patterns</text>
+<text x="192" y="334" fill="#ffffff" font-size="15" font-weight="850">map_location, bottom_sheet_map,</text>
+<text x="192" y="354" fill="#ffffff" font-size="15" font-weight="850">route_navigation…</text>
+<text x="80" y="382" fill="#8fa1c3" font-size="12" font-weight="800">layout</text>
+<text x="192" y="382" fill="#ffffff" font-size="15" font-weight="850">map_plus_sheet</text>
+  </g>
+  <g class="panel">
+    <rect x="416" y="232" width="360" height="188" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="438" y="266" fill="#8ec5ff" font-size="13" font-weight="900" letter-spacing="1.8">BRIEF EXCERPT</text>
+    <text x="440" y="286" fill="#dbe7ff" font-size="17" font-weight="700">지도 맥락을 잃지 않고 경로를 선택해 예약하도록 돕습니다.</text><text x="440" y="360" fill="#9fb0d0" font-size="15" font-weight="650">시트는 collapsed/half/full 상태를 가지며, 권한 거부 시 주소 검색과</text>
+<text x="440" y="380" fill="#9fb0d0" font-size="15" font-weight="650">최근 장소 목록으로 전환합니다.</text>
+  </g>
+  <g class="panel">
+    <rect x="796" y="232" width="348" height="188" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="818" y="266" fill="#80ffdb" font-size="13" font-weight="900" letter-spacing="1.8">IMPLEMENTATION PROMPT</text>
+    <text x="820" y="286" fill="#d7f7ef" font-size="15" font-weight="700">지도+시트 예약 화면을 구현하세요. 지도를 읽을 수 있게 유지하고, 시트</text>
+<text x="820" y="306" fill="#d7f7ef" font-size="15" font-weight="700">상태를 노출하며, 위치 권한 거부 시 주소 목록 fallback을 제공하세요.</text>
+<text x="820" y="326" fill="#d7f7ef" font-size="15" font-weight="700">예약 CTA는 요금/도착 예상 정보와 함께 시트 안에 유지합니다.</text>
+  </g>
+  <g class="panel">
+    <rect x="56" y="446" width="340" height="248" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="78" y="480" fill="#8ec5ff" font-size="13" font-weight="900" letter-spacing="1.8">COMPONENTS</text>
+    <circle cx="82" cy="495" r="4" fill="#8ec5ff"/>
+<text x="100" y="500" fill="#d6e4fb" font-size="15" font-weight="650">지도 캔버스</text>
+<circle cx="82" cy="529" r="4" fill="#8ec5ff"/>
+<text x="100" y="534" fill="#d6e4fb" font-size="15" font-weight="650">출발/도착 칩</text>
+<circle cx="82" cy="563" r="4" fill="#8ec5ff"/>
+<text x="100" y="568" fill="#d6e4fb" font-size="15" font-weight="650">경로 라인</text>
+<circle cx="82" cy="597" r="4" fill="#8ec5ff"/>
+<text x="100" y="602" fill="#d6e4fb" font-size="15" font-weight="650">바텀시트</text>
+<circle cx="82" cy="631" r="4" fill="#8ec5ff"/>
+<text x="100" y="636" fill="#d6e4fb" font-size="15" font-weight="650">경로 옵션 목록</text>
+<circle cx="82" cy="665" r="4" fill="#8ec5ff"/>
+<text x="100" y="670" fill="#d6e4fb" font-size="15" font-weight="650">요금 예상</text>
+  </g>
+  <g class="panel">
+    <rect x="416" y="446" width="340" height="248" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="438" y="480" fill="#80ffdb" font-size="13" font-weight="900" letter-spacing="1.8">STATE MATRIX</text>
+    <circle cx="442" cy="495" r="4" fill="#80ffdb"/>
+<text x="460" y="500" fill="#d6e4fb" font-size="15" font-weight="650">위치 확인 중</text>
+<circle cx="442" cy="529" r="4" fill="#80ffdb"/>
+<text x="460" y="534" fill="#d6e4fb" font-size="15" font-weight="650">권한 거부</text>
+<circle cx="442" cy="563" r="4" fill="#80ffdb"/>
+<text x="460" y="568" fill="#d6e4fb" font-size="15" font-weight="650">경로 재계산</text>
+<circle cx="442" cy="597" r="4" fill="#80ffdb"/>
+<text x="460" y="602" fill="#d6e4fb" font-size="15" font-weight="650">근처 차량 없음</text>
+<circle cx="442" cy="631" r="4" fill="#80ffdb"/>
+<text x="460" y="636" fill="#d6e4fb" font-size="15" font-weight="650">탄력 요금</text>
+<circle cx="442" cy="665" r="4" fill="#80ffdb"/>
+<text x="460" y="670" fill="#d6e4fb" font-size="15" font-weight="650">예약 진행 중</text>
+  </g>
+  <g class="panel">
+    <rect x="776" y="446" width="368" height="248" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="798" y="480" fill="#80ffdb" font-size="13" font-weight="900" letter-spacing="1.8">JSON SPEC</text>
+    <text x="800" y="500" fill="#8fa1c3" font-size="12" font-weight="800">screen_id</text>
+<text x="906" y="500" fill="#ffffff" font-size="15" font-weight="850">ride_booking_map</text>
+<text x="800" y="548" fill="#8fa1c3" font-size="12" font-weight="800">navigation</text>
+<text x="906" y="548" fill="#ffffff" font-size="15" font-weight="850">map_canvas + bottom_sheet</text>
+<text x="800" y="596" fill="#8fa1c3" font-size="12" font-weight="800">primary_cta</text>
+<text x="906" y="596" fill="#ffffff" font-size="15" font-weight="850">예약하고 결제하기</text>
+<text x="800" y="644" fill="#8fa1c3" font-size="12" font-weight="800">language</text>
+<text x="906" y="644" fill="#ffffff" font-size="15" font-weight="850">ko</text>
+  </g>
+</svg>

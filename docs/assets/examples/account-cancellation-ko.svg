@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">위험 고지가 있는 회원 탈퇴 skill output preview</title>
+  <desc id="desc">Generated visual preview from the Mobile UI Generator skill output data.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#070a12"/><stop offset=".58" stop-color="#101827"/><stop offset="1" stop-color="#0b1f28"/></linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff7a90" stop-opacity=".22"/><stop offset="1" stop-color="#ffd166" stop-opacity=".12"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000" flood-opacity=".30"/></filter>
+    <style>
+      text{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Noto Sans KR','Segoe UI',sans-serif}
+      .pulse{animation:pulse 2.8s ease-in-out infinite; transform-origin:center}
+      @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+      @media (prefers-reduced-motion: reduce){.pulse{animation:none}}
+    </style>
+  </defs>
+  <rect width="1200" height="760" rx="44" fill="url(#bg)"/>
+  <rect x="32" y="32" width="1136" height="696" rx="36" fill="#101622" stroke="#fff" stroke-opacity=".08" filter="url(#shadow)"/>
+  <rect x="56" y="56" width="1088" height="144" rx="28" fill="url(#header)" stroke="#ff7a90" stroke-opacity=".24"/>
+  <circle class="pulse" cx="88" cy="89" r="7" fill="#ff7a90"/>
+  <text x="106" y="94" fill="#ff7a90" font-size="14" font-weight="900" letter-spacing="2.1">생성 스킬 산출물</text>
+  <text x="80" y="140" fill="#fff" font-size="32" font-weight="900">위험 고지가 있는 회원 탈퇴</text>
+  <text x="80" y="180" fill="#cbd6ec" font-size="16" font-weight="650">탈퇴 결과를 설명하고, 파괴적 액션을 분리하며, 사유 입력과 고객센터 경로가 있는 회원 탈퇴 플로우를 만들어줘.</text>
+  <text x="760" y="96" fill="#9fb0d0" font-size="13" font-weight="850" letter-spacing="1.6">산출물 프리뷰</text>
+  <rect x="760" y="114" width="112" height="30" rx="15" fill="#ff7a90" opacity="0.16" stroke="#ff7a90" stroke-opacity="0.38"/>
+<text x="774" y="134" fill="#effff8" font-size="12" font-weight="850" letter-spacing="0.4">screen brief</text>
+<rect x="882" y="114" width="92" height="30" rx="15" fill="#ff7a90" opacity="0.16" stroke="#ff7a90" stroke-opacity="0.38"/>
+<text x="896" y="134" fill="#effff8" font-size="12" font-weight="850" letter-spacing="0.4">JSON spec</text>
+<rect x="984" y="114" width="112" height="30" rx="15" fill="#ff7a90" opacity="0.16" stroke="#ff7a90" stroke-opacity="0.38"/>
+<text x="998" y="134" fill="#effff8" font-size="12" font-weight="850" letter-spacing="0.4">state matrix</text>
+  
+  <g class="panel">
+    <rect x="56" y="232" width="340" height="188" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="78" y="266" fill="#ff7a90" font-size="13" font-weight="900" letter-spacing="1.8">PATTERN SYSTEM</text>
+    <text x="80" y="286" fill="#8fa1c3" font-size="12" font-weight="800">app_type</text>
+<text x="192" y="286" fill="#ffffff" font-size="15" font-weight="850">설정 / 계정</text>
+<text x="80" y="334" fill="#8fa1c3" font-size="12" font-weight="800">ui_patterns</text>
+<text x="192" y="334" fill="#ffffff" font-size="15" font-weight="850">account_cancellation,</text>
+<text x="192" y="354" fill="#ffffff" font-size="15" font-weight="850">risk_disclosure…</text>
+<text x="80" y="382" fill="#8fa1c3" font-size="12" font-weight="800">layout</text>
+<text x="192" y="382" fill="#ffffff" font-size="15" font-weight="850">risk_disclosure_form</text>
+  </g>
+  <g class="panel">
+    <rect x="416" y="232" width="360" height="188" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="438" y="266" fill="#ff7a90" font-size="13" font-weight="900" letter-spacing="1.8">BRIEF EXCERPT</text>
+    <text x="440" y="286" fill="#dbe7ff" font-size="17" font-weight="700">실수로 인한 삭제를 막으면서도 명확하고 존중하는 탈퇴 경로를 제공합니다.</text><text x="440" y="360" fill="#9fb0d0" font-size="15" font-weight="650">명시 확인을 요구하고, 최종 삭제 전 고객센터와 계정 일시정지 대안을 계속 보여줍니다.</text>
+  </g>
+  <g class="panel">
+    <rect x="796" y="232" width="348" height="188" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="818" y="266" fill="#ffd166" font-size="13" font-weight="900" letter-spacing="1.8">IMPLEMENTATION PROMPT</text>
+    <text x="820" y="286" fill="#d7f7ef" font-size="15" font-weight="700">전체 화면 회원 탈퇴 검토 화면을 구현하세요. 탈퇴를 일반 기본 CTA처럼</text>
+<text x="820" y="306" fill="#d7f7ef" font-size="15" font-weight="700">보이게 하지 마세요. 파괴적 액션을 분리하고, 확인과 사유를 요구하며,</text>
+<text x="820" y="326" fill="#d7f7ef" font-size="15" font-weight="700">고객센터/상담 경로와 실패/재시도 상태 문구를 유지하세요.</text>
+  </g>
+  <g class="panel">
+    <rect x="56" y="446" width="340" height="248" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="78" y="480" fill="#ff7a90" font-size="13" font-weight="900" letter-spacing="1.8">COMPONENTS</text>
+    <circle cx="82" cy="495" r="4" fill="#ff7a90"/>
+<text x="100" y="500" fill="#d6e4fb" font-size="15" font-weight="650">닫기 포함 상단 앱바</text>
+<circle cx="82" cy="529" r="4" fill="#ff7a90"/>
+<text x="100" y="534" fill="#d6e4fb" font-size="15" font-weight="650">손실 체크리스트</text>
+<circle cx="82" cy="563" r="4" fill="#ff7a90"/>
+<text x="100" y="568" fill="#d6e4fb" font-size="15" font-weight="650">대안 액션 카드</text>
+<circle cx="82" cy="597" r="4" fill="#ff7a90"/>
+<text x="100" y="602" fill="#d6e4fb" font-size="15" font-weight="650">사유 입력 textarea</text>
+<circle cx="82" cy="631" r="4" fill="#ff7a90"/>
+<text x="100" y="636" fill="#d6e4fb" font-size="15" font-weight="650">고객센터 링크</text>
+<circle cx="82" cy="665" r="4" fill="#ff7a90"/>
+<text x="100" y="670" fill="#d6e4fb" font-size="15" font-weight="650">확인 체크박스</text>
+  </g>
+  <g class="panel">
+    <rect x="416" y="446" width="340" height="248" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="438" y="480" fill="#ffd166" font-size="13" font-weight="900" letter-spacing="1.8">STATE MATRIX</text>
+    <circle cx="442" cy="495" r="4" fill="#ffd166"/>
+<text x="460" y="500" fill="#d6e4fb" font-size="15" font-weight="650">기본</text>
+<circle cx="442" cy="529" r="4" fill="#ffd166"/>
+<text x="460" y="534" fill="#d6e4fb" font-size="15" font-weight="650">사유 입력 중</text>
+<circle cx="442" cy="563" r="4" fill="#ffd166"/>
+<text x="460" y="568" fill="#d6e4fb" font-size="15" font-weight="650">확인 미체크</text>
+<circle cx="442" cy="597" r="4" fill="#ffd166"/>
+<text x="460" y="602" fill="#d6e4fb" font-size="15" font-weight="650">CTA 비활성</text>
+<circle cx="442" cy="631" r="4" fill="#ffd166"/>
+<text x="460" y="636" fill="#d6e4fb" font-size="15" font-weight="650">파괴적 확인</text>
+<circle cx="442" cy="665" r="4" fill="#ffd166"/>
+<text x="460" y="670" fill="#d6e4fb" font-size="15" font-weight="650">처리 중</text>
+  </g>
+  <g class="panel">
+    <rect x="776" y="446" width="368" height="248" rx="22" fill="#171d2b" stroke="#ffffff" stroke-opacity="0.09"/>
+    <text x="798" y="480" fill="#ffd166" font-size="13" font-weight="900" letter-spacing="1.8">JSON SPEC</text>
+    <text x="800" y="500" fill="#8fa1c3" font-size="12" font-weight="800">screen_id</text>
+<text x="906" y="500" fill="#ffffff" font-size="15" font-weight="850">account_cancellation_review</text>
+<text x="800" y="548" fill="#8fa1c3" font-size="12" font-weight="800">navigation</text>
+<text x="906" y="548" fill="#ffffff" font-size="15" font-weight="850">modal_fullscreen +</text>
+<text x="906" y="568" fill="#ffffff" font-size="15" font-weight="850">separated_destructive_cta</text>
+<text x="800" y="596" fill="#8fa1c3" font-size="12" font-weight="800">primary_cta</text>
+<text x="906" y="596" fill="#ffffff" font-size="15" font-weight="850">계정 탈퇴하기</text>
+<text x="800" y="644" fill="#8fa1c3" font-size="12" font-weight="800">language</text>
+<text x="906" y="644" fill="#ffffff" font-size="15" font-weight="850">ko</text>
+  </g>
+</svg>
