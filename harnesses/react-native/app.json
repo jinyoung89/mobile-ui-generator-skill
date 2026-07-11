@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Mobile UI Showcase",
+    "slug": "mobile-ui-showcase",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "mobileuishowcase",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.jinyoung.mobileuishowcase",
+      "deploymentTarget": "17.2"
+    },
+    "android": {
+      "package": "com.jinyoung.mobileuishowcase",
+      "adaptiveIcon": { "backgroundColor": "#ffffff" }
+    },
+    "extra": {
+      "harnessVersion": "1.0.0",
+      "toolchain": { "expo": "51.0.39", "reactNative": "0.74.7", "node": "22.15.0", "xcode": "15.2", "ios": "17.2", "androidApi": 34 }
+    }
+  }
+}
