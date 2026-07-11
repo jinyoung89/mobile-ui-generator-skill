@@ -71,6 +71,8 @@ export function applyBrowserProfile(root: HTMLElement, profileName: string): Bro
 export function bootFromLocation(root: HTMLElement): BrowserProfile {
   const params = new URLSearchParams(window.location.search);
   const profile = applyBrowserProfile(root, params.get("profile") ?? "standard");
+  const state = params.get("state");
+  if (state && ["default", "loading", "error", "success"].includes(state)) (root.querySelector<HTMLElement>(".mobile-screen") ?? root).dataset.state = state;
   attachFixtureRuntime(root);
   return profile;
 }

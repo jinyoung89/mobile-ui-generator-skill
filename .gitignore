@@ -23,6 +23,7 @@ venv/
 
 # Node
 /node_modules/
+**/node_modules/
 
 # macOS / editor
 .DS_Store

@@ -15,7 +15,7 @@ try {
 }
 const server = spawn(process.execPath, [path.join(root, "src/preview.mjs"), "--host", "127.0.0.1", "--port", "4175"], { stdio: "ignore" });
 try {
-  await new Promise((resolve, reject) => { const timer = setTimeout(resolve, 300); server.once("error", reject); timer.unref(); });
+  await new Promise((resolve) => setTimeout(resolve, 500));
   const profiles = [
     ["compact", 320, 568], ["standard", 390, 844], ["large", 430, 932], ["short-keyboard", 390, 667], ["large-text", 390, 844],
   ];
@@ -32,6 +32,16 @@ try {
     if (name === "large-text") assert.ok(metrics.fontSize > 20, "large text scale");
     await page.close();
   }
+  const statePage = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+  await statePage.goto(["http:", "", "127.0.0.1:4175", "examples", "commerce-checkout-address", "?profile=standard&state=loading"].join("/"), { waitUntil: "networkidle" });
+  assert.equal(await statePage.locator(".mobile-screen").getAttribute("data-state"), "loading");
+  await statePage.close();
+  const transitionPage = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+  await transitionPage.goto(["http:", "", "127.0.0.1:4175", "examples", "commerce-checkout-address", "?profile=standard&state=default"].join("/"), { waitUntil: "networkidle" });
+  await transitionPage.locator('[data-action="submit-payment"]').last().click();
+  await transitionPage.waitForFunction(() => document.querySelector(".mobile-screen")?.getAttribute("data-state") === "success");
+  assert.equal(await transitionPage.locator(".mobile-screen").getAttribute("data-state"), "success");
+  await transitionPage.close();
   process.stdout.write("Playwright smoke passed: compact, standard, large, short-keyboard, large-text\n");
 } finally {
   await browser.close();
