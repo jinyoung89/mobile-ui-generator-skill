@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mobile-ui-generator.dev/schema/coverage-manifest-1.0.0.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","manifest_version","coverage_owner","frequency_snapshot","state_transitions","supported_categories","supported_patterns","proof_pairs","pairs"],
+  "properties": {
+    "schema_version": {"const":"1.0.0"},
+    "manifest_version": {"type":"string","minLength":1},
+    "coverage_owner": {"type":"string","minLength":1},
+    "frequency_snapshot": {"$ref":"#/$defs/frequency"},
+    "state_transitions": {"type":"array","const":["proposed","approved","generated","build_verified","render_verified","published"]},
+    "supported_categories": {"type":"array","minItems":1,"items":{"$ref":"#/$defs/taxonomy"}},
+    "supported_patterns": {"type":"array","minItems":1,"items":{"$ref":"#/$defs/taxonomy"}},
+    "proof_pairs": {"type":"array","minItems":5,"maxItems":5,"uniqueItems":true,"items":{"$ref":"#/$defs/id"}},
+    "pairs": {"type":"array","minItems":80,"maxItems":120,"items":{"$ref":"#/$defs/pair"}}
+  },
+  "$defs": {
+    "id": {"type":"string","pattern":"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"},
+    "taxonomy": {"type":"object","additionalProperties":false,"required":["id","label"],"properties":{"id":{"$ref":"#/$defs/id"},"label":{"type":"string","minLength":1}}},
+    "frequency": {"type":"object","additionalProperties":false,"required":["version","metric","minimum_sample_count","tie_rule","source"],"properties":{"version":{"type":"string","minLength":1},"metric":{"const":"aggregate_observation_count"},"minimum_sample_count":{"type":"integer","minimum":1},"tie_rule":{"type":"string","minLength":1},"source":{"type":"string","minLength":1}}},
+    "basis": {"type":"object","additionalProperties":false,"required":["kind","snapshot_version","metric_rank"],"properties":{"kind":{"enum":["sanitized_knowledge","product_rationale"]},"snapshot_version":{"type":"string","minLength":1},"metric_rank":{"type":"integer","minimum":1}}},
+    "pair": {"type":"object","additionalProperties":false,"required":["pair_id","app_category","ui_pattern","user_job","rationale","layout_archetype","risk_tier","required_states","languages","owner","basis","frequency_rank","release_state"],"properties":{"pair_id":{"$ref":"#/$defs/id"},"app_category":{"$ref":"#/$defs/id"},"ui_pattern":{"$ref":"#/$defs/id"},"user_job":{"type":"string","minLength":1},"rationale":{"type":"string","minLength":1},"layout_archetype":{"type":"string","minLength":1},"risk_tier":{"enum":["low","medium","high"]},"required_states":{"type":"array","minItems":1,"items":{"type":"string","pattern":"^[a-z][a-z0-9_]*(?:-[a-z0-9_]+)*$"},"uniqueItems":true},"languages":{"type":"array","minItems":1,"items":{"type":"string","pattern":"^[a-z]{2}(?:-[A-Z]{2})?$"},"uniqueItems":true},"owner":{"type":"string","minLength":1},"basis":{"$ref":"#/$defs/basis"},"frequency_rank":{"type":"integer","minimum":1},"release_state":{"enum":["proposed","approved","generated","build_verified","render_verified","published"]}}}
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "manifest_version": "1.0.0",
+  "example_id": "commerce-checkout-address",
+  "platform": "html_css",
+  "harness_version": "1.0.0",
+  "source_hash": "2255c0fbd5fec3df691d735ad1622a9187cbfde470bc2655b78c1260c35d3786",
+  "module_entry": "harnesses/html/src/examples.ts#commerce-checkout-address",
+  "required_fixtures": [
+    "address_default",
+    "payment_card"
+  ],
+  "required_assets": [],
+  "capabilities": {
+    "network": false,
+    "authentication": false,
+    "payment_execution": false,
+    "push": false,
+    "fixture_only": true
+  },
+  "assembly_command": "npm --prefix harnesses/html ci && npm --prefix harnesses/html run build",
+  "run_command": "npm --prefix harnesses/html run preview -- --host 127.0.0.1 --port 4173",
+  "profiles": [
+    "compact",
+    "standard",
+    "large",
+    "short-keyboard",
+    "large-text"
+  ]
+}

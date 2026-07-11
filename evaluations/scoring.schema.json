@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mobile-ui-skill-effectiveness-scoring-1",
+  "title": "Mobile UI skill effectiveness scoring contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dimensions", "thresholds"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "dimensions": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "blocking", "threshold", "weight"],
+        "properties": {
+          "id": {"type": "string", "enum": ["classification", "spec_completeness", "numeric_consistency", "required_states", "accessibility", "platform_mapping", "build_readiness", "visible_acceptance"]},
+          "label": {"type": "string", "minLength": 1},
+          "blocking": {"type": "boolean"},
+          "threshold": {"type": "number", "minimum": 0, "maximum": 100},
+          "weight": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall_min", "prompt_pass_rate_min", "blocking_dimension_min"],
+      "properties": {
+        "overall_min": {"type": "number", "minimum": 0, "maximum": 100},
+        "prompt_pass_rate_min": {"type": "number", "minimum": 0, "maximum": 1},
+        "blocking_dimension_min": {"type": "number", "minimum": 0, "maximum": 100}
+      }
+    }
+  }
+}

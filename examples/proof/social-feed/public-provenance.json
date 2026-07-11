@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "generated_by": "mobile-ui-generator",
+  "skill_package": "skills/mobile-ui-generator",
+  "skill_contract_version": "1.0.0",
+  "mode": "showcase/all-platforms",
+  "source_kind": "public-generalized-guidance",
+  "canonical_spec_id": "social-feed",
+  "request_sha256": "e1264968f3686f16177959c2ec61f836d3ff4c7746e42588760c3b4ff0c3a653",
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "generator": "tooling/src/generate-proof-set.ts",
+  "generator_version": "1.0.0",
+  "restricted_inputs_included": false
+}

@@ -1,0 +1,18 @@
+{
+  "name": "mobile-ui-generator-html-harness",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx --test test/runtime.test.ts",
+    "test:browser": "node scripts/browser-smoke.mjs && node scripts/playwright-smoke.mjs",
+    "build": "node --import tsx src/build.ts",
+    "preview": "node src/preview.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "playwright": "^1.55.1",
+    "tsx": "4.19.4",
+    "typescript": "5.8.3"
+  }
+}

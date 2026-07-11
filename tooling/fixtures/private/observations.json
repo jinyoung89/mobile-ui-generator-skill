@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0.0",
+  "fixture_notice": "SYNTHETIC TEST DATA ONLY; NOT SOURCE-DERIVED",
+  "observations": [
+    {
+      "source_id": "synthetic-source-1",
+      "source_url": "https://invalid.example.test/fake-1",
+      "local_path": "/synthetic/not-real/fake-1.png",
+      "credential_fields": {
+        "api_key": "FAKE_API_KEY_1",
+        "bearer_token": "FAKE_BEARER_TOKEN_1"
+      },
+      "reviewer_identity": "Synthetic Reviewer 1",
+      "raw_asset_pointer": "fake-asset://1",
+      "app_specific_copy": "Fictional App 1 private copy",
+      "category_id": "commerce",
+      "pattern_id": "product-grid",
+      "observation_metrics": {
+        "content_padding_px": 17,
+        "card_gap_px": 9,
+        "bottom_nav_height_px": 49
+      },
+      "component_rules": ["card-grid", "persistent-bottom-nav"],
+      "state_rules": ["loading-skeleton", "empty-state"],
+      "confidence": 0.81,
+      "sample_group": "synthetic-group-1"
+    },
+    {
+      "source_id": "synthetic-source-2",
+      "source_url": "https://invalid.example.test/fake-2",
+      "local_path": "/synthetic/not-real/fake-2.png",
+      "credential_fields": {
+        "api_key": "FAKE_API_KEY_2",
+        "bearer_token": "FAKE_BEARER_TOKEN_2"
+      },
+      "reviewer_identity": "Synthetic Reviewer 2",
+      "raw_asset_pointer": "fake-asset://2",
+      "app_specific_copy": "Fictional App 2 private copy",
+      "category_id": "commerce",
+      "pattern_id": "product-grid",
+      "observation_metrics": {
+        "content_padding_px": 18,
+        "card_gap_px": 10,
+        "bottom_nav_height_px": 50
+      },
+      "component_rules": ["card-grid", "persistent-bottom-nav"],
+      "state_rules": ["loading-skeleton", "empty-state"],
+      "confidence": 0.82,
+      "sample_group": "synthetic-group-2"
+    },
+    {
+      "source_id": "synthetic-source-3",
+      "source_url": "https://invalid.example.test/fake-3",
+      "local_path": "/synthetic/not-real/fake-3.png",
+      "credential_fields": {
+        "api_key": "FAKE_API_KEY_3",
+        "bearer_token": "FAKE_BEARER_TOKEN_3"
+      },
+      "reviewer_identity": "Synthetic Reviewer 3",
+      "raw_asset_pointer": "fake-asset://3",
+      "app_specific_copy": "Fictional App 3 private copy",
+      "category_id": "commerce",
+      "pattern_id": "product-grid",
+      "observation_metrics": {
+        "content_padding_px": 19,
+        "card_gap_px": 11,
+        "bottom_nav_height_px": 51
+      },
+      "component_rules": ["card-grid", "persistent-bottom-nav"],
+      "state_rules": ["loading-skeleton", "empty-state"],
+      "confidence": 0.83,
+      "sample_group": "synthetic-group-3"
+    },
+    {
+      "source_id": "synthetic-source-4",
+      "source_url": "https://invalid.example.test/fake-4",
+      "local_path": "/synthetic/not-real/fake-4.png",
+      "credential_fields": {
+        "api_key": "FAKE_API_KEY_4",
+        "bearer_token": "FAKE_BEARER_TOKEN_4"
+      },
+      "reviewer_identity": "Synthetic Reviewer 4",
+      "raw_asset_pointer": "fake-asset://4",
+      "app_specific_copy": "Fictional App 4 private copy",
+      "category_id": "commerce",
+      "pattern_id": "product-grid",
+      "observation_metrics": {
+        "content_padding_px": 20,
+        "card_gap_px": 12,
+        "bottom_nav_height_px": 52
+      },
+      "component_rules": ["card-grid", "persistent-bottom-nav"],
+      "state_rules": ["loading-skeleton", "empty-state"],
+      "confidence": 0.84,
+      "sample_group": "synthetic-group-4"
+    },
+    {
+      "source_id": "synthetic-source-5",
+      "source_url": "https://invalid.example.test/fake-5",
+      "local_path": "/synthetic/not-real/fake-5.png",
+      "credential_fields": {
+        "api_key": "FAKE_API_KEY_5",
+        "bearer_token": "FAKE_BEARER_TOKEN_5"
+      },
+      "reviewer_identity": "Synthetic Reviewer 5",
+      "raw_asset_pointer": "fake-asset://5",
+      "app_specific_copy": "Fictional App 5 private copy",
+      "category_id": "commerce",
+      "pattern_id": "product-grid",
+      "observation_metrics": {
+        "content_padding_px": 21,
+        "card_gap_px": 13,
+        "bottom_nav_height_px": 53
+      },
+      "component_rules": ["card-grid", "persistent-bottom-nav"],
+      "state_rules": ["loading-skeleton", "empty-state"],
+      "confidence": 0.85,
+      "sample_group": "synthetic-group-5"
+    }
+  ]
+}

@@ -1,226 +1,105 @@
-<p align="center">
-  <img src="docs/assets/readme-banner.svg" alt="Mobile UI Generator Skill" width="100%" />
-</p>
+# Mobile UI Generator
 
-# Mobile UI Generator Skill
+Mobile UI Generator turns a screen request into one numeric canonical spec and
+complete source for HTML/CSS, React Native, Flutter, and SwiftUI. The included
+proof set is responsive, bilingual, fixture-only, and statically verifiable.
 
-<p align="center">
-  <em>Service-aware mobile UX/UI briefs, JSON specs, font profiles, and implementation prompts for AI agents.</em>
-</p>
+[Showcase](https://jinyoung89.github.io/mobile-ui-generator-skill/) ·
+[한국어](README.ko.md) ·
+[Skill instructions](skills/mobile-ui-generator/SKILL.md) ·
+[Canonical schema](skills/mobile-ui-generator/schemas/mobile-ui-spec.schema.json)
 
-<p align="center">
-  <a href="https://jinyoung89.github.io/mobile-ui-generator-skill/">Website</a>
-  · <a href="README.ko.md">한국어</a>
-  · <a href="skills/mobile-ui-generator/SKILL.md">Skill</a>
-  · <a href="examples/briefs/fintech-signup.md">Example brief</a>
-</p>
+## What you get
 
----
+- A strict JSON spec for layout, safe areas, states, interactions, localization,
+  accessibility, and platform mappings.
+- Complete HTML/CSS, React Native, Flutter, and SwiftUI source derived from that
+  spec, with local fixtures and no required API.
+- Numeric layout tokens for 320, 390, and 430 px reference widths.
+- Static validation evidence, source hashes, canonical IR, and public provenance.
+- A generated website with responsive previews and inspectable code tabs for all
+  four targets.
 
-## What it is
+## Five proof examples
 
-**Mobile UI Generator Skill** helps AI agents create better mobile UX/UI outputs for real product flows.
-
-It focuses on generation-ready structure:
-
-1. choose the target app domain and screen flow;
-2. select concrete mobile UI patterns such as phone verification, PLP/PDP, checkout, map bottom sheet, chat composer, review writing, ranking, reward, FAQ, or empty-state recovery;
-3. define layout archetype, navigation model, hierarchy, components, states, interactions, and CTAs;
-4. write locale-appropriate UI copy;
-5. choose a language mode: English or Korean;
-6. add a service-appropriate font profile;
-7. produce Markdown briefs and JSON UI specs for design, code, Figma, or image-generation agents.
-
-The skill does **not** run image generation unless the user explicitly asks for it.
-
-## Language modes
-
-Default public docs are English. Generated output should use **one selected language mode**:
-
-| Mode | Use when | Rule |
+| Example | Preview | Canonical artifacts |
 |---|---|---|
-| `en` | English product or documentation output | Use English narrative and English UI copy. |
-| `ko` | Korean product output | Use Korean narrative and Korean UI copy. |
+| Fintech signup | [Phone verification](https://jinyoung89.github.io/mobile-ui-generator-skill/examples/fintech-signup/) | [Source and spec](examples/proof/fintech-signup/) |
+| Commerce checkout | [Address and payment review](https://jinyoung89.github.io/mobile-ui-generator-skill/examples/commerce-checkout-address/) | [Source and spec](examples/proof/commerce-checkout/) |
+| Mobility booking | [Map and ride booking](https://jinyoung89.github.io/mobile-ui-generator-skill/examples/mobility-map-booking/) | [Source and spec](examples/proof/mobility-map-booking/) |
+| Social feed | [Community feed](https://jinyoung89.github.io/mobile-ui-generator-skill/examples/social-feed/) | [Source and spec](examples/proof/social-feed/) |
+| Messenger chat | [Conversation and composer](https://jinyoung89.github.io/mobile-ui-generator-skill/examples/messenger-chat/) | [Source and spec](examples/proof/messenger-chat/) |
 
-Do not mix English and Korean in the same user-facing output unless the user requests bilingual output or a brand/product name requires it.
+Each proof directory contains the request, canonical `spec.json`, compiled IR,
+four source targets, public provenance, and static verification results. The
+[showcase](https://jinyoung89.github.io/mobile-ui-generator-skill/) presents the
+same artifacts as responsive previews with HTML/CSS, React Native, Flutter, and
+SwiftUI code tabs.
 
-## Screen taxonomy
+## Install
 
-| Flow | Screen types |
-|---|---|
-| Acquisition | `splash`, `onboarding`, `permission`, `preference_setup` |
-| Auth | `login`, `signup`, `identity_verification`, `terms` |
-| Account | `profile`, `settings`, `notification_permission`, `account_cancellation` |
-| Commerce | `product_list`, `product_detail`, `cart`, `checkout`, `payment`, `order_complete` |
-| Finance | `account_home`, `transfer`, `wallet`, `investment_portfolio`, `card_detail` |
-| Social/content | `feed`, `chat`, `notification`, `creator_profile`, `content_viewer` |
-| Mobility/travel | `map_location`, `reservation_booking`, `route`, `stay_booking`, `ticket` |
-| Education/game | `lesson_home`, `quiz`, `progress`, `game_lobby`, `reward` |
-| Support | `customer_support`, `faq`, `empty_state`, `error_recovery` |
-
-## Pattern system
-
-The skill now treats mobile UI as a pattern system, not just a screen name. A generated brief should identify concrete patterns and the decisions each pattern requires.
-
-| Pattern group | Examples |
-|---|---|
-| Acquisition/auth | splash, onboarding, permission, login, signup, phone verification, identity verification, terms agreement |
-| Home/navigation | main home, bottom tabs, top app bar, menu, my page, membership |
-| Search/listing | search, filter/sort, category browse, PLP, comparison, nearby discovery |
-| Detail/content | PDP, content viewer, media viewer, bookmark/wishlist, announcement |
-| Commerce/payment | cart, checkout, simple payment, coupon/points, order complete, order history, review, review writing |
-| Finance | account overview, transfer, transaction history, card detail, portfolio, security auth |
-| Booking/location | map location, route navigation, reservation booking, map bottom sheet, delivery tracking, stay booking |
-| Social/creation | feed, chat, notification, profile, writing/posting, camera/upload |
-| Engagement | gamification, ranking, points/rewards, event promotion, quest progress |
-| Support/states | customer support, FAQ, inquiry, empty state, error state, loading skeleton, success state |
-
-Each pattern should specify component inventory, state matrix, interaction model, copy requirements, and mobile constraints.
-
-## Service domains
-
-The skill can adapt tone, layout, CTA hierarchy, and font choices for domains such as:
-
-- fintech and banking;
-- commerce and marketplace;
-- mobility and delivery;
-- healthcare and booking;
-- education and learning;
-- games and entertainment;
-- messenger and social community;
-- media/content apps;
-- travel and reservation;
-- SaaS/productivity;
-- customer support and help centers.
-
-## Font profiles
-
-Typography is part of the generated UI. If a real brand font is confirmed by the user or public brand/design materials, use it. If the exact font is unknown, use a safe free/public Korean UI font profile.
-
-| Font profile | Good for | Public URL |
-|---|---|---|
-| Pretendard | neutral Korean app UI, fintech, commerce, productivity | https://github.com/orioncactus/pretendard |
-| SUIT | compact modern UI, onboarding, settings, dashboards | https://github.com/sunn-us/SUIT |
-| Noto Sans KR | safe Android/Web fallback | https://fonts.google.com/noto/specimen/Noto+Sans+KR |
-| IBM Plex Sans KR | tech, AI, analytics, editorial/product screens | https://fonts.google.com/specimen/IBM+Plex+Sans+KR |
-| Spoqa Han Sans Neo | friendly consumer services, local commerce, food/lifestyle | https://github.com/spoqa/spoqa-han-sans |
-| Wanted Sans | SaaS, recruiting, productivity, professional services | https://github.com/wanteddev/wanted-sans |
-
-Example field:
-
-```yaml
-font_profile:
-  family: Pretendard
-  css_url: https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css
-  fallback: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif
-  confidence: recommended fallback
-  reason: Neutral Korean mobile UI with strong numeric readability.
+```bash
+git clone https://github.com/jinyoung89/mobile-ui-generator-skill.git
+cp -R mobile-ui-generator-skill/skills/mobile-ui-generator "$CODEX_HOME/skills/"
 ```
 
-Rules:
+## Use
 
-- Do not invent a service-specific font name.
-- Use confirmed brand fonts only when the user provides them or public brand/design docs confirm them.
-- Always include a fallback stack for iOS, Android, and Web.
-- Check each font license before commercial use.
-
-## What the skill produces
-
-| Output | Purpose |
-|---|---|
-| `mobile-ui-brief.md` | Human-readable UX/UI generation brief |
-| `mobile-ui-brief.json` | Machine-readable UI spec |
-| `pattern_system` | Pattern groups, layout archetype, components, interactions, and state matrix |
-| `font_profile` | Font family, CSS URL, fallback stack, and reason |
-| `copy_system` | Locale-specific UI copy guidelines |
-| `implementation_prompt` | Prompt for code, Figma, design-system, or image-generation agents |
-
-## Website examples
-
-The website focuses on prompt-to-UI results. Each example starts with a user request and shows the mobile screen, visual hierarchy, interaction states, and UX decisions the skill can produce. Internal JSON/spec details stay in the repository for agents and validation rather than dominating the public page.
-
-- requested prompt;
-- generated mobile UI preview;
-- UX goal and hierarchy;
-- visible components;
-- handled states;
-- visual/font tone.
-
-Current showcased scenarios include Korean fintech phone verification, commerce checkout, mobility map booking, and account cancellation.
-
-Open the showcase:
+Ask an agent to use the installed skill and name the product job, states,
+language, viewport range, and target platforms:
 
 ```text
-https://jinyoung89.github.io/mobile-ui-generator-skill/
+Create a checkout screen for 320–430 px widths. Include empty, loading,
+error, and success states. Return HTML/CSS, React Native, Flutter, and SwiftUI.
 ```
 
-## Repository layout
+For a new spec, start from
+[`templates/mobile-ui-spec.json`](skills/mobile-ui-generator/templates/mobile-ui-spec.json)
+and validate it with the skill-local script:
+
+```bash
+python3 skills/mobile-ui-generator/scripts/validate_spec.py path/to/spec.json
+```
+
+## Canonical generation and static verification
+
+The JSON spec is the source of truth. Platform source, responsive preview,
+compiled IR, hashes, and provenance are generated from it; platform-specific
+values do not become a second design contract.
+
+Repository checks:
+
+```bash
+npm install
+npm test -- tooling/test/proof-set.test.ts
+npm run typecheck
+python3 scripts/validate_patterns.py
+python3 scripts/validate_site.py
+npm run validate:boundary -- examples/proof
+```
+
+The first-release proof claim is deliberately static: canonical specs validate,
+generated source is reproducible, files and hashes agree, and the public boundary
+passes. Native build, native run, device/simulator execution, and native capture
+are **not claimed and are not required** for this proof set.
+
+## Privacy boundary
+
+Public artifacts contain generalized guidance, synthetic local fixtures, and
+repository-generated outputs only. The boundary checker rejects private paths,
+credentials, source-identifying material, unsupported links, and unsafe files.
+Source screenshots, private acquisition data, and hidden provenance are not
+published.
+
+## Repository map
 
 ```text
-skills/mobile-ui-generator/SKILL.md
-examples/briefs/                  # public sample briefs
-examples/specs/                   # public sample UI specs
-docs/index.html                   # static showcase page
-docs/assets/                      # public SVG artwork
+skills/mobile-ui-generator/   # installable skill, schema, templates, references
+examples/proof/               # five canonical specs and four-target source sets
+tooling/                      # compiler, generators, validators, and tests
+site/                         # generated showcase source
+docs/                         # published static site
 ```
-
-## Skill reference architecture
-
-The installed skill is not just a single prompt. It includes a design reference set under `skills/mobile-ui-generator/references/`. The public skill contains generalized design guidance only; underlying reference screens and origin details stay private:
-
-| Reference | Purpose |
-|---|---|
-| `evidence-and-sanitization.md` | Public-safe policy for using private/local collected reference analysis without revealing origins |
-| `taxonomy-filter-model.md` | Defines the two filter axes: app type/service category vs UI pattern/functional unit |
-| `design-principles.md` | Mobile design decision order, hierarchy, typography, color, motion, accessibility |
-| `visual-composition-contract.md` | Alignment, spacing, density, proportions, safe-area, and rendered visual QA rules for visible UI outputs |
-| `mobile-pattern-library.md` | 60+ mobile UI patterns with components, states, interactions, copy, accessibility, anti-patterns |
-| `visual-style-taxonomy.md` | Mobile visual style selection, color moods, style combinations, anti-patterns |
-| `domain-playbooks.md` | Domain-specific guidance for fintech, commerce, mobility, healthcare, education, games, media, IoT, and more |
-| `component-state-checklist.md` | Component inventory and state matrix rules for implementation-ready specs |
-| `quality-review-checklist.md` | Pre-delivery quality gate for design fit, visual system, states, accessibility, and handoff |
-| `scripts/search.py` | Search installed skill references by query, area, or exact pattern ID |
-| `templates/mobile-ui-brief.md` | Human-readable mobile design brief template |
-| `templates/mobile-ui-spec.json` | Structured JSON implementation spec template |
-| `templates/pattern-observation.md` | Public-safe observation template for future pattern updates |
-
-### Two filter axes
-
-- `app_type`: what the service does, e.g. `wallet_payment`, `food_delivery`, `pet_care`, `travel_booking`, `ai_productivity`.
-- `ui_pattern`: functional units inside the service, e.g. `phone_verification`, `search`, `checkout`, `bottom_sheet_map`, `review_write`.
-
-Internal taxonomy labels are for specs and QA only. They should not appear as visible user-facing UI copy.
-
-### Skill-local search
-
-After installing the skill, agents can query the design knowledge base directly:
-
-```bash
-python3 skills/mobile-ui-generator/scripts/search.py "fintech checkout coupon" --area all -n 5
-python3 skills/mobile-ui-generator/scripts/search.py --pattern phone_verification
-python3 skills/mobile-ui-generator/scripts/search.py "glass dark premium" --area styles -n 3
-python3 skills/mobile-ui-generator/scripts/search.py "empty error loading" --area components -n 5
-```
-
-Search areas: `taxonomy`, `patterns`, `domains`, `styles`, `components`, `quality`, `principles`, `evidence`, or `all`.
-
-Validation:
-
-```bash
-python3 scripts/validate_patterns.py
-python3 scripts/validate_site.py
-```
-
-## Pattern coverage workflow
-
-Patterns are maintained as an expanding public-safe library. New observations should first be normalized into generic pattern IDs, then added to `skills/mobile-ui-generator/references/mobile-pattern-library.md`. Run:
-
-```bash
-python3 scripts/validate_patterns.py
-python3 scripts/validate_site.py
-```
-
-The current library covers 60+ detailed mobile patterns plus domain modifiers, searchable references, and reusable handoff templates.
 
 ## License
 

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "public-knowledge.schema.json",
+  "title": "Public aggregate mobile UI knowledge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authored_platform_guidance",
+    "minimum_aggregate_sample_count",
+    "patterns"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "authored_platform_guidance": { "const": true },
+    "minimum_aggregate_sample_count": { "type": "integer", "minimum": 5 },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category_id",
+          "pattern_id",
+          "sample_count",
+          "aggregate_distributions",
+          "recommended_ranges",
+          "recurring_component_rules",
+          "recurring_state_rules",
+          "confidence_summary"
+        ],
+        "properties": {
+          "category_id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+          "pattern_id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+          "sample_count": { "type": "integer", "minimum": 5 },
+          "aggregate_distributions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["metric_id", "minimum", "median", "maximum"],
+              "properties": {
+                "metric_id": { "enum": ["bottom-nav-height-px", "card-gap-px", "content-padding-px"] },
+                "minimum": { "type": "number", "minimum": 0 },
+                "median": { "type": "number", "minimum": 0 },
+                "maximum": { "type": "number", "minimum": 0 }
+              }
+            }
+          },
+          "recommended_ranges": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["metric_id", "minimum", "maximum"],
+              "properties": {
+                "metric_id": { "enum": ["bottom-nav-height-px", "card-gap-px", "content-padding-px"] },
+                "minimum": { "type": "number", "minimum": 0 },
+                "maximum": { "type": "number", "minimum": 0 }
+              }
+            }
+          },
+          "recurring_component_rules": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" }
+          },
+          "recurring_state_rules": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" }
+          },
+          "confidence_summary": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["minimum", "median", "maximum"],
+            "properties": {
+              "minimum": { "type": "number", "minimum": 0, "maximum": 1 },
+              "median": { "type": "number", "minimum": 0, "maximum": 1 },
+              "maximum": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

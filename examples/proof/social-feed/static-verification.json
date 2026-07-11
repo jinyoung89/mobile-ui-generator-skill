@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0.0",
+  "example_id": "social-feed",
+  "status": "passed",
+  "verification_scope": "canonical-spec-and-static-source",
+  "spec_valid": true,
+  "source_static_valid": true,
+  "bilingual_fixtures_present": true,
+  "numeric_tokens_resolved": true,
+  "platform_parity_warnings": [],
+  "spec_sha256": "d2cd9c4cdf66366c8bc9bc7fcfe344fba6f915bd21063810f70b8b270b8457de",
+  "canonical_ir_sha256": "cf8c2220453e00ddb6f69b906929fa9ac9109f052f6cad11366ae77457c8ca43",
+  "request_sha256": "e1264968f3686f16177959c2ec61f836d3ff4c7746e42588760c3b4ff0c3a653",
+  "source_sha256": {
+    "html-css/index.html": "ed5efca6900aaafa5ce831e3e1795de2b9ba066f03d95db576c0b00cbf4b45c6",
+    "html-css/styles.css": "bebb82e896a2bf9349bc6532dc0a7e96357008ae8ed2ee0ac126014756fa4868",
+    "html-css/app.js": "3ab59c915049dcf104eb298f2b7bad343f641592befddd9f08ca50634853b62f",
+    "react-native/Screen.tsx": "467adf13cb365d355b9bc68fa77f3f678343e43f0d8151f90a4e828535f6a9fc",
+    "react-native/fixtures.ts": "eb6b95c1e830e6859a0b64f8cb19ace2fa6d788e2bbc9b1cfb25745e207a7ad9",
+    "flutter/screen.dart": "9b33892d20838dd80f93b1c57cf2684ad60c4a89176251e046cc82ae018468c6",
+    "flutter/fixtures.dart": "9e1ad606c954a8de174690bb9e5870a1b7e641689161243313fa993b5ccbaf57",
+    "swiftui/Screen.swift": "ec3e9c0ec5cafc82f815aea19d2fa8d4fbc8139cf36b0a2bf99ebcbeb7a55bd6",
+    "swiftui/Fixtures.swift": "7932030cec60ad03ac412c939590f2074b02ff11ad23d5c8252d5594a1c83ffd"
+  },
+  "checked_targets": [
+    "html-css",
+    "react-native",
+    "flutter",
+    "swiftui"
+  ],
+  "native_build": "not_run_not_required",
+  "native_execution": "not_run_not_required",
+  "native_capture": "not_run_not_required",
+  "generator_version": "1.0.0",
+  "checks": [
+    {
+      "id": "source-completeness",
+      "status": "passed",
+      "detail": "all nine source files are present"
+    },
+    {
+      "id": "unresolved-markers",
+      "status": "passed",
+      "detail": "no unresolved template markers"
+    },
+    {
+      "id": "locales-html-css",
+      "status": "passed",
+      "detail": "HTML visible and ARIA copy follows locale fixtures"
+    },
+    {
+      "id": "locales-react-native",
+      "status": "passed",
+      "detail": "React Native uses bilingual fixtures"
+    },
+    {
+      "id": "locales-flutter",
+      "status": "passed",
+      "detail": "Flutter uses bilingual fixtures"
+    },
+    {
+      "id": "locales-swiftui",
+      "status": "passed",
+      "detail": "SwiftUI uses bilingual fixtures"
+    },
+    {
+      "id": "states-html-css",
+      "status": "passed",
+      "detail": "HTML renders all declared fixture states"
+    },
+    {
+      "id": "states-react-native",
+      "status": "passed",
+      "detail": "react-native renders all declared fixture states"
+    },
+    {
+      "id": "states-flutter",
+      "status": "passed",
+      "detail": "flutter renders all declared fixture states"
+    },
+    {
+      "id": "states-swiftui",
+      "status": "passed",
+      "detail": "swiftui renders all declared fixture states"
+    },
+    {
+      "id": "platform-constructs",
+      "status": "passed",
+      "detail": "safe-area, keyboard, and scroll constructs are present"
+    },
+    {
+      "id": "high-risk-confirmation",
+      "status": "passed",
+      "detail": "confirmation gate is not required for this risk tier"
+    }
+  ]
+}

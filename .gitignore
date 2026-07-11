@@ -21,6 +21,10 @@ venv/
 .env
 .env.*
 
+# Node
+/node_modules/
+**/node_modules/
+
 # macOS / editor
 .DS_Store
 .idea/
@@ -29,4 +33,5 @@ venv/
 # Build artifacts
 /dist/
 /build/
-/site/
+**/.dart_tool/
+**/build/

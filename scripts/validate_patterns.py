@@ -26,6 +26,14 @@ PATTERN_REF = REF_DIR / "mobile-pattern-library.md"
 SEARCH_SCRIPT = SCRIPT_DIR / "search.py"
 
 REQUIRED_REFERENCES = {
+    "request-routing.md": ["Route before styling", "app_category", "ui_patterns", "showcase/all-platforms"],
+    "layout-foundations.md": ["Numeric contract", "token layer", "constraint precedence", "Component recipe"],
+    "responsive-and-safe-area.md": ["Width profiles", "safe-area", "Keyboard and dynamic content", "Stress matrix"],
+    "accessibility.md": ["Accessibility baseline", "44×44", "4.5:1", "Dynamic Type"],
+    "acceptance-checks.md": ["Source gate", "Build and interaction gate", "Render gate", "Showcase gate"],
+    "taxonomy.md": ["Two axes", "app_category", "ui_patterns", "Selection rules"],
+    "pattern-catalog.md": ["Pattern catalog", "checkout", "chat", "required states"],
+    "domain-guides.md": ["Domain guides", "Commerce / marketplace", "Finance / identity", "numeric layout contract"],
     "evidence-and-sanitization.md": [
         "Public-safe statement",
         "What must stay private",
@@ -135,6 +143,8 @@ REQUIRED_SUPPORT_FILES = {
         "Public reference update candidate",
         "Sanitization checklist",
     ],
+    "scripts/validate_spec.py": ["canonical mobile UI spec", "schema_version", "platform_mappings", "Spec validation passed"],
+    "scripts/validate_artifact.py": ["artifact manifest", "source_files", "generated_by", "Artifact validation passed"],
 }
 
 EXPECTED_PATTERN_IDS = [
@@ -245,6 +255,17 @@ SKILL_MUST_CONTAIN = [
     "Build the pattern system before writing copy",
     "Language mode is a copy/output setting",
     "quality_gate",
+    "request-routing.md",
+    "layout-foundations.md",
+    "responsive-and-safe-area.md",
+    "accessibility.md",
+    "acceptance-checks.md",
+    "taxonomy.md",
+    "pattern-catalog.md",
+    "domain-guides.md",
+    "showcase/all-platforms",
+    "validate_spec.py",
+    "validate_artifact.py",
 ]
 
 

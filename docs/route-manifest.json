@@ -1,0 +1,10 @@
+{
+  "routes": [
+    "./",
+    "examples/commerce-checkout-address/",
+    "examples/fintech-signup/",
+    "examples/messenger-chat/",
+    "examples/mobility-map-booking/",
+    "examples/social-feed/"
+  ]
+}

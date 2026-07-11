@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-07-11",
+  "requiredCellsConfigured": true,
+  "node": {
+    "version": "22.15.0",
+    "installed": true
+  },
+  "npm": {
+    "version": "10.9.2",
+    "installed": true
+  },
+  "python": {
+    "version": "3.14.3",
+    "installed": true
+  },
+  "flutter": {
+    "version": "3.35.3",
+    "installed": true
+  },
+  "dart": {
+    "version": "3.9.2",
+    "installed": true
+  },
+  "apple": {
+    "xcode": "15.2",
+    "swift": "5.9.2",
+    "iosRuntime": "17.2",
+    "simulator": {
+      "name": "iPhone 15",
+      "udid": "7732B728-22A6-4CCC-A121-C1F2BDC5EC23",
+      "configured": true
+    },
+    "installed": true
+  },
+  "android": {
+    "sdkRoot": "$HOME/Library/Android/sdk",
+    "commandLineTools": "21.0",
+    "platformApi": 34,
+    "systemImage": "system-images;android-34;google_apis;arm64-v8a",
+    "adb": "35.0.2-12147458",
+    "emulator": "35.2.10.0",
+    "avd": {
+      "name": "mobile_ui_api34",
+      "device": "pixel_7",
+      "configured": true
+    },
+    "installed": true
+  }
+}

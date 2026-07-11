@@ -1,0 +1,1499 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Generated mobile UI examples with complete cross-platform source."><title>민서 — Mobile UI Generator</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="topbar"><a class="brand" href="../../">M/UI</a><nav aria-label="Primary"><a href="../../#examples">All examples</a><a href="../../#install">Install</a></nav></header><main class="detail"><section class="detail-hero"><div><p class="kicker">messaging · chat + message-composer + conversation-list</p><h1>민서</h1><p class="lede">Read recent context and send a message without the keyboard covering the conversation</p><div class="chips"><span>disabled</span><span>enabled</span><span>loading</span><span>success</span><span>empty</span><span>focused</span></div></div><div class="preview-studio"><div class="preview-toolbar" role="group" aria-label="Preview width"><button type="button" data-preview-width="320" aria-pressed="false">320</button><button type="button" data-preview-width="390" aria-pressed="true">390</button><button type="button" data-preview-width="430" aria-pressed="false">430</button></div><div class="resizable-preview" data-preview-container style="--preview-width:390px"><div class="device-shell"><iframe class="device-preview" title="민서 generated mobile UI preview" loading="eager" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title data-i18n=&quot;title&quot;&gt;민서&lt;/title&gt;
+  &lt;style&gt;/* canonical messenger-chat: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #0F766E; --danger: #B42318; }
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.risk-confirm { display: flex; min-height: 44px; align-items: center; gap: 10px; margin-top: 10px; font-weight: 700; }
+.risk-confirm input { width: 22px; height: 22px; accent-color: var(--primary); }
+.state-panel { display: grid; gap: 6px; margin-bottom: var(--component-gap); border: 1px solid color-mix(in srgb, var(--primary) 25%, #e2e6ec); border-radius: var(--radius); padding: var(--card-padding); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+.state-panel[hidden] { display: none; }
+.state-panel h2, .state-panel p { margin: 0; } .state-panel p { color: #5b6472; line-height: 22px; }
+.state-panel button { justify-self: start; border: 1px solid var(--primary); border-radius: 10px; padding: 0 14px; background: var(--surface); color: var(--primary); font-weight: 750; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: chat */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-chat&quot; data-example-id=&quot;messenger-chat&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot; data-i18n=&quot;item_badge&quot;&gt;온라인&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;민서&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;온라인 · 알림 켜짐&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;언어 전환&quot; data-i18n-aria=&quot;switch_language_label&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;state-panel&quot; data-state-panel hidden&gt;&lt;h2 data-state-title&gt;&lt;/h2&gt;&lt;p data-state-body&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; data-recover hidden&gt;&lt;/button&gt;&lt;/section&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;section class=&quot;message-list&quot; aria-label=&quot;최근 대화&quot; data-i18n-aria=&quot;secondary_label&quot;&gt;&lt;div class=&quot;bubble incoming&quot; data-i18n=&quot;message_in&quot;&gt;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&lt;/div&gt;&lt;div class=&quot;bubble outgoing&quot; data-i18n=&quot;message_out&quot;&gt;응, 긴 한국어 문장까지 줄바꿈 확인했어.&lt;/div&gt;&lt;small data-i18n=&quot;item_meta&quot;&gt;오후 3:24 · 읽음&lt;/small&gt;&lt;/section&gt;&lt;label class=&quot;composer&quot;&gt;&lt;span class=&quot;sr-only&quot; data-i18n=&quot;field_label&quot;&gt;메시지 입력&lt;/span&gt;&lt;input data-local-input aria-label=&quot;메시지 입력&quot; data-i18n-aria=&quot;field_label&quot;&gt;&lt;button type=&quot;button&quot; data-secondary-action aria-label=&quot;메시지 보내기&quot; data-i18n-aria=&quot;primary_cta&quot;&gt;↑&lt;/button&gt;&lt;/label&gt;&lt;span class=&quot;source-id&quot; aria-hidden=&quot;true&quot;&gt;messenger-chat&lt;/span&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;메시지 보내기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status data-i18n=&quot;ready_label&quot;&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// messenger-chat: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_action_label&quot;: &quot;이해했고 확인합니다&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;로컬 예시를 확인하고 준비되면 계속하세요.&quot;,
+      &quot;default_title&quot;: &quot;준비됐어요&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;영향을 확인하고 동의한 뒤 신뢰가 필요한 동작을 진행하세요.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;계속하기 전에 확인해 주세요&quot;,
+      &quot;disabled_body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+      &quot;disabled_title&quot;: &quot;아직 진행할 수 없어요&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;enabled_body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+      &quot;enabled_title&quot;: &quot;진행할 준비가 됐어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;메시지 입력&quot;,
+      &quot;filled_body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+      &quot;filled_title&quot;: &quot;입력이 완료됐어요&quot;,
+      &quot;focused_body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+      &quot;focused_title&quot;: &quot;입력란을 선택했어요&quot;,
+      &quot;item_badge&quot;: &quot;온라인&quot;,
+      &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+      &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+      &quot;item_title&quot;: &quot;민서와의 대화&quot;,
+      &quot;keyboard_body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+      &quot;keyboard_title&quot;: &quot;키보드가 열렸어요&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+      &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+      &quot;offline_body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+      &quot;offline_title&quot;: &quot;오프라인 상태예요&quot;,
+      &quot;permission_denied_body&quot;: &quot;로컬 대체 화면을 사용하거나 권한 안내를 확인하세요.&quot;,
+      &quot;permission_denied_title&quot;: &quot;권한이 허용되지 않았어요&quot;,
+      &quot;pressed_body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+      &quot;pressed_title&quot;: &quot;버튼을 눌렀어요&quot;,
+      &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;recover_label&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+      &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+      &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;전송됨&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;switch_language_label&quot;: &quot;언어 전환&quot;,
+      &quot;title&quot;: &quot;민서&quot;,
+      &quot;validation_error_body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+      &quot;validation_error_title&quot;: &quot;입력 내용을 확인해 주세요&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_action_label&quot;: &quot;I understand and confirm&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;Review the local example and continue when ready.&quot;,
+      &quot;default_title&quot;: &quot;Ready&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;Review the consequence and acknowledge it before the high-trust action.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;Confirm before continuing&quot;,
+      &quot;disabled_body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+      &quot;disabled_title&quot;: &quot;Action unavailable&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;enabled_body&quot;: &quot;The primary action is ready for this local example.&quot;,
+      &quot;enabled_title&quot;: &quot;Action ready&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Message&quot;,
+      &quot;filled_body&quot;: &quot;The local value is ready to review.&quot;,
+      &quot;filled_title&quot;: &quot;Input complete&quot;,
+      &quot;focused_body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+      &quot;focused_title&quot;: &quot;Input focused&quot;,
+      &quot;item_badge&quot;: &quot;Online&quot;,
+      &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+      &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+      &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
+      &quot;keyboard_body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+      &quot;keyboard_title&quot;: &quot;Keyboard open&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+      &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+      &quot;offline_body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+      &quot;offline_title&quot;: &quot;You are offline&quot;,
+      &quot;permission_denied_body&quot;: &quot;Continue with the local fallback or review permission guidance.&quot;,
+      &quot;permission_denied_title&quot;: &quot;Permission not allowed&quot;,
+      &quot;pressed_body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+      &quot;pressed_title&quot;: &quot;Action pressed&quot;,
+      &quot;primary_cta&quot;: &quot;Send message&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;recover_label&quot;: &quot;Return to default&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+      &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+      &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+      &quot;success_label&quot;: &quot;Sent&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;switch_language_label&quot;: &quot;Switch language&quot;,
+      &quot;title&quot;: &quot;Minseo&quot;,
+      &quot;validation_error_body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+      &quot;validation_error_title&quot;: &quot;Check this field&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;conversation_default&quot;: {
+      &quot;delivery&quot;: &quot;read&quot;,
+      &quot;messages&quot;: 2,
+      &quot;network&quot;: false,
+      &quot;offline_queue&quot;: false,
+      &quot;participant&quot;: &quot;민서&quot;
+    }
+  },
+  &quot;stateFixtures&quot;: {
+    &quot;ko&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;민서&quot;,
+        &quot;body&quot;: &quot;온라인 · 알림 켜짐&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;화면을 준비하고 있어요&quot;,
+        &quot;body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;아직 내용이 없어요&quot;,
+        &quot;body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;완료하지 못했어요&quot;,
+        &quot;body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;offline&quot;: {
+        &quot;title&quot;: &quot;오프라인 상태예요&quot;,
+        &quot;body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;완료됐어요&quot;,
+        &quot;body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;전송됨&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;입력란을 선택했어요&quot;,
+        &quot;body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;입력이 완료됐어요&quot;,
+        &quot;body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;키보드가 열렸어요&quot;,
+        &quot;body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;아직 진행할 수 없어요&quot;,
+        &quot;body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;진행할 준비가 됐어요&quot;,
+        &quot;body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    },
+    &quot;en&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;Minseo&quot;,
+        &quot;body&quot;: &quot;Online · Notifications on&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;Preparing your screen&quot;,
+        &quot;body&quot;: &quot;The local example is loading without a network request.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;Nothing here yet&quot;,
+        &quot;body&quot;: &quot;Start with the primary action below.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;We could not finish that&quot;,
+        &quot;body&quot;: &quot;Review the highlighted information and try again.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;offline&quot;: {
+        &quot;title&quot;: &quot;You are offline&quot;,
+        &quot;body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;All set&quot;,
+        &quot;body&quot;: &quot;The message was added to the local conversation.&quot;,
+        &quot;actionLabel&quot;: &quot;Sent&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;Input focused&quot;,
+        &quot;body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;Input complete&quot;,
+        &quot;body&quot;: &quot;The local value is ready to review.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;Keyboard open&quot;,
+        &quot;body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;Action unavailable&quot;,
+        &quot;body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;Action ready&quot;,
+        &quot;body&quot;: &quot;The primary action is ready for this local example.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    }
+  },
+  &quot;requiredStates&quot;: [
+    &quot;default&quot;,
+    &quot;loading&quot;,
+    &quot;empty&quot;,
+    &quot;error&quot;,
+    &quot;offline&quot;,
+    &quot;success&quot;,
+    &quot;focused&quot;,
+    &quot;filled&quot;,
+    &quot;keyboard&quot;,
+    &quot;disabled&quot;,
+    &quot;enabled&quot;
+  ],
+  &quot;risk&quot;: &quot;medium&quot;
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+const statePanel = document.querySelector(&#39;[data-state-panel]&#39;);
+const stateTitle = document.querySelector(&#39;[data-state-title]&#39;);
+const stateBody = document.querySelector(&#39;[data-state-body]&#39;);
+const recover = document.querySelector(&#39;[data-recover]&#39;);
+const riskCheckbox = document.querySelector(&#39;[data-risk-checkbox]&#39;);
+let locale = &#39;ko&#39;;
+let acknowledged = proof.risk !== &#39;high&#39;;
+const requestedState = new URLSearchParams(window.location.search).get(&#39;state&#39;);
+let currentState = proof.requiredStates.includes(requestedState) ? requestedState : &#39;default&#39;;
+const renderState = (nextState = currentState) =&gt; {
+  currentState = proof.requiredStates.includes(nextState) ? nextState : &#39;default&#39;;
+  const stateModel = proof.stateFixtures[locale][currentState];
+  root.dataset.state = currentState;
+  statePanel.hidden = currentState === &#39;default&#39;;
+  stateTitle.textContent = stateModel.title;
+  stateBody.textContent = stateModel.body;
+  recover.hidden = !stateModel.recoverTo;
+  recover.textContent = stateModel.recoveryLabel;
+  recover.dataset.recoverTo = stateModel.recoverTo ?? &#39;&#39;;
+  status.textContent = stateModel.body;
+  primary.textContent = stateModel.actionLabel;
+  primary.disabled = stateModel.blocksPrimary || (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged);
+  primary.setAttribute(&#39;aria-busy&#39;, String(stateModel.busy));
+};
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.title = copy.title;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  document.querySelectorAll(&#39;[data-i18n-aria]&#39;).forEach((node) =&gt; { const key = node.dataset.i18nAria; if (key &amp;&amp; copy[key]) node.setAttribute(&#39;aria-label&#39;, copy[key]); });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  renderState(currentState);
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  if (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged) { renderState(&#39;destructive_confirmation&#39;); return; }
+  renderState(&#39;loading&#39;);
+  queueMicrotask(() =&gt; renderState(&#39;success&#39;));
+});
+recover.addEventListener(&#39;click&#39;, () =&gt; renderState(recover.dataset.recoverTo || &#39;default&#39;));
+riskCheckbox?.addEventListener(&#39;change&#39;, () =&gt; { acknowledged = riskCheckbox.checked; renderState(acknowledged ? &#39;default&#39; : &#39;destructive_confirmation&#39;); });
+document.querySelectorAll(&#39;[data-local-input]&#39;).forEach((input) =&gt; {
+  input.addEventListener(&#39;focus&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;focused&#39;)) renderState(&#39;focused&#39;); });
+  input.addEventListener(&#39;input&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;filled&#39;)) renderState(input.value ? &#39;filled&#39; : &#39;default&#39;); });
+});
+window.__MOBILE_UI_PROOF__ = { ...proof, renderState };
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div></div></div></section>
+<section class="evidence"><div><p class="kicker">Numeric contract</p><h2>Measured, not guessed</h2></div><dl><div><dt>card padding</dt><dd>16px</dd></div><div><dt>component gap</dt><dd>12px</dd></div><div><dt>control height</dt><dd>52px</dd></div><div><dt>corner radius</dt><dd>12px</dd></div><div><dt>max readable line width</dt><dd>360px</dd></div><div><dt>screen horizontal inset</dt><dd>16px</dd></div><div><dt>scroll content bottom inset</dt><dd>100px</dd></div><div><dt>section gap</dt><dd>16px</dd></div></dl><p class="evidence-note">Safe area and fixed regions are represented in the canonical IR. Responsive profiles cover 320, 390, and 430 px. Platform source is statically generated; native execution is not claimed.</p></section>
+<section class="source-section"><div class="section-heading"><div><p class="kicker">Complete source</p><h2>Use the platform you ship</h2></div><p>File boundaries are preserved. Copy controls copy the entire visible file.</p></div><div class="source-tabs" role="tablist" aria-label="Source platform"><button id="tab-html_css" type="button" role="tab" aria-controls="panel-html_css" aria-selected="true" tabindex="0">HTML / CSS</button><button id="tab-react_native" type="button" role="tab" aria-controls="panel-react_native" aria-selected="false" tabindex="-1">React Native</button><button id="tab-flutter" type="button" role="tab" aria-controls="panel-flutter" aria-selected="false" tabindex="-1">Flutter</button><button id="tab-swiftui" type="button" role="tab" aria-controls="panel-swiftui" aria-selected="false" tabindex="-1">SwiftUI</button></div><section id="panel-html_css" role="tabpanel" aria-labelledby="tab-html_css" ><article class="source-file"><div class="source-toolbar"><strong>index.html</strong><button type="button" data-copy-source="source-html_css-0">Copy file</button></div><pre tabindex="0"><code id="source-html_css-0">&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title data-i18n=&quot;title&quot;&gt;민서&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-chat&quot; data-example-id=&quot;messenger-chat&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot; data-i18n=&quot;item_badge&quot;&gt;온라인&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;민서&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;온라인 · 알림 켜짐&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;언어 전환&quot; data-i18n-aria=&quot;switch_language_label&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;state-panel&quot; data-state-panel hidden&gt;&lt;h2 data-state-title&gt;&lt;/h2&gt;&lt;p data-state-body&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; data-recover hidden&gt;&lt;/button&gt;&lt;/section&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;section class=&quot;message-list&quot; aria-label=&quot;최근 대화&quot; data-i18n-aria=&quot;secondary_label&quot;&gt;&lt;div class=&quot;bubble incoming&quot; data-i18n=&quot;message_in&quot;&gt;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&lt;/div&gt;&lt;div class=&quot;bubble outgoing&quot; data-i18n=&quot;message_out&quot;&gt;응, 긴 한국어 문장까지 줄바꿈 확인했어.&lt;/div&gt;&lt;small data-i18n=&quot;item_meta&quot;&gt;오후 3:24 · 읽음&lt;/small&gt;&lt;/section&gt;&lt;label class=&quot;composer&quot;&gt;&lt;span class=&quot;sr-only&quot; data-i18n=&quot;field_label&quot;&gt;메시지 입력&lt;/span&gt;&lt;input data-local-input aria-label=&quot;메시지 입력&quot; data-i18n-aria=&quot;field_label&quot;&gt;&lt;button type=&quot;button&quot; data-secondary-action aria-label=&quot;메시지 보내기&quot; data-i18n-aria=&quot;primary_cta&quot;&gt;↑&lt;/button&gt;&lt;/label&gt;&lt;span class=&quot;source-id&quot; aria-hidden=&quot;true&quot;&gt;messenger-chat&lt;/span&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;메시지 보내기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status data-i18n=&quot;ready_label&quot;&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>styles.css</strong><button type="button" data-copy-source="source-html_css-1">Copy file</button></div><pre tabindex="0"><code id="source-html_css-1">/* canonical messenger-chat: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #0F766E; --danger: #B42318; }
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.risk-confirm { display: flex; min-height: 44px; align-items: center; gap: 10px; margin-top: 10px; font-weight: 700; }
+.risk-confirm input { width: 22px; height: 22px; accent-color: var(--primary); }
+.state-panel { display: grid; gap: 6px; margin-bottom: var(--component-gap); border: 1px solid color-mix(in srgb, var(--primary) 25%, #e2e6ec); border-radius: var(--radius); padding: var(--card-padding); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+.state-panel[hidden] { display: none; }
+.state-panel h2, .state-panel p { margin: 0; } .state-panel p { color: #5b6472; line-height: 22px; }
+.state-panel button { justify-self: start; border: 1px solid var(--primary); border-radius: 10px; padding: 0 14px; background: var(--surface); color: var(--primary); font-weight: 750; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: chat */
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>app.js</strong><button type="button" data-copy-source="source-html_css-2">Copy file</button></div><pre tabindex="0"><code id="source-html_css-2">// messenger-chat: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_action_label&quot;: &quot;이해했고 확인합니다&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;로컬 예시를 확인하고 준비되면 계속하세요.&quot;,
+      &quot;default_title&quot;: &quot;준비됐어요&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;영향을 확인하고 동의한 뒤 신뢰가 필요한 동작을 진행하세요.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;계속하기 전에 확인해 주세요&quot;,
+      &quot;disabled_body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+      &quot;disabled_title&quot;: &quot;아직 진행할 수 없어요&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;enabled_body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+      &quot;enabled_title&quot;: &quot;진행할 준비가 됐어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;메시지 입력&quot;,
+      &quot;filled_body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+      &quot;filled_title&quot;: &quot;입력이 완료됐어요&quot;,
+      &quot;focused_body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+      &quot;focused_title&quot;: &quot;입력란을 선택했어요&quot;,
+      &quot;item_badge&quot;: &quot;온라인&quot;,
+      &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+      &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+      &quot;item_title&quot;: &quot;민서와의 대화&quot;,
+      &quot;keyboard_body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+      &quot;keyboard_title&quot;: &quot;키보드가 열렸어요&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+      &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+      &quot;offline_body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+      &quot;offline_title&quot;: &quot;오프라인 상태예요&quot;,
+      &quot;permission_denied_body&quot;: &quot;로컬 대체 화면을 사용하거나 권한 안내를 확인하세요.&quot;,
+      &quot;permission_denied_title&quot;: &quot;권한이 허용되지 않았어요&quot;,
+      &quot;pressed_body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+      &quot;pressed_title&quot;: &quot;버튼을 눌렀어요&quot;,
+      &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;recover_label&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+      &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+      &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;전송됨&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;switch_language_label&quot;: &quot;언어 전환&quot;,
+      &quot;title&quot;: &quot;민서&quot;,
+      &quot;validation_error_body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+      &quot;validation_error_title&quot;: &quot;입력 내용을 확인해 주세요&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_action_label&quot;: &quot;I understand and confirm&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;Review the local example and continue when ready.&quot;,
+      &quot;default_title&quot;: &quot;Ready&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;Review the consequence and acknowledge it before the high-trust action.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;Confirm before continuing&quot;,
+      &quot;disabled_body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+      &quot;disabled_title&quot;: &quot;Action unavailable&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;enabled_body&quot;: &quot;The primary action is ready for this local example.&quot;,
+      &quot;enabled_title&quot;: &quot;Action ready&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Message&quot;,
+      &quot;filled_body&quot;: &quot;The local value is ready to review.&quot;,
+      &quot;filled_title&quot;: &quot;Input complete&quot;,
+      &quot;focused_body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+      &quot;focused_title&quot;: &quot;Input focused&quot;,
+      &quot;item_badge&quot;: &quot;Online&quot;,
+      &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+      &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+      &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
+      &quot;keyboard_body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+      &quot;keyboard_title&quot;: &quot;Keyboard open&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+      &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+      &quot;offline_body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+      &quot;offline_title&quot;: &quot;You are offline&quot;,
+      &quot;permission_denied_body&quot;: &quot;Continue with the local fallback or review permission guidance.&quot;,
+      &quot;permission_denied_title&quot;: &quot;Permission not allowed&quot;,
+      &quot;pressed_body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+      &quot;pressed_title&quot;: &quot;Action pressed&quot;,
+      &quot;primary_cta&quot;: &quot;Send message&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;recover_label&quot;: &quot;Return to default&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+      &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+      &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+      &quot;success_label&quot;: &quot;Sent&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;switch_language_label&quot;: &quot;Switch language&quot;,
+      &quot;title&quot;: &quot;Minseo&quot;,
+      &quot;validation_error_body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+      &quot;validation_error_title&quot;: &quot;Check this field&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;conversation_default&quot;: {
+      &quot;delivery&quot;: &quot;read&quot;,
+      &quot;messages&quot;: 2,
+      &quot;network&quot;: false,
+      &quot;offline_queue&quot;: false,
+      &quot;participant&quot;: &quot;민서&quot;
+    }
+  },
+  &quot;stateFixtures&quot;: {
+    &quot;ko&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;민서&quot;,
+        &quot;body&quot;: &quot;온라인 · 알림 켜짐&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;화면을 준비하고 있어요&quot;,
+        &quot;body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;아직 내용이 없어요&quot;,
+        &quot;body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;완료하지 못했어요&quot;,
+        &quot;body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;offline&quot;: {
+        &quot;title&quot;: &quot;오프라인 상태예요&quot;,
+        &quot;body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;완료됐어요&quot;,
+        &quot;body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;전송됨&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;입력란을 선택했어요&quot;,
+        &quot;body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;입력이 완료됐어요&quot;,
+        &quot;body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;키보드가 열렸어요&quot;,
+        &quot;body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;아직 진행할 수 없어요&quot;,
+        &quot;body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;진행할 준비가 됐어요&quot;,
+        &quot;body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    },
+    &quot;en&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;Minseo&quot;,
+        &quot;body&quot;: &quot;Online · Notifications on&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;Preparing your screen&quot;,
+        &quot;body&quot;: &quot;The local example is loading without a network request.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;Nothing here yet&quot;,
+        &quot;body&quot;: &quot;Start with the primary action below.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;We could not finish that&quot;,
+        &quot;body&quot;: &quot;Review the highlighted information and try again.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;offline&quot;: {
+        &quot;title&quot;: &quot;You are offline&quot;,
+        &quot;body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;All set&quot;,
+        &quot;body&quot;: &quot;The message was added to the local conversation.&quot;,
+        &quot;actionLabel&quot;: &quot;Sent&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;Input focused&quot;,
+        &quot;body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;Input complete&quot;,
+        &quot;body&quot;: &quot;The local value is ready to review.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;Keyboard open&quot;,
+        &quot;body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;Action unavailable&quot;,
+        &quot;body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;Action ready&quot;,
+        &quot;body&quot;: &quot;The primary action is ready for this local example.&quot;,
+        &quot;actionLabel&quot;: &quot;Send message&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    }
+  },
+  &quot;requiredStates&quot;: [
+    &quot;default&quot;,
+    &quot;loading&quot;,
+    &quot;empty&quot;,
+    &quot;error&quot;,
+    &quot;offline&quot;,
+    &quot;success&quot;,
+    &quot;focused&quot;,
+    &quot;filled&quot;,
+    &quot;keyboard&quot;,
+    &quot;disabled&quot;,
+    &quot;enabled&quot;
+  ],
+  &quot;risk&quot;: &quot;medium&quot;
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+const statePanel = document.querySelector(&#39;[data-state-panel]&#39;);
+const stateTitle = document.querySelector(&#39;[data-state-title]&#39;);
+const stateBody = document.querySelector(&#39;[data-state-body]&#39;);
+const recover = document.querySelector(&#39;[data-recover]&#39;);
+const riskCheckbox = document.querySelector(&#39;[data-risk-checkbox]&#39;);
+let locale = &#39;ko&#39;;
+let acknowledged = proof.risk !== &#39;high&#39;;
+const requestedState = new URLSearchParams(window.location.search).get(&#39;state&#39;);
+let currentState = proof.requiredStates.includes(requestedState) ? requestedState : &#39;default&#39;;
+const renderState = (nextState = currentState) =&gt; {
+  currentState = proof.requiredStates.includes(nextState) ? nextState : &#39;default&#39;;
+  const stateModel = proof.stateFixtures[locale][currentState];
+  root.dataset.state = currentState;
+  statePanel.hidden = currentState === &#39;default&#39;;
+  stateTitle.textContent = stateModel.title;
+  stateBody.textContent = stateModel.body;
+  recover.hidden = !stateModel.recoverTo;
+  recover.textContent = stateModel.recoveryLabel;
+  recover.dataset.recoverTo = stateModel.recoverTo ?? &#39;&#39;;
+  status.textContent = stateModel.body;
+  primary.textContent = stateModel.actionLabel;
+  primary.disabled = stateModel.blocksPrimary || (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged);
+  primary.setAttribute(&#39;aria-busy&#39;, String(stateModel.busy));
+};
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.title = copy.title;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  document.querySelectorAll(&#39;[data-i18n-aria]&#39;).forEach((node) =&gt; { const key = node.dataset.i18nAria; if (key &amp;&amp; copy[key]) node.setAttribute(&#39;aria-label&#39;, copy[key]); });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  renderState(currentState);
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  if (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged) { renderState(&#39;destructive_confirmation&#39;); return; }
+  renderState(&#39;loading&#39;);
+  queueMicrotask(() =&gt; renderState(&#39;success&#39;));
+});
+recover.addEventListener(&#39;click&#39;, () =&gt; renderState(recover.dataset.recoverTo || &#39;default&#39;));
+riskCheckbox?.addEventListener(&#39;change&#39;, () =&gt; { acknowledged = riskCheckbox.checked; renderState(acknowledged ? &#39;default&#39; : &#39;destructive_confirmation&#39;); });
+document.querySelectorAll(&#39;[data-local-input]&#39;).forEach((input) =&gt; {
+  input.addEventListener(&#39;focus&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;focused&#39;)) renderState(&#39;focused&#39;); });
+  input.addEventListener(&#39;input&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;filled&#39;)) renderState(input.value ? &#39;filled&#39; : &#39;default&#39;); });
+});
+window.__MOBILE_UI_PROOF__ = { ...proof, renderState };
+renderLocale();
+</code></pre></article></section><section id="panel-react_native" role="tabpanel" aria-labelledby="tab-react_native" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.tsx</strong><button type="button" data-copy-source="source-react_native-0">Copy file</button></div><pre tabindex="0"><code id="source-react_native-0">// Generated from canonical IR messenger-chat; 한국어 + English; fixture-only.
+import React, { useMemo, useState } from &#39;react&#39;;
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, View } from &#39;react-native&#39;;
+import { SafeAreaView } from &#39;react-native-safe-area-context&#39;;
+import { fixtures, stateFixtures, type ProofState } from &#39;./fixtures&#39;;
+
+type Locale = keyof typeof fixtures;
+type MessengerChatScreenProps = { initialState?: ProofState };
+export function MessengerChatScreen({ initialState = &#39;default&#39; }: MessengerChatScreenProps) {
+  const [locale, setLocale] = useState&lt;Locale&gt;(&#39;ko&#39;);
+  const [screenState, setScreenState] = useState&lt;ProofState&gt;(initialState);
+  const [acknowledged, setAcknowledged] = useState(true);
+  const model = useMemo(() =&gt; fixtures[locale], [locale]);
+  const stateModel = stateFixtures[locale][screenState];
+  const actionAccessibilityState = { disabled: stateModel.blocksPrimary, busy: stateModel.busy };
+  return &lt;SafeAreaView style={styles.safe} edges={[&#39;top&#39;, &#39;bottom&#39;]}&gt;
+    &lt;KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === &#39;ios&#39; ? &#39;padding&#39; : &#39;height&#39;}&gt;
+      &lt;ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps=&quot;handled&quot; automaticallyAdjustKeyboardInsets&gt;
+        &lt;View style={styles.header}&gt;&lt;View style={styles.flex}&gt;&lt;Text accessibilityRole=&quot;header&quot; allowFontScaling style={styles.title}&gt;{model.title}&lt;/Text&gt;&lt;Text allowFontScaling style={styles.muted}&gt;{model.subtitle}&lt;/Text&gt;&lt;/View&gt;&lt;Pressable accessibilityRole=&quot;button&quot; accessibilityLabel={model.switch_language_label} onPress={() =&gt; setLocale(locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;)} style={styles.locale}&gt;&lt;Text&gt;{locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
+        {screenState !== &#39;default&#39; &amp;&amp; &lt;View accessibilityRole=&quot;alert&quot; style={styles.statePanel}&gt;{stateModel.busy &amp;&amp; &lt;ActivityIndicator /&gt;}&lt;Text style={styles.strong}&gt;{stateModel.title}&lt;/Text&gt;&lt;Text style={styles.muted}&gt;{stateModel.body}&lt;/Text&gt;{stateModel.recoverTo &amp;&amp; &lt;Pressable accessibilityRole=&quot;button&quot; onPress={() =&gt; setScreenState(stateModel.recoverTo as ProofState)} style={styles.recover}&gt;&lt;Text style={styles.recoverText}&gt;{stateModel.recoveryLabel}&lt;/Text&gt;&lt;/Pressable&gt;}&lt;/View&gt;}
+        &lt;View style={styles.messages}&gt;&lt;Text style={styles.incoming}&gt;{model.message_in}&lt;/Text&gt;&lt;Text style={styles.outgoing}&gt;{model.message_out}&lt;/Text&gt;&lt;Text style={styles.time}&gt;{model.item_meta}&lt;/Text&gt;&lt;/View&gt;&lt;View style={styles.composer}&gt;&lt;TextInput accessibilityLabel={model.field_label} style={[styles.input, styles.flex]} onFocus={() =&gt; setScreenState(&#39;focused&#39;)} onChangeText={(value) =&gt; setScreenState(value ? &#39;filled&#39; : &#39;default&#39;)} /&gt;&lt;Pressable accessibilityRole=&quot;button&quot; style={styles.send}&gt;&lt;Text style={styles.markText}&gt;↑&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
+      &lt;/ScrollView&gt;
+      &lt;View style={styles.fixed}&gt;&lt;Pressable accessibilityRole=&quot;button&quot; accessibilityLabel={stateModel.actionLabel} accessibilityState={actionAccessibilityState} disabled={stateModel.blocksPrimary} onPress={() =&gt; { setScreenState(&#39;loading&#39;); queueMicrotask(() =&gt; setScreenState(&#39;success&#39;)); }} style={({ pressed }) =&gt; [styles.action, pressed &amp;&amp; styles.pressed, (stateModel.blocksPrimary) &amp;&amp; styles.actionDisabled]}&gt;&lt;Text style={styles.actionText}&gt;{stateModel.actionLabel}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
+    &lt;/KeyboardAvoidingView&gt;
+  &lt;/SafeAreaView&gt;;
+}
+
+const styles = StyleSheet.create({
+  safe: { flex: 1, backgroundColor: &#39;#FFFFFF&#39; }, flex: { flex: 1 }, content: { paddingHorizontal: 16, paddingTop: 24, paddingBottom: 218, gap: 12 },
+  header: { flexDirection: &#39;row&#39;, gap: 12, alignItems: &#39;flex-start&#39; }, title: { color: &#39;#111827&#39;, fontSize: 26, lineHeight: 34, fontWeight: &#39;700&#39; }, muted: { color: &#39;#5B6472&#39;, lineHeight: 22 }, strong: { color: &#39;#111827&#39;, fontWeight: &#39;700&#39;, fontSize: 17 }, amount: { marginTop: 12, fontSize: 24, fontWeight: &#39;800&#39; }, badge: { color: &#39;#0F766E&#39;, fontWeight: &#39;800&#39; },
+  locale: { minWidth: 44, minHeight: 44, borderRadius: 22, borderWidth: 1, borderColor: &#39;#D7DCE3&#39;, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39; }, input: { minHeight: 52, borderRadius: 12, borderWidth: 1, borderColor: &#39;#AEB6C2&#39;, paddingHorizontal: 16 }, card: { gap: 12, padding: 16, borderRadius: 12, backgroundColor: &#39;#F7F9FC&#39; }, row: { flexDirection: &#39;row&#39;, alignItems: &#39;center&#39;, gap: 12 }, mark: { width: 44, height: 44, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; }, markText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; },
+  map: { minHeight: 280, borderRadius: 18, backgroundColor: &#39;#DFEEE5&#39;, overflow: &#39;hidden&#39; }, route: { position: &#39;absolute&#39;, top: 105, left: 88, width: 170, height: 72, borderRightWidth: 5, borderBottomWidth: 5, borderColor: &#39;#0F766E&#39;, borderRadius: 36 }, pinA: { position: &#39;absolute&#39;, top: 64, left: 65, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#0F766E&#39; }, pinB: { position: &#39;absolute&#39;, right: 58, bottom: 54, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#0F766E&#39; }, eta: { position: &#39;absolute&#39;, top: 16, right: 16, padding: 10, borderRadius: 10, backgroundColor: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; }, risk: { color: &#39;#B42318&#39;, lineHeight: 22 },
+  stories: { flexDirection: &#39;row&#39;, gap: 12 }, story: { width: 56, height: 56, borderRadius: 28, borderWidth: 3, borderColor: &#39;#0F766E&#39;, textAlign: &#39;center&#39;, paddingTop: 17, fontWeight: &#39;800&#39; }, avatar: { width: 44, height: 44, borderRadius: 22, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; }, media: { minHeight: 220, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#E8EDF4&#39; },
+  messages: { minHeight: 390, justifyContent: &#39;flex-end&#39;, gap: 12 }, incoming: { alignSelf: &#39;flex-start&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, backgroundColor: &#39;#EDF0F4&#39; }, outgoing: { alignSelf: &#39;flex-end&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#0F766E&#39; }, time: { alignSelf: &#39;center&#39;, color: &#39;#717B89&#39; }, composer: { flexDirection: &#39;row&#39;, gap: 12 }, send: { width: 52, height: 52, borderRadius: 26, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; },
+  statePanel: { gap: 6, padding: 16, borderRadius: 12, backgroundColor: &#39;#EEF4FF&#39; }, recover: { minHeight: 44, alignSelf: &#39;flex-start&#39;, justifyContent: &#39;center&#39; }, recoverText: { color: &#39;#0F766E&#39;, fontWeight: &#39;700&#39; }, riskGate: { minHeight: 52, flexDirection: &#39;row&#39;, alignItems: &#39;center&#39;, gap: 12, padding: 16, borderRadius: 12, backgroundColor: &#39;#FFF7ED&#39; },
+  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: &#39;#FFFFFF&#39; }, action: { minHeight: 52, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; }, pressed: { opacity: 0.82 }, actionDisabled: { opacity: 0.45 }, actionText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39;, fontSize: 16 },
+});
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.ts</strong><button type="button" data-copy-source="source-react_native-1">Copy file</button></div><pre tabindex="0"><code id="source-react_native-1">// messenger-chat: 한국어 + English canonical fixtures
+export const requiredStates = [&quot;default&quot;,&quot;loading&quot;,&quot;empty&quot;,&quot;error&quot;,&quot;offline&quot;,&quot;success&quot;,&quot;focused&quot;,&quot;filled&quot;,&quot;keyboard&quot;,&quot;disabled&quot;,&quot;enabled&quot;] as const;
+export const fixtures = {
+  &quot;ko&quot;: {
+    &quot;amount&quot;: &quot;&quot;,
+    &quot;confirm_action_label&quot;: &quot;이해했고 확인합니다&quot;,
+    &quot;confirm_label&quot;: &quot;&quot;,
+    &quot;default_body&quot;: &quot;로컬 예시를 확인하고 준비되면 계속하세요.&quot;,
+    &quot;default_title&quot;: &quot;준비됐어요&quot;,
+    &quot;destructive_confirmation_body&quot;: &quot;영향을 확인하고 동의한 뒤 신뢰가 필요한 동작을 진행하세요.&quot;,
+    &quot;destructive_confirmation_title&quot;: &quot;계속하기 전에 확인해 주세요&quot;,
+    &quot;disabled_body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+    &quot;disabled_title&quot;: &quot;아직 진행할 수 없어요&quot;,
+    &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+    &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+    &quot;enabled_body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+    &quot;enabled_title&quot;: &quot;진행할 준비가 됐어요&quot;,
+    &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+    &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+    &quot;field_label&quot;: &quot;메시지 입력&quot;,
+    &quot;filled_body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+    &quot;filled_title&quot;: &quot;입력이 완료됐어요&quot;,
+    &quot;focused_body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+    &quot;focused_title&quot;: &quot;입력란을 선택했어요&quot;,
+    &quot;item_badge&quot;: &quot;온라인&quot;,
+    &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+    &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+    &quot;item_title&quot;: &quot;민서와의 대화&quot;,
+    &quot;keyboard_body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+    &quot;keyboard_title&quot;: &quot;키보드가 열렸어요&quot;,
+    &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+    &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+    &quot;map_label&quot;: &quot;&quot;,
+    &quot;media_label&quot;: &quot;&quot;,
+    &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+    &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+    &quot;offline_body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+    &quot;offline_title&quot;: &quot;오프라인 상태예요&quot;,
+    &quot;permission_denied_body&quot;: &quot;로컬 대체 화면을 사용하거나 권한 안내를 확인하세요.&quot;,
+    &quot;permission_denied_title&quot;: &quot;권한이 허용되지 않았어요&quot;,
+    &quot;pressed_body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+    &quot;pressed_title&quot;: &quot;버튼을 눌렀어요&quot;,
+    &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
+    &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+    &quot;recover_label&quot;: &quot;기본 상태로 돌아가기&quot;,
+    &quot;risk_notice&quot;: &quot;&quot;,
+    &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+    &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+    &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+    &quot;success_label&quot;: &quot;전송됨&quot;,
+    &quot;success_title&quot;: &quot;완료됐어요&quot;,
+    &quot;switch_language_label&quot;: &quot;언어 전환&quot;,
+    &quot;title&quot;: &quot;민서&quot;,
+    &quot;validation_error_body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+    &quot;validation_error_title&quot;: &quot;입력 내용을 확인해 주세요&quot;
+  },
+  &quot;en&quot;: {
+    &quot;amount&quot;: &quot;&quot;,
+    &quot;confirm_action_label&quot;: &quot;I understand and confirm&quot;,
+    &quot;confirm_label&quot;: &quot;&quot;,
+    &quot;default_body&quot;: &quot;Review the local example and continue when ready.&quot;,
+    &quot;default_title&quot;: &quot;Ready&quot;,
+    &quot;destructive_confirmation_body&quot;: &quot;Review the consequence and acknowledge it before the high-trust action.&quot;,
+    &quot;destructive_confirmation_title&quot;: &quot;Confirm before continuing&quot;,
+    &quot;disabled_body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+    &quot;disabled_title&quot;: &quot;Action unavailable&quot;,
+    &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+    &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+    &quot;enabled_body&quot;: &quot;The primary action is ready for this local example.&quot;,
+    &quot;enabled_title&quot;: &quot;Action ready&quot;,
+    &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+    &quot;error_title&quot;: &quot;We could not finish that&quot;,
+    &quot;field_label&quot;: &quot;Message&quot;,
+    &quot;filled_body&quot;: &quot;The local value is ready to review.&quot;,
+    &quot;filled_title&quot;: &quot;Input complete&quot;,
+    &quot;focused_body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+    &quot;focused_title&quot;: &quot;Input focused&quot;,
+    &quot;item_badge&quot;: &quot;Online&quot;,
+    &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+    &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+    &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
+    &quot;keyboard_body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+    &quot;keyboard_title&quot;: &quot;Keyboard open&quot;,
+    &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+    &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+    &quot;map_label&quot;: &quot;&quot;,
+    &quot;media_label&quot;: &quot;&quot;,
+    &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+    &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+    &quot;offline_body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+    &quot;offline_title&quot;: &quot;You are offline&quot;,
+    &quot;permission_denied_body&quot;: &quot;Continue with the local fallback or review permission guidance.&quot;,
+    &quot;permission_denied_title&quot;: &quot;Permission not allowed&quot;,
+    &quot;pressed_body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+    &quot;pressed_title&quot;: &quot;Action pressed&quot;,
+    &quot;primary_cta&quot;: &quot;Send message&quot;,
+    &quot;ready_label&quot;: &quot;Static local example&quot;,
+    &quot;recover_label&quot;: &quot;Return to default&quot;,
+    &quot;risk_notice&quot;: &quot;&quot;,
+    &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+    &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+    &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+    &quot;success_label&quot;: &quot;Sent&quot;,
+    &quot;success_title&quot;: &quot;All set&quot;,
+    &quot;switch_language_label&quot;: &quot;Switch language&quot;,
+    &quot;title&quot;: &quot;Minseo&quot;,
+    &quot;validation_error_body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+    &quot;validation_error_title&quot;: &quot;Check this field&quot;
+  }
+} as const;
+export const stateFixtures = {
+  &quot;ko&quot;: {
+    &quot;default&quot;: {
+      &quot;title&quot;: &quot;민서&quot;,
+      &quot;body&quot;: &quot;온라인 · 알림 켜짐&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;default&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;loading&quot;: {
+      &quot;title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;loading&quot;,
+      &quot;busy&quot;: true,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;empty&quot;: {
+      &quot;title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;empty&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;error&quot;: {
+      &quot;title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;offline&quot;: {
+      &quot;title&quot;: &quot;오프라인 상태예요&quot;,
+      &quot;body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;success&quot;: {
+      &quot;title&quot;: &quot;완료됐어요&quot;,
+      &quot;body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;전송됨&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;success&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;focused&quot;: {
+      &quot;title&quot;: &quot;입력란을 선택했어요&quot;,
+      &quot;body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;filled&quot;: {
+      &quot;title&quot;: &quot;입력이 완료됐어요&quot;,
+      &quot;body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;keyboard&quot;: {
+      &quot;title&quot;: &quot;키보드가 열렸어요&quot;,
+      &quot;body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;disabled&quot;: {
+      &quot;title&quot;: &quot;아직 진행할 수 없어요&quot;,
+      &quot;body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;enabled&quot;: {
+      &quot;title&quot;: &quot;진행할 준비가 됐어요&quot;,
+      &quot;body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;메시지 보내기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    }
+  },
+  &quot;en&quot;: {
+    &quot;default&quot;: {
+      &quot;title&quot;: &quot;Minseo&quot;,
+      &quot;body&quot;: &quot;Online · Notifications on&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;default&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;loading&quot;: {
+      &quot;title&quot;: &quot;Preparing your screen&quot;,
+      &quot;body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;loading&quot;,
+      &quot;busy&quot;: true,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;empty&quot;: {
+      &quot;title&quot;: &quot;Nothing here yet&quot;,
+      &quot;body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;empty&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;error&quot;: {
+      &quot;title&quot;: &quot;We could not finish that&quot;,
+      &quot;body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;offline&quot;: {
+      &quot;title&quot;: &quot;You are offline&quot;,
+      &quot;body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;success&quot;: {
+      &quot;title&quot;: &quot;All set&quot;,
+      &quot;body&quot;: &quot;The message was added to the local conversation.&quot;,
+      &quot;actionLabel&quot;: &quot;Sent&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;success&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;focused&quot;: {
+      &quot;title&quot;: &quot;Input focused&quot;,
+      &quot;body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;filled&quot;: {
+      &quot;title&quot;: &quot;Input complete&quot;,
+      &quot;body&quot;: &quot;The local value is ready to review.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;keyboard&quot;: {
+      &quot;title&quot;: &quot;Keyboard open&quot;,
+      &quot;body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;disabled&quot;: {
+      &quot;title&quot;: &quot;Action unavailable&quot;,
+      &quot;body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;enabled&quot;: {
+      &quot;title&quot;: &quot;Action ready&quot;,
+      &quot;body&quot;: &quot;The primary action is ready for this local example.&quot;,
+      &quot;actionLabel&quot;: &quot;Send message&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    }
+  }
+} as const;
+export type ProofState = keyof typeof stateFixtures.ko;
+</code></pre></article></section><section id="panel-flutter" role="tabpanel" aria-labelledby="tab-flutter" hidden><article class="source-file"><div class="source-toolbar"><strong>screen.dart</strong><button type="button" data-copy-source="source-flutter-0">Copy file</button></div><pre tabindex="0"><code id="source-flutter-0">// Generated from canonical IR messenger-chat; 한국어 + English; fixture-only.
+import &#39;package:flutter/material.dart&#39;;
+import &#39;fixtures.dart&#39;;
+
+class MessengerChatScreen extends StatefulWidget { const MessengerChatScreen({super.key, this.initialState = &#39;default&#39;}); final String initialState; @override State&lt;MessengerChatScreen&gt; createState() =&gt; _MessengerChatScreenState(); }
+class _MessengerChatScreenState extends State&lt;MessengerChatScreen&gt; {
+  String locale = &#39;ko&#39;; late String screenState; bool acknowledged = true;
+  @override void initState() { super.initState(); screenState = requiredStates.contains(widget.initialState) ? widget.initialState : &#39;default&#39;; }
+  @override Widget build(BuildContext context) {
+    final model = proofFixtures[locale]!; final stateModel = stateFixtures[locale]![screenState]!; final media = MediaQuery.of(context); final scaler = MediaQuery.textScalerOf(context); final canSubmit = !stateModel.blocksPrimary;
+    return SafeArea(child: Scaffold(backgroundColor: const Color(0xFFFFFFFF), body: Column(children: [
+      Expanded(child: SingleChildScrollView(key: const Key(&#39;proof-scroll&#39;), keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, padding: EdgeInsets.fromLTRB(16, 24, 16, 100 + media.viewInsets.bottom), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(model[&#39;title&#39;]!, textScaler: scaler, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)), SizedBox(height: 6), Text(model[&#39;subtitle&#39;]!)])), Semantics(label: model[&#39;switch_language_label&#39;], button: true, child: TextButton(onPressed: () =&gt; setState(() =&gt; locale = locale == &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;), child: Text(locale == &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;)))]),
+        if (screenState != &#39;default&#39;) ...[SizedBox(height: 12), _StatePanel(stateModel: stateModel, onRecover: stateModel.recoverTo == null ? null : () =&gt; setState(() =&gt; screenState = stateModel.recoverTo!))],
+        SizedBox(height: 24), SizedBox(height: 360, child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.stretch, children: [Align(alignment: Alignment.centerLeft, child: Chip(label: Text(model[&#39;message_in&#39;]!))), Align(alignment: Alignment.centerRight, child: Chip(backgroundColor: const Color(0xFF0F766E), label: Text(model[&#39;message_out&#39;]!, style: const TextStyle(color: Colors.white))))])), SizedBox(height: 12), TextField(decoration: InputDecoration(labelText: model[&#39;field_label&#39;]), onTap: () =&gt; setState(() =&gt; screenState = &#39;focused&#39;), onChanged: (value) =&gt; setState(() =&gt; screenState = value.isEmpty ? &#39;default&#39; : &#39;filled&#39;))
+      ]))),
+      Container(padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + media.padding.bottom + media.viewInsets.bottom), child: SizedBox(height: 52, width: double.infinity, child: FilledButton(onPressed: canSubmit ? () { setState(() =&gt; screenState = &#39;loading&#39;); Future.microtask(() { if (mounted) setState(() =&gt; screenState = &#39;success&#39;); }); } : null, child: stateModel.busy ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2)) : Text(stateModel.actionLabel))))
+    ])));
+  }
+}
+class _Card extends StatelessWidget { const _Card(this.title, this.body, this.padding, this.radius); final String title; final String body; final double padding; final double radius; @override Widget build(BuildContext context) =&gt; Container(padding: EdgeInsets.all(padding), decoration: BoxDecoration(color: const Color(0xFFF7F9FC), borderRadius: BorderRadius.circular(radius)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w700)), const SizedBox(height: 6), Text(body)])); }
+class _StatePanel extends StatelessWidget { const _StatePanel({required this.stateModel, required this.onRecover}); final ProofStateFixture stateModel; final VoidCallback? onRecover; @override Widget build(BuildContext context) =&gt; Semantics(liveRegion: true, child: Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [if (stateModel.busy) const LinearProgressIndicator(), Text(stateModel.title, style: const TextStyle(fontWeight: FontWeight.w700)), const SizedBox(height: 6), Text(stateModel.body), if (onRecover != null) TextButton(onPressed: onRecover, child: Text(stateModel.recoveryLabel))])))); }
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.dart</strong><button type="button" data-copy-source="source-flutter-1">Copy file</button></div><pre tabindex="0"><code id="source-flutter-1">// messenger-chat: 한국어 + English canonical fixtures
+class ProofStateFixture {
+  const ProofStateFixture({required this.title, required this.body, required this.actionLabel, required this.recoveryLabel, required this.recoverTo, required this.kind, required this.busy, required this.blocksPrimary, required this.requiresAcknowledgement});
+  final String title; final String body; final String actionLabel; final String recoveryLabel; final String? recoverTo; final String kind; final bool busy; final bool blocksPrimary; final bool requiresAcknowledgement;
+}
+const requiredStates = &lt;String&gt;[&#39;default&#39;,&#39;loading&#39;,&#39;empty&#39;,&#39;error&#39;,&#39;offline&#39;,&#39;success&#39;,&#39;focused&#39;,&#39;filled&#39;,&#39;keyboard&#39;,&#39;disabled&#39;,&#39;enabled&#39;];
+const proofFixtures = &lt;String, Map&lt;String, String&gt;&gt;{
+  &#39;ko&#39;: {&#39;title&#39;: &#39;민서&#39;, &#39;subtitle&#39;: &#39;온라인 · 알림 켜짐&#39;, &#39;primary_cta&#39;: &#39;메시지 보내기&#39;, &#39;success_label&#39;: &#39;전송됨&#39;, &#39;field_label&#39;: &#39;메시지 입력&#39;, &#39;secondary_label&#39;: &#39;최근 대화&#39;, &#39;item_title&#39;: &#39;민서와의 대화&#39;, &#39;item_body&#39;: &#39;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&#39;, &#39;item_meta&#39;: &#39;오후 3:24 · 읽음&#39;, &#39;amount&#39;: &#39;&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&#39;, &#39;message_out&#39;: &#39;응, 긴 한국어 문장까지 줄바꿈 확인했어.&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;&#39;, &#39;switch_language_label&#39;: &#39;언어 전환&#39;},
+  &#39;en&#39;: {&#39;title&#39;: &#39;Minseo&#39;, &#39;subtitle&#39;: &#39;Online · Notifications on&#39;, &#39;primary_cta&#39;: &#39;Send message&#39;, &#39;success_label&#39;: &#39;Sent&#39;, &#39;field_label&#39;: &#39;Message&#39;, &#39;secondary_label&#39;: &#39;Recent conversation&#39;, &#39;item_title&#39;: &#39;Chat with Minseo&#39;, &#39;item_body&#39;: &#39;Recent messages and the composer remain visible with the keyboard open.&#39;, &#39;item_meta&#39;: &#39;3:24 PM · Read&#39;, &#39;amount&#39;: &#39;&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;Did the screen stay aligned at 320 px?&#39;, &#39;message_out&#39;: &#39;Yes, I checked wrapping with long Korean copy too.&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;&#39;, &#39;switch_language_label&#39;: &#39;Switch language&#39;},
+};
+const stateFixtures = &lt;String, Map&lt;String, ProofStateFixture&gt;&gt;{
+  &#39;ko&#39;: {&#39;default&#39;: ProofStateFixture(title: &#39;민서&#39;, body: &#39;온라인 · 알림 켜짐&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;default&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;loading&#39;: ProofStateFixture(title: &#39;화면을 준비하고 있어요&#39;, body: &#39;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;loading&#39;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &#39;empty&#39;: ProofStateFixture(title: &#39;아직 내용이 없어요&#39;, body: &#39;아래 기본 동작으로 시작해 보세요.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: &#39;default&#39;, kind: &#39;empty&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;error&#39;: ProofStateFixture(title: &#39;완료하지 못했어요&#39;, body: &#39;표시된 정보를 확인하고 다시 시도해 주세요.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;offline&#39;: ProofStateFixture(title: &#39;오프라인 상태예요&#39;, body: &#39;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;success&#39;: ProofStateFixture(title: &#39;완료됐어요&#39;, body: &#39;메시지가 로컬 대화에 추가되었습니다.&#39;, actionLabel: &#39;전송됨&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;success&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;focused&#39;: ProofStateFixture(title: &#39;입력란을 선택했어요&#39;, body: &#39;활성 입력란은 키보드 위에서 계속 보입니다.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;filled&#39;: ProofStateFixture(title: &#39;입력이 완료됐어요&#39;, body: &#39;로컬 값을 확인할 준비가 됐습니다.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;keyboard&#39;: ProofStateFixture(title: &#39;키보드가 열렸어요&#39;, body: &#39;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;disabled&#39;: ProofStateFixture(title: &#39;아직 진행할 수 없어요&#39;, body: &#39;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;enabled&#39;: ProofStateFixture(title: &#39;진행할 준비가 됐어요&#39;, body: &#39;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&#39;, actionLabel: &#39;메시지 보내기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)},
+  &#39;en&#39;: {&#39;default&#39;: ProofStateFixture(title: &#39;Minseo&#39;, body: &#39;Online · Notifications on&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;default&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;loading&#39;: ProofStateFixture(title: &#39;Preparing your screen&#39;, body: &#39;The local example is loading without a network request.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;loading&#39;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &#39;empty&#39;: ProofStateFixture(title: &#39;Nothing here yet&#39;, body: &#39;Start with the primary action below.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: &#39;default&#39;, kind: &#39;empty&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;error&#39;: ProofStateFixture(title: &#39;We could not finish that&#39;, body: &#39;Review the highlighted information and try again.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;offline&#39;: ProofStateFixture(title: &#39;You are offline&#39;, body: &#39;Review cached fixture content or return to the default state.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;success&#39;: ProofStateFixture(title: &#39;All set&#39;, body: &#39;The message was added to the local conversation.&#39;, actionLabel: &#39;Sent&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;success&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;focused&#39;: ProofStateFixture(title: &#39;Input focused&#39;, body: &#39;The active field stays visible above the keyboard.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;filled&#39;: ProofStateFixture(title: &#39;Input complete&#39;, body: &#39;The local value is ready to review.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;keyboard&#39;: ProofStateFixture(title: &#39;Keyboard open&#39;, body: &#39;Scrollable content and the primary action remain reachable.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;disabled&#39;: ProofStateFixture(title: &#39;Action unavailable&#39;, body: &#39;Complete the required local fields to enable this action.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;enabled&#39;: ProofStateFixture(title: &#39;Action ready&#39;, body: &#39;The primary action is ready for this local example.&#39;, actionLabel: &#39;Send message&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)},
+};
+</code></pre></article></section><section id="panel-swiftui" role="tabpanel" aria-labelledby="tab-swiftui" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.swift</strong><button type="button" data-copy-source="source-swiftui-0">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-0">// Generated from canonical IR messenger-chat; 한국어 + English; fixture-only.
+import SwiftUI
+
+struct MessengerChatScreen: View {
+  @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+  @FocusState private var focused: Bool
+  @State private var locale = &quot;ko&quot;; @State private var screenState: String; @State private var input = &quot;&quot;; @State private var secondaryInput = &quot;&quot;; @State private var acknowledged: Bool
+  init(initialState: String = &quot;default&quot;) { _screenState = State(initialValue: requiredStates.contains(initialState) ? initialState : &quot;default&quot;); _acknowledged = State(initialValue: true) }
+  private var model: ProofFixture { proofFixtures[locale] ?? proofFixtures[&quot;ko&quot;]! }
+  private var stateModel: ProofStateFixture { stateFixtures[locale]?[screenState] ?? stateFixtures[&quot;ko&quot;]![&quot;default&quot;]! }
+  var body: some View {
+    ScrollView { VStack(alignment: .leading, spacing: 12) {
+      HStack(alignment: .top) { VStack(alignment: .leading, spacing: 6) { Text(model.title).font(.system(size: 26, weight: .bold)).accessibilityAddTraits(.isHeader); Text(model.subtitle).font(.body).foregroundStyle(.secondary) }; Spacer(); Button(locale == &quot;ko&quot; ? &quot;EN&quot; : &quot;KO&quot;) { locale = locale == &quot;ko&quot; ? &quot;en&quot; : &quot;ko&quot; }.accessibilityLabel(model.switch_language_label).frame(minWidth: 44, minHeight: 44).buttonStyle(.bordered) }
+      if screenState != &quot;default&quot; { VStack(alignment: .leading, spacing: 6) { if stateModel.busy { ProgressView() }; Text(stateModel.title).font(.headline); Text(stateModel.body).foregroundStyle(.secondary); if let recoverTo = stateModel.recoverTo { Button(stateModel.recoveryLabel) { screenState = recoverTo } } }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 12)).accessibilityElement(children: .combine) }
+      VStack(spacing: 12) { Spacer(minLength: 260); Text(model.message_in).proofBubble(.secondary.opacity(0.14), alignment: .leading); Text(model.message_out).proofBubble(Color.accentColor, foreground: .white, alignment: .trailing); Text(model.item_meta).font(.caption).foregroundStyle(.secondary) }; HStack { TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).focused($focused).onChange(of: input) { _, value in screenState = value.isEmpty ? &quot;default&quot; : &quot;filled&quot; }; Button(&quot;↑&quot;) { screenState = &quot;success&quot; }.accessibilityLabel(model.primary_cta).frame(width: 52, height: 52).buttonStyle(.borderedProminent).clipShape(Circle()) }
+    }.padding(.horizontal, 16).padding(.top, 24).padding(.bottom, 100).frame(maxWidth: .infinity, alignment: .leading) }
+    .scrollDismissesKeyboard(.interactively).dynamicTypeSize(...DynamicTypeSize.accessibility3)
+    .safeAreaInset(edge: .bottom, spacing: 0) { Button(stateModel.actionLabel) { screenState = &quot;loading&quot;; focused = false; DispatchQueue.main.async { screenState = &quot;success&quot; } }.frame(maxWidth: .infinity, minHeight: 52).buttonStyle(.borderedProminent).clipShape(RoundedRectangle(cornerRadius: 12)).disabled(stateModel.blocksPrimary).accessibilityLabel(stateModel.actionLabel).padding(.horizontal, 16).padding(.vertical, 12).background(.ultraThinMaterial) }
+  }
+  private func proofCard(_ title: String, _ body: String) -&gt; some View { VStack(alignment: .leading, spacing: 6) { Text(title).font(.headline); Text(body).font(.body).foregroundStyle(.secondary) }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 12)) }
+}
+private extension View { func proofBubble(_ background: Color, foreground: Color = .primary, alignment: Alignment) -&gt; some View { self.padding(12).foregroundStyle(foreground).background(background, in: RoundedRectangle(cornerRadius: 18)).frame(maxWidth: .infinity, alignment: alignment) } }
+private extension Text { func proofPin() -&gt; some View { self.frame(width: 38, height: 38).foregroundStyle(.white).background(Color.accentColor, in: Circle()).overlay(Circle().stroke(.white, lineWidth: 4)) } }
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>Fixtures.swift</strong><button type="button" data-copy-source="source-swiftui-1">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-1">// messenger-chat: 한국어 + English canonical fixtures
+import Foundation
+struct ProofFixture { let title: String; let subtitle: String; let primary_cta: String; let success_label: String; let field_label: String; let secondary_label: String; let item_title: String; let item_body: String; let item_meta: String; let amount: String; let risk_notice: String; let confirm_label: String; let message_in: String; let message_out: String; let map_label: String; let media_label: String; let switch_language_label: String }
+struct ProofStateFixture { let title: String; let body: String; let actionLabel: String; let recoveryLabel: String; let recoverTo: String?; let kind: String; let busy: Bool; let blocksPrimary: Bool; let requiresAcknowledgement: Bool }
+let requiredStates: [String] = [&quot;default&quot;,&quot;loading&quot;,&quot;empty&quot;,&quot;error&quot;,&quot;offline&quot;,&quot;success&quot;,&quot;focused&quot;,&quot;filled&quot;,&quot;keyboard&quot;,&quot;disabled&quot;,&quot;enabled&quot;]
+let proofFixtures: [String: ProofFixture] = [
+  &quot;ko&quot;: ProofFixture(title: &quot;민서&quot;, subtitle: &quot;온라인 · 알림 켜짐&quot;, primary_cta: &quot;메시지 보내기&quot;, success_label: &quot;전송됨&quot;, field_label: &quot;메시지 입력&quot;, secondary_label: &quot;최근 대화&quot;, item_title: &quot;민서와의 대화&quot;, item_body: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;, item_meta: &quot;오후 3:24 · 읽음&quot;, amount: &quot;&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;, message_out: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;, map_label: &quot;&quot;, media_label: &quot;&quot;, switch_language_label: &quot;언어 전환&quot;),
+  &quot;en&quot;: ProofFixture(title: &quot;Minseo&quot;, subtitle: &quot;Online · Notifications on&quot;, primary_cta: &quot;Send message&quot;, success_label: &quot;Sent&quot;, field_label: &quot;Message&quot;, secondary_label: &quot;Recent conversation&quot;, item_title: &quot;Chat with Minseo&quot;, item_body: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;, item_meta: &quot;3:24 PM · Read&quot;, amount: &quot;&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;Did the screen stay aligned at 320 px?&quot;, message_out: &quot;Yes, I checked wrapping with long Korean copy too.&quot;, map_label: &quot;&quot;, media_label: &quot;&quot;, switch_language_label: &quot;Switch language&quot;)
+]
+let stateFixtures: [String: [String: ProofStateFixture]] = [
+  &quot;ko&quot;: [&quot;default&quot;: ProofStateFixture(title: &quot;민서&quot;, body: &quot;온라인 · 알림 켜짐&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;default&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;loading&quot;: ProofStateFixture(title: &quot;화면을 준비하고 있어요&quot;, body: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;loading&quot;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &quot;empty&quot;: ProofStateFixture(title: &quot;아직 내용이 없어요&quot;, body: &quot;아래 기본 동작으로 시작해 보세요.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: &quot;default&quot;, kind: &quot;empty&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;error&quot;: ProofStateFixture(title: &quot;완료하지 못했어요&quot;, body: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;offline&quot;: ProofStateFixture(title: &quot;오프라인 상태예요&quot;, body: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;success&quot;: ProofStateFixture(title: &quot;완료됐어요&quot;, body: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;, actionLabel: &quot;전송됨&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;success&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;focused&quot;: ProofStateFixture(title: &quot;입력란을 선택했어요&quot;, body: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;filled&quot;: ProofStateFixture(title: &quot;입력이 완료됐어요&quot;, body: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;keyboard&quot;: ProofStateFixture(title: &quot;키보드가 열렸어요&quot;, body: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;disabled&quot;: ProofStateFixture(title: &quot;아직 진행할 수 없어요&quot;, body: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;enabled&quot;: ProofStateFixture(title: &quot;진행할 준비가 됐어요&quot;, body: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;, actionLabel: &quot;메시지 보내기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)],
+  &quot;en&quot;: [&quot;default&quot;: ProofStateFixture(title: &quot;Minseo&quot;, body: &quot;Online · Notifications on&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;default&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;loading&quot;: ProofStateFixture(title: &quot;Preparing your screen&quot;, body: &quot;The local example is loading without a network request.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;loading&quot;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &quot;empty&quot;: ProofStateFixture(title: &quot;Nothing here yet&quot;, body: &quot;Start with the primary action below.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: &quot;default&quot;, kind: &quot;empty&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;error&quot;: ProofStateFixture(title: &quot;We could not finish that&quot;, body: &quot;Review the highlighted information and try again.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;offline&quot;: ProofStateFixture(title: &quot;You are offline&quot;, body: &quot;Review cached fixture content or return to the default state.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;success&quot;: ProofStateFixture(title: &quot;All set&quot;, body: &quot;The message was added to the local conversation.&quot;, actionLabel: &quot;Sent&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;success&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;focused&quot;: ProofStateFixture(title: &quot;Input focused&quot;, body: &quot;The active field stays visible above the keyboard.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;filled&quot;: ProofStateFixture(title: &quot;Input complete&quot;, body: &quot;The local value is ready to review.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;keyboard&quot;: ProofStateFixture(title: &quot;Keyboard open&quot;, body: &quot;Scrollable content and the primary action remain reachable.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;disabled&quot;: ProofStateFixture(title: &quot;Action unavailable&quot;, body: &quot;Complete the required local fields to enable this action.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;enabled&quot;: ProofStateFixture(title: &quot;Action ready&quot;, body: &quot;The primary action is ready for this local example.&quot;, actionLabel: &quot;Send message&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)]
+]
+</code></pre></article></section></section></main><footer><a href="../../#examples">← Back to all examples</a><span>Generated from <code>examples/proof/messenger-chat</code></span></footer><script src="../../assets/site.js" defer></script></body></html>
