@@ -1,0 +1,80 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* App.swift */; };
+		A10000010000000000000002 /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000002 /* Registry.swift */; };
+		A10000010000000000000003 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000003 /* Runtime.swift */; };
+		A10000010000000000000004 /* RuntimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000004 /* RuntimeTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000010000000000000000 /* MobileUIShowcase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileUIShowcase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000010000000000000001 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		A20000010000000000000002 /* Registry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registry.swift; sourceTree = "<group>"; };
+		A20000010000000000000003 /* Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
+		A20000010000000000000004 /* RuntimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeTests.swift; sourceTree = "<group>"; };
+		A20000010000000000000005 /* MobileUIShowcaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileUIShowcaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000010000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A30000010000000000000002 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A40000010000000000000000 = {isa = PBXGroup; children = (A40000010000000000000001, A40000010000000000000002, A40000010000000000000003, A40000010000000000000004, A40000010000000000000005); sourceTree = "<group>"; };
+		A40000010000000000000001 /* Sources */ = {isa = PBXGroup; children = (A20000010000000000000001, A20000010000000000000002, A40000010000000000000006); path = Sources; sourceTree = "<group>"; };
+		A40000010000000000000002 /* Runtime */ = {isa = PBXGroup; children = (A20000010000000000000003); path = Runtime; sourceTree = "<group>"; };
+		A40000010000000000000003 /* Tests */ = {isa = PBXGroup; children = (A20000010000000000000004); path = Tests; sourceTree = "<group>"; };
+		A40000010000000000000004 /* Products */ = {isa = PBXGroup; children = (A20000010000000000000000, A20000010000000000000005); name = Products; sourceTree = "<group>"; };
+		A40000010000000000000005 /* MobileUIShowcaseTests */ = {isa = PBXGroup; children = (); path = MobileUIShowcaseTests; sourceTree = "<group>"; };
+		A40000010000000000000006 /* Runtime */ = {isa = PBXGroup; children = (A20000010000000000000003); path = Runtime; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000010000000000000001 /* MobileUIShowcase */ = {isa = PBXNativeTarget; buildConfigurationList = A60000010000000000000001; buildPhases = (A30000010000000000000003, A30000010000000000000001, A30000010000000000000004); buildRules = (); dependencies = (); name = MobileUIShowcase; productName = MobileUIShowcase; productReference = A20000010000000000000000; productType = "com.apple.product-type.application"; };
+		A50000010000000000000002 /* MobileUIShowcaseTests */ = {isa = PBXNativeTarget; buildConfigurationList = A60000010000000000000002; buildPhases = (A30000010000000000000005, A30000010000000000000002); buildRules = (); dependencies = (A70000010000000000000001); name = MobileUIShowcaseTests; productName = MobileUIShowcaseTests; productReference = A20000010000000000000005; productType = "com.apple.product-type.bundle.unit-test"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A80000010000000000000001 /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1520; TargetAttributes = {A50000010000000000000001 = {CreatedOnToolsVersion = 15.2;}; A50000010000000000000002 = {CreatedOnToolsVersion = 15.2; TestTargetID = A50000010000000000000001;};};}; buildConfigurationList = A60000010000000000000000; compatibilityVersion = "Xcode 15.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = A40000010000000000000000; productRefGroup = A40000010000000000000004; projectDirPath = ""; projectRoot = ""; targets = (A50000010000000000000001, A50000010000000000000002); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A30000010000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A30000010000000000000004 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A10000010000000000000001, A10000010000000000000002, A10000010000000000000003); runOnlyForDeploymentPostprocessing = 0; };
+		A30000010000000000000005 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A10000010000000000000004); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A30000010000000000000006 = {isa = PBXShellScriptBuildPhase; buildActionMask = 2147483647; files = (); inputPaths = (); name = "Source-only contract"; outputPaths = (); runOnlyForDeploymentPostprocessing = 0; shellPath = /bin/sh; shellScript = "echo SwiftUI source contract is validated by npm run verify:swiftui-source"; };
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A70000010000000000000001 = {isa = PBXTargetDependency; target = A50000010000000000000001; targetProxy = A70000010000000000000002; };
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		A70000010000000000000002 = {isa = PBXContainerItemProxy; containerPortal = A80000010000000000000001; proxyType = 1; remoteGlobalIDString = A50000010000000000000001; remoteInfo = MobileUIShowcase; };
+/* End PBXContainerItemProxy section */
+
+/* Begin XCBuildConfiguration section */
+		A90000010000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.2; PRODUCT_BUNDLE_IDENTIFIER = com.jinyoung.mobileuishowcase.swiftui; SWIFT_VERSION = 5.9; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+		A90000010000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.2; PRODUCT_BUNDLE_IDENTIFIER = com.jinyoung.mobileuishowcase.swiftui; SWIFT_VERSION = 5.9; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+		A90000010000000000000003 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; IPHONEOS_DEPLOYMENT_TARGET = 17.2; PRODUCT_BUNDLE_IDENTIFIER = com.jinyoung.mobileuishowcase.swiftui.tests; SWIFT_VERSION = 5.9; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MobileUIShowcase.app/MobileUIShowcase"; }; name = Debug; };
+		A90000010000000000000004 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; IPHONEOS_DEPLOYMENT_TARGET = 17.2; PRODUCT_BUNDLE_IDENTIFIER = com.jinyoung.mobileuishowcase.swiftui.tests; SWIFT_VERSION = 5.9; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MobileUIShowcase.app/MobileUIShowcase"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A60000010000000000000000 /* Build configuration list for PBXProject */ = {isa = XCConfigurationList; buildConfigurations = (A90000010000000000000001, A90000010000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A60000010000000000000001 /* Build configuration list for PBXNativeTarget MobileUIShowcase */ = {isa = XCConfigurationList; buildConfigurations = (A90000010000000000000001, A90000010000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A60000010000000000000002 /* Build configuration list for PBXNativeTarget MobileUIShowcaseTests */ = {isa = XCConfigurationList; buildConfigurations = (A90000010000000000000003, A90000010000000000000004); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A80000010000000000000001 /* Project object */;
+}
+

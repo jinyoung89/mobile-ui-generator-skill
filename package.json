@@ -16,6 +16,7 @@
     "validate:images": "tsx tooling/src/check-image-similarity.ts",
     "compile:example": "tsx tooling/src/compile-example.ts",
     "evaluate:skill": "tsx tooling/src/evaluate-skill.ts --contract-smoke",
+    "verify:swiftui-source": "bash tooling/scripts/verify-swiftui-source.sh && npm test -- tooling/test/swiftui-generator.test.ts tooling/test/swiftui-source.test.ts",
     "validate:baseline": "python3 scripts/validate_patterns.py && python3 scripts/validate_site.py && npm test && npm run typecheck",
     "verify:flutter-source": "cd harnesses/flutter && flutter pub get && dart format --output=none --set-exit-if-changed . && flutter analyze && flutter test",
     "preflight:mobile": "tooling/scripts/verify-mobile-targets.sh",
