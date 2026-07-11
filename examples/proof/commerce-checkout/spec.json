@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "id": "commerce-checkout-address",
+  "request": {
+    "language": "ko",
+    "user_job": "Complete an order safely"
+  },
+  "classification": {
+    "app_category": "commerce",
+    "ui_patterns": ["checkout", "address_selection", "payment_method"],
+    "risk_level": "medium"
+  },
+  "platform_policy": {
+    "reference_viewport_width": 390,
+    "supported_width_range": {"min": 320, "max": 430},
+    "safe_area": {"top": 47, "bottom": 34, "unit": "px", "mode": "system_insets"},
+    "token_resolution_order": ["component", "pattern", "global"],
+    "rounding": {"html_css": "nearest", "react_native": "nearest", "flutter": "nearest", "swiftui": "nearest"},
+    "constraint_precedence": ["safe_area", "fixed_region", "min_max", "content"]
+  },
+  "layout": {
+    "tokens": {
+      "space_1": {"value": 4, "unit": "px"},
+      "space_2": {"value": 8, "unit": "px"},
+      "space_3": {"value": 12, "unit": "px"},
+      "space_4": {"value": 16, "unit": "px"},
+      "control_height": {"value": 52, "unit": "px"},
+      "radius_md": {"value": 12, "unit": "px"}
+    },
+    "screen_horizontal_inset": {"token": "space_4"},
+    "grid": {"columns": 1, "gutter": {"token": "space_2"}},
+    "alignment_anchors": ["screen-leading", "screen-trailing", "primary-cta"],
+    "component_gap": {"token": "space_3"},
+    "section_gap": {"token": "space_4"},
+    "card_padding": {"token": "space_4"},
+    "control_height": {"token": "control_height"},
+    "corner_radius": {"token": "radius_md"},
+    "sticky_region_height": {"value": 84, "unit": "px"},
+    "scroll_content_bottom_inset": {"value": 100, "unit": "px"},
+    "max_readable_line_width": {"value": 360, "unit": "px"},
+    "image_aspect_ratios": {"product": {"width": 1, "height": 1, "crop": "cover"}},
+    "constraints": {"precedence": ["safe_area", "fixed_region", "min_max", "content"]}
+  },
+  "typography": {
+    "roles": [
+      {"id": "title", "font_family": "system", "size": {"value": 24, "unit": "px"}, "line_height": {"value": 32, "unit": "px"}, "weight": 700, "letter_spacing": {"value": -0.2, "unit": "px"}, "max_lines": 2, "overflow": "wrap", "text_scale_policy": "reflow", "min_contrast_ratio": 4.5},
+      {"id": "body", "font_family": "system", "size": {"value": 16, "unit": "px"}, "line_height": {"value": 24, "unit": "px"}, "weight": 400, "letter_spacing": {"value": 0, "unit": "px"}, "max_lines": 4, "overflow": "wrap", "text_scale_policy": "reflow", "min_contrast_ratio": 4.5},
+      {"id": "label", "font_family": "system", "size": {"value": 14, "unit": "px"}, "line_height": {"value": 20, "unit": "px"}, "weight": 600, "letter_spacing": {"value": 0, "unit": "px"}, "max_lines": 1, "overflow": "truncate", "text_scale_policy": "reflow", "min_contrast_ratio": 4.5}
+    ]
+  },
+  "colors": {
+    "tokens": {"text": "#111827", "surface": "#FFFFFF", "primary": "#2563EB", "danger": "#DC2626"},
+    "contrast_pairs": [{"foreground": "text", "background": "surface", "minimum_ratio": 4.5}]
+  },
+  "components": [
+    {"id": "checkout-screen", "role": "screen", "parent": null, "order": 0, "layout": {"width": "fill", "height": "content", "padding": {"token": "space_4"}, "gap": {"token": "space_3"}, "alignment": "screen-leading"}, "states": ["default", "loading", "error", "success"], "default_state": "default", "text_roles": ["title", "body"], "interaction": {"kind": "screen"}, "accessibility": {"label": "Checkout", "target_size": {"width": 44, "height": 44, "unit": "px"}}, "platform_native_substitution": "container"},
+    {"id": "address-field", "role": "text_field", "parent": "checkout-screen", "order": 1, "layout": {"width": "fill", "height": {"token": "control_height"}, "padding": {"token": "space_3"}, "gap": {"token": "space_1"}, "alignment": "screen-leading"}, "states": ["empty", "focused", "filled", "invalid", "disabled"], "default_state": "empty", "text_roles": ["label", "body"], "interaction": {"kind": "text_input", "focusable": true}, "accessibility": {"label": "배송 주소", "target_size": {"width": 44, "height": 44, "unit": "px"}}, "platform_native_substitution": "native_text_field"},
+    {"id": "pay-button", "role": "primary_action", "parent": "checkout-screen", "order": 2, "layout": {"width": "fill", "height": {"token": "control_height"}, "padding": {"token": "space_3"}, "gap": {"token": "space_1"}, "alignment": "primary-cta"}, "states": ["disabled", "enabled", "pressed", "loading", "success"], "default_state": "disabled", "text_roles": ["label"], "interaction": {"kind": "button", "focusable": true}, "accessibility": {"label": "결제하기", "target_size": {"width": 44, "height": 44, "unit": "px"}}, "platform_native_substitution": "native_button"}
+  ],
+  "states": {"screen": ["default", "loading", "error", "success"], "inputs": ["empty", "focused", "filled", "invalid", "disabled"], "cta": ["disabled", "enabled", "pressed", "loading", "success"]},
+  "interactions": [{"id": "submit-payment", "source": "pay-button", "event": "press", "action": "submit"}],
+  "responsive_rules": [
+    {"width": {"min": 320, "max": 374}, "changes": ["stack_sections", "wrap_long_copy"], "no_horizontal_overflow": true, "fixed_regions_preserve_inset": true},
+    {"width": {"min": 375, "max": 409}, "changes": ["standard_spacing"], "no_horizontal_overflow": true, "fixed_regions_preserve_inset": true},
+    {"width": {"min": 410, "max": 430}, "changes": ["increase_readable_line_width"], "no_horizontal_overflow": true, "fixed_regions_preserve_inset": true}
+  ],
+  "accessibility": {"minimum_contrast_ratio": 4.5, "minimum_touch_target": {"width": 44, "height": 44, "unit": "px"}, "screen_reader": "labels_from_component_contract", "reduced_motion": "remove_nonessential_motion", "dynamic_text": "reflow_and_wrap"},
+  "content": {"locales": {"ko": {"title": "주문 결제", "pay": "결제하기"}, "en": {"title": "Checkout", "pay": "Pay now"}}, "fixtures": ["address_default", "payment_card"]},
+  "assets_and_fallbacks": {"assets": [], "fallback_policy": "system_placeholder"},
+  "fixture_data": {"address_default": {"label": "서울시 중구 세종대로 1", "selected": true}, "payment_card": {"brand": "Visa", "last4": "4242"}},
+  "navigation_and_actions": [{"id": "submit-payment", "source_component": "pay-button", "outcome": {"kind": "local_state", "state": "success"}}],
+  "validation_rules": {"no_horizontal_overflow": true, "no_overlap": true, "safe_area_respected": true, "fixed_regions_do_not_cover_content": true, "required_states_renderable": true},
+  "focus_and_keyboard": {"focusable_components": ["address-field", "pay-button"], "keyboard_behavior": "resize_and_scroll_active_field", "primary_action_visible": true},
+  "localization": {"default_language": "ko", "supported_languages": ["ko", "en"], "fallback_language": "en", "long_copy_profiles": ["long-copy-ko", "long-copy-en"]},
+  "themes": {"supported": ["light"], "default": "light"},
+  "capabilities_and_dependencies": {"network": false, "authentication": false, "payment_execution": false, "push": false, "fixture_only": true},
+  "platform_mappings": {
+    "html_css": {"unit": "px", "safe_area": "env(safe-area-inset-top/bottom)", "rounding": "nearest", "native_substitutions_explicit": true},
+    "react_native": {"unit": "dp", "safe_area": "react-native-safe-area-context", "rounding": "nearest", "native_substitutions_explicit": true},
+    "flutter": {"unit": "dp", "safe_area": "SafeArea+MediaQuery", "rounding": "nearest", "native_substitutions_explicit": true},
+    "swiftui": {"unit": "pt", "safe_area": "safeAreaInset", "rounding": "nearest", "native_substitutions_explicit": true}
+  },
+  "quality_requirements": {"numeric_spec_validated": true, "responsive_profiles": [320, 390, 430], "all_states_fixture_backed": true, "platform_parity_report": true}
+}
