@@ -154,7 +154,21 @@ function isInside(candidate: string, parent: string): boolean {
   return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
 }
 
+function assertNoSymlinkAncestors(candidate: string, label: "input" | "staging"): void {
+  for (let current = path.resolve(candidate); ; current = path.dirname(current)) {
+    if (existsSync(current) && lstatSync(current).isSymbolicLink()) {
+      throw new Error(`Selected ${label} path has a symlink ancestor: ${current}`);
+    }
+    if (current === path.dirname(current)) return;
+  }
+}
+
 function assertSafePaths(input: string, output: string, mode: string): void {
+  assertNoSymlinkAncestors(input, "input");
+  assertNoSymlinkAncestors(output, "staging");
+  if (mode === "release" && isInside(input, repositoryRoot)) {
+    throw new Error("Release mode requires an external private input outside public repository roots");
+  }
   const realInput = realpathSync(input);
   if (mode === "release" && isInside(realInput, repositoryRoot)) {
     throw new Error("Release mode requires an external private input outside public repository roots");
@@ -165,19 +179,18 @@ function assertSafePaths(input: string, output: string, mode: string): void {
   if (output === path.parse(output).root || output === path.dirname(output)) {
     throw new Error("Refusing unsafe staging directory");
   }
-  if (existsSync(output) && lstatSync(output).isSymbolicLink()) {
-    throw new Error("Selected staging directory must not be a symlink");
-  }
-  const stagingParent = path.dirname(output);
-  if (existsSync(stagingParent) && lstatSync(stagingParent).isSymbolicLink()) {
-    throw new Error("Selected staging directory must not be beneath a symlink");
-  }
 }
 
-function privateStringKinds(observations: PrivateObservation[]): Map<string, string> {
+function privateStringKinds(input: PrivateInput): Map<string, string> {
   const kinds = new Map<string, string>();
-  for (const observation of observations) {
-    for (const value of [observation.source_id, observation.source_url, observation.raw_asset_pointer]) {
+  if (input.fixture_notice) kinds.set(input.fixture_notice, "private fixture string");
+  for (const observation of input.observations) {
+    for (const value of [
+      observation.source_id,
+      observation.source_url,
+      observation.local_path,
+      observation.raw_asset_pointer,
+    ]) {
       kinds.set(value, "source-identifying private string");
     }
     for (const value of [observation.app_specific_copy, observation.reviewer_identity, observation.sample_group]) {
@@ -190,11 +203,16 @@ function privateStringKinds(observations: PrivateObservation[]): Map<string, str
   return kinds;
 }
 
+function assertNoPrivateString(value: string, privateKinds: Map<string, string>, label: string): void {
+  for (const [privateValue, privateKind] of privateKinds) {
+    if (value.includes(privateValue)) throw new Error(`${label} contains a ${privateKind}`);
+  }
+}
+
 function assertPublicIdentifier(value: string, privateKinds: Map<string, string>): void {
   if (/^https?:\/\//i.test(value)) throw new Error("Public identifier contains a URL");
   if (path.isAbsolute(value) || /^[a-z]:[\\/]/i.test(value)) throw new Error("Public identifier contains a local path");
-  const privateKind = privateKinds.get(value);
-  if (privateKind) throw new Error(`Public identifier contains a ${privateKind}`);
+  assertNoPrivateString(value, privateKinds, "Public identifier");
   if (!IDENTIFIER_PATTERN.test(value)) throw new Error(`Public identifier is not sanitized: ${value}`);
 }
 
@@ -224,10 +242,13 @@ function recurringRules(observations: PrivateObservation[], field: "component_ru
 
 function buildPublicKnowledge(input: PrivateInput, minimumSamples: number): unknown {
   const groups = new Map<string, PrivateObservation[]>();
-  const privateKinds = privateStringKinds(input.observations);
+  const privateKinds = privateStringKinds(input);
   for (const observation of input.observations) {
     assertPublicIdentifier(observation.category_id, privateKinds);
     assertPublicIdentifier(observation.pattern_id, privateKinds);
+    for (const rule of [...observation.component_rules, ...observation.state_rules]) {
+      assertNoPrivateString(rule, privateKinds, "Public rule");
+    }
     const key = `${observation.category_id}\u0000${observation.pattern_id}`;
     groups.set(key, [...(groups.get(key) ?? []), observation]);
   }

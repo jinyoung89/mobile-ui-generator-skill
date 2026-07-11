@@ -4,6 +4,7 @@ import {
   mkdtempSync,
   mkdirSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   rmSync,
   symlinkSync,
@@ -55,7 +56,7 @@ function makeInput(count = 5): JsonObject {
 }
 
 function makeTemporaryRoot(): string {
-  const root = mkdtempSync(path.join(os.tmpdir(), "public-knowledge-export-"));
+  const root = mkdtempSync(path.join(realpathSync(os.tmpdir()), "public-knowledge-export-"));
   temporaryRoots.push(root);
   return root;
 }
@@ -170,6 +171,43 @@ test("rejects private strings leaked across observation records", () => {
   assert.equal(existsSync(result.output), false);
 });
 
+test("rejects private values in recurring rule channels", () => {
+  const cases = [
+    {
+      privateField: (observations: JsonObject[]) => {
+        (observations[0].credential_fields as JsonObject).api_key = "private-token";
+      },
+      ruleField: "component_rules",
+      rule: "private-token",
+    },
+    {
+      privateField: (observations: JsonObject[]) => {
+        observations[0].source_id = "source-token";
+      },
+      ruleField: "state_rules",
+      rule: "contains-source-token",
+    },
+    {
+      privateField: (observations: JsonObject[]) => {
+        observations[0].app_specific_copy = "app-copy-token";
+      },
+      ruleField: "component_rules",
+      rule: "app-copy-token-card",
+    },
+  ] as const;
+
+  for (const reproduction of cases) {
+    const input = makeInput();
+    const observations = input.observations as JsonObject[];
+    reproduction.privateField(observations);
+    for (const observation of observations) observation[reproduction.ruleField] = [reproduction.rule];
+    const result = runExporter(input);
+    assert.notEqual(result.status, 0, reproduction.rule);
+    assert.match(result.stderr, /public rule.*private string|private value.*rule/i);
+    assert.equal(existsSync(result.output), false);
+  }
+});
+
 test("omits aggregates below the conservative minimum sample count", () => {
   const result = runExporter(makeInput(4));
   assert.equal(result.status, 0, result.stderr);
@@ -241,6 +279,50 @@ test("rejects a staging directory beneath a symlinked parent", () => {
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /staging.*symlink/i);
   assert.deepEqual(readdirSync(outside), []);
+});
+
+test("rejects a deep symlink ancestor of the staging directory", () => {
+  const root = makeTemporaryRoot();
+  const outside = path.join(root, "outside");
+  mkdirSync(path.join(outside, "nested/deep"), { recursive: true });
+  const linkedParent = path.join(root, "linked-parent");
+  symlinkSync(outside, linkedParent);
+  const output = path.join(linkedParent, "nested/deep/public-knowledge-staging");
+
+  const result = runExporter(makeInput(), { root, output });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /staging.*symlink ancestor/i);
+  assert.deepEqual(readdirSync(path.join(outside, "nested/deep")), []);
+});
+
+test("release mode rejects a repo-local symlink to external private input", () => {
+  const root = makeTemporaryRoot();
+  const inputPath = writeInput(root, makeInput());
+  const linkedInputRoot = path.join(repositoryRoot, "tooling/test/.external-private-link");
+  const output = path.join(root, "public-knowledge-staging");
+  symlinkSync(root, linkedInputRoot);
+  try {
+    const result = spawnSync(
+      process.execPath,
+      [
+        "--import",
+        "tsx",
+        exporter,
+        "--input",
+        path.join(linkedInputRoot, path.basename(inputPath)),
+        "--output",
+        output,
+        "--mode",
+        "release",
+      ],
+      { cwd: repositoryRoot, encoding: "utf8" },
+    );
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /input.*symlink ancestor|lexically external/i);
+    assert.equal(existsSync(output), false);
+  } finally {
+    rmSync(linkedInputRoot, { force: true });
+  }
 });
 
 test("release input does not have to claim it is a synthetic fixture", () => {
