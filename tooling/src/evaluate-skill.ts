@@ -367,12 +367,20 @@ if (process.argv[1]?.endsWith("evaluate-skill.ts")) {
   const corpus = loadEvaluationCorpus(path.join(root, "evaluations/prompts.json"));
   const responseIndex = process.argv.indexOf("--responses");
   const smoke = process.argv.includes("--contract-smoke");
-  if (responseIndex < 0 && !smoke) {
+  const responsePath = responseIndex >= 0 ? process.argv[responseIndex + 1] : undefined;
+  const invalidResponses = responseIndex >= 0 && (!responsePath || responsePath.startsWith("-"));
+  if (invalidResponses) {
+    console.error("--responses requires a non-empty response file path.");
+    process.exitCode = 1;
+  } else if (responseIndex >= 0 && smoke) {
+    console.error("Choose either --responses <file> for release evaluation or --contract-smoke for the non-release contract check, not both.");
+    process.exitCode = 1;
+  } else if (responseIndex < 0 && !smoke) {
     console.error("Release effectiveness requires --responses <file>; use --contract-smoke only for the non-release contract check.");
     process.exitCode = 1;
   } else {
     const responses = responseIndex >= 0 && process.argv[responseIndex + 1]
-      ? readResponses(path.resolve(process.argv[responseIndex + 1]))
+      ? readResponses(path.resolve(responsePath!))
       : corpus.prompts.map(baselineResponse);
     const report = evaluateSkill(corpus, responses, responseIndex >= 0 ? "responses" : "contract-smoke");
     mkdirSync(path.join(root, "reports"), { recursive: true });

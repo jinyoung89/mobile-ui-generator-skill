@@ -113,3 +113,13 @@ test("the CLI refuses to call a contract smoke baseline a release evaluation", (
   assert.equal(report.mode, "contract-smoke");
   assert.equal(report.release_eligible, false);
 });
+
+test("the CLI rejects an empty response path and conflicting smoke/release flags", () => {
+  const evaluator = path.join(root, "tooling/src/evaluate-skill.ts");
+  const missingPath = spawnSync(process.execPath, ["--import", "tsx", evaluator, "--responses"], { cwd: root, encoding: "utf8" });
+  assert.notEqual(missingPath.status, 0);
+  assert.match(missingPath.stderr, /non-empty.*path/i);
+  const conflicting = spawnSync(process.execPath, ["--import", "tsx", evaluator, "--responses", "evaluations/prompts.json", "--contract-smoke"], { cwd: root, encoding: "utf8" });
+  assert.notEqual(conflicting.status, 0);
+  assert.match(conflicting.stderr, /either|both/i);
+});
