@@ -115,8 +115,13 @@ function validDigest(value: unknown): value is string {
 function trustedKeyMatches(publicKey: string, trustedPublicKeys: string[]): boolean {
   if (trustedPublicKeys.length === 0) return false;
   try {
-    const candidate = createPublicKey(publicKey).export({ type: "spki", format: "der" }).toString("base64");
-    return trustedPublicKeys.some((trusted) => createPublicKey(trusted).export({ type: "spki", format: "der" }).toString("base64") === candidate);
+    const candidateKey = createPublicKey(publicKey);
+    if (candidateKey.asymmetricKeyType !== "ed25519") return false;
+    const candidate = candidateKey.export({ type: "spki", format: "der" }).toString("base64");
+    return trustedPublicKeys.some((trusted) => {
+      const trustedKey = createPublicKey(trusted);
+      return trustedKey.asymmetricKeyType === "ed25519" && trustedKey.export({ type: "spki", format: "der" }).toString("base64") === candidate;
+    });
   } catch {
     return false;
   }
@@ -137,6 +142,7 @@ function verifyEvidence(pathname: string, sourceRoot: string, publicRoot: string
       typeof value.checkedAt !== "string" || !validDigest(value.sourceDigest) || !validDigest(value.publicDigest) ||
       typeof value.publicKey !== "string" || typeof value.signature !== "string" || !value.signature) return false;
     const evidence = value as SimilarityEvidence;
+    if (createPublicKey(evidence.publicKey).asymmetricKeyType !== "ed25519") return false;
     if (!trustedKeyMatches(evidence.publicKey, options.trustedPublicKeys ?? [])) return false;
     if (evidence.commit !== currentCommit(options.repositoryRoot ?? process.cwd())) return false;
     if (imageRootDigest(publicRoot) !== evidence.publicDigest) return false;

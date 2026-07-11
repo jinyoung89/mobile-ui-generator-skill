@@ -38,7 +38,7 @@ im.save(out, format="PNG")
   assert.equal(result.status, 0, result.stderr);
 }
 
-function signedEvidence(root: string, overrides: Partial<SimilarityEvidence> = {}): { path: string; publicKey: string } {
+function signedEvidence(root: string, overrides: Partial<SimilarityEvidence> = {}): { path: string; publicKey: string; keyPath: string } {
   const { privateKey, publicKey } = generateKeyPairSync("ed25519");
   const commit = spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).stdout.trim();
   const evidence: SimilarityEvidence = {
@@ -56,7 +56,9 @@ function signedEvidence(root: string, overrides: Partial<SimilarityEvidence> = {
   evidence.signature = sign(null, Buffer.from(canonicalAuditPayload(evidence)), privateKey).toString("base64");
   const pathname = path.join(root, "audit.json");
   writeFileSync(pathname, JSON.stringify(evidence, null, 2));
-  return { path: pathname, publicKey: evidence.publicKey };
+  const keyPath = path.join(root, "trusted-key.pem");
+  writeFileSync(keyPath, evidence.publicKey);
+  return { path: pathname, publicKey: evidence.publicKey, keyPath };
 }
 
 test("rejects an exact byte-for-byte source image by SHA-256", () => {
@@ -181,4 +183,21 @@ test("wires image comparison into the repository boundary command", () => {
   });
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /image-similarity/);
+});
+
+test("accepts evidence and trusted-key options in either CLI order", () => {
+  const root = fixtureRoot();
+  const output = path.join(root, "output");
+  mkdirSync(output);
+  makeImage(path.join(output, "screen.png"), "different");
+  const evidence = signedEvidence(root);
+  for (const flags of [
+    ["--image-similarity-evidence", evidence.path, "--image-similarity-trusted-key", evidence.keyPath],
+    ["--image-similarity-trusted-key", evidence.keyPath, "--image-similarity-evidence", evidence.path],
+  ]) {
+    const result = spawnSync("npm", ["run", "validate:boundary", "--", "--image-similarity", path.join(root, "missing-source"), output, ...flags], {
+      cwd: path.resolve("."), encoding: "utf8",
+    });
+    assert.equal(result.status, 0, result.stderr);
+  }
 });
