@@ -226,7 +226,7 @@ type ScanState = { members: number; bytes: number };
 type ArchiveMember = { name: string; kind: "file" | "directory" | "link"; size: number; data?: string; error?: string };
 
 const archiveReader = String.raw`
-import base64, json, pathlib, sys, tarfile, zipfile
+import base64, json, pathlib, stat, sys, tarfile, zipfile
 p = pathlib.Path(sys.argv[1]); max_members = int(sys.argv[2]); max_bytes = int(sys.argv[3]); out = []; total = 0
 def add(row, reader=None):
   global total
@@ -245,7 +245,8 @@ try:
   if zipfile.is_zipfile(p):
     with zipfile.ZipFile(p) as z:
       for i in z.infolist():
-        kind = "directory" if i.is_dir() else "file"
+        mode = (i.external_attr >> 16) & 0xffff
+        kind = "link" if stat.S_ISLNK(mode) else ("directory" if i.is_dir() else "file")
         row = {"name": i.filename, "kind": kind, "size": i.file_size}
         if i.flag_bits & 1: row["error"] = "encrypted ZIP member"; stop = add(row)
         else: stop = add(row, (lambda i=i: z.read(i)) if kind == "file" else None)

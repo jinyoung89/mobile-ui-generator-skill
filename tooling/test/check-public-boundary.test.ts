@@ -81,6 +81,23 @@ test("fails closed on archive traversal and sensitive member names", () => {
   assert.equal(findings.some((finding) => finding.kind === "sensitive-name"), true);
 });
 
+test("fails closed on ZIP symlink members", () => {
+  const root = fixtureRoot();
+  const archive = path.join(root, "symlink.zip");
+  const script = String.raw`
+import stat, sys, zipfile
+with zipfile.ZipFile(sys.argv[1], "w") as z:
+  info = zipfile.ZipInfo("tooling/test/link.txt")
+  info.create_system = 3
+  info.external_attr = (stat.S_IFLNK | 0o777) << 16
+  z.writestr(info, "../../private.txt")
+`;
+  const made = spawnSync("python3", ["-c", script, archive], { encoding: "utf8" });
+  assert.equal(made.status, 0, made.stderr);
+  const findings = scanArchive(archive);
+  assert.equal(findings.some((finding) => finding.kind === "unsupported" && finding.detail.includes("link")), true);
+});
+
 test("applies strict distribution policy inside tooling-like download archive paths", () => {
   const root = fixtureRoot();
   const archive = path.join(root, "download.zip");
