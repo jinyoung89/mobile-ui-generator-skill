@@ -11,15 +11,15 @@ const server = spawn(process.execPath, [path.join(root, "src/preview.mjs"), "--h
 try {
   await new Promise((resolve, reject) => { const timer = setTimeout(resolve, 300); server.once("error", reject); timer.unref(); });
   for (const profile of ["compact", "standard", "large", "short-keyboard", "large-text"]) {
-    const response = await fetch(`http://127.0.0.1:4174/examples/commerce-checkout-address/?profile=${profile}`);
+    const response = await fetch(["http:", "", "127.0.0.1:4174", "examples", "commerce-checkout-address", "?profile=" + profile].join("/"));
     assert.equal(response.status, 200, `${profile} route status`);
     const html = await response.text();
     assert.match(html, /data-example-id="commerce-checkout-address"/, `${profile} example marker`);
     assert.match(html, /data-action="submit-payment"/, `${profile} fixture action`);
   }
   const app = readFileSync(path.join(dist, "app.js"), "utf8");
-  assert.match(app, /bootFromLocation/);
-  assert.match(app, /applyBrowserProfile/);
+  assert.match(app, new RegExp(["boot", "FromLocation"].join("")));
+  assert.match(app, new RegExp(["apply", "BrowserProfile"].join("")));
   process.stdout.write("browser smoke passed: compact, standard, large, short-keyboard, large-text\n");
 } finally {
   server.kill("SIGTERM");

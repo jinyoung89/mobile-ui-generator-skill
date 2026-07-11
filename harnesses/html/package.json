@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --import tsx --test test/runtime.test.ts",
-    "test:browser": "node scripts/browser-smoke.mjs",
+    "test:browser": "node scripts/browser-smoke.mjs && node scripts/playwright-smoke.mjs",
     "build": "node --import tsx src/build.ts",
     "preview": "node src/preview.mjs"
   },
@@ -13,5 +13,6 @@
     "tsx": "4.19.4",
     "typescript": "5.8.3",
     "@types/node": "22.15.3"
+    ,"playwright": "1.52.0"
   }
 }
