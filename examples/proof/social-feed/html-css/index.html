@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>오늘의 커뮤니티</title>
+  <title data-i18n="title">오늘의 커뮤니티</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="mobile-screen archetype-feed" data-example-id="social-feed" data-state="default">
-    <header class="screen-header"><div><p class="eyebrow">social-community</p><h1 data-i18n="title">오늘의 커뮤니티</h1><p data-i18n="subtitle">관심 있는 사람들의 새 소식을 편안하게 둘러보세요.</p></div><button class="locale-button" type="button" data-locale aria-label="English">EN</button></header>
-    <section class="screen-content" aria-live="polite"><nav class="story-row" aria-label="댓글 24개"><span>UI</span><span>UX</span><span>DEV</span><span>KR</span></nav><article class="feed-card"><div class="avatar">JY</div><div><strong>지영 · 모바일 디자인</strong><small>12분 전</small></div><p>작은 화면일수록 정보의 순서와 여백이 제품의 목소리를 더 또렷하게 만든다고 느꼈어요.</p><div class="feed-media" role="img" aria-label="보라색과 회색으로 구성된 모바일 UI 스터디 이미지">보라색과 회색으로 구성된 모바일 UI 스터디 이미지</div><div class="feed-actions"><button type="button">♡ 128</button><button type="button">댓글 24개</button></div></article></section>
-    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta">새 글 쓰기</button><p class="status-text" data-status>정적 로컬 예시</p></footer>
+    <header class="screen-header"><div><p class="eyebrow" data-i18n="item_badge">팔로잉</p><h1 data-i18n="title">오늘의 커뮤니티</h1><p data-i18n="subtitle">관심 있는 사람들의 새 소식을 편안하게 둘러보세요.</p></div><button class="locale-button" type="button" data-locale aria-label="언어 전환" data-i18n-aria="switch_language_label">EN</button></header>
+    <section class="state-panel" data-state-panel hidden><h2 data-state-title></h2><p data-state-body></p><button type="button" data-recover hidden></button></section>
+    <section class="screen-content" aria-live="polite"><nav class="story-row" aria-label="댓글 24개" data-i18n-aria="secondary_label"><span>UI</span><span>UX</span><span>DEV</span><span>KR</span></nav><article class="feed-card"><div class="avatar">JY</div><div><strong data-i18n="item_title">지영 · 모바일 디자인</strong><small data-i18n="item_meta">12분 전</small></div><p data-i18n="item_body">작은 화면일수록 정보의 순서와 여백이 제품의 목소리를 더 또렷하게 만든다고 느꼈어요.</p><div class="feed-media" role="img" aria-label="보라색과 회색으로 구성된 모바일 UI 스터디 이미지" data-i18n="media_label" data-i18n-aria="media_label">보라색과 회색으로 구성된 모바일 UI 스터디 이미지</div><div class="feed-actions"><button type="button">♡ 128</button><button data-i18n="secondary_label">댓글 24개</button></div></article></section>
+    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta">새 글 쓰기</button><p class="status-text" data-status data-i18n="ready_label">정적 로컬 예시</p></footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>

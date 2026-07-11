@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>휴대폰 번호로 시작할게요</title>
+  <title data-i18n="title">휴대폰 번호로 시작할게요</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="mobile-screen archetype-form" data-example-id="fintech-signup" data-state="default">
-    <header class="screen-header"><div><p class="eyebrow">finance-fintech</p><h1 data-i18n="title">휴대폰 번호로 시작할게요</h1><p data-i18n="subtitle">본인 명의 번호를 확인하면 안전하게 계정을 만들 수 있어요.</p></div><button class="locale-button" type="button" data-locale aria-label="English">EN</button></header>
-    <section class="screen-content" aria-live="polite"><label class="field"><span>휴대폰 번호</span><input data-local-input inputmode="tel" aria-label="휴대폰 번호"></label><label class="field"><span>인증번호 6자리</span><input data-local-input inputmode="numeric" aria-label="인증번호 6자리"></label><aside class="notice" role="note"><strong>필수 약관과 본인 확인 내용에 동의합니다</strong><p>계좌 개설 전 이름과 휴대폰 명의가 일치하는지 확인하세요. 실제 인증이나 계좌 개설은 실행하지 않습니다.</p></aside></section>
-    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta">확인하고 계속</button><p class="status-text" data-status>정적 로컬 예시</p></footer>
+    <header class="screen-header"><div><p class="eyebrow" data-i18n="item_badge">보안 확인</p><h1 data-i18n="title">휴대폰 번호로 시작할게요</h1><p data-i18n="subtitle">본인 명의 번호를 확인하면 안전하게 계정을 만들 수 있어요.</p></div><button class="locale-button" type="button" data-locale aria-label="언어 전환" data-i18n-aria="switch_language_label">EN</button></header>
+    <section class="state-panel" data-state-panel hidden><h2 data-state-title></h2><p data-state-body></p><button type="button" data-recover hidden></button></section>
+    <section class="screen-content" aria-live="polite"><label class="field"><span data-i18n="field_label">휴대폰 번호</span><input data-local-input inputmode="tel" aria-label="휴대폰 번호" data-i18n-aria="field_label"></label><label class="field"><span data-i18n="secondary_label">인증번호 6자리</span><input data-local-input inputmode="numeric" aria-label="인증번호 6자리" data-i18n-aria="secondary_label"></label><aside class="notice" role="note"><strong data-i18n="destructive_confirmation_title">계속하기 전에 확인해 주세요</strong><p data-i18n="risk_notice">계좌 개설 전 이름과 휴대폰 명의가 일치하는지 확인하세요. 실제 인증이나 계좌 개설은 실행하지 않습니다.</p><label class="risk-confirm" data-risk-confirm><input type="checkbox" data-risk-checkbox><span data-i18n="confirm_label">필수 약관과 본인 확인 내용에 동의합니다</span></label></aside></section>
+    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta" disabled>확인하고 계속</button><p class="status-text" data-status data-i18n="ready_label">정적 로컬 예시</p></footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>

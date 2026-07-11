@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>주문을 확인해 주세요</title>
+  <title data-i18n="title">주문을 확인해 주세요</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="mobile-screen archetype-checkout" data-example-id="commerce-checkout-address" data-state="default">
-    <header class="screen-header"><div><p class="eyebrow">commerce</p><h1 data-i18n="title">주문을 확인해 주세요</h1><p data-i18n="subtitle">배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.</p></div><button class="locale-button" type="button" data-locale aria-label="English">EN</button></header>
-    <section class="screen-content" aria-live="polite"><article class="summary-card"><span class="tag">내일 도착</span><h2>데일리 코튼 셔츠</h2><p>오프화이트 · M · 수량 1</p><strong>48,900원</strong></article><label class="field"><span>배송지</span><input data-local-input inputmode="text" aria-label="배송지"></label><section class="payment-row" aria-label="Visa ···· 4242"><span class="payment-mark">V</span><div><strong>Visa ···· 4242</strong><small>일시불 · 결제 실행 없음</small></div></section></section>
-    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta">48,900원 결제하기</button><p class="status-text" data-status>정적 로컬 예시</p></footer>
+    <header class="screen-header"><div><p class="eyebrow" data-i18n="item_badge">내일 도착</p><h1 data-i18n="title">주문을 확인해 주세요</h1><p data-i18n="subtitle">배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.</p></div><button class="locale-button" type="button" data-locale aria-label="언어 전환" data-i18n-aria="switch_language_label">EN</button></header>
+    <section class="state-panel" data-state-panel hidden><h2 data-state-title></h2><p data-state-body></p><button type="button" data-recover hidden></button></section>
+    <section class="screen-content" aria-live="polite"><article class="summary-card"><span class="tag" data-i18n="item_badge">내일 도착</span><h2 data-i18n="item_title">데일리 코튼 셔츠</h2><p data-i18n="item_body">오프화이트 · M · 수량 1</p><strong data-i18n="amount">48,900원</strong></article><label class="field"><span data-i18n="field_label">배송지</span><input data-local-input inputmode="text" aria-label="배송지" data-i18n-aria="field_label"></label><section class="payment-row" aria-label="Visa ···· 4242" data-i18n-aria="secondary_label"><span class="payment-mark">V</span><div><strong data-i18n="secondary_label">Visa ···· 4242</strong><small data-i18n="item_meta">일시불 · 결제 실행 없음</small></div></section></section>
+    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta">48,900원 결제하기</button><p class="status-text" data-status data-i18n="ready_label">정적 로컬 예시</p></footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>

@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>이 경로로 예약할까요?</title>
+  <title data-i18n="title">이 경로로 예약할까요?</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="mobile-screen archetype-map" data-example-id="mobility-map-booking" data-state="default">
-    <header class="screen-header"><div><p class="eyebrow">mobility-transportation</p><h1 data-i18n="title">이 경로로 예약할까요?</h1><p data-i18n="subtitle">탑승 위치와 예상 요금, 취소 조건을 확인해 주세요.</p></div><button class="locale-button" type="button" data-locale aria-label="English">EN</button></header>
-    <section class="screen-content" aria-live="polite"><section class="map-surface" aria-label="서울역에서 광화문까지의 예시 경로"><div class="route-line"></div><span class="map-pin map-pin-start">A</span><span class="map-pin map-pin-end">B</span><span class="eta">예상 12분 · 4.2km</span></section><article class="booking-card"><span class="tag">4분 뒤 도착</span><h2>스탠다드 · 3명</h2><p>서울역 1번 출구에서 광화문까지 약 12분</p><aside class="notice"><strong>요금과 취소 조건을 확인했습니다</strong><p>예약 후 2분이 지나면 취소 수수료가 발생할 수 있습니다. 이 예시는 실제 위치 권한이나 차량 호출을 실행하지 않습니다.</p></aside></article></section>
-    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta">차량 예약하기</button><p class="status-text" data-status>정적 로컬 예시</p></footer>
+    <header class="screen-header"><div><p class="eyebrow" data-i18n="item_badge">4분 뒤 도착</p><h1 data-i18n="title">이 경로로 예약할까요?</h1><p data-i18n="subtitle">탑승 위치와 예상 요금, 취소 조건을 확인해 주세요.</p></div><button class="locale-button" type="button" data-locale aria-label="언어 전환" data-i18n-aria="switch_language_label">EN</button></header>
+    <section class="state-panel" data-state-panel hidden><h2 data-state-title></h2><p data-state-body></p><button type="button" data-recover hidden></button></section>
+    <section class="screen-content" aria-live="polite"><section class="map-surface" aria-label="서울역에서 광화문까지의 예시 경로" data-i18n-aria="map_label"><div class="route-line"></div><span class="map-pin map-pin-start">A</span><span class="map-pin map-pin-end">B</span><span class="eta" data-i18n="item_meta">예상 12분 · 4.2km</span></section><article class="booking-card"><span class="tag" data-i18n="item_badge">4분 뒤 도착</span><h2 data-i18n="item_title">스탠다드 · 3명</h2><p data-i18n="item_body">서울역 1번 출구에서 광화문까지 약 12분</p><strong data-i18n="amount">예상 13,800원</strong><aside class="notice" role="note"><strong data-i18n="destructive_confirmation_title">계속하기 전에 확인해 주세요</strong><p data-i18n="risk_notice">예약 후 2분이 지나면 취소 수수료가 발생할 수 있습니다. 이 예시는 실제 위치 권한이나 차량 호출을 실행하지 않습니다.</p><label class="risk-confirm" data-risk-confirm><input type="checkbox" data-risk-checkbox><span data-i18n="confirm_label">요금과 취소 조건을 확인했습니다</span></label></aside></article></section>
+    <footer class="fixed-action"><button class="primary-action" type="button" data-primary-action data-i18n="primary_cta" disabled>차량 예약하기</button><p class="status-text" data-status data-i18n="ready_label">정적 로컬 예시</p></footer>
   </main>
   <script type="module" src="app.js"></script>
 </body>

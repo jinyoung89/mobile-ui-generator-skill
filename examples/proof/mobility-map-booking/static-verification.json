@@ -8,19 +8,19 @@
   "bilingual_fixtures_present": true,
   "numeric_tokens_resolved": true,
   "platform_parity_warnings": [],
-  "spec_sha256": "1a283ce0110584d49433d48ce93c282085cb45c9379733257da4108b81945a2c",
-  "canonical_ir_sha256": "006794a9236f220f5919282c25bf0371e151aa3db1985f3cabeb5339547db2a0",
+  "spec_sha256": "812eec144ae5de3b69f55403dac7ede4496375d251c2324f5445354647be2c47",
+  "canonical_ir_sha256": "d6a569e9b3ac106be6f11409da4ff29c09358a38507389bc4e3ed573f857e3a1",
   "request_sha256": "bdc00c925599b401afec6e3ec74215abd45c53e96ad2bbd3a9b49d795ee0b6e7",
   "source_sha256": {
-    "html-css/index.html": "02bae178871fac8931cebe0b52cb246d979d76b11b28b20b57986254da396c96",
-    "html-css/styles.css": "4a964b51f6464e1a0ded345c1ec8fa7a19c89a4e0bc34ea101d93216e4a9863a",
-    "html-css/app.js": "941b7b63e45f8e945620624e06bed372ce2ef44be57ae9c25f49713d584937ab",
-    "react-native/Screen.tsx": "f8ecb211c814d21a1fe0d1310fe02403447800526c2334d4b9fe6b474c481fd1",
-    "react-native/fixtures.ts": "fc7f7ff015ceca505d4f38919de858b572a1666ea7e1941eae91141b6ef6d7ec",
-    "flutter/screen.dart": "2208e548c2f32f2f8db1b6d7ac54d3298893eaeb12483b9822717dbcee48e2c8",
-    "flutter/fixtures.dart": "cc5da41ad7fbc3143735466b9f30e70545327893dfe3a579d728ebb26511afa3",
-    "swiftui/Screen.swift": "fa77a6502dff8d8d43a452c59e298a442c4caf248838508bf5a2a363077a5e9f",
-    "swiftui/Fixtures.swift": "c631f9b72ae73c18aaa831eef22f75fe0b75d452a18d89604a63d1738e2c6674"
+    "html-css/index.html": "89bac302b0987d012f3af4521c816708f6f1ca65dfbf950670a0147b716ad351",
+    "html-css/styles.css": "8020d0bddf5c3da108c01134223bcf5b0893f38680dddfa30990b36c89bfb008",
+    "html-css/app.js": "7b83d9c7509b21189a5c74a1a02f7b43253d28226adc046a1b14a76736b9b19e",
+    "react-native/Screen.tsx": "36d1ac9e3414a5599688112d10ac2937c46afcd6bb4832ed6419d5546fc2e333",
+    "react-native/fixtures.ts": "a5ba7f365639dece9cb3c9fc70369a1eff739cd75dfc1943c324da24de134e04",
+    "flutter/screen.dart": "e0adf18e0da39853a77843a90f4131c684177d7ecfb653e05e735c9cb87da6f6",
+    "flutter/fixtures.dart": "1459e9420315174f3078ac0ad8607acd6429b72d893ec7a6a2c4ace29041bd1d",
+    "swiftui/Screen.swift": "df35e4e07a1a8a0bfb24f55f404ac7eeded71d9cca98c1e2370fa9e671a3c1ee",
+    "swiftui/Fixtures.swift": "fb97cf8d81a4389598a3c48bb7f5b9665a0adc7d7148de18c85864f100c29850"
   },
   "checked_targets": [
     "html-css",
@@ -31,5 +31,67 @@
   "native_build": "not_run_not_required",
   "native_execution": "not_run_not_required",
   "native_capture": "not_run_not_required",
-  "generator_version": "1.0.0"
+  "generator_version": "1.0.0",
+  "checks": [
+    {
+      "id": "source-completeness",
+      "status": "passed",
+      "detail": "all nine source files are present"
+    },
+    {
+      "id": "unresolved-markers",
+      "status": "passed",
+      "detail": "no unresolved template markers"
+    },
+    {
+      "id": "locales-html-css",
+      "status": "passed",
+      "detail": "HTML visible and ARIA copy follows locale fixtures"
+    },
+    {
+      "id": "locales-react-native",
+      "status": "passed",
+      "detail": "React Native uses bilingual fixtures"
+    },
+    {
+      "id": "locales-flutter",
+      "status": "passed",
+      "detail": "Flutter uses bilingual fixtures"
+    },
+    {
+      "id": "locales-swiftui",
+      "status": "passed",
+      "detail": "SwiftUI uses bilingual fixtures"
+    },
+    {
+      "id": "states-html-css",
+      "status": "passed",
+      "detail": "HTML renders all declared fixture states"
+    },
+    {
+      "id": "states-react-native",
+      "status": "passed",
+      "detail": "react-native renders all declared fixture states"
+    },
+    {
+      "id": "states-flutter",
+      "status": "passed",
+      "detail": "flutter renders all declared fixture states"
+    },
+    {
+      "id": "states-swiftui",
+      "status": "passed",
+      "detail": "swiftui renders all declared fixture states"
+    },
+    {
+      "id": "platform-constructs",
+      "status": "passed",
+      "detail": "safe-area, keyboard, and scroll constructs are present"
+    },
+    {
+      "id": "high-risk-confirmation",
+      "status": "passed",
+      "detail": "high-risk actions require acknowledgement"
+    }
+  ]
 }

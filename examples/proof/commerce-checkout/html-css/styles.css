@@ -17,6 +17,12 @@ h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
 .field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
 .notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
 .notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.risk-confirm { display: flex; min-height: 44px; align-items: center; gap: 10px; margin-top: 10px; font-weight: 700; }
+.risk-confirm input { width: 22px; height: 22px; accent-color: var(--primary); }
+.state-panel { display: grid; gap: 6px; margin-bottom: var(--component-gap); border: 1px solid color-mix(in srgb, var(--primary) 25%, #e2e6ec); border-radius: var(--radius); padding: var(--card-padding); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+.state-panel[hidden] { display: none; }
+.state-panel h2, .state-panel p { margin: 0; } .state-panel p { color: #5b6472; line-height: 22px; }
+.state-panel button { justify-self: start; border: 1px solid var(--primary); border-radius: 10px; padding: 0 14px; background: var(--surface); color: var(--primary); font-weight: 750; }
 .tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
 .summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
 .summary-card > strong { display: block; margin-top: 14px; font-size: 24px; }

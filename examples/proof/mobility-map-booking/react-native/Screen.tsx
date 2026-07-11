@@ -1,21 +1,27 @@
 // Generated from canonical IR mobility-map-booking; 한국어 + English; fixture-only.
 import React, { useMemo, useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fixtures } from './fixtures';
+import { fixtures, stateFixtures, type ProofState } from './fixtures';
 
 type Locale = keyof typeof fixtures;
-export function MobilityMapBookingScreen() {
+type MobilityMapBookingScreenProps = { initialState?: ProofState };
+export function MobilityMapBookingScreen({ initialState = 'default' }: MobilityMapBookingScreenProps) {
   const [locale, setLocale] = useState<Locale>('ko');
-  const [screenState, setScreenState] = useState<'default' | 'success'>('default');
+  const [screenState, setScreenState] = useState<ProofState>(initialState);
+  const [acknowledged, setAcknowledged] = useState(false);
   const model = useMemo(() => fixtures[locale], [locale]);
+  const stateModel = stateFixtures[locale][screenState];
+  const actionAccessibilityState = { disabled: !acknowledged || stateModel.blocksPrimary, busy: stateModel.busy };
   return <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled" automaticallyAdjustKeyboardInsets>
-        <View style={styles.header}><View style={styles.flex}><Text accessibilityRole="header" allowFontScaling style={styles.title}>{model.title}</Text><Text allowFontScaling style={styles.muted}>{model.subtitle}</Text></View><Pressable accessibilityRole="button" onPress={() => setLocale(locale === 'ko' ? 'en' : 'ko')} style={styles.locale}><Text>{locale === 'ko' ? 'EN' : 'KO'}</Text></Pressable></View>
+        <View style={styles.header}><View style={styles.flex}><Text accessibilityRole="header" allowFontScaling style={styles.title}>{model.title}</Text><Text allowFontScaling style={styles.muted}>{model.subtitle}</Text></View><Pressable accessibilityRole="button" accessibilityLabel={model.switch_language_label} onPress={() => setLocale(locale === 'ko' ? 'en' : 'ko')} style={styles.locale}><Text>{locale === 'ko' ? 'EN' : 'KO'}</Text></Pressable></View>
+        {screenState !== 'default' && <View accessibilityRole="alert" style={styles.statePanel}>{stateModel.busy && <ActivityIndicator />}<Text style={styles.strong}>{stateModel.title}</Text><Text style={styles.muted}>{stateModel.body}</Text>{stateModel.recoverTo && <Pressable accessibilityRole="button" onPress={() => setScreenState(stateModel.recoverTo as ProofState)} style={styles.recover}><Text style={styles.recoverText}>{stateModel.recoveryLabel}</Text></Pressable>}</View>}
         <View accessibilityLabel={model.map_label} style={styles.map}><View style={styles.route} /><Text style={styles.pinA}>A</Text><Text style={styles.pinB}>B</Text><Text style={styles.eta}>{model.item_meta}</Text></View><View style={styles.card}><Text style={styles.badge}>{model.item_badge}</Text><Text style={styles.strong}>{model.item_title}</Text><Text style={styles.muted}>{model.item_body}</Text><Text style={styles.risk}>{model.risk_notice}</Text></View>
+        <View style={styles.riskGate}><Switch accessibilityLabel={model.confirm_label} value={acknowledged} onValueChange={setAcknowledged} /><Text style={styles.flex}>{model.confirm_label}</Text></View>
       </ScrollView>
-      <View style={styles.fixed}><Pressable accessibilityRole="button" accessibilityLabel={model.primary_cta} onPress={() => setScreenState('success')} style={styles.action}><Text style={styles.actionText}>{screenState === 'success' ? model.success_label : model.primary_cta}</Text></Pressable></View>
+      <View style={styles.fixed}><Pressable accessibilityRole="button" accessibilityLabel={stateModel.actionLabel} accessibilityState={actionAccessibilityState} disabled={!acknowledged || stateModel.blocksPrimary} onPress={() => { if (!acknowledged) { setScreenState('destructive_confirmation'); return; } setScreenState('loading'); queueMicrotask(() => setScreenState('success')); }} style={({ pressed }) => [styles.action, pressed && styles.pressed, (!acknowledged || stateModel.blocksPrimary) && styles.actionDisabled]}><Text style={styles.actionText}>{stateModel.actionLabel}</Text></Pressable></View>
     </KeyboardAvoidingView>
   </SafeAreaView>;
 }
@@ -27,5 +33,6 @@ const styles = StyleSheet.create({
   map: { minHeight: 280, borderRadius: 18, backgroundColor: '#DFEEE5', overflow: 'hidden' }, route: { position: 'absolute', top: 105, left: 88, width: 170, height: 72, borderRightWidth: 5, borderBottomWidth: 5, borderColor: '#146C5A', borderRadius: 36 }, pinA: { position: 'absolute', top: 64, left: 65, padding: 12, borderRadius: 24, color: '#FFFFFF', backgroundColor: '#146C5A' }, pinB: { position: 'absolute', right: 58, bottom: 54, padding: 12, borderRadius: 24, color: '#FFFFFF', backgroundColor: '#146C5A' }, eta: { position: 'absolute', top: 16, right: 16, padding: 10, borderRadius: 10, backgroundColor: '#FFFFFF', fontWeight: '800' }, risk: { color: '#B42318', lineHeight: 22 },
   stories: { flexDirection: 'row', gap: 12 }, story: { width: 56, height: 56, borderRadius: 28, borderWidth: 3, borderColor: '#146C5A', textAlign: 'center', paddingTop: 17, fontWeight: '800' }, avatar: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', backgroundColor: '#146C5A' }, media: { minHeight: 220, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: '#E8EDF4' },
   messages: { minHeight: 390, justifyContent: 'flex-end', gap: 12 }, incoming: { alignSelf: 'flex-start', maxWidth: '78%', padding: 12, borderRadius: 18, backgroundColor: '#EDF0F4' }, outgoing: { alignSelf: 'flex-end', maxWidth: '78%', padding: 12, borderRadius: 18, color: '#FFFFFF', backgroundColor: '#146C5A' }, time: { alignSelf: 'center', color: '#717B89' }, composer: { flexDirection: 'row', gap: 12 }, send: { width: 52, height: 52, borderRadius: 26, alignItems: 'center', justifyContent: 'center', backgroundColor: '#146C5A' },
-  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: '#FFFFFF' }, action: { minHeight: 52, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: '#146C5A' }, actionText: { color: '#FFFFFF', fontWeight: '800', fontSize: 16 },
+  statePanel: { gap: 6, padding: 16, borderRadius: 12, backgroundColor: '#EEF4FF' }, recover: { minHeight: 44, alignSelf: 'flex-start', justifyContent: 'center' }, recoverText: { color: '#146C5A', fontWeight: '700' }, riskGate: { minHeight: 52, flexDirection: 'row', alignItems: 'center', gap: 12, padding: 16, borderRadius: 12, backgroundColor: '#FFF7ED' },
+  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: '#FFFFFF' }, action: { minHeight: 52, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: '#146C5A' }, pressed: { opacity: 0.82 }, actionDisabled: { opacity: 0.45 }, actionText: { color: '#FFFFFF', fontWeight: '800', fontSize: 16 },
 });

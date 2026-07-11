@@ -4,15 +4,19 @@ import SwiftUI
 struct FintechSignupScreen: View {
   @Environment(\.dynamicTypeSize) private var dynamicTypeSize
   @FocusState private var focused: Bool
-  @State private var locale = "ko"; @State private var screenState = "default"; @State private var input = ""; @State private var secondaryInput = ""
+  @State private var locale = "ko"; @State private var screenState: String; @State private var input = ""; @State private var secondaryInput = ""; @State private var acknowledged: Bool
+  init(initialState: String = "default") { _screenState = State(initialValue: requiredStates.contains(initialState) ? initialState : "default"); _acknowledged = State(initialValue: false) }
   private var model: ProofFixture { proofFixtures[locale] ?? proofFixtures["ko"]! }
+  private var stateModel: ProofStateFixture { stateFixtures[locale]?[screenState] ?? stateFixtures["ko"]!["default"]! }
   var body: some View {
     ScrollView { VStack(alignment: .leading, spacing: 12) {
-      HStack(alignment: .top) { VStack(alignment: .leading, spacing: 6) { Text(model.title).font(.system(size: 26, weight: .bold)).accessibilityAddTraits(.isHeader); Text(model.subtitle).font(.body).foregroundStyle(.secondary) }; Spacer(); Button(locale == "ko" ? "EN" : "KO") { locale = locale == "ko" ? "en" : "ko" }.frame(minWidth: 44, minHeight: 44).buttonStyle(.bordered) }
-      TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).keyboardType(.phonePad).frame(minHeight: 52).focused($focused); TextField(model.secondary_label, text: $secondaryInput).textFieldStyle(.roundedBorder).keyboardType(.numberPad).frame(minHeight: 52); proofCard(model.confirm_label, model.risk_notice)
+      HStack(alignment: .top) { VStack(alignment: .leading, spacing: 6) { Text(model.title).font(.system(size: 26, weight: .bold)).accessibilityAddTraits(.isHeader); Text(model.subtitle).font(.body).foregroundStyle(.secondary) }; Spacer(); Button(locale == "ko" ? "EN" : "KO") { locale = locale == "ko" ? "en" : "ko" }.accessibilityLabel(model.switch_language_label).frame(minWidth: 44, minHeight: 44).buttonStyle(.bordered) }
+      if screenState != "default" { VStack(alignment: .leading, spacing: 6) { if stateModel.busy { ProgressView() }; Text(stateModel.title).font(.headline); Text(stateModel.body).foregroundStyle(.secondary); if let recoverTo = stateModel.recoverTo { Button(stateModel.recoveryLabel) { screenState = recoverTo } } }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 12)).accessibilityElement(children: .combine) }
+      TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).keyboardType(.phonePad).frame(minHeight: 52).focused($focused).onChange(of: input) { _, value in screenState = value.isEmpty ? "default" : "filled" }; TextField(model.secondary_label, text: $secondaryInput).textFieldStyle(.roundedBorder).keyboardType(.numberPad).frame(minHeight: 52).onChange(of: secondaryInput) { _, value in screenState = value.isEmpty ? "default" : "filled" }; proofCard(model.destructive_confirmation_title, model.risk_notice)
+      Toggle(model.confirm_label, isOn: $acknowledged).onChange(of: acknowledged) { _, value in screenState = value ? "default" : "destructive_confirmation" }
     }.padding(.horizontal, 16).padding(.top, 24).padding(.bottom, 100).frame(maxWidth: .infinity, alignment: .leading) }
     .scrollDismissesKeyboard(.interactively).dynamicTypeSize(...DynamicTypeSize.accessibility3)
-    .safeAreaInset(edge: .bottom, spacing: 0) { Button(screenState == "success" ? model.success_label : model.primary_cta) { screenState = "success"; focused = false }.frame(maxWidth: .infinity, minHeight: 52).buttonStyle(.borderedProminent).clipShape(RoundedRectangle(cornerRadius: 12)).padding(.horizontal, 16).padding(.vertical, 12).background(.ultraThinMaterial) }
+    .safeAreaInset(edge: .bottom, spacing: 0) { Button(stateModel.actionLabel) { screenState = "loading"; focused = false; DispatchQueue.main.async { screenState = "success" } }.frame(maxWidth: .infinity, minHeight: 52).buttonStyle(.borderedProminent).clipShape(RoundedRectangle(cornerRadius: 12)).disabled(!acknowledged).disabled(stateModel.blocksPrimary).accessibilityLabel(stateModel.actionLabel).padding(.horizontal, 16).padding(.vertical, 12).background(.ultraThinMaterial) }
   }
   private func proofCard(_ title: String, _ body: String) -> some View { VStack(alignment: .leading, spacing: 6) { Text(title).font(.headline); Text(body).font(.body).foregroundStyle(.secondary) }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 12)) }
 }

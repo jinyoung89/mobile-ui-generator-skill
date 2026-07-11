@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 import { compileExample, stableStringify } from "../src/compile-example.js";
-import { buildProofBundle } from "../src/generate-proof-set.js";
+import { buildProofBundle, verifyProofSources } from "../src/generate-proof-set.js";
 import { validateSpec } from "../src/validate-spec.js";
 
 type JsonObject = Record<string, unknown>;
@@ -111,7 +111,8 @@ for (const [id, contract] of Object.entries(expected)) {
   test(`${id} source files and verification hashes derive from the canonical IR`, () => {
     const dir = path.join(proofRoot, id);
     const specText = readFileSync(path.join(dir, "spec.json"), "utf8");
-    const compiled = compileExample(JSON.parse(specText) as JsonObject);
+    const spec = JSON.parse(specText) as JsonObject;
+    const compiled = compileExample(spec);
     const verification = readJson(path.join(dir, "static-verification.json"));
     const provenance = readJson(path.join(dir, "public-provenance.json"));
 
@@ -154,5 +155,71 @@ for (const [id, contract] of Object.entries(expected)) {
     assert.match(readFileSync(path.join(dir, "request.md"), "utf8"), /showcase\/all-platforms/);
     assert.deepEqual(regenerated.provenance, provenance);
     assert.deepEqual(regenerated.verification, verification);
+
+    const declaredStates = [...new Set(Object.values(spec.states as JsonObject).flatMap((value) => value as string[]))];
+    const targetSources = {
+      html_css: `${regenerated.files["html-css/index.html"]}\n${regenerated.files["html-css/app.js"]}`,
+      react_native: `${regenerated.files["react-native/Screen.tsx"]}\n${regenerated.files["react-native/fixtures.ts"]}`,
+      flutter: `${regenerated.files["flutter/screen.dart"]}\n${regenerated.files["flutter/fixtures.dart"]}`,
+      swiftui: `${regenerated.files["swiftui/Screen.swift"]}\n${regenerated.files["swiftui/Fixtures.swift"]}`,
+    };
+    for (const [target, source] of Object.entries(targetSources)) {
+      for (const state of declaredStates) assert.match(source, new RegExp(`['"]${state}['"]`), `${id}/${target} missing fixture-backed state ${state}`);
+    }
+
+    const html = regenerated.files["html-css/index.html"];
+    for (const match of html.matchAll(/<([a-z][^>]*)>([^<]*[가-힣][^<]*)<\//gi)) {
+      assert.match(match[1] ?? "", /data-i18n=/, `${id} Korean visible copy is not locale-bound: ${match[2]}`);
+    }
+    for (const match of html.matchAll(/<([a-z][^>]*aria-label="[^"]*[가-힣][^"]*"[^>]*)>/gi)) {
+      assert.match(match[1] ?? "", /data-i18n-aria=/, `${id} Korean ARIA copy is not locale-bound`);
+    }
+    assert.match(regenerated.files["html-css/app.js"], /data-i18n-aria/);
+    assert.match(regenerated.files["html-css/app.js"], /renderState/);
+    assert.match(regenerated.files["html-css/app.js"], /stateFixtures/);
+
+    for (const [fixturePath, localePattern] of [
+      ["react-native/fixtures.ts", /ko[\s\S]*[가-힣][\s\S]*en[\s\S]*[A-Za-z]{4}/],
+      ["flutter/fixtures.dart", /'ko'[\s\S]*[가-힣][\s\S]*'en'[\s\S]*[A-Za-z]{4}/],
+      ["swiftui/Fixtures.swift", /"ko"[\s\S]*[가-힣][\s\S]*"en"[\s\S]*[A-Za-z]{4}/],
+    ] as const) assert.match(regenerated.files[fixturePath], localePattern, `${id}/${fixturePath} lacks meaningful bilingual fixtures`);
+
+    assert.match(regenerated.files["react-native/Screen.tsx"], /initialState/);
+    assert.match(regenerated.files["react-native/Screen.tsx"], /stateFixtures/);
+    assert.match(regenerated.files["react-native/Screen.tsx"], /recoverTo/);
+    assert.match(regenerated.files["flutter/screen.dart"], /initialState/);
+    assert.match(regenerated.files["flutter/screen.dart"], /stateFixtures/);
+    assert.match(regenerated.files["flutter/screen.dart"], /recoverTo/);
+    assert.match(regenerated.files["swiftui/Screen.swift"], /initialState/);
+    assert.match(regenerated.files["swiftui/Screen.swift"], /stateFixtures/);
+    assert.match(regenerated.files["swiftui/Screen.swift"], /recoverTo/);
+
+    const computed = verifyProofSources(compiled, regenerated.files);
+    assert.equal(computed.status, "passed");
+    assert.ok(computed.checks.length >= 8);
+    assert.ok(computed.checks.every((check) => check.status === "passed"));
+    assert.deepEqual(verification.checks, computed.checks);
+
+    if (contract.risk === "high") {
+      assert.match(html, /data-risk-confirm/);
+      assert.match(regenerated.files["html-css/app.js"], /acknowledged/);
+      assert.match(regenerated.files["react-native/Screen.tsx"], /acknowledged/);
+      assert.match(regenerated.files["react-native/Screen.tsx"], /disabled=\{!acknowledged/);
+      assert.match(regenerated.files["flutter/screen.dart"], /CheckboxListTile/);
+      assert.match(regenerated.files["flutter/screen.dart"], /acknowledged \?/);
+      assert.match(regenerated.files["swiftui/Screen.swift"], /Toggle/);
+      assert.match(regenerated.files["swiftui/Screen.swift"], /\.disabled\(!acknowledged\)/);
+    }
   });
 }
+
+test("computed static verification fails when a target loses a required state", () => {
+  const dir = path.join(proofRoot, "messenger-chat");
+  const specText = readFileSync(path.join(dir, "spec.json"), "utf8");
+  const bundle = buildProofBundle(specText, readFileSync(path.join(dir, "request.md"), "utf8"));
+  const compiled = compileExample(JSON.parse(specText) as JsonObject);
+  const broken = { ...bundle.files, "react-native/fixtures.ts": bundle.files["react-native/fixtures.ts"].replaceAll('"offline"', '"removed-state"') };
+  const result = verifyProofSources(compiled, broken);
+  assert.equal(result.status, "failed");
+  assert.ok(result.checks.some((check) => check.id === "states-react-native" && check.status === "failed"));
+});
