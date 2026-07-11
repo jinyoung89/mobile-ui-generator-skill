@@ -17,10 +17,30 @@ test("mobile preflight is a checked-in bounded runtime verification command", ()
   assert.match(script, /IOS_BOOT_TIMEOUT_SECONDS/);
   assert.match(script, /ANDROID_BOOT_TIMEOUT_SECONDS/);
   assert.match(script, /simctl boot/);
+  assert.match(
+    script,
+    /run_with_timeout "\$IOS_BOOT_TIMEOUT_SECONDS" xcrun simctl bootstatus "\$IOS_UDID" -b/,
+  );
   assert.match(script, /sys\.boot_completed/);
   assert.match(script, /simctl shutdown/);
   assert.match(script, /adb.*emu kill/);
   assert.match(script, /"status":"ok"/);
+});
+
+test("Android preflight allocates and owns a serial before targeting its process", () => {
+  const script = readFileSync(verificationScript, "utf8");
+
+  assert.match(script, /ANDROID_PORT_MIN=\d+/);
+  assert.match(script, /ANDROID_PORT_MAX=\d+/);
+  assert.match(script, /android_port=\$\(allocate_android_port\)/);
+  assert.match(script, /adb devices.*candidate_serial/);
+  assert.match(script, /emulator_pid=\$!/);
+  assert.match(script, /kill -0 "\$emulator_pid"/);
+  assert.match(script, /emu avd name/);
+  assert.match(
+    script,
+    /wait_for_owned_process "\$SHUTDOWN_TIMEOUT_SECONDS" "\$emulator_pid"/,
+  );
 });
 
 test("unfinished release scripts always fail behind an explicit baseline validator", () => {

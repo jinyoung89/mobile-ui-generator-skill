@@ -93,16 +93,16 @@ Command:
 npm run preflight:mobile
 ```
 
-This invokes the checked-in `tooling/scripts/verify-mobile-targets.sh`. It boots the pinned iOS and Android targets, uses bounded condition polling, verifies iOS 17.2 and Android API 34, shuts both targets down, and emits a JSON success record only after those checks complete.
+This invokes the checked-in `tooling/scripts/verify-mobile-targets.sh`. It boots the pinned iOS target and requires `xcrun simctl bootstatus <pinned-udid> -b` to complete under an external timeout before verifying iOS 17.2. It allocates an unoccupied even Android emulator port from a bounded range, captures the launched PID, verifies that the new serial reports the pinned AVD and API 34, and waits for only that owned process during shutdown. It emits a JSON success record only after both targets are shut down.
 
 Exit status: `0`
 
 Relevant output:
 
 ```text
-IOS_BOOT_COMPLETED attempt=1 runtime=17.2
-ANDROID_BOOT_COMPLETED attempt=11 api=34
-{"status":"ok","ios":{"runtime":"17.2","udid":"7732B728-22A6-4CCC-A121-C1F2BDC5EC23","verified":true},"android":{"api":34,"avd":"mobile_ui_api34","verified":true}}
+IOS_BOOT_COMPLETED bootstatus=ready runtime=17.2
+ANDROID_BOOT_COMPLETED attempt=9 api=34 serial=emulator-5580 pid=39213
+{"status":"ok","ios":{"runtime":"17.2","udid":"7732B728-22A6-4CCC-A121-C1F2BDC5EC23","verified":true},"android":{"api":34,"avd":"mobile_ui_api34","serial":"emulator-5580","port":5580,"verified":true}}
 ```
 
 The JSON record is runtime verification evidence. The `installed` and `configured` fields in `tooling/toolchains.json` intentionally make no boot-readiness claim.
@@ -167,6 +167,26 @@ Relevant output:
 
 The failures reported the missing mobile preflight command, missing baseline validation contract, and absent installed/configured registry state.
 
+Owned-readiness RED command:
+
+```sh
+npm test -- tooling/test/mobile-preflight-contract.test.ts
+```
+
+Exit status: `1`
+
+Relevant output:
+
+```text
+# tests 3
+# pass 1
+# fail 2
+```
+
+The two failures required bounded `simctl bootstatus -b` readiness and safe Android port/PID ownership. The same command then exited `0` with 3/3 tests passing after implementation.
+
+A fresh runtime gate then exposed that `kill -0` can remain true for an exited, unreaped child. A follow-up targeted RED exited `1` with 3 tests, 2 passes, and 1 failure requiring `wait_for_owned_process "$SHUTDOWN_TIMEOUT_SECONDS" "$emulator_pid"`; the GREEN run passed 3/3 and the real preflight emitted JSON status `ok`.
+
 Hardening full-suite command:
 
 ```sh
@@ -178,8 +198,8 @@ Exit status: `0`
 Relevant output:
 
 ```text
-# tests 11
-# pass 11
+# tests 12
+# pass 12
 # fail 0
 ```
 
