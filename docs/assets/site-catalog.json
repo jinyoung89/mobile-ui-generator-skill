@@ -84,6 +84,7 @@
       "enabled",
       "loading",
       "success",
+      "destructive_confirmation",
       "empty",
       "focused",
       "filled",

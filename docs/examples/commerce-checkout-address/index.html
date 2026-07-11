@@ -5,7 +5,7 @@
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
-  &lt;title&gt;주문을 확인해 주세요&lt;/title&gt;
+  &lt;title data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/title&gt;
   &lt;style&gt;/* canonical commerce-checkout-address: 한국어 + English static proof */
 :root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #2563EB; --danger: #B42318; }
 * { box-sizing: border-box; }
@@ -25,6 +25,12 @@ h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
 .field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
 .notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
 .notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.risk-confirm { display: flex; min-height: 44px; align-items: center; gap: 10px; margin-top: 10px; font-weight: 700; }
+.risk-confirm input { width: 22px; height: 22px; accent-color: var(--primary); }
+.state-panel { display: grid; gap: 6px; margin-bottom: var(--component-gap); border: 1px solid color-mix(in srgb, var(--primary) 25%, #e2e6ec); border-radius: var(--radius); padding: var(--card-padding); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+.state-panel[hidden] { display: none; }
+.state-panel h2, .state-panel p { margin: 0; } .state-panel p { color: #5b6472; line-height: 22px; }
+.state-panel button { justify-self: start; border: 1px solid var(--primary); border-radius: 10px; padding: 0 14px; background: var(--surface); color: var(--primary); font-weight: 750; }
 .tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
 .summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
 .summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
@@ -66,68 +72,119 @@ h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
 &lt;/head&gt;
 &lt;body&gt;
   &lt;main class=&quot;mobile-screen archetype-checkout&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot;&gt;
-    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
-    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;내일 도착&lt;/span&gt;&lt;h2&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Visa ···· 4242&lt;/strong&gt;&lt;small&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
-    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot; data-i18n=&quot;item_badge&quot;&gt;내일 도착&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;언어 전환&quot; data-i18n-aria=&quot;switch_language_label&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;state-panel&quot; data-state-panel hidden&gt;&lt;h2 data-state-title&gt;&lt;/h2&gt;&lt;p data-state-body&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; data-recover hidden&gt;&lt;/button&gt;&lt;/section&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot; data-i18n=&quot;item_badge&quot;&gt;내일 도착&lt;/span&gt;&lt;h2 data-i18n=&quot;item_title&quot;&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p data-i18n=&quot;item_body&quot;&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong data-i18n=&quot;amount&quot;&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span data-i18n=&quot;field_label&quot;&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot; data-i18n-aria=&quot;field_label&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot; data-i18n-aria=&quot;secondary_label&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong data-i18n=&quot;secondary_label&quot;&gt;Visa ···· 4242&lt;/strong&gt;&lt;small data-i18n=&quot;item_meta&quot;&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status data-i18n=&quot;ready_label&quot;&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
   &lt;/main&gt;
   &lt;script type=&quot;module&quot;&gt;// commerce-checkout-address: 한국어 + English local fixture runtime
 const proof = {
   &quot;locales&quot;: {
     &quot;ko&quot;: {
       &quot;amount&quot;: &quot;48,900원&quot;,
+      &quot;confirm_action_label&quot;: &quot;이해했고 확인합니다&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;로컬 예시를 확인하고 준비되면 계속하세요.&quot;,
+      &quot;default_title&quot;: &quot;준비됐어요&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;영향을 확인하고 동의한 뒤 신뢰가 필요한 동작을 진행하세요.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;계속하기 전에 확인해 주세요&quot;,
+      &quot;disabled_body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+      &quot;disabled_title&quot;: &quot;아직 진행할 수 없어요&quot;,
       &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
       &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;enabled_body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+      &quot;enabled_title&quot;: &quot;진행할 준비가 됐어요&quot;,
       &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
       &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
       &quot;field_label&quot;: &quot;배송지&quot;,
+      &quot;filled_body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+      &quot;filled_title&quot;: &quot;입력이 완료됐어요&quot;,
+      &quot;focused_body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+      &quot;focused_title&quot;: &quot;입력란을 선택했어요&quot;,
       &quot;item_badge&quot;: &quot;내일 도착&quot;,
       &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
       &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
       &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+      &quot;keyboard_body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+      &quot;keyboard_title&quot;: &quot;키보드가 열렸어요&quot;,
       &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
       &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
       &quot;map_label&quot;: &quot;&quot;,
       &quot;media_label&quot;: &quot;상품 미리보기&quot;,
       &quot;message_in&quot;: &quot;&quot;,
       &quot;message_out&quot;: &quot;&quot;,
+      &quot;offline_body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+      &quot;offline_title&quot;: &quot;오프라인 상태예요&quot;,
+      &quot;permission_denied_body&quot;: &quot;로컬 대체 화면을 사용하거나 권한 안내를 확인하세요.&quot;,
+      &quot;permission_denied_title&quot;: &quot;권한이 허용되지 않았어요&quot;,
+      &quot;pressed_body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+      &quot;pressed_title&quot;: &quot;버튼을 눌렀어요&quot;,
       &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
       &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;recover_label&quot;: &quot;기본 상태로 돌아가기&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
       &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
       &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
       &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
       &quot;success_label&quot;: &quot;주문 완료&quot;,
       &quot;success_title&quot;: &quot;완료됐어요&quot;,
-      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+      &quot;switch_language_label&quot;: &quot;언어 전환&quot;,
+      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;,
+      &quot;validation_error_body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+      &quot;validation_error_title&quot;: &quot;입력 내용을 확인해 주세요&quot;
     },
     &quot;en&quot;: {
       &quot;amount&quot;: &quot;KRW 48,900&quot;,
+      &quot;confirm_action_label&quot;: &quot;I understand and confirm&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;Review the local example and continue when ready.&quot;,
+      &quot;default_title&quot;: &quot;Ready&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;Review the consequence and acknowledge it before the high-trust action.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;Confirm before continuing&quot;,
+      &quot;disabled_body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+      &quot;disabled_title&quot;: &quot;Action unavailable&quot;,
       &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
       &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;enabled_body&quot;: &quot;The primary action is ready for this local example.&quot;,
+      &quot;enabled_title&quot;: &quot;Action ready&quot;,
       &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
       &quot;error_title&quot;: &quot;We could not finish that&quot;,
       &quot;field_label&quot;: &quot;Delivery address&quot;,
+      &quot;filled_body&quot;: &quot;The local value is ready to review.&quot;,
+      &quot;filled_title&quot;: &quot;Input complete&quot;,
+      &quot;focused_body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+      &quot;focused_title&quot;: &quot;Input focused&quot;,
       &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
       &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
       &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
       &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+      &quot;keyboard_body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+      &quot;keyboard_title&quot;: &quot;Keyboard open&quot;,
       &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
       &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
       &quot;map_label&quot;: &quot;&quot;,
       &quot;media_label&quot;: &quot;Product preview&quot;,
       &quot;message_in&quot;: &quot;&quot;,
       &quot;message_out&quot;: &quot;&quot;,
+      &quot;offline_body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+      &quot;offline_title&quot;: &quot;You are offline&quot;,
+      &quot;permission_denied_body&quot;: &quot;Continue with the local fallback or review permission guidance.&quot;,
+      &quot;permission_denied_title&quot;: &quot;Permission not allowed&quot;,
+      &quot;pressed_body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+      &quot;pressed_title&quot;: &quot;Action pressed&quot;,
       &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
       &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;recover_label&quot;: &quot;Return to default&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
       &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
       &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
       &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
       &quot;success_label&quot;: &quot;Order complete&quot;,
       &quot;success_title&quot;: &quot;All set&quot;,
-      &quot;title&quot;: &quot;Review your order&quot;
+      &quot;switch_language_label&quot;: &quot;Switch language&quot;,
+      &quot;title&quot;: &quot;Review your order&quot;,
+      &quot;validation_error_body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+      &quot;validation_error_title&quot;: &quot;Check this field&quot;
     }
   },
   &quot;fixtures&quot;: {
@@ -146,50 +203,342 @@ const proof = {
       &quot;last4&quot;: &quot;4242&quot;
     }
   },
-  &quot;states&quot;: {
-    &quot;screen&quot;: [
-      &quot;default&quot;,
-      &quot;loading&quot;,
-      &quot;error&quot;,
-      &quot;success&quot;
-    ],
-    &quot;inputs&quot;: [
-      &quot;empty&quot;,
-      &quot;focused&quot;,
-      &quot;filled&quot;,
-      &quot;validation_error&quot;,
-      &quot;keyboard&quot;,
-      &quot;disabled&quot;
-    ],
-    &quot;cta&quot;: [
-      &quot;disabled&quot;,
-      &quot;enabled&quot;,
-      &quot;pressed&quot;,
-      &quot;loading&quot;,
-      &quot;success&quot;
-    ]
-  }
+  &quot;stateFixtures&quot;: {
+    &quot;ko&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;주문을 확인해 주세요&quot;,
+        &quot;body&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;화면을 준비하고 있어요&quot;,
+        &quot;body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;완료하지 못했어요&quot;,
+        &quot;body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;완료됐어요&quot;,
+        &quot;body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;주문 완료&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;아직 내용이 없어요&quot;,
+        &quot;body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;입력란을 선택했어요&quot;,
+        &quot;body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;입력이 완료됐어요&quot;,
+        &quot;body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;validation_error&quot;: {
+        &quot;title&quot;: &quot;입력 내용을 확인해 주세요&quot;,
+        &quot;body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;키보드가 열렸어요&quot;,
+        &quot;body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;아직 진행할 수 없어요&quot;,
+        &quot;body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;진행할 준비가 됐어요&quot;,
+        &quot;body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;pressed&quot;: {
+        &quot;title&quot;: &quot;버튼을 눌렀어요&quot;,
+        &quot;body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    },
+    &quot;en&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;Review your order&quot;,
+        &quot;body&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;Preparing your screen&quot;,
+        &quot;body&quot;: &quot;The local example is loading without a network request.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;We could not finish that&quot;,
+        &quot;body&quot;: &quot;Review the highlighted information and try again.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;All set&quot;,
+        &quot;body&quot;: &quot;The order moved to a local success state.&quot;,
+        &quot;actionLabel&quot;: &quot;Order complete&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;Nothing here yet&quot;,
+        &quot;body&quot;: &quot;Start with the primary action below.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;Input focused&quot;,
+        &quot;body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;Input complete&quot;,
+        &quot;body&quot;: &quot;The local value is ready to review.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;validation_error&quot;: {
+        &quot;title&quot;: &quot;Check this field&quot;,
+        &quot;body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;Keyboard open&quot;,
+        &quot;body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;Action unavailable&quot;,
+        &quot;body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;Action ready&quot;,
+        &quot;body&quot;: &quot;The primary action is ready for this local example.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;pressed&quot;: {
+        &quot;title&quot;: &quot;Action pressed&quot;,
+        &quot;body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    }
+  },
+  &quot;requiredStates&quot;: [
+    &quot;default&quot;,
+    &quot;loading&quot;,
+    &quot;error&quot;,
+    &quot;success&quot;,
+    &quot;empty&quot;,
+    &quot;focused&quot;,
+    &quot;filled&quot;,
+    &quot;validation_error&quot;,
+    &quot;keyboard&quot;,
+    &quot;disabled&quot;,
+    &quot;enabled&quot;,
+    &quot;pressed&quot;
+  ],
+  &quot;risk&quot;: &quot;medium&quot;
 };
 const root = document.querySelector(&#39;.mobile-screen&#39;);
 const localeButton = document.querySelector(&#39;[data-locale]&#39;);
 const primary = document.querySelector(&#39;[data-primary-action]&#39;);
 const status = document.querySelector(&#39;[data-status]&#39;);
+const statePanel = document.querySelector(&#39;[data-state-panel]&#39;);
+const stateTitle = document.querySelector(&#39;[data-state-title]&#39;);
+const stateBody = document.querySelector(&#39;[data-state-body]&#39;);
+const recover = document.querySelector(&#39;[data-recover]&#39;);
+const riskCheckbox = document.querySelector(&#39;[data-risk-checkbox]&#39;);
 let locale = &#39;ko&#39;;
+let acknowledged = proof.risk !== &#39;high&#39;;
+const requestedState = new URLSearchParams(window.location.search).get(&#39;state&#39;);
+let currentState = proof.requiredStates.includes(requestedState) ? requestedState : &#39;default&#39;;
+const renderState = (nextState = currentState) =&gt; {
+  currentState = proof.requiredStates.includes(nextState) ? nextState : &#39;default&#39;;
+  const stateModel = proof.stateFixtures[locale][currentState];
+  root.dataset.state = currentState;
+  statePanel.hidden = currentState === &#39;default&#39;;
+  stateTitle.textContent = stateModel.title;
+  stateBody.textContent = stateModel.body;
+  recover.hidden = !stateModel.recoverTo;
+  recover.textContent = stateModel.recoveryLabel;
+  recover.dataset.recoverTo = stateModel.recoverTo ?? &#39;&#39;;
+  status.textContent = stateModel.body;
+  primary.textContent = stateModel.actionLabel;
+  primary.disabled = stateModel.blocksPrimary || (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged);
+  primary.setAttribute(&#39;aria-busy&#39;, String(stateModel.busy));
+};
 const renderLocale = () =&gt; {
   const copy = proof.locales[locale];
   document.documentElement.lang = locale;
+  document.title = copy.title;
   document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  document.querySelectorAll(&#39;[data-i18n-aria]&#39;).forEach((node) =&gt; { const key = node.dataset.i18nAria; if (key &amp;&amp; copy[key]) node.setAttribute(&#39;aria-label&#39;, copy[key]); });
   localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
-  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
-  status.textContent = copy.ready_label;
+  renderState(currentState);
 };
 localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
 primary.addEventListener(&#39;click&#39;, () =&gt; {
-  root.dataset.state = &#39;loading&#39;;
-  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
-  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+  if (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged) { renderState(&#39;destructive_confirmation&#39;); return; }
+  renderState(&#39;loading&#39;);
+  queueMicrotask(() =&gt; renderState(&#39;success&#39;));
 });
-window.__MOBILE_UI_PROOF__ = proof;
+recover.addEventListener(&#39;click&#39;, () =&gt; renderState(recover.dataset.recoverTo || &#39;default&#39;));
+riskCheckbox?.addEventListener(&#39;change&#39;, () =&gt; { acknowledged = riskCheckbox.checked; renderState(acknowledged ? &#39;default&#39; : &#39;destructive_confirmation&#39;); });
+document.querySelectorAll(&#39;[data-local-input]&#39;).forEach((input) =&gt; {
+  input.addEventListener(&#39;focus&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;focused&#39;)) renderState(&#39;focused&#39;); });
+  input.addEventListener(&#39;input&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;filled&#39;)) renderState(input.value ? &#39;filled&#39; : &#39;default&#39;); });
+});
+window.__MOBILE_UI_PROOF__ = { ...proof, renderState };
 renderLocale();
 &lt;/script&gt;
 &lt;/body&gt;
@@ -201,14 +550,15 @@ renderLocale();
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
-  &lt;title&gt;주문을 확인해 주세요&lt;/title&gt;
+  &lt;title data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/title&gt;
   &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;main class=&quot;mobile-screen archetype-checkout&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot;&gt;
-    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
-    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;내일 도착&lt;/span&gt;&lt;h2&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Visa ···· 4242&lt;/strong&gt;&lt;small&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
-    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot; data-i18n=&quot;item_badge&quot;&gt;내일 도착&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;언어 전환&quot; data-i18n-aria=&quot;switch_language_label&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;state-panel&quot; data-state-panel hidden&gt;&lt;h2 data-state-title&gt;&lt;/h2&gt;&lt;p data-state-body&gt;&lt;/p&gt;&lt;button type=&quot;button&quot; data-recover hidden&gt;&lt;/button&gt;&lt;/section&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot; data-i18n=&quot;item_badge&quot;&gt;내일 도착&lt;/span&gt;&lt;h2 data-i18n=&quot;item_title&quot;&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p data-i18n=&quot;item_body&quot;&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong data-i18n=&quot;amount&quot;&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span data-i18n=&quot;field_label&quot;&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot; data-i18n-aria=&quot;field_label&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot; data-i18n-aria=&quot;secondary_label&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong data-i18n=&quot;secondary_label&quot;&gt;Visa ···· 4242&lt;/strong&gt;&lt;small data-i18n=&quot;item_meta&quot;&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status data-i18n=&quot;ready_label&quot;&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
   &lt;/main&gt;
   &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
@@ -232,6 +582,12 @@ h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
 .field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
 .notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
 .notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.risk-confirm { display: flex; min-height: 44px; align-items: center; gap: 10px; margin-top: 10px; font-weight: 700; }
+.risk-confirm input { width: 22px; height: 22px; accent-color: var(--primary); }
+.state-panel { display: grid; gap: 6px; margin-bottom: var(--component-gap); border: 1px solid color-mix(in srgb, var(--primary) 25%, #e2e6ec); border-radius: var(--radius); padding: var(--card-padding); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+.state-panel[hidden] { display: none; }
+.state-panel h2, .state-panel p { margin: 0; } .state-panel p { color: #5b6472; line-height: 22px; }
+.state-panel button { justify-self: start; border: 1px solid var(--primary); border-radius: 10px; padding: 0 14px; background: var(--surface); color: var(--primary); font-weight: 750; }
 .tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
 .summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
 .summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
@@ -274,59 +630,109 @@ const proof = {
   &quot;locales&quot;: {
     &quot;ko&quot;: {
       &quot;amount&quot;: &quot;48,900원&quot;,
+      &quot;confirm_action_label&quot;: &quot;이해했고 확인합니다&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;로컬 예시를 확인하고 준비되면 계속하세요.&quot;,
+      &quot;default_title&quot;: &quot;준비됐어요&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;영향을 확인하고 동의한 뒤 신뢰가 필요한 동작을 진행하세요.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;계속하기 전에 확인해 주세요&quot;,
+      &quot;disabled_body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+      &quot;disabled_title&quot;: &quot;아직 진행할 수 없어요&quot;,
       &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
       &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;enabled_body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+      &quot;enabled_title&quot;: &quot;진행할 준비가 됐어요&quot;,
       &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
       &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
       &quot;field_label&quot;: &quot;배송지&quot;,
+      &quot;filled_body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+      &quot;filled_title&quot;: &quot;입력이 완료됐어요&quot;,
+      &quot;focused_body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+      &quot;focused_title&quot;: &quot;입력란을 선택했어요&quot;,
       &quot;item_badge&quot;: &quot;내일 도착&quot;,
       &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
       &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
       &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+      &quot;keyboard_body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+      &quot;keyboard_title&quot;: &quot;키보드가 열렸어요&quot;,
       &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
       &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
       &quot;map_label&quot;: &quot;&quot;,
       &quot;media_label&quot;: &quot;상품 미리보기&quot;,
       &quot;message_in&quot;: &quot;&quot;,
       &quot;message_out&quot;: &quot;&quot;,
+      &quot;offline_body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+      &quot;offline_title&quot;: &quot;오프라인 상태예요&quot;,
+      &quot;permission_denied_body&quot;: &quot;로컬 대체 화면을 사용하거나 권한 안내를 확인하세요.&quot;,
+      &quot;permission_denied_title&quot;: &quot;권한이 허용되지 않았어요&quot;,
+      &quot;pressed_body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+      &quot;pressed_title&quot;: &quot;버튼을 눌렀어요&quot;,
       &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
       &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;recover_label&quot;: &quot;기본 상태로 돌아가기&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
       &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
       &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
       &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
       &quot;success_label&quot;: &quot;주문 완료&quot;,
       &quot;success_title&quot;: &quot;완료됐어요&quot;,
-      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+      &quot;switch_language_label&quot;: &quot;언어 전환&quot;,
+      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;,
+      &quot;validation_error_body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+      &quot;validation_error_title&quot;: &quot;입력 내용을 확인해 주세요&quot;
     },
     &quot;en&quot;: {
       &quot;amount&quot;: &quot;KRW 48,900&quot;,
+      &quot;confirm_action_label&quot;: &quot;I understand and confirm&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;default_body&quot;: &quot;Review the local example and continue when ready.&quot;,
+      &quot;default_title&quot;: &quot;Ready&quot;,
+      &quot;destructive_confirmation_body&quot;: &quot;Review the consequence and acknowledge it before the high-trust action.&quot;,
+      &quot;destructive_confirmation_title&quot;: &quot;Confirm before continuing&quot;,
+      &quot;disabled_body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+      &quot;disabled_title&quot;: &quot;Action unavailable&quot;,
       &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
       &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;enabled_body&quot;: &quot;The primary action is ready for this local example.&quot;,
+      &quot;enabled_title&quot;: &quot;Action ready&quot;,
       &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
       &quot;error_title&quot;: &quot;We could not finish that&quot;,
       &quot;field_label&quot;: &quot;Delivery address&quot;,
+      &quot;filled_body&quot;: &quot;The local value is ready to review.&quot;,
+      &quot;filled_title&quot;: &quot;Input complete&quot;,
+      &quot;focused_body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+      &quot;focused_title&quot;: &quot;Input focused&quot;,
       &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
       &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
       &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
       &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+      &quot;keyboard_body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+      &quot;keyboard_title&quot;: &quot;Keyboard open&quot;,
       &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
       &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
       &quot;map_label&quot;: &quot;&quot;,
       &quot;media_label&quot;: &quot;Product preview&quot;,
       &quot;message_in&quot;: &quot;&quot;,
       &quot;message_out&quot;: &quot;&quot;,
+      &quot;offline_body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+      &quot;offline_title&quot;: &quot;You are offline&quot;,
+      &quot;permission_denied_body&quot;: &quot;Continue with the local fallback or review permission guidance.&quot;,
+      &quot;permission_denied_title&quot;: &quot;Permission not allowed&quot;,
+      &quot;pressed_body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+      &quot;pressed_title&quot;: &quot;Action pressed&quot;,
       &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
       &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;recover_label&quot;: &quot;Return to default&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
       &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
       &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
       &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
       &quot;success_label&quot;: &quot;Order complete&quot;,
       &quot;success_title&quot;: &quot;All set&quot;,
-      &quot;title&quot;: &quot;Review your order&quot;
+      &quot;switch_language_label&quot;: &quot;Switch language&quot;,
+      &quot;title&quot;: &quot;Review your order&quot;,
+      &quot;validation_error_body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+      &quot;validation_error_title&quot;: &quot;Check this field&quot;
     }
   },
   &quot;fixtures&quot;: {
@@ -345,69 +751,366 @@ const proof = {
       &quot;last4&quot;: &quot;4242&quot;
     }
   },
-  &quot;states&quot;: {
-    &quot;screen&quot;: [
-      &quot;default&quot;,
-      &quot;loading&quot;,
-      &quot;error&quot;,
-      &quot;success&quot;
-    ],
-    &quot;inputs&quot;: [
-      &quot;empty&quot;,
-      &quot;focused&quot;,
-      &quot;filled&quot;,
-      &quot;validation_error&quot;,
-      &quot;keyboard&quot;,
-      &quot;disabled&quot;
-    ],
-    &quot;cta&quot;: [
-      &quot;disabled&quot;,
-      &quot;enabled&quot;,
-      &quot;pressed&quot;,
-      &quot;loading&quot;,
-      &quot;success&quot;
-    ]
-  }
+  &quot;stateFixtures&quot;: {
+    &quot;ko&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;주문을 확인해 주세요&quot;,
+        &quot;body&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;화면을 준비하고 있어요&quot;,
+        &quot;body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;완료하지 못했어요&quot;,
+        &quot;body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;완료됐어요&quot;,
+        &quot;body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;주문 완료&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;아직 내용이 없어요&quot;,
+        &quot;body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;입력란을 선택했어요&quot;,
+        &quot;body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;입력이 완료됐어요&quot;,
+        &quot;body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;validation_error&quot;: {
+        &quot;title&quot;: &quot;입력 내용을 확인해 주세요&quot;,
+        &quot;body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;키보드가 열렸어요&quot;,
+        &quot;body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;아직 진행할 수 없어요&quot;,
+        &quot;body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;진행할 준비가 됐어요&quot;,
+        &quot;body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;pressed&quot;: {
+        &quot;title&quot;: &quot;버튼을 눌렀어요&quot;,
+        &quot;body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+        &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+        &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    },
+    &quot;en&quot;: {
+      &quot;default&quot;: {
+        &quot;title&quot;: &quot;Review your order&quot;,
+        &quot;body&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;default&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;loading&quot;: {
+        &quot;title&quot;: &quot;Preparing your screen&quot;,
+        &quot;body&quot;: &quot;The local example is loading without a network request.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;loading&quot;,
+        &quot;busy&quot;: true,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;error&quot;: {
+        &quot;title&quot;: &quot;We could not finish that&quot;,
+        &quot;body&quot;: &quot;Review the highlighted information and try again.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;success&quot;: {
+        &quot;title&quot;: &quot;All set&quot;,
+        &quot;body&quot;: &quot;The order moved to a local success state.&quot;,
+        &quot;actionLabel&quot;: &quot;Order complete&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;success&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;empty&quot;: {
+        &quot;title&quot;: &quot;Nothing here yet&quot;,
+        &quot;body&quot;: &quot;Start with the primary action below.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;empty&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;focused&quot;: {
+        &quot;title&quot;: &quot;Input focused&quot;,
+        &quot;body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;filled&quot;: {
+        &quot;title&quot;: &quot;Input complete&quot;,
+        &quot;body&quot;: &quot;The local value is ready to review.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;validation_error&quot;: {
+        &quot;title&quot;: &quot;Check this field&quot;,
+        &quot;body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: &quot;default&quot;,
+        &quot;kind&quot;: &quot;error&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;keyboard&quot;: {
+        &quot;title&quot;: &quot;Keyboard open&quot;,
+        &quot;body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;disabled&quot;: {
+        &quot;title&quot;: &quot;Action unavailable&quot;,
+        &quot;body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: true,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;enabled&quot;: {
+        &quot;title&quot;: &quot;Action ready&quot;,
+        &quot;body&quot;: &quot;The primary action is ready for this local example.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      },
+      &quot;pressed&quot;: {
+        &quot;title&quot;: &quot;Action pressed&quot;,
+        &quot;body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+        &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+        &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+        &quot;recoverTo&quot;: null,
+        &quot;kind&quot;: &quot;interaction&quot;,
+        &quot;busy&quot;: false,
+        &quot;blocksPrimary&quot;: false,
+        &quot;requiresAcknowledgement&quot;: false
+      }
+    }
+  },
+  &quot;requiredStates&quot;: [
+    &quot;default&quot;,
+    &quot;loading&quot;,
+    &quot;error&quot;,
+    &quot;success&quot;,
+    &quot;empty&quot;,
+    &quot;focused&quot;,
+    &quot;filled&quot;,
+    &quot;validation_error&quot;,
+    &quot;keyboard&quot;,
+    &quot;disabled&quot;,
+    &quot;enabled&quot;,
+    &quot;pressed&quot;
+  ],
+  &quot;risk&quot;: &quot;medium&quot;
 };
 const root = document.querySelector(&#39;.mobile-screen&#39;);
 const localeButton = document.querySelector(&#39;[data-locale]&#39;);
 const primary = document.querySelector(&#39;[data-primary-action]&#39;);
 const status = document.querySelector(&#39;[data-status]&#39;);
+const statePanel = document.querySelector(&#39;[data-state-panel]&#39;);
+const stateTitle = document.querySelector(&#39;[data-state-title]&#39;);
+const stateBody = document.querySelector(&#39;[data-state-body]&#39;);
+const recover = document.querySelector(&#39;[data-recover]&#39;);
+const riskCheckbox = document.querySelector(&#39;[data-risk-checkbox]&#39;);
 let locale = &#39;ko&#39;;
+let acknowledged = proof.risk !== &#39;high&#39;;
+const requestedState = new URLSearchParams(window.location.search).get(&#39;state&#39;);
+let currentState = proof.requiredStates.includes(requestedState) ? requestedState : &#39;default&#39;;
+const renderState = (nextState = currentState) =&gt; {
+  currentState = proof.requiredStates.includes(nextState) ? nextState : &#39;default&#39;;
+  const stateModel = proof.stateFixtures[locale][currentState];
+  root.dataset.state = currentState;
+  statePanel.hidden = currentState === &#39;default&#39;;
+  stateTitle.textContent = stateModel.title;
+  stateBody.textContent = stateModel.body;
+  recover.hidden = !stateModel.recoverTo;
+  recover.textContent = stateModel.recoveryLabel;
+  recover.dataset.recoverTo = stateModel.recoverTo ?? &#39;&#39;;
+  status.textContent = stateModel.body;
+  primary.textContent = stateModel.actionLabel;
+  primary.disabled = stateModel.blocksPrimary || (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged);
+  primary.setAttribute(&#39;aria-busy&#39;, String(stateModel.busy));
+};
 const renderLocale = () =&gt; {
   const copy = proof.locales[locale];
   document.documentElement.lang = locale;
+  document.title = copy.title;
   document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  document.querySelectorAll(&#39;[data-i18n-aria]&#39;).forEach((node) =&gt; { const key = node.dataset.i18nAria; if (key &amp;&amp; copy[key]) node.setAttribute(&#39;aria-label&#39;, copy[key]); });
   localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
-  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
-  status.textContent = copy.ready_label;
+  renderState(currentState);
 };
 localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
 primary.addEventListener(&#39;click&#39;, () =&gt; {
-  root.dataset.state = &#39;loading&#39;;
-  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
-  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+  if (proof.risk === &#39;high&#39; &amp;&amp; !acknowledged) { renderState(&#39;destructive_confirmation&#39;); return; }
+  renderState(&#39;loading&#39;);
+  queueMicrotask(() =&gt; renderState(&#39;success&#39;));
 });
-window.__MOBILE_UI_PROOF__ = proof;
+recover.addEventListener(&#39;click&#39;, () =&gt; renderState(recover.dataset.recoverTo || &#39;default&#39;));
+riskCheckbox?.addEventListener(&#39;change&#39;, () =&gt; { acknowledged = riskCheckbox.checked; renderState(acknowledged ? &#39;default&#39; : &#39;destructive_confirmation&#39;); });
+document.querySelectorAll(&#39;[data-local-input]&#39;).forEach((input) =&gt; {
+  input.addEventListener(&#39;focus&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;focused&#39;)) renderState(&#39;focused&#39;); });
+  input.addEventListener(&#39;input&#39;, () =&gt; { if (proof.requiredStates.includes(&#39;filled&#39;)) renderState(input.value ? &#39;filled&#39; : &#39;default&#39;); });
+});
+window.__MOBILE_UI_PROOF__ = { ...proof, renderState };
 renderLocale();
 </code></pre></article></section><section id="panel-react_native" role="tabpanel" aria-labelledby="tab-react_native" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.tsx</strong><button type="button" data-copy-source="source-react_native-0">Copy file</button></div><pre tabindex="0"><code id="source-react_native-0">// Generated from canonical IR commerce-checkout-address; 한국어 + English; fixture-only.
 import React, { useMemo, useState } from &#39;react&#39;;
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from &#39;react-native&#39;;
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, View } from &#39;react-native&#39;;
 import { SafeAreaView } from &#39;react-native-safe-area-context&#39;;
-import { fixtures } from &#39;./fixtures&#39;;
+import { fixtures, stateFixtures, type ProofState } from &#39;./fixtures&#39;;
 
 type Locale = keyof typeof fixtures;
-export function CommerceCheckoutAddressScreen() {
+type CommerceCheckoutAddressScreenProps = { initialState?: ProofState };
+export function CommerceCheckoutAddressScreen({ initialState = &#39;default&#39; }: CommerceCheckoutAddressScreenProps) {
   const [locale, setLocale] = useState&lt;Locale&gt;(&#39;ko&#39;);
-  const [screenState, setScreenState] = useState&lt;&#39;default&#39; | &#39;success&#39;&gt;(&#39;default&#39;);
+  const [screenState, setScreenState] = useState&lt;ProofState&gt;(initialState);
+  const [acknowledged, setAcknowledged] = useState(true);
   const model = useMemo(() =&gt; fixtures[locale], [locale]);
+  const stateModel = stateFixtures[locale][screenState];
+  const actionAccessibilityState = { disabled: stateModel.blocksPrimary, busy: stateModel.busy };
   return &lt;SafeAreaView style={styles.safe} edges={[&#39;top&#39;, &#39;bottom&#39;]}&gt;
     &lt;KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === &#39;ios&#39; ? &#39;padding&#39; : &#39;height&#39;}&gt;
       &lt;ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps=&quot;handled&quot; automaticallyAdjustKeyboardInsets&gt;
-        &lt;View style={styles.header}&gt;&lt;View style={styles.flex}&gt;&lt;Text accessibilityRole=&quot;header&quot; allowFontScaling style={styles.title}&gt;{model.title}&lt;/Text&gt;&lt;Text allowFontScaling style={styles.muted}&gt;{model.subtitle}&lt;/Text&gt;&lt;/View&gt;&lt;Pressable accessibilityRole=&quot;button&quot; onPress={() =&gt; setLocale(locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;)} style={styles.locale}&gt;&lt;Text&gt;{locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
-        &lt;View style={styles.card}&gt;&lt;Text style={styles.badge}&gt;{model.item_badge}&lt;/Text&gt;&lt;Text style={styles.strong}&gt;{model.item_title}&lt;/Text&gt;&lt;Text style={styles.muted}&gt;{model.item_body}&lt;/Text&gt;&lt;Text style={styles.amount}&gt;{model.amount}&lt;/Text&gt;&lt;/View&gt;&lt;TextInput accessibilityLabel={model.field_label} style={styles.input} /&gt;&lt;View style={styles.row}&gt;&lt;View style={styles.mark}&gt;&lt;Text style={styles.markText}&gt;V&lt;/Text&gt;&lt;/View&gt;&lt;Text style={styles.strong}&gt;{model.secondary_label}&lt;/Text&gt;&lt;/View&gt;
+        &lt;View style={styles.header}&gt;&lt;View style={styles.flex}&gt;&lt;Text accessibilityRole=&quot;header&quot; allowFontScaling style={styles.title}&gt;{model.title}&lt;/Text&gt;&lt;Text allowFontScaling style={styles.muted}&gt;{model.subtitle}&lt;/Text&gt;&lt;/View&gt;&lt;Pressable accessibilityRole=&quot;button&quot; accessibilityLabel={model.switch_language_label} onPress={() =&gt; setLocale(locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;)} style={styles.locale}&gt;&lt;Text&gt;{locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
+        {screenState !== &#39;default&#39; &amp;&amp; &lt;View accessibilityRole=&quot;alert&quot; style={styles.statePanel}&gt;{stateModel.busy &amp;&amp; &lt;ActivityIndicator /&gt;}&lt;Text style={styles.strong}&gt;{stateModel.title}&lt;/Text&gt;&lt;Text style={styles.muted}&gt;{stateModel.body}&lt;/Text&gt;{stateModel.recoverTo &amp;&amp; &lt;Pressable accessibilityRole=&quot;button&quot; onPress={() =&gt; setScreenState(stateModel.recoverTo as ProofState)} style={styles.recover}&gt;&lt;Text style={styles.recoverText}&gt;{stateModel.recoveryLabel}&lt;/Text&gt;&lt;/Pressable&gt;}&lt;/View&gt;}
+        &lt;View style={styles.card}&gt;&lt;Text style={styles.badge}&gt;{model.item_badge}&lt;/Text&gt;&lt;Text style={styles.strong}&gt;{model.item_title}&lt;/Text&gt;&lt;Text style={styles.muted}&gt;{model.item_body}&lt;/Text&gt;&lt;Text style={styles.amount}&gt;{model.amount}&lt;/Text&gt;&lt;/View&gt;&lt;TextInput accessibilityLabel={model.field_label} style={styles.input} onFocus={() =&gt; setScreenState(&#39;focused&#39;)} onChangeText={(value) =&gt; setScreenState(value ? &#39;filled&#39; : &#39;default&#39;)} /&gt;&lt;View style={styles.row}&gt;&lt;View style={styles.mark}&gt;&lt;Text style={styles.markText}&gt;V&lt;/Text&gt;&lt;/View&gt;&lt;Text style={styles.strong}&gt;{model.secondary_label}&lt;/Text&gt;&lt;/View&gt;
       &lt;/ScrollView&gt;
-      &lt;View style={styles.fixed}&gt;&lt;Pressable accessibilityRole=&quot;button&quot; accessibilityLabel={model.primary_cta} onPress={() =&gt; setScreenState(&#39;success&#39;)} style={styles.action}&gt;&lt;Text style={styles.actionText}&gt;{screenState === &#39;success&#39; ? model.success_label : model.primary_cta}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
+      &lt;View style={styles.fixed}&gt;&lt;Pressable accessibilityRole=&quot;button&quot; accessibilityLabel={stateModel.actionLabel} accessibilityState={actionAccessibilityState} disabled={stateModel.blocksPrimary} onPress={() =&gt; { setScreenState(&#39;loading&#39;); queueMicrotask(() =&gt; setScreenState(&#39;success&#39;)); }} style={({ pressed }) =&gt; [styles.action, pressed &amp;&amp; styles.pressed, (stateModel.blocksPrimary) &amp;&amp; styles.actionDisabled]}&gt;&lt;Text style={styles.actionText}&gt;{stateModel.actionLabel}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
     &lt;/KeyboardAvoidingView&gt;
   &lt;/SafeAreaView&gt;;
 }
@@ -419,90 +1122,425 @@ const styles = StyleSheet.create({
   map: { minHeight: 280, borderRadius: 18, backgroundColor: &#39;#DFEEE5&#39;, overflow: &#39;hidden&#39; }, route: { position: &#39;absolute&#39;, top: 105, left: 88, width: 170, height: 72, borderRightWidth: 5, borderBottomWidth: 5, borderColor: &#39;#2563EB&#39;, borderRadius: 36 }, pinA: { position: &#39;absolute&#39;, top: 64, left: 65, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#2563EB&#39; }, pinB: { position: &#39;absolute&#39;, right: 58, bottom: 54, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#2563EB&#39; }, eta: { position: &#39;absolute&#39;, top: 16, right: 16, padding: 10, borderRadius: 10, backgroundColor: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; }, risk: { color: &#39;#B42318&#39;, lineHeight: 22 },
   stories: { flexDirection: &#39;row&#39;, gap: 12 }, story: { width: 56, height: 56, borderRadius: 28, borderWidth: 3, borderColor: &#39;#2563EB&#39;, textAlign: &#39;center&#39;, paddingTop: 17, fontWeight: &#39;800&#39; }, avatar: { width: 44, height: 44, borderRadius: 22, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; }, media: { minHeight: 220, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#E8EDF4&#39; },
   messages: { minHeight: 390, justifyContent: &#39;flex-end&#39;, gap: 12 }, incoming: { alignSelf: &#39;flex-start&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, backgroundColor: &#39;#EDF0F4&#39; }, outgoing: { alignSelf: &#39;flex-end&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#2563EB&#39; }, time: { alignSelf: &#39;center&#39;, color: &#39;#717B89&#39; }, composer: { flexDirection: &#39;row&#39;, gap: 12 }, send: { width: 52, height: 52, borderRadius: 26, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; },
-  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: &#39;#FFFFFF&#39; }, action: { minHeight: 52, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; }, actionText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39;, fontSize: 16 },
+  statePanel: { gap: 6, padding: 16, borderRadius: 12, backgroundColor: &#39;#EEF4FF&#39; }, recover: { minHeight: 44, alignSelf: &#39;flex-start&#39;, justifyContent: &#39;center&#39; }, recoverText: { color: &#39;#2563EB&#39;, fontWeight: &#39;700&#39; }, riskGate: { minHeight: 52, flexDirection: &#39;row&#39;, alignItems: &#39;center&#39;, gap: 12, padding: 16, borderRadius: 12, backgroundColor: &#39;#FFF7ED&#39; },
+  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: &#39;#FFFFFF&#39; }, action: { minHeight: 52, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; }, pressed: { opacity: 0.82 }, actionDisabled: { opacity: 0.45 }, actionText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39;, fontSize: 16 },
 });
 </code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.ts</strong><button type="button" data-copy-source="source-react_native-1">Copy file</button></div><pre tabindex="0"><code id="source-react_native-1">// commerce-checkout-address: 한국어 + English canonical fixtures
+export const requiredStates = [&quot;default&quot;,&quot;loading&quot;,&quot;error&quot;,&quot;success&quot;,&quot;empty&quot;,&quot;focused&quot;,&quot;filled&quot;,&quot;validation_error&quot;,&quot;keyboard&quot;,&quot;disabled&quot;,&quot;enabled&quot;,&quot;pressed&quot;] as const;
 export const fixtures = {
   &quot;ko&quot;: {
     &quot;amount&quot;: &quot;48,900원&quot;,
+    &quot;confirm_action_label&quot;: &quot;이해했고 확인합니다&quot;,
     &quot;confirm_label&quot;: &quot;&quot;,
+    &quot;default_body&quot;: &quot;로컬 예시를 확인하고 준비되면 계속하세요.&quot;,
+    &quot;default_title&quot;: &quot;준비됐어요&quot;,
+    &quot;destructive_confirmation_body&quot;: &quot;영향을 확인하고 동의한 뒤 신뢰가 필요한 동작을 진행하세요.&quot;,
+    &quot;destructive_confirmation_title&quot;: &quot;계속하기 전에 확인해 주세요&quot;,
+    &quot;disabled_body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+    &quot;disabled_title&quot;: &quot;아직 진행할 수 없어요&quot;,
     &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
     &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+    &quot;enabled_body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+    &quot;enabled_title&quot;: &quot;진행할 준비가 됐어요&quot;,
     &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
     &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
     &quot;field_label&quot;: &quot;배송지&quot;,
+    &quot;filled_body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+    &quot;filled_title&quot;: &quot;입력이 완료됐어요&quot;,
+    &quot;focused_body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+    &quot;focused_title&quot;: &quot;입력란을 선택했어요&quot;,
     &quot;item_badge&quot;: &quot;내일 도착&quot;,
     &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
     &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
     &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+    &quot;keyboard_body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+    &quot;keyboard_title&quot;: &quot;키보드가 열렸어요&quot;,
     &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
     &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
     &quot;map_label&quot;: &quot;&quot;,
     &quot;media_label&quot;: &quot;상품 미리보기&quot;,
     &quot;message_in&quot;: &quot;&quot;,
     &quot;message_out&quot;: &quot;&quot;,
+    &quot;offline_body&quot;: &quot;저장된 예시 내용을 확인하거나 기본 상태로 돌아가세요.&quot;,
+    &quot;offline_title&quot;: &quot;오프라인 상태예요&quot;,
+    &quot;permission_denied_body&quot;: &quot;로컬 대체 화면을 사용하거나 권한 안내를 확인하세요.&quot;,
+    &quot;permission_denied_title&quot;: &quot;권한이 허용되지 않았어요&quot;,
+    &quot;pressed_body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+    &quot;pressed_title&quot;: &quot;버튼을 눌렀어요&quot;,
     &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
     &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+    &quot;recover_label&quot;: &quot;기본 상태로 돌아가기&quot;,
     &quot;risk_notice&quot;: &quot;&quot;,
     &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
     &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
     &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
     &quot;success_label&quot;: &quot;주문 완료&quot;,
     &quot;success_title&quot;: &quot;완료됐어요&quot;,
-    &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+    &quot;switch_language_label&quot;: &quot;언어 전환&quot;,
+    &quot;title&quot;: &quot;주문을 확인해 주세요&quot;,
+    &quot;validation_error_body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+    &quot;validation_error_title&quot;: &quot;입력 내용을 확인해 주세요&quot;
   },
   &quot;en&quot;: {
     &quot;amount&quot;: &quot;KRW 48,900&quot;,
+    &quot;confirm_action_label&quot;: &quot;I understand and confirm&quot;,
     &quot;confirm_label&quot;: &quot;&quot;,
+    &quot;default_body&quot;: &quot;Review the local example and continue when ready.&quot;,
+    &quot;default_title&quot;: &quot;Ready&quot;,
+    &quot;destructive_confirmation_body&quot;: &quot;Review the consequence and acknowledge it before the high-trust action.&quot;,
+    &quot;destructive_confirmation_title&quot;: &quot;Confirm before continuing&quot;,
+    &quot;disabled_body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+    &quot;disabled_title&quot;: &quot;Action unavailable&quot;,
     &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
     &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+    &quot;enabled_body&quot;: &quot;The primary action is ready for this local example.&quot;,
+    &quot;enabled_title&quot;: &quot;Action ready&quot;,
     &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
     &quot;error_title&quot;: &quot;We could not finish that&quot;,
     &quot;field_label&quot;: &quot;Delivery address&quot;,
+    &quot;filled_body&quot;: &quot;The local value is ready to review.&quot;,
+    &quot;filled_title&quot;: &quot;Input complete&quot;,
+    &quot;focused_body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+    &quot;focused_title&quot;: &quot;Input focused&quot;,
     &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
     &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
     &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
     &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+    &quot;keyboard_body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+    &quot;keyboard_title&quot;: &quot;Keyboard open&quot;,
     &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
     &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
     &quot;map_label&quot;: &quot;&quot;,
     &quot;media_label&quot;: &quot;Product preview&quot;,
     &quot;message_in&quot;: &quot;&quot;,
     &quot;message_out&quot;: &quot;&quot;,
+    &quot;offline_body&quot;: &quot;Review cached fixture content or return to the default state.&quot;,
+    &quot;offline_title&quot;: &quot;You are offline&quot;,
+    &quot;permission_denied_body&quot;: &quot;Continue with the local fallback or review permission guidance.&quot;,
+    &quot;permission_denied_title&quot;: &quot;Permission not allowed&quot;,
+    &quot;pressed_body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+    &quot;pressed_title&quot;: &quot;Action pressed&quot;,
     &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
     &quot;ready_label&quot;: &quot;Static local example&quot;,
+    &quot;recover_label&quot;: &quot;Return to default&quot;,
     &quot;risk_notice&quot;: &quot;&quot;,
     &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
     &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
     &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
     &quot;success_label&quot;: &quot;Order complete&quot;,
     &quot;success_title&quot;: &quot;All set&quot;,
-    &quot;title&quot;: &quot;Review your order&quot;
+    &quot;switch_language_label&quot;: &quot;Switch language&quot;,
+    &quot;title&quot;: &quot;Review your order&quot;,
+    &quot;validation_error_body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+    &quot;validation_error_title&quot;: &quot;Check this field&quot;
   }
 } as const;
+export const stateFixtures = {
+  &quot;ko&quot;: {
+    &quot;default&quot;: {
+      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;,
+      &quot;body&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;default&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;loading&quot;: {
+      &quot;title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;loading&quot;,
+      &quot;busy&quot;: true,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;error&quot;: {
+      &quot;title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;success&quot;: {
+      &quot;title&quot;: &quot;완료됐어요&quot;,
+      &quot;body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;주문 완료&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;success&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;empty&quot;: {
+      &quot;title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;empty&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;focused&quot;: {
+      &quot;title&quot;: &quot;입력란을 선택했어요&quot;,
+      &quot;body&quot;: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;filled&quot;: {
+      &quot;title&quot;: &quot;입력이 완료됐어요&quot;,
+      &quot;body&quot;: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;validation_error&quot;: {
+      &quot;title&quot;: &quot;입력 내용을 확인해 주세요&quot;,
+      &quot;body&quot;: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;keyboard&quot;: {
+      &quot;title&quot;: &quot;키보드가 열렸어요&quot;,
+      &quot;body&quot;: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;disabled&quot;: {
+      &quot;title&quot;: &quot;아직 진행할 수 없어요&quot;,
+      &quot;body&quot;: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;enabled&quot;: {
+      &quot;title&quot;: &quot;진행할 준비가 됐어요&quot;,
+      &quot;body&quot;: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;pressed&quot;: {
+      &quot;title&quot;: &quot;버튼을 눌렀어요&quot;,
+      &quot;body&quot;: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;,
+      &quot;actionLabel&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;recoveryLabel&quot;: &quot;기본 상태로 돌아가기&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    }
+  },
+  &quot;en&quot;: {
+    &quot;default&quot;: {
+      &quot;title&quot;: &quot;Review your order&quot;,
+      &quot;body&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;default&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;loading&quot;: {
+      &quot;title&quot;: &quot;Preparing your screen&quot;,
+      &quot;body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;loading&quot;,
+      &quot;busy&quot;: true,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;error&quot;: {
+      &quot;title&quot;: &quot;We could not finish that&quot;,
+      &quot;body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;success&quot;: {
+      &quot;title&quot;: &quot;All set&quot;,
+      &quot;body&quot;: &quot;The order moved to a local success state.&quot;,
+      &quot;actionLabel&quot;: &quot;Order complete&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;success&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;empty&quot;: {
+      &quot;title&quot;: &quot;Nothing here yet&quot;,
+      &quot;body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;empty&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;focused&quot;: {
+      &quot;title&quot;: &quot;Input focused&quot;,
+      &quot;body&quot;: &quot;The active field stays visible above the keyboard.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;filled&quot;: {
+      &quot;title&quot;: &quot;Input complete&quot;,
+      &quot;body&quot;: &quot;The local value is ready to review.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;validation_error&quot;: {
+      &quot;title&quot;: &quot;Check this field&quot;,
+      &quot;body&quot;: &quot;Correct the highlighted local value before continuing.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: &quot;default&quot;,
+      &quot;kind&quot;: &quot;error&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;keyboard&quot;: {
+      &quot;title&quot;: &quot;Keyboard open&quot;,
+      &quot;body&quot;: &quot;Scrollable content and the primary action remain reachable.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;disabled&quot;: {
+      &quot;title&quot;: &quot;Action unavailable&quot;,
+      &quot;body&quot;: &quot;Complete the required local fields to enable this action.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: true,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;enabled&quot;: {
+      &quot;title&quot;: &quot;Action ready&quot;,
+      &quot;body&quot;: &quot;The primary action is ready for this local example.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    },
+    &quot;pressed&quot;: {
+      &quot;title&quot;: &quot;Action pressed&quot;,
+      &quot;body&quot;: &quot;Immediate feedback confirms the local press state.&quot;,
+      &quot;actionLabel&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;recoveryLabel&quot;: &quot;Return to default&quot;,
+      &quot;recoverTo&quot;: null,
+      &quot;kind&quot;: &quot;interaction&quot;,
+      &quot;busy&quot;: false,
+      &quot;blocksPrimary&quot;: false,
+      &quot;requiresAcknowledgement&quot;: false
+    }
+  }
+} as const;
+export type ProofState = keyof typeof stateFixtures.ko;
 </code></pre></article></section><section id="panel-flutter" role="tabpanel" aria-labelledby="tab-flutter" hidden><article class="source-file"><div class="source-toolbar"><strong>screen.dart</strong><button type="button" data-copy-source="source-flutter-0">Copy file</button></div><pre tabindex="0"><code id="source-flutter-0">// Generated from canonical IR commerce-checkout-address; 한국어 + English; fixture-only.
 import &#39;package:flutter/material.dart&#39;;
 import &#39;fixtures.dart&#39;;
 
-class CommerceCheckoutAddressScreen extends StatefulWidget { const CommerceCheckoutAddressScreen({super.key}); @override State&lt;CommerceCheckoutAddressScreen&gt; createState() =&gt; _CommerceCheckoutAddressScreenState(); }
+class CommerceCheckoutAddressScreen extends StatefulWidget { const CommerceCheckoutAddressScreen({super.key, this.initialState = &#39;default&#39;}); final String initialState; @override State&lt;CommerceCheckoutAddressScreen&gt; createState() =&gt; _CommerceCheckoutAddressScreenState(); }
 class _CommerceCheckoutAddressScreenState extends State&lt;CommerceCheckoutAddressScreen&gt; {
-  String locale = &#39;ko&#39;; String screenState = &#39;default&#39;;
+  String locale = &#39;ko&#39;; late String screenState; bool acknowledged = true;
+  @override void initState() { super.initState(); screenState = requiredStates.contains(widget.initialState) ? widget.initialState : &#39;default&#39;; }
   @override Widget build(BuildContext context) {
-    final model = proofFixtures[locale]!; final media = MediaQuery.of(context); final scaler = MediaQuery.textScalerOf(context);
+    final model = proofFixtures[locale]!; final stateModel = stateFixtures[locale]![screenState]!; final media = MediaQuery.of(context); final scaler = MediaQuery.textScalerOf(context); final canSubmit = !stateModel.blocksPrimary;
     return SafeArea(child: Scaffold(backgroundColor: const Color(0xFFFFFFFF), body: Column(children: [
       Expanded(child: SingleChildScrollView(key: const Key(&#39;proof-scroll&#39;), keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, padding: EdgeInsets.fromLTRB(16, 24, 16, 100 + media.viewInsets.bottom), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(model[&#39;title&#39;]!, textScaler: scaler, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)), SizedBox(height: 6), Text(model[&#39;subtitle&#39;]!)])), TextButton(onPressed: () =&gt; setState(() =&gt; locale = locale == &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;), child: Text(locale == &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;))]),
-        SizedBox(height: 24), _Card(model[&#39;item_title&#39;]!, &#39;48,900원 · KRW 48,900&#39;, 16, 12), SizedBox(height: 12), TextField(decoration: InputDecoration(labelText: model[&#39;field_label&#39;])), SizedBox(height: 12), _Card(model[&#39;secondary_label&#39;]!, model[&#39;item_meta&#39;]!, 16, 12)
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(model[&#39;title&#39;]!, textScaler: scaler, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)), SizedBox(height: 6), Text(model[&#39;subtitle&#39;]!)])), Semantics(label: model[&#39;switch_language_label&#39;], button: true, child: TextButton(onPressed: () =&gt; setState(() =&gt; locale = locale == &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;), child: Text(locale == &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;)))]),
+        if (screenState != &#39;default&#39;) ...[SizedBox(height: 12), _StatePanel(stateModel: stateModel, onRecover: stateModel.recoverTo == null ? null : () =&gt; setState(() =&gt; screenState = stateModel.recoverTo!))],
+        SizedBox(height: 24), _Card(model[&#39;item_title&#39;]!, &#39;48,900원 · KRW 48,900&#39;, 16, 12), SizedBox(height: 12), TextField(decoration: InputDecoration(labelText: model[&#39;field_label&#39;]), onTap: () =&gt; setState(() =&gt; screenState = &#39;focused&#39;), onChanged: (value) =&gt; setState(() =&gt; screenState = value.isEmpty ? &#39;default&#39; : &#39;filled&#39;)), SizedBox(height: 12), _Card(model[&#39;secondary_label&#39;]!, model[&#39;item_meta&#39;]!, 16, 12)
       ]))),
-      Container(padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + media.padding.bottom + media.viewInsets.bottom), child: SizedBox(height: 52, width: double.infinity, child: FilledButton(onPressed: () =&gt; setState(() =&gt; screenState = &#39;success&#39;), child: Text(screenState == &#39;success&#39; ? model[&#39;success_label&#39;]! : model[&#39;primary_cta&#39;]!))))
+      Container(padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + media.padding.bottom + media.viewInsets.bottom), child: SizedBox(height: 52, width: double.infinity, child: FilledButton(onPressed: canSubmit ? () { setState(() =&gt; screenState = &#39;loading&#39;); Future.microtask(() { if (mounted) setState(() =&gt; screenState = &#39;success&#39;); }); } : null, child: stateModel.busy ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2)) : Text(stateModel.actionLabel))))
     ])));
   }
 }
 class _Card extends StatelessWidget { const _Card(this.title, this.body, this.padding, this.radius); final String title; final String body; final double padding; final double radius; @override Widget build(BuildContext context) =&gt; Container(padding: EdgeInsets.all(padding), decoration: BoxDecoration(color: const Color(0xFFF7F9FC), borderRadius: BorderRadius.circular(radius)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w700)), const SizedBox(height: 6), Text(body)])); }
+class _StatePanel extends StatelessWidget { const _StatePanel({required this.stateModel, required this.onRecover}); final ProofStateFixture stateModel; final VoidCallback? onRecover; @override Widget build(BuildContext context) =&gt; Semantics(liveRegion: true, child: Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [if (stateModel.busy) const LinearProgressIndicator(), Text(stateModel.title, style: const TextStyle(fontWeight: FontWeight.w700)), const SizedBox(height: 6), Text(stateModel.body), if (onRecover != null) TextButton(onPressed: onRecover, child: Text(stateModel.recoveryLabel))])))); }
 </code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.dart</strong><button type="button" data-copy-source="source-flutter-1">Copy file</button></div><pre tabindex="0"><code id="source-flutter-1">// commerce-checkout-address: 한국어 + English canonical fixtures
+class ProofStateFixture {
+  const ProofStateFixture({required this.title, required this.body, required this.actionLabel, required this.recoveryLabel, required this.recoverTo, required this.kind, required this.busy, required this.blocksPrimary, required this.requiresAcknowledgement});
+  final String title; final String body; final String actionLabel; final String recoveryLabel; final String? recoverTo; final String kind; final bool busy; final bool blocksPrimary; final bool requiresAcknowledgement;
+}
+const requiredStates = &lt;String&gt;[&#39;default&#39;,&#39;loading&#39;,&#39;error&#39;,&#39;success&#39;,&#39;empty&#39;,&#39;focused&#39;,&#39;filled&#39;,&#39;validation_error&#39;,&#39;keyboard&#39;,&#39;disabled&#39;,&#39;enabled&#39;,&#39;pressed&#39;];
 const proofFixtures = &lt;String, Map&lt;String, String&gt;&gt;{
-  &#39;ko&#39;: {&#39;title&#39;: &#39;주문을 확인해 주세요&#39;, &#39;subtitle&#39;: &#39;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&#39;, &#39;primary_cta&#39;: &#39;48,900원 결제하기&#39;, &#39;success_label&#39;: &#39;주문 완료&#39;, &#39;field_label&#39;: &#39;배송지&#39;, &#39;secondary_label&#39;: &#39;Visa ···· 4242&#39;, &#39;item_title&#39;: &#39;데일리 코튼 셔츠&#39;, &#39;item_body&#39;: &#39;오프화이트 · M · 수량 1&#39;, &#39;item_meta&#39;: &#39;일시불 · 결제 실행 없음&#39;, &#39;amount&#39;: &#39;48,900원&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;&#39;, &#39;message_out&#39;: &#39;&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;상품 미리보기&#39;},
-  &#39;en&#39;: {&#39;title&#39;: &#39;Review your order&#39;, &#39;subtitle&#39;: &#39;Confirm delivery details and the final total before placing the order.&#39;, &#39;primary_cta&#39;: &#39;Pay KRW 48,900&#39;, &#39;success_label&#39;: &#39;Order complete&#39;, &#39;field_label&#39;: &#39;Delivery address&#39;, &#39;secondary_label&#39;: &#39;Visa ···· 4242&#39;, &#39;item_title&#39;: &#39;Daily cotton shirt&#39;, &#39;item_body&#39;: &#39;Off white · M · Quantity 1&#39;, &#39;item_meta&#39;: &#39;One-time · No payment execution&#39;, &#39;amount&#39;: &#39;KRW 48,900&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;&#39;, &#39;message_out&#39;: &#39;&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;Product preview&#39;},
+  &#39;ko&#39;: {&#39;title&#39;: &#39;주문을 확인해 주세요&#39;, &#39;subtitle&#39;: &#39;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&#39;, &#39;primary_cta&#39;: &#39;48,900원 결제하기&#39;, &#39;success_label&#39;: &#39;주문 완료&#39;, &#39;field_label&#39;: &#39;배송지&#39;, &#39;secondary_label&#39;: &#39;Visa ···· 4242&#39;, &#39;item_title&#39;: &#39;데일리 코튼 셔츠&#39;, &#39;item_body&#39;: &#39;오프화이트 · M · 수량 1&#39;, &#39;item_meta&#39;: &#39;일시불 · 결제 실행 없음&#39;, &#39;amount&#39;: &#39;48,900원&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;&#39;, &#39;message_out&#39;: &#39;&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;상품 미리보기&#39;, &#39;switch_language_label&#39;: &#39;언어 전환&#39;},
+  &#39;en&#39;: {&#39;title&#39;: &#39;Review your order&#39;, &#39;subtitle&#39;: &#39;Confirm delivery details and the final total before placing the order.&#39;, &#39;primary_cta&#39;: &#39;Pay KRW 48,900&#39;, &#39;success_label&#39;: &#39;Order complete&#39;, &#39;field_label&#39;: &#39;Delivery address&#39;, &#39;secondary_label&#39;: &#39;Visa ···· 4242&#39;, &#39;item_title&#39;: &#39;Daily cotton shirt&#39;, &#39;item_body&#39;: &#39;Off white · M · Quantity 1&#39;, &#39;item_meta&#39;: &#39;One-time · No payment execution&#39;, &#39;amount&#39;: &#39;KRW 48,900&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;&#39;, &#39;message_out&#39;: &#39;&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;Product preview&#39;, &#39;switch_language_label&#39;: &#39;Switch language&#39;},
+};
+const stateFixtures = &lt;String, Map&lt;String, ProofStateFixture&gt;&gt;{
+  &#39;ko&#39;: {&#39;default&#39;: ProofStateFixture(title: &#39;주문을 확인해 주세요&#39;, body: &#39;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;default&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;loading&#39;: ProofStateFixture(title: &#39;화면을 준비하고 있어요&#39;, body: &#39;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;loading&#39;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &#39;error&#39;: ProofStateFixture(title: &#39;완료하지 못했어요&#39;, body: &#39;표시된 정보를 확인하고 다시 시도해 주세요.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;success&#39;: ProofStateFixture(title: &#39;완료됐어요&#39;, body: &#39;주문이 로컬 성공 상태로 변경되었습니다.&#39;, actionLabel: &#39;주문 완료&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;success&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;empty&#39;: ProofStateFixture(title: &#39;아직 내용이 없어요&#39;, body: &#39;아래 기본 동작으로 시작해 보세요.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: &#39;default&#39;, kind: &#39;empty&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;focused&#39;: ProofStateFixture(title: &#39;입력란을 선택했어요&#39;, body: &#39;활성 입력란은 키보드 위에서 계속 보입니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;filled&#39;: ProofStateFixture(title: &#39;입력이 완료됐어요&#39;, body: &#39;로컬 값을 확인할 준비가 됐습니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;validation_error&#39;: ProofStateFixture(title: &#39;입력 내용을 확인해 주세요&#39;, body: &#39;강조된 로컬 값을 수정한 뒤 계속하세요.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;keyboard&#39;: ProofStateFixture(title: &#39;키보드가 열렸어요&#39;, body: &#39;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;disabled&#39;: ProofStateFixture(title: &#39;아직 진행할 수 없어요&#39;, body: &#39;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;enabled&#39;: ProofStateFixture(title: &#39;진행할 준비가 됐어요&#39;, body: &#39;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;pressed&#39;: ProofStateFixture(title: &#39;버튼을 눌렀어요&#39;, body: &#39;즉시 피드백으로 로컬 누름 상태를 확인합니다.&#39;, actionLabel: &#39;48,900원 결제하기&#39;, recoveryLabel: &#39;기본 상태로 돌아가기&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)},
+  &#39;en&#39;: {&#39;default&#39;: ProofStateFixture(title: &#39;Review your order&#39;, body: &#39;Confirm delivery details and the final total before placing the order.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;default&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;loading&#39;: ProofStateFixture(title: &#39;Preparing your screen&#39;, body: &#39;The local example is loading without a network request.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;loading&#39;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &#39;error&#39;: ProofStateFixture(title: &#39;We could not finish that&#39;, body: &#39;Review the highlighted information and try again.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;success&#39;: ProofStateFixture(title: &#39;All set&#39;, body: &#39;The order moved to a local success state.&#39;, actionLabel: &#39;Order complete&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;success&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;empty&#39;: ProofStateFixture(title: &#39;Nothing here yet&#39;, body: &#39;Start with the primary action below.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: &#39;default&#39;, kind: &#39;empty&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;focused&#39;: ProofStateFixture(title: &#39;Input focused&#39;, body: &#39;The active field stays visible above the keyboard.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;filled&#39;: ProofStateFixture(title: &#39;Input complete&#39;, body: &#39;The local value is ready to review.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;validation_error&#39;: ProofStateFixture(title: &#39;Check this field&#39;, body: &#39;Correct the highlighted local value before continuing.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: &#39;default&#39;, kind: &#39;error&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;keyboard&#39;: ProofStateFixture(title: &#39;Keyboard open&#39;, body: &#39;Scrollable content and the primary action remain reachable.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;disabled&#39;: ProofStateFixture(title: &#39;Action unavailable&#39;, body: &#39;Complete the required local fields to enable this action.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &#39;enabled&#39;: ProofStateFixture(title: &#39;Action ready&#39;, body: &#39;The primary action is ready for this local example.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &#39;pressed&#39;: ProofStateFixture(title: &#39;Action pressed&#39;, body: &#39;Immediate feedback confirms the local press state.&#39;, actionLabel: &#39;Pay KRW 48,900&#39;, recoveryLabel: &#39;Return to default&#39;, recoverTo: null, kind: &#39;interaction&#39;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)},
 };
 </code></pre></article></section><section id="panel-swiftui" role="tabpanel" aria-labelledby="tab-swiftui" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.swift</strong><button type="button" data-copy-source="source-swiftui-0">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-0">// Generated from canonical IR commerce-checkout-address; 한국어 + English; fixture-only.
 import SwiftUI
@@ -510,15 +1548,18 @@ import SwiftUI
 struct CommerceCheckoutAddressScreen: View {
   @Environment(\.dynamicTypeSize) private var dynamicTypeSize
   @FocusState private var focused: Bool
-  @State private var locale = &quot;ko&quot;; @State private var screenState = &quot;default&quot;; @State private var input = &quot;&quot;; @State private var secondaryInput = &quot;&quot;
+  @State private var locale = &quot;ko&quot;; @State private var screenState: String; @State private var input = &quot;&quot;; @State private var secondaryInput = &quot;&quot;; @State private var acknowledged: Bool
+  init(initialState: String = &quot;default&quot;) { _screenState = State(initialValue: requiredStates.contains(initialState) ? initialState : &quot;default&quot;); _acknowledged = State(initialValue: true) }
   private var model: ProofFixture { proofFixtures[locale] ?? proofFixtures[&quot;ko&quot;]! }
+  private var stateModel: ProofStateFixture { stateFixtures[locale]?[screenState] ?? stateFixtures[&quot;ko&quot;]![&quot;default&quot;]! }
   var body: some View {
     ScrollView { VStack(alignment: .leading, spacing: 12) {
-      HStack(alignment: .top) { VStack(alignment: .leading, spacing: 6) { Text(model.title).font(.system(size: 26, weight: .bold)).accessibilityAddTraits(.isHeader); Text(model.subtitle).font(.body).foregroundStyle(.secondary) }; Spacer(); Button(locale == &quot;ko&quot; ? &quot;EN&quot; : &quot;KO&quot;) { locale = locale == &quot;ko&quot; ? &quot;en&quot; : &quot;ko&quot; }.frame(minWidth: 44, minHeight: 44).buttonStyle(.bordered) }
-      proofCard(model.item_title, model.amount); TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).frame(minHeight: 52).focused($focused); proofCard(model.secondary_label, model.item_meta)
+      HStack(alignment: .top) { VStack(alignment: .leading, spacing: 6) { Text(model.title).font(.system(size: 26, weight: .bold)).accessibilityAddTraits(.isHeader); Text(model.subtitle).font(.body).foregroundStyle(.secondary) }; Spacer(); Button(locale == &quot;ko&quot; ? &quot;EN&quot; : &quot;KO&quot;) { locale = locale == &quot;ko&quot; ? &quot;en&quot; : &quot;ko&quot; }.accessibilityLabel(model.switch_language_label).frame(minWidth: 44, minHeight: 44).buttonStyle(.bordered) }
+      if screenState != &quot;default&quot; { VStack(alignment: .leading, spacing: 6) { if stateModel.busy { ProgressView() }; Text(stateModel.title).font(.headline); Text(stateModel.body).foregroundStyle(.secondary); if let recoverTo = stateModel.recoverTo { Button(stateModel.recoveryLabel) { screenState = recoverTo } } }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 12)).accessibilityElement(children: .combine) }
+      proofCard(model.item_title, model.amount); TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).frame(minHeight: 52).focused($focused).onChange(of: input) { _, value in screenState = value.isEmpty ? &quot;default&quot; : &quot;filled&quot; }; proofCard(model.secondary_label, model.item_meta)
     }.padding(.horizontal, 16).padding(.top, 24).padding(.bottom, 100).frame(maxWidth: .infinity, alignment: .leading) }
     .scrollDismissesKeyboard(.interactively).dynamicTypeSize(...DynamicTypeSize.accessibility3)
-    .safeAreaInset(edge: .bottom, spacing: 0) { Button(screenState == &quot;success&quot; ? model.success_label : model.primary_cta) { screenState = &quot;success&quot;; focused = false }.frame(maxWidth: .infinity, minHeight: 52).buttonStyle(.borderedProminent).clipShape(RoundedRectangle(cornerRadius: 12)).padding(.horizontal, 16).padding(.vertical, 12).background(.ultraThinMaterial) }
+    .safeAreaInset(edge: .bottom, spacing: 0) { Button(stateModel.actionLabel) { screenState = &quot;loading&quot;; focused = false; DispatchQueue.main.async { screenState = &quot;success&quot; } }.frame(maxWidth: .infinity, minHeight: 52).buttonStyle(.borderedProminent).clipShape(RoundedRectangle(cornerRadius: 12)).disabled(stateModel.blocksPrimary).accessibilityLabel(stateModel.actionLabel).padding(.horizontal, 16).padding(.vertical, 12).background(.ultraThinMaterial) }
   }
   private func proofCard(_ title: String, _ body: String) -&gt; some View { VStack(alignment: .leading, spacing: 6) { Text(title).font(.headline); Text(body).font(.body).foregroundStyle(.secondary) }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 12)) }
 }
@@ -526,9 +1567,15 @@ private extension View { func proofBubble(_ background: Color, foreground: Color
 private extension Text { func proofPin() -&gt; some View { self.frame(width: 38, height: 38).foregroundStyle(.white).background(Color.accentColor, in: Circle()).overlay(Circle().stroke(.white, lineWidth: 4)) } }
 </code></pre></article><article class="source-file"><div class="source-toolbar"><strong>Fixtures.swift</strong><button type="button" data-copy-source="source-swiftui-1">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-1">// commerce-checkout-address: 한국어 + English canonical fixtures
 import Foundation
-struct ProofFixture { let title: String; let subtitle: String; let primary_cta: String; let success_label: String; let field_label: String; let secondary_label: String; let item_title: String; let item_body: String; let item_meta: String; let amount: String; let risk_notice: String; let confirm_label: String; let message_in: String; let message_out: String; let map_label: String; let media_label: String }
+struct ProofFixture { let title: String; let subtitle: String; let primary_cta: String; let success_label: String; let field_label: String; let secondary_label: String; let item_title: String; let item_body: String; let item_meta: String; let amount: String; let risk_notice: String; let confirm_label: String; let message_in: String; let message_out: String; let map_label: String; let media_label: String; let switch_language_label: String }
+struct ProofStateFixture { let title: String; let body: String; let actionLabel: String; let recoveryLabel: String; let recoverTo: String?; let kind: String; let busy: Bool; let blocksPrimary: Bool; let requiresAcknowledgement: Bool }
+let requiredStates: [String] = [&quot;default&quot;,&quot;loading&quot;,&quot;error&quot;,&quot;success&quot;,&quot;empty&quot;,&quot;focused&quot;,&quot;filled&quot;,&quot;validation_error&quot;,&quot;keyboard&quot;,&quot;disabled&quot;,&quot;enabled&quot;,&quot;pressed&quot;]
 let proofFixtures: [String: ProofFixture] = [
-  &quot;ko&quot;: ProofFixture(title: &quot;주문을 확인해 주세요&quot;, subtitle: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;, primary_cta: &quot;48,900원 결제하기&quot;, success_label: &quot;주문 완료&quot;, field_label: &quot;배송지&quot;, secondary_label: &quot;Visa ···· 4242&quot;, item_title: &quot;데일리 코튼 셔츠&quot;, item_body: &quot;오프화이트 · M · 수량 1&quot;, item_meta: &quot;일시불 · 결제 실행 없음&quot;, amount: &quot;48,900원&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;&quot;, message_out: &quot;&quot;, map_label: &quot;&quot;, media_label: &quot;상품 미리보기&quot;),
-  &quot;en&quot;: ProofFixture(title: &quot;Review your order&quot;, subtitle: &quot;Confirm delivery details and the final total before placing the order.&quot;, primary_cta: &quot;Pay KRW 48,900&quot;, success_label: &quot;Order complete&quot;, field_label: &quot;Delivery address&quot;, secondary_label: &quot;Visa ···· 4242&quot;, item_title: &quot;Daily cotton shirt&quot;, item_body: &quot;Off white · M · Quantity 1&quot;, item_meta: &quot;One-time · No payment execution&quot;, amount: &quot;KRW 48,900&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;&quot;, message_out: &quot;&quot;, map_label: &quot;&quot;, media_label: &quot;Product preview&quot;)
+  &quot;ko&quot;: ProofFixture(title: &quot;주문을 확인해 주세요&quot;, subtitle: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;, primary_cta: &quot;48,900원 결제하기&quot;, success_label: &quot;주문 완료&quot;, field_label: &quot;배송지&quot;, secondary_label: &quot;Visa ···· 4242&quot;, item_title: &quot;데일리 코튼 셔츠&quot;, item_body: &quot;오프화이트 · M · 수량 1&quot;, item_meta: &quot;일시불 · 결제 실행 없음&quot;, amount: &quot;48,900원&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;&quot;, message_out: &quot;&quot;, map_label: &quot;&quot;, media_label: &quot;상품 미리보기&quot;, switch_language_label: &quot;언어 전환&quot;),
+  &quot;en&quot;: ProofFixture(title: &quot;Review your order&quot;, subtitle: &quot;Confirm delivery details and the final total before placing the order.&quot;, primary_cta: &quot;Pay KRW 48,900&quot;, success_label: &quot;Order complete&quot;, field_label: &quot;Delivery address&quot;, secondary_label: &quot;Visa ···· 4242&quot;, item_title: &quot;Daily cotton shirt&quot;, item_body: &quot;Off white · M · Quantity 1&quot;, item_meta: &quot;One-time · No payment execution&quot;, amount: &quot;KRW 48,900&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;&quot;, message_out: &quot;&quot;, map_label: &quot;&quot;, media_label: &quot;Product preview&quot;, switch_language_label: &quot;Switch language&quot;)
+]
+let stateFixtures: [String: [String: ProofStateFixture]] = [
+  &quot;ko&quot;: [&quot;default&quot;: ProofStateFixture(title: &quot;주문을 확인해 주세요&quot;, body: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;default&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;loading&quot;: ProofStateFixture(title: &quot;화면을 준비하고 있어요&quot;, body: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;loading&quot;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &quot;error&quot;: ProofStateFixture(title: &quot;완료하지 못했어요&quot;, body: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;success&quot;: ProofStateFixture(title: &quot;완료됐어요&quot;, body: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;, actionLabel: &quot;주문 완료&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;success&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;empty&quot;: ProofStateFixture(title: &quot;아직 내용이 없어요&quot;, body: &quot;아래 기본 동작으로 시작해 보세요.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: &quot;default&quot;, kind: &quot;empty&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;focused&quot;: ProofStateFixture(title: &quot;입력란을 선택했어요&quot;, body: &quot;활성 입력란은 키보드 위에서 계속 보입니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;filled&quot;: ProofStateFixture(title: &quot;입력이 완료됐어요&quot;, body: &quot;로컬 값을 확인할 준비가 됐습니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;validation_error&quot;: ProofStateFixture(title: &quot;입력 내용을 확인해 주세요&quot;, body: &quot;강조된 로컬 값을 수정한 뒤 계속하세요.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;keyboard&quot;: ProofStateFixture(title: &quot;키보드가 열렸어요&quot;, body: &quot;스크롤 내용과 기본 동작을 계속 사용할 수 있습니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;disabled&quot;: ProofStateFixture(title: &quot;아직 진행할 수 없어요&quot;, body: &quot;필수 로컬 입력을 완료하면 동작이 활성화됩니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;enabled&quot;: ProofStateFixture(title: &quot;진행할 준비가 됐어요&quot;, body: &quot;이 로컬 예시의 기본 동작을 사용할 수 있습니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;pressed&quot;: ProofStateFixture(title: &quot;버튼을 눌렀어요&quot;, body: &quot;즉시 피드백으로 로컬 누름 상태를 확인합니다.&quot;, actionLabel: &quot;48,900원 결제하기&quot;, recoveryLabel: &quot;기본 상태로 돌아가기&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)],
+  &quot;en&quot;: [&quot;default&quot;: ProofStateFixture(title: &quot;Review your order&quot;, body: &quot;Confirm delivery details and the final total before placing the order.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;default&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;loading&quot;: ProofStateFixture(title: &quot;Preparing your screen&quot;, body: &quot;The local example is loading without a network request.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;loading&quot;, busy: true, blocksPrimary: true, requiresAcknowledgement: false), &quot;error&quot;: ProofStateFixture(title: &quot;We could not finish that&quot;, body: &quot;Review the highlighted information and try again.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;success&quot;: ProofStateFixture(title: &quot;All set&quot;, body: &quot;The order moved to a local success state.&quot;, actionLabel: &quot;Order complete&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;success&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;empty&quot;: ProofStateFixture(title: &quot;Nothing here yet&quot;, body: &quot;Start with the primary action below.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: &quot;default&quot;, kind: &quot;empty&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;focused&quot;: ProofStateFixture(title: &quot;Input focused&quot;, body: &quot;The active field stays visible above the keyboard.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;filled&quot;: ProofStateFixture(title: &quot;Input complete&quot;, body: &quot;The local value is ready to review.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;validation_error&quot;: ProofStateFixture(title: &quot;Check this field&quot;, body: &quot;Correct the highlighted local value before continuing.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: &quot;default&quot;, kind: &quot;error&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;keyboard&quot;: ProofStateFixture(title: &quot;Keyboard open&quot;, body: &quot;Scrollable content and the primary action remain reachable.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;disabled&quot;: ProofStateFixture(title: &quot;Action unavailable&quot;, body: &quot;Complete the required local fields to enable this action.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: true, requiresAcknowledgement: false), &quot;enabled&quot;: ProofStateFixture(title: &quot;Action ready&quot;, body: &quot;The primary action is ready for this local example.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false), &quot;pressed&quot;: ProofStateFixture(title: &quot;Action pressed&quot;, body: &quot;Immediate feedback confirms the local press state.&quot;, actionLabel: &quot;Pay KRW 48,900&quot;, recoveryLabel: &quot;Return to default&quot;, recoverTo: nil, kind: &quot;interaction&quot;, busy: false, blocksPrimary: false, requiresAcknowledgement: false)]
 ]
 </code></pre></article></section></section></main><footer><a href="../../#examples">← Back to all examples</a><span>Generated from <code>examples/proof/commerce-checkout</code></span></footer><script src="../../assets/site.js" defer></script></body></html>
