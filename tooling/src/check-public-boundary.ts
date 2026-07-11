@@ -58,7 +58,7 @@ const forbiddenCopy = [
 ];
 const textExtensions = new Set([
   ".css", ".csv", ".html", ".js", ".json", ".jsx", ".md", ".mjs", ".py",
-  ".lock", ".sh", ".svg", ".tpl", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml", ".dart",
+  ".lock", ".pbxproj", ".sh", ".svg", ".swift", ".tpl", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml", ".dart",
 ]);
 const imageExtensions = new Set([".png", ".jpg", ".jpeg"]);
 const archiveExtensions = [".tar.gz", ".tgz", ".zip", ".tar"];
@@ -75,6 +75,7 @@ const allowedSiteRouteRoots = new Set([
   "assets", "catalog", "docs", "evaluations", "examples", "ko", "mobile-ui-generator-skill", "public-knowledge",
   "reports", "scripts", "skills", "tooling",
 ]);
+const allowedSystemPaths = new Set(["/bin/sh", "/usr/bin/env"]);
 const urlPattern = /https?:\/\/[^\s<>"')\]]+/g;
 const generatedUrlHosts = new Set([
   "cdn.jsdelivr.net", "fonts.google.com", "fonts.googleapis.com", "fonts.gstatic.com",
@@ -122,7 +123,7 @@ function addTextFindings(text: string, displayPath: string, mode: CopyMode, find
     for (const match of text.matchAll(posixPathPattern)) {
       const pathname = match[1] ?? "";
       const firstSegment = pathname.split("/")[1]?.toLowerCase() ?? "";
-      if (!allowedSiteRouteRoots.has(firstSegment)) {
+      if (!allowedSiteRouteRoots.has(firstSegment) && !allowedSystemPaths.has(pathname)) {
         findings.push({ kind: "path", path: displayPath, detail: `absolute/private path: ${pathname}` });
       }
     }

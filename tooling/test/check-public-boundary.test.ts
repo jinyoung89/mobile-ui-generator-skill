@@ -167,6 +167,14 @@ test("treats dependency lockfiles as repository text", () => {
   assert.deepEqual(findings, []);
 });
 
+test("treats Swift and Xcode project sources as repository text", () => {
+  const root = fixtureRoot();
+  writeFileSync(path.join(root, "Screen.swift"), "import SwiftUI\nstruct Screen: View { var body: some View { Text(\"Hello\") } }\n");
+  writeFileSync(path.join(root, "project.pbxproj"), "// !$*UTF8*$!\n{ archiveVersion = 1; shellPath = /bin/sh; }\n");
+  const findings = scanPublicTree(root, { copyMode: "repository" });
+  assert.deepEqual(findings, []);
+});
+
 test("stops oversized archive member enumeration at the configured bound", () => {
   const root = fixtureRoot();
   const archive = path.join(root, "oversized.zip");
