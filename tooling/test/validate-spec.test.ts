@@ -151,3 +151,30 @@ test("requires supported localization and fallback language coverage", () => {
   assert.match(result.errors.join("\n"), /supported_languages|non-empty|request\.language/i);
   assert.match(result.errors.join("\n"), /fallback|supported/i);
 });
+
+test("keeps validator strictness aligned with the published JSON schema", () => {
+  const cases: Array<[string, (value: Record<string, unknown>) => void, RegExp]> = [
+    ["uppercase id", (value) => { value.id = "Commerce-Checkout"; }, /id.*pattern|lowercase|format/i],
+    ["empty tokens", (value) => { (value.layout as Record<string, unknown>).tokens = {}; }, /layout\.tokens.*(required|empty|token)/i],
+    ["empty anchors", (value) => { (value.layout as Record<string, unknown>).alignment_anchors = []; }, /alignment_anchors.*non-empty/i],
+    ["empty components", (value) => { value.components = []; }, /components.*non-empty/i],
+    ["empty component states", (value) => { ((value.components as Array<Record<string, unknown>>)[0]).states = []; }, /components\[0\]\.states.*non-empty/i],
+    ["empty typography roles", (value) => { (value.typography as Record<string, unknown>).roles = []; }, /typography\.roles.*non-empty/i],
+    ["out of range typography weight", (value) => { (((value.typography as Record<string, unknown>).roles as Array<Record<string, unknown>>)[0]).weight = 1001; }, /weight.*1000/i],
+    ["empty interactions", (value) => { value.interactions = []; }, /interactions.*non-empty/i],
+    ["empty responsive changes", (value) => { ((value.responsive_rules as Array<Record<string, unknown>>)[0]).changes = []; }, /responsive_rules\[0\]\.changes.*non-empty/i],
+    ["too few responsive rules", (value) => { value.responsive_rules = [(value.responsive_rules as unknown[])[0]]; }, /responsive_rules.*three|3|coverage/i],
+    ["empty locale copy", (value) => { ((value.content as Record<string, unknown>).locales as Record<string, unknown>).ko = {}; }, /content\.locales\.ko.*non-empty|copy/i],
+    ["non-string asset", (value) => { (value.assets_and_fallbacks as Record<string, unknown>).assets = [1]; }, /assets.*string/i],
+    ["empty focusable components", (value) => { (value.focus_and_keyboard as Record<string, unknown>).focusable_components = []; }, /focusable_components.*non-empty/i],
+    ["empty content fixtures", (value) => { (value.content as Record<string, unknown>).fixtures = []; }, /content\.fixtures.*non-empty/i],
+    ["empty theme list", (value) => { (value.themes as Record<string, unknown>).supported = []; }, /themes\.supported.*non-empty/i],
+  ];
+  for (const [name, mutate, expected] of cases) {
+    const value = fixture();
+    mutate(value);
+    const result = validateSpec(value);
+    assert.equal(result.valid, false, `${name} unexpectedly passed`);
+    assert.match(result.errors.join("\n"), expected, name);
+  }
+});

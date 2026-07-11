@@ -53,10 +53,10 @@ function stringValue(value: unknown, field: string, errors: string[], nonEmpty =
   return value;
 }
 
-function numberValue(value: unknown, field: string, errors: string[], options: { integer?: boolean; min?: number } = {}): number | undefined {
+function numberValue(value: unknown, field: string, errors: string[], options: { integer?: boolean; min?: number; max?: number } = {}): number | undefined {
   if (typeof value !== "number" || !Number.isFinite(value) || (options.integer && !Number.isInteger(value)) ||
-      (options.min !== undefined && value < options.min)) {
-    const suffix = options.min === undefined ? "" : ` >= ${options.min}`;
+      (options.min !== undefined && value < options.min) || (options.max !== undefined && value > options.max)) {
+    const suffix = options.min !== undefined && options.max !== undefined ? ` between ${options.min} and ${options.max}` : options.min !== undefined ? ` >= ${options.min}` : options.max !== undefined ? ` <= ${options.max}` : "";
     errors.push(`${field}: expected finite ${options.integer ? "integer" : "number"}${suffix}`);
     return undefined;
   }
@@ -166,6 +166,7 @@ function checkLayout(value: JsonObject, errors: string[]): Set<string> {
   required(value, ["tokens", "screen_horizontal_inset", "grid", "alignment_anchors", "component_gap", "section_gap", "card_padding", "control_height", "corner_radius", "sticky_region_height", "scroll_content_bottom_inset", "max_readable_line_width", "image_aspect_ratios", "constraints"], "layout", errors);
   const tokens = object(value.tokens, "layout.tokens", errors);
   const names = new Set(tokens ? Object.keys(tokens) : []);
+  if (tokens && names.size === 0) errors.push("layout.tokens: must be non-empty");
   if (tokens) for (const [name, token] of Object.entries(tokens)) {
     checkMeasure(token, `layout.tokens.${name}`, errors, names);
     const row = token as JsonObject;
@@ -197,6 +198,7 @@ function checkLayout(value: JsonObject, errors: string[]): Set<string> {
     checkMeasure(grid.gutter, "layout.grid.gutter", errors, names);
   }
   const anchors = array(value.alignment_anchors, "layout.alignment_anchors", errors);
+  if (anchors && anchors.length === 0) errors.push("layout.alignment_anchors: must be non-empty");
   anchors?.forEach((anchor, index) => stringValue(anchor, `layout.alignment_anchors[${index}]`, errors));
   const ratios = object(value.image_aspect_ratios, "layout.image_aspect_ratios", errors);
   if (ratios) for (const [name, ratio] of Object.entries(ratios)) {
@@ -220,6 +222,7 @@ function checkLayout(value: JsonObject, errors: string[]): Set<string> {
 function checkTypography(value: JsonObject, errors: string[], tokens: Set<string>): Set<string> {
   strict(value, ["roles"], "typography", errors);
   const roles = array(value.roles, "typography.roles", errors);
+  if (roles && roles.length === 0) errors.push("typography.roles: must be non-empty");
   const ids = new Set<string>();
   roles?.forEach((role, index) => {
     const field = `typography.roles[${index}]`;
@@ -233,7 +236,7 @@ function checkTypography(value: JsonObject, errors: string[], tokens: Set<string
     checkMeasure(row.size, `${field}.size`, errors, tokens);
     checkMeasure(row.line_height, `${field}.line_height`, errors, tokens);
     if ("letter_spacing" in row) checkMeasure(row.letter_spacing, `${field}.letter_spacing`, errors, tokens);
-    numberValue(row.weight, `${field}.weight`, errors, { integer: true, min: 100 });
+    numberValue(row.weight, `${field}.weight`, errors, { integer: true, min: 100, max: 1000 });
     numberValue(row.max_lines, `${field}.max_lines`, errors, { integer: true, min: 1 });
     stringValue(row.overflow, `${field}.overflow`, errors);
     stringValue(row.text_scale_policy, `${field}.text_scale_policy`, errors);
@@ -244,6 +247,7 @@ function checkTypography(value: JsonObject, errors: string[], tokens: Set<string
 
 function checkComponents(value: unknown, errors: string[], tokens: Set<string>, componentStates: Set<string>, typographyRoles: Set<string>): Set<string> {
   const components = array(value, "components", errors);
+  if (components && components.length === 0) errors.push("components: must be non-empty");
   const ids = new Set<string>();
   const rows: JsonObject[] = [];
   components?.forEach((component, index) => {
@@ -269,6 +273,7 @@ function checkComponents(value: unknown, errors: string[], tokens: Set<string>, 
       stringValue(layout.alignment, `${field}.layout.alignment`, errors);
     }
     const states = array(row.states, `${field}.states`, errors);
+    if (states && states.length === 0) errors.push(`${field}.states: must be non-empty`);
     const stateNames = new Set<string>();
     states?.forEach((state, stateIndex) => {
       const name = stringValue(state, `${field}.states[${stateIndex}]`, errors);
@@ -314,6 +319,7 @@ function checkStates(value: JsonObject, errors: string[], componentStates: Set<s
 
 function checkResponsive(value: unknown, errors: string[], policy: JsonObject): void {
   const rules = array(value, "responsive_rules", errors);
+  if (rules && rules.length < 3) errors.push("responsive_rules: at least three rules are required for compact, standard, and large widths");
   const covered = [320, 390, 430].map(() => false);
   const ranges: Array<{ min: number; max: number; index: number }> = [];
   rules?.forEach((rule, index) => {
@@ -325,7 +331,7 @@ function checkResponsive(value: unknown, errors: string[], policy: JsonObject): 
     const width = object(row.width, `${field}.width`, errors);
     let min: number | undefined; let max: number | undefined;
     if (width) { strict(width, ["min", "max"], `${field}.width`, errors); min = numberValue(width.min, `${field}.width.min`, errors, { integer: true, min: 1 }); max = numberValue(width.max, `${field}.width.max`, errors, { integer: true, min: 1 }); if (min !== undefined && max !== undefined && min > max) errors.push(`${field}.width: min must not exceed max`); }
-    const changes = array(row.changes, `${field}.changes`, errors); changes?.forEach((change, changeIndex) => stringValue(change, `${field}.changes[${changeIndex}]`, errors));
+    const changes = array(row.changes, `${field}.changes`, errors); if (changes && changes.length === 0) errors.push(`${field}.changes: must be non-empty`); changes?.forEach((change, changeIndex) => stringValue(change, `${field}.changes[${changeIndex}]`, errors));
     if (row.no_horizontal_overflow !== true) errors.push(`${field}.no_horizontal_overflow: must be true`);
     if (row.fixed_regions_preserve_inset !== true) errors.push(`${field}.fixed_regions_preserve_inset: must be true`);
     [320, 390, 430].forEach((widthValue, widthIndex) => { if (min !== undefined && max !== undefined && widthValue >= min && widthValue <= max) covered[widthIndex] = true; });
@@ -346,6 +352,7 @@ function checkResponsive(value: unknown, errors: string[], policy: JsonObject): 
 
 function checkInteractions(value: unknown, errors: string[], componentIds: Set<string>): void {
   const interactions = array(value, "interactions", errors);
+  if (interactions && interactions.length === 0) errors.push("interactions: must be non-empty");
   const ids = new Set<string>();
   interactions?.forEach((interaction, index) => {
     const field = `interactions[${index}]`;
@@ -389,7 +396,7 @@ function checkSimpleSections(spec: JsonObject, errors: string[]): void {
     const target = object(accessibility.minimum_touch_target, "accessibility.minimum_touch_target", errors); if (target) { strict(target, ["width", "height", "unit"], "accessibility.minimum_touch_target", errors); required(target, ["width", "height", "unit"], "accessibility.minimum_touch_target", errors); numberValue(target.width, "accessibility.minimum_touch_target.width", errors, { min: 44 }); numberValue(target.height, "accessibility.minimum_touch_target.height", errors, { min: 44 }); const unit = stringValue(target.unit, "accessibility.minimum_touch_target.unit", errors); if (unit && !new Set(["px", "pt", "dp"]).has(unit)) errors.push("accessibility.minimum_touch_target.unit: expected px, pt, or dp"); }
     for (const key of ["screen_reader", "reduced_motion", "dynamic_text"]) stringValue(accessibility[key], `accessibility.${key}`, errors);
   }
-  const focus = object(spec.focus_and_keyboard, "focus_and_keyboard", errors); if (focus) { strict(focus, ["focusable_components", "keyboard_behavior", "primary_action_visible"], "focus_and_keyboard", errors); required(focus, ["focusable_components", "keyboard_behavior", "primary_action_visible"], "focus_and_keyboard", errors); const ids = array(focus.focusable_components, "focus_and_keyboard.focusable_components", errors); ids?.forEach((id, index) => stringValue(id, `focus_and_keyboard.focusable_components[${index}]`, errors)); stringValue(focus.keyboard_behavior, "focus_and_keyboard.keyboard_behavior", errors); if (focus.primary_action_visible !== true) errors.push("focus_and_keyboard.primary_action_visible: must be true"); }
+  const focus = object(spec.focus_and_keyboard, "focus_and_keyboard", errors); if (focus) { strict(focus, ["focusable_components", "keyboard_behavior", "primary_action_visible"], "focus_and_keyboard", errors); required(focus, ["focusable_components", "keyboard_behavior", "primary_action_visible"], "focus_and_keyboard", errors); const ids = array(focus.focusable_components, "focus_and_keyboard.focusable_components", errors); if (ids && ids.length === 0) errors.push("focus_and_keyboard.focusable_components: must be non-empty"); ids?.forEach((id, index) => stringValue(id, `focus_and_keyboard.focusable_components[${index}]`, errors)); stringValue(focus.keyboard_behavior, "focus_and_keyboard.keyboard_behavior", errors); if (focus.primary_action_visible !== true) errors.push("focus_and_keyboard.primary_action_visible: must be true"); }
   const localization = object(spec.localization, "localization", errors); if (localization) { strict(localization, ["default_language", "supported_languages", "fallback_language", "long_copy_profiles"], "localization", errors); required(localization, ["default_language", "supported_languages", "fallback_language", "long_copy_profiles"], "localization", errors); const supported = array(localization.supported_languages, "localization.supported_languages", errors); if (supported && supported.length === 0) errors.push("localization.supported_languages: must be non-empty"); supported?.forEach((lang, index) => { const value = stringValue(lang, `localization.supported_languages[${index}]`, errors); if (value && !/^[a-z]{2}(?:-[A-Z]{2})?$/.test(value)) errors.push(`localization.supported_languages[${index}]: invalid language tag`); }); const defaultLanguage = stringValue(localization.default_language, "localization.default_language", errors); const fallback = stringValue(localization.fallback_language, "localization.fallback_language", errors); if (defaultLanguage && supported && !supported.includes(defaultLanguage)) errors.push("localization.default_language: must be supported"); if (fallback && supported && !supported.includes(fallback)) errors.push("localization.fallback_language: must be supported"); const profiles = array(localization.long_copy_profiles, "localization.long_copy_profiles", errors); if (profiles && profiles.length === 0) errors.push("localization.long_copy_profiles: must be non-empty"); profiles?.forEach((profile, index) => stringValue(profile, `localization.long_copy_profiles[${index}]`, errors)); }
 }
 
@@ -418,7 +425,8 @@ export function validateSpec(input: unknown): SpecValidationResult {
   strict(spec, TOP_LEVEL, "spec", errors);
   required(spec, [...TOP_LEVEL], "spec", errors);
   if (spec.schema_version !== 1) errors.push("schema_version: only version 1 is supported");
-  stringValue(spec.id, "id", errors);
+  const specId = stringValue(spec.id, "id", errors);
+  if (specId && !/^[a-z][a-z0-9-]{2,96}$/.test(specId)) errors.push("id: must be lowercase kebab-case with 3-97 characters");
   const request = object(spec.request, "request", errors); if (request) { strict(request, ["language", "user_job"], "request", errors); required(request, ["language", "user_job"], "request", errors); stringValue(request.language, "request.language", errors); stringValue(request.user_job, "request.user_job", errors); }
   const classification = object(spec.classification, "classification", errors); if (classification) { strict(classification, ["app_category", "ui_patterns", "risk_level"], "classification", errors); required(classification, ["app_category", "ui_patterns", "risk_level"], "classification", errors); stringValue(classification.app_category, "classification.app_category", errors); const patterns = array(classification.ui_patterns, "classification.ui_patterns", errors); patterns?.forEach((pattern, index) => stringValue(pattern, `classification.ui_patterns[${index}]`, errors)); const risk = stringValue(classification.risk_level, "classification.risk_level", errors); if (risk && !RISKS.has(risk)) errors.push("classification.risk_level: unsupported risk"); }
   const policy = object(spec.platform_policy, "platform_policy", errors);
@@ -436,9 +444,9 @@ export function validateSpec(input: unknown): SpecValidationResult {
   checkInteractions(spec.interactions, errors, componentIds);
   checkNavigation(spec.navigation_and_actions, errors, componentIds, fixtures, matrixStates);
   checkSimpleSections(spec, errors);
-  const content = object(spec.content, "content", errors); if (content) { strict(content, ["locales", "fixtures"], "content", errors); required(content, ["locales", "fixtures"], "content", errors); const locales = object(content.locales, "content.locales", errors); const requestLanguage = (spec.request as JsonObject | undefined)?.language; if (locales && typeof requestLanguage === "string" && !(requestLanguage in locales)) errors.push("content.locales: request language must have copy"); const contentFixtures = array(content.fixtures, "content.fixtures", errors); contentFixtures?.forEach((name, index) => { const key = stringValue(name, `content.fixtures[${index}]`, errors); if (key && !fixtures.has(key)) errors.push(`content.fixtures[${index}]: missing fixture_data.${key}`); }); }
-  const assets = object(spec.assets_and_fallbacks, "assets_and_fallbacks", errors); if (assets) { strict(assets, ["assets", "fallback_policy"], "assets_and_fallbacks", errors); required(assets, ["assets", "fallback_policy"], "assets_and_fallbacks", errors); array(assets.assets, "assets_and_fallbacks.assets", errors); stringValue(assets.fallback_policy, "assets_and_fallbacks.fallback_policy", errors); }
-  const themes = object(spec.themes, "themes", errors); if (themes) { strict(themes, ["supported", "default"], "themes", errors); required(themes, ["supported", "default"], "themes", errors); const supported = array(themes.supported, "themes.supported", errors); const defaultTheme = stringValue(themes.default, "themes.default", errors); if (defaultTheme && supported && !supported.includes(defaultTheme)) errors.push("themes.default: must be supported"); }
+  const content = object(spec.content, "content", errors); if (content) { strict(content, ["locales", "fixtures"], "content", errors); required(content, ["locales", "fixtures"], "content", errors); const locales = object(content.locales, "content.locales", errors); const requestLanguage = (spec.request as JsonObject | undefined)?.language; if (locales && Object.keys(locales).length === 0) errors.push("content.locales: must be non-empty"); if (locales && typeof requestLanguage === "string" && !(requestLanguage in locales)) errors.push("content.locales: request language must have copy"); if (locales) for (const [language, copy] of Object.entries(locales)) { const row = object(copy, `content.locales.${language}`, errors); if (row && Object.keys(row).length === 0) errors.push(`content.locales.${language}: must contain copy`); } const contentFixtures = array(content.fixtures, "content.fixtures", errors); if (contentFixtures && contentFixtures.length === 0) errors.push("content.fixtures: must be non-empty"); contentFixtures?.forEach((name, index) => { const key = stringValue(name, `content.fixtures[${index}]`, errors); if (key && !fixtures.has(key)) errors.push(`content.fixtures[${index}]: missing fixture_data.${key}`); }); }
+  const assets = object(spec.assets_and_fallbacks, "assets_and_fallbacks", errors); if (assets) { strict(assets, ["assets", "fallback_policy"], "assets_and_fallbacks", errors); required(assets, ["assets", "fallback_policy"], "assets_and_fallbacks", errors); const assetList = array(assets.assets, "assets_and_fallbacks.assets", errors); assetList?.forEach((asset, index) => stringValue(asset, `assets_and_fallbacks.assets[${index}]`, errors)); stringValue(assets.fallback_policy, "assets_and_fallbacks.fallback_policy", errors); }
+  const themes = object(spec.themes, "themes", errors); if (themes) { strict(themes, ["supported", "default"], "themes", errors); required(themes, ["supported", "default"], "themes", errors); const supported = array(themes.supported, "themes.supported", errors); if (supported && supported.length === 0) errors.push("themes.supported: must be non-empty"); const defaultTheme = stringValue(themes.default, "themes.default", errors); if (defaultTheme && supported && !supported.includes(defaultTheme)) errors.push("themes.default: must be supported"); }
   const capabilities = object(spec.capabilities_and_dependencies, "capabilities_and_dependencies", errors); if (capabilities) { strict(capabilities, ["network", "authentication", "payment_execution", "push", "fixture_only"], "capabilities_and_dependencies", errors); for (const key of ["network", "authentication", "payment_execution", "push", "fixture_only"]) if (typeof capabilities[key] !== "boolean") errors.push(`capabilities_and_dependencies.${key}: expected boolean`); if (capabilities.network === true || capabilities.authentication === true || capabilities.payment_execution === true || capabilities.push === true) errors.push("capabilities_and_dependencies: version 1 examples must be fixture-only and local"); if (capabilities.fixture_only !== true) errors.push("capabilities_and_dependencies.fixture_only: must be true"); }
   const mappings = object(spec.platform_mappings, "platform_mappings", errors); if (mappings) checkMappings(mappings, errors, policy);
   const validationRules = object(spec.validation_rules, "validation_rules", errors); if (validationRules) { strict(validationRules, ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"], "validation_rules", errors); for (const key of ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"]) if (validationRules[key] !== true) errors.push(`validation_rules.${key}: must be true`); }

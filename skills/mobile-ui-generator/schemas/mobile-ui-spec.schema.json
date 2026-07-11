@@ -20,7 +20,7 @@
     "interactions": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "source", "event", "action"], "properties": {"id": {"type": "string"}, "source": {"type": "string"}, "event": {"type": "string"}, "action": {"type": "string"}}}},
     "responsive_rules": {"type": "array", "minItems": 3, "items": {"$ref": "#/$defs/responsiveRule"}},
     "accessibility": {"$ref": "#/$defs/accessibility"},
-    "content": {"type": "object", "additionalProperties": false, "required": ["locales", "fixtures"], "properties": {"locales": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "object"}}, "fixtures": {"$ref": "#/$defs/stringArray"}}},
+    "content": {"type": "object", "additionalProperties": false, "required": ["locales", "fixtures"], "properties": {"locales": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "object", "minProperties": 1}}, "fixtures": {"$ref": "#/$defs/stringArray"}}},
     "assets_and_fallbacks": {"type": "object", "additionalProperties": false, "required": ["assets", "fallback_policy"], "properties": {"assets": {"type": "array", "items": {"type": "string"}}, "fallback_policy": {"type": "string", "minLength": 1}}},
     "fixture_data": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "object"}},
     "navigation_and_actions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/navigationAction"}},
