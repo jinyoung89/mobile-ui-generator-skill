@@ -51,6 +51,20 @@ test("finds forbidden copy, provider terms, private paths, credentials, and disa
   assert.deepEqual(new Set(findings.map((finding) => finding.kind)), new Set(["copy", "path", "credential", "url"]));
 });
 
+test("rejects general POSIX content paths but permits documented site routes", () => {
+  const root = fixtureRoot();
+  writeFileSync(path.join(root, "paths.md"), [
+    "/tmp/release/private.json",
+    "/opt/build/source.png",
+    "/examples/commerce-checkout",
+  ].join("\n"));
+  const findings = scanPublicTree(root, { copyMode: "public" });
+  const details = findings.filter((finding) => finding.kind === "path").map((finding) => finding.detail);
+  assert.equal(details.some((detail) => detail.includes("/tmp/")), true);
+  assert.equal(details.some((detail) => detail.includes("/opt/")), true);
+  assert.equal(details.some((detail) => detail.includes("/examples/")), false);
+});
+
 test("allows documented public URLs in repository metadata but rejects them in generated data", () => {
   const root = fixtureRoot();
   writeFileSync(path.join(root, "README.md"), "https://example.com/docs\n");
@@ -65,6 +79,21 @@ test("fails closed on archive traversal and sensitive member names", () => {
   const findings = scanArchive(archive);
   assert.equal(findings.some((finding) => finding.kind === "traversal"), true);
   assert.equal(findings.some((finding) => finding.kind === "sensitive-name"), true);
+});
+
+test("applies strict distribution policy inside tooling-like download archive paths", () => {
+  const root = fixtureRoot();
+  const archive = path.join(root, "download.zip");
+  makeZip(archive, {
+    "tooling/test/leak.txt": [homePath, credentialCopy, "https://example.invalid/private"].join("\n"),
+  });
+  const result = spawnSync("npm", ["run", "validate:boundary", "--", "--archive", archive], {
+    cwd: path.resolve("."), encoding: "utf8",
+  });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /path:/);
+  assert.match(result.stderr, /credential:/);
+  assert.match(result.stderr, /url:/);
 });
 
 test("recursively inspects archive contents and source maps", () => {
@@ -102,6 +131,23 @@ test("fails closed on unsupported files and bounded archive expansion", () => {
   makeZip(archive, { "one.txt": "1", "two.txt": "2" });
   const archiveFindings = scanArchive(archive, { maxMembers: 1 });
   assert.equal(archiveFindings.some((finding) => finding.kind === "limit"), true);
+});
+
+test("stops oversized archive member enumeration at the configured bound", () => {
+  const root = fixtureRoot();
+  const archive = path.join(root, "oversized.zip");
+  const script = String.raw`
+import sys, zipfile
+with zipfile.ZipFile(sys.argv[1], "w") as z:
+  for index in range(20000): z.writestr(f"members/{index:05d}-{'x' * 80}.txt", "x")
+`;
+  const made = spawnSync("python3", ["-c", script, archive], { encoding: "utf8" });
+  assert.equal(made.status, 0, made.stderr);
+  const started = performance.now();
+  const findings = scanArchive(archive, { maxMembers: 1, maxBytes: 1024 });
+  const elapsed = performance.now() - started;
+  assert.deepEqual(findings.map((finding) => finding.kind), ["limit"]);
+  assert.ok(elapsed < 2_000, `bounded scan took ${elapsed.toFixed(0)}ms`);
 });
 
 test("shared synthetic leak fixtures are rejected by both Node and Python validators", () => {

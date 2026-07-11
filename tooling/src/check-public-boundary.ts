@@ -28,7 +28,7 @@ export type FindingKind =
   | "limit";
 
 export type Finding = { kind: FindingKind; path: string; detail: string };
-export type CopyMode = "public" | "generated" | "repository";
+export type CopyMode = "public" | "distribution" | "generated" | "repository";
 export type ScanOptions = {
   copyMode?: CopyMode;
   maxMembers?: number;
@@ -67,14 +67,20 @@ const credentialPatterns = [
   /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/g,
   /\b(?:api[_-]?key|client[_-]?secret|access[_-]?token)\s*[:=]\s*["']?[A-Za-z0-9_./+=-]{16,}/gi,
 ];
-const absolutePathPatterns = [
-  /(?:^|[\s"'(])\/(?:Users|home|private|Volumes)\/[^\s"')]+/g,
-  /\b[A-Za-z]:\\Users\\[^\s"']+/g,
-];
+const posixPathPattern = /(?:^|[\s"'(=:])(\/(?:[A-Za-z0-9._-]+\/)+[^\s"')<>,;]*)/g;
+const windowsPathPattern = /\b[A-Za-z]:\\(?:Users|ProgramData|Windows|Temp)\\[^\s"']+/g;
+const allowedSiteRouteRoots = new Set([
+  "assets", "catalog", "docs", "examples", "ko", "mobile-ui-generator-skill", "public-knowledge",
+  "reports", "scripts", "skills", "tooling",
+]);
 const urlPattern = /https?:\/\/[^\s<>"')\]]+/g;
 const generatedUrlHosts = new Set([
   "cdn.jsdelivr.net", "fonts.google.com", "fonts.googleapis.com", "fonts.gstatic.com",
-  "jinyoung89.github.io", "opensource.org", "schema.org", "www.sitemaps.org", "www.w3.org",
+  "github.com", "jinyoung89.github.io", "opensource.org", "schema.org", "www.sitemaps.org", "www.w3.org",
+]);
+const repositoryUrlHosts = new Set([
+  ...generatedUrlHosts,
+  "example.com", "github.com", "json-schema.org", "raw.githubusercontent.com", "registry.npmjs.org",
 ]);
 
 function archiveExtension(name: string): string | undefined {
@@ -104,11 +110,20 @@ function addTextFindings(text: string, displayPath: string, mode: CopyMode, find
       findings.push({ kind: "copy", path: displayPath, detail: `forbidden public copy: ${term}` });
     }
   }
-  for (const pattern of absolutePathPatterns) {
-    pattern.lastIndex = 0;
-    for (const match of text.matchAll(pattern)) {
-      findings.push({ kind: "path", path: displayPath, detail: `absolute/private path: ${match[0].trim()}` });
+  const contentName = displayPath.includes("!/") ? displayPath.split("!/").at(-1) ?? displayPath : displayPath;
+  if (path.basename(contentName) !== ".gitignore") {
+    posixPathPattern.lastIndex = 0;
+    for (const match of text.matchAll(posixPathPattern)) {
+      const pathname = match[1] ?? "";
+      const firstSegment = pathname.split("/")[1]?.toLowerCase() ?? "";
+      if (!allowedSiteRouteRoots.has(firstSegment)) {
+        findings.push({ kind: "path", path: displayPath, detail: `absolute/private path: ${pathname}` });
+      }
     }
+  }
+  windowsPathPattern.lastIndex = 0;
+  for (const match of text.matchAll(windowsPathPattern)) {
+    findings.push({ kind: "path", path: displayPath, detail: `absolute/private path: ${match[0]}` });
   }
   for (const pattern of credentialPatterns) {
     pattern.lastIndex = 0;
@@ -117,10 +132,10 @@ function addTextFindings(text: string, displayPath: string, mode: CopyMode, find
   urlPattern.lastIndex = 0;
   for (const match of text.matchAll(urlPattern)) {
     let allowed = false;
-    if (mode === "repository" || mode === "generated") {
+    if (["repository", "generated", "distribution", "public"].includes(mode)) {
       try {
         const host = new URL(match[0]).hostname;
-        allowed = mode === "repository" ? true : generatedUrlHosts.has(host);
+        allowed = mode === "repository" ? repositoryUrlHosts.has(host) : generatedUrlHosts.has(host);
       } catch { allowed = false; }
     }
     if (!allowed) findings.push({ kind: "url", path: displayPath, detail: `forbidden URL: ${match[0]}` });
@@ -217,19 +232,24 @@ def add(row, reader=None):
   global total
   total += row["size"]
   over = len(out) + 1 > max_members or total > max_bytes
-  if over: row["error"] = "archive expansion limit exceeded"
-  elif reader is not None:
+  if over:
+    row["error"] = "archive expansion limit exceeded"
+    out.append(row)
+    return True
+  if reader is not None:
     try: row["data"] = base64.b64encode(reader()).decode("ascii")
     except Exception as e: row["error"] = "unreadable archive member: " + str(e)
   out.append(row)
+  return False
 try:
   if zipfile.is_zipfile(p):
     with zipfile.ZipFile(p) as z:
       for i in z.infolist():
         kind = "directory" if i.is_dir() else "file"
         row = {"name": i.filename, "kind": kind, "size": i.file_size}
-        if i.flag_bits & 1: row["error"] = "encrypted ZIP member"; add(row)
-        else: add(row, (lambda i=i: z.read(i)) if kind == "file" else None)
+        if i.flag_bits & 1: row["error"] = "encrypted ZIP member"; stop = add(row)
+        else: stop = add(row, (lambda i=i: z.read(i)) if kind == "file" else None)
+        if stop: break
   elif tarfile.is_tarfile(p):
     with tarfile.open(p, "r:*") as t:
       for i in t:
@@ -239,7 +259,7 @@ try:
           f = t.extractfile(i)
           if f is None: raise ValueError("member has no readable stream")
           return f.read()
-        add(row, read if kind == "file" else None)
+        if add(row, read if kind == "file" else None): break
   else: raise ValueError("unsupported or invalid archive")
   print(json.dumps(out))
 except Exception as e:
@@ -338,7 +358,7 @@ function repositoryFixturePath(name: string): boolean {
 function filterRepositoryFixtureFindings(findings: Finding[]): Finding[] {
   return findings.filter((item) => {
     const memberName = item.path.includes("!/") ? item.path.split("!/").at(-1) ?? item.path : item.path;
-    return !repositoryFixturePath(memberName) || (item.kind !== "path" && item.kind !== "credential");
+    return !repositoryFixturePath(memberName) || !["path", "credential", "url"].includes(item.kind);
   });
 }
 
@@ -366,13 +386,17 @@ function runCli(): void {
     if (argument === "--tree" || argument === "--site") {
       const value = args[++index];
       if (!value) throw new Error(`${argument} requires a path`);
-      findings.push(...scanPublicTree(path.resolve(value), { copyMode: argument === "--site" ? "generated" : "public" }));
+      findings.push(...scanPublicTree(path.resolve(value), { copyMode: argument === "--site" ? "generated" : "distribution" }));
     } else if (argument === "--archive") {
       const value = args[++index];
       if (!value) throw new Error("--archive requires a path");
+      findings.push(...scanArchive(path.resolve(value), { copyMode: "distribution" }));
+    } else if (argument === "--git-archive") {
+      const value = args[++index];
+      if (!value) throw new Error("--git-archive requires a path");
       findings.push(...filterRepositoryFixtureFindings(scanArchive(path.resolve(value), { copyMode: "repository" })));
     } else if (!argument.startsWith("-") && archiveExtension(argument)) {
-      findings.push(...filterRepositoryFixtureFindings(scanArchive(path.resolve(argument), { copyMode: "repository" })));
+      findings.push(...scanArchive(path.resolve(argument), { copyMode: "distribution" }));
     } else if (!argument.startsWith("-")) {
       findings.push(...scanPublicTree(path.resolve(argument), { copyMode: "public" }));
     } else throw new Error(`unknown argument: ${argument}`);
