@@ -178,3 +178,28 @@ test("keeps validator strictness aligned with the published JSON schema", () => 
     assert.match(result.errors.join("\n"), expected, name);
   }
 });
+
+test("enforces array uniqueness, ID references, and fixture/profile shapes", () => {
+  const cases: Array<[string, (value: Record<string, unknown>) => void, RegExp]> = [
+    ["empty patterns", (value) => { (value.classification as Record<string, unknown>).ui_patterns = []; }, /ui_patterns.*non-empty/i],
+    ["duplicate patterns", (value) => { (value.classification as Record<string, unknown>).ui_patterns = ["checkout", "checkout"]; }, /ui_patterns.*unique|duplicate/i],
+    ["duplicate state matrix values", (value) => { (value.states as Record<string, unknown>).screen = ["default", "default"]; }, /states\.screen.*unique|duplicate/i],
+    ["duplicate component states", (value) => { ((value.components as Array<Record<string, unknown>>)[0]).states = ["default", "default"]; }, /components\[0\]\.states.*unique|duplicate/i],
+    ["duplicate responsive changes", (value) => { ((value.responsive_rules as Array<Record<string, unknown>>)[0]).changes = ["stack_sections", "stack_sections"]; }, /responsive_rules\[0\]\.changes.*unique|duplicate/i],
+    ["duplicate supported languages", (value) => { (value.localization as Record<string, unknown>).supported_languages = ["ko", "ko"]; }, /supported_languages.*unique|duplicate/i],
+    ["duplicate long-copy profiles", (value) => { (value.localization as Record<string, unknown>).long_copy_profiles = ["long-copy-ko", "long-copy-ko"]; }, /long_copy_profiles.*unique|duplicate/i],
+    ["duplicate themes", (value) => { (value.themes as Record<string, unknown>).supported = ["light", "light"]; }, /themes\.supported.*unique|duplicate/i],
+    ["unknown focusable ID", (value) => { (value.focus_and_keyboard as Record<string, unknown>).focusable_components = ["missing-component"]; }, /focusable_components.*missing|component/i],
+    ["non-object fixture", (value) => { (value.fixture_data as Record<string, unknown>).bad = "not-an-object"; }, /fixture_data\.bad.*object/i],
+    ["invalid quality profiles", (value) => { (value.quality_requirements as Record<string, unknown>).responsive_profiles = [320, 320]; }, /responsive_profiles.*unique|duplicate/i],
+    ["short language tag", (value) => { (value.request as Record<string, unknown>).language = "k"; }, /request\.language.*2|length/i],
+    ["empty content fixtures", (value) => { (value.content as Record<string, unknown>).fixtures = []; }, /content\.fixtures.*non-empty/i],
+  ];
+  for (const [name, mutate, expected] of cases) {
+    const value = fixture();
+    mutate(value);
+    const result = validateSpec(value);
+    assert.equal(result.valid, false, `${name} unexpectedly passed`);
+    assert.match(result.errors.join("\n"), expected, name);
+  }
+});
