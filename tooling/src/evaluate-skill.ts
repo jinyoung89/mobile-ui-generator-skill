@@ -337,7 +337,7 @@ export function evaluateSkill(corpus: EvaluationCorpus, responses: SkillResponse
     schema_version: "1.0.0",
     corpus_id: corpus.corpus_id,
     mode,
-    release_eligible: mode === "responses",
+    release_eligible: mode === "responses" && passed,
     generated_at: "2026-07-11T00:00:00.000Z",
     thresholds: THRESHOLDS,
     summary: { prompt_count: corpus.prompts.length, response_count: responses.length, evaluated_count: cases.length, prompt_pass_rate: promptPassRate, overall_score: overall, blocking_dimension_pass_rate: blockingPassRate },

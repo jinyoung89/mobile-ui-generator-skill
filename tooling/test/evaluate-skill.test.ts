@@ -91,6 +91,7 @@ test("missing numeric and platform evidence fails the corresponding blocking gat
   delete (response.spec as Record<string, unknown>).platform_mappings;
   const report = evaluateSkill({ ...corpus, prompts: [corpus.prompts[0]] }, [response]);
   assert.equal(report.passed, false);
+  assert.equal(report.release_eligible, false);
   assert.match(report.cases[0].failures.join("\n"), /numeric_consistency|platform_mapping/);
 });
 
