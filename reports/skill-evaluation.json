@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0.0",
+  "corpus_id": "mobile-ui-skill-effectiveness-1",
+  "mode": "contract-baseline",
+  "generated_at": "2026-07-11T00:00:00.000Z",
+  "thresholds": {
+    "overall_min": 90,
+    "prompt_pass_rate_min": 1,
+    "blocking_dimension_min": 85
+  },
+  "summary": {
+    "prompt_count": 8,
+    "response_count": 8,
+    "evaluated_count": 8,
+    "prompt_pass_rate": 1,
+    "overall_score": 100,
+    "blocking_dimension_pass_rate": 1
+  },
+  "dimensions": [
+    {
+      "id": "classification",
+      "label": "Request classification",
+      "blocking": true,
+      "threshold": 85,
+      "weight": 0.12,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "spec_completeness",
+      "label": "Canonical specification completeness",
+      "blocking": true,
+      "threshold": 90,
+      "weight": 0.14,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "numeric_consistency",
+      "label": "Numeric layout consistency",
+      "blocking": true,
+      "threshold": 90,
+      "weight": 0.15,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "required_states",
+      "label": "Required state coverage",
+      "blocking": true,
+      "threshold": 85,
+      "weight": 0.12,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility contract",
+      "blocking": true,
+      "threshold": 90,
+      "weight": 0.12,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "platform_mapping",
+      "label": "Platform mapping parity",
+      "blocking": true,
+      "threshold": 90,
+      "weight": 0.12,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "build_readiness",
+      "label": "Build readiness",
+      "blocking": true,
+      "threshold": 95,
+      "weight": 0.11,
+      "average": 100,
+      "pass_rate": 1
+    },
+    {
+      "id": "visible_acceptance",
+      "label": "Visible acceptance",
+      "blocking": true,
+      "threshold": 90,
+      "weight": 0.12,
+      "average": 100,
+      "pass_rate": 1
+    }
+  ],
+  "cases": [
+    {
+      "prompt_id": "familiar-commerce-checkout",
+      "tags": [
+        "familiar",
+        "high-trust"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "rare-medical-reservation",
+      "tags": [
+        "rare",
+        "high-trust"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "ambiguous-finance-overview",
+      "tags": [
+        "ambiguous",
+        "high-trust"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "multi-pattern-travel-booking",
+      "tags": [
+        "multi-pattern",
+        "high-trust"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "long-copy-ko-content-detail",
+      "tags": [
+        "long-copy-ko",
+        "rare"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "long-copy-en-business-settings",
+      "tags": [
+        "long-copy-en",
+        "rare"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "compact-keyboard-chat",
+      "tags": [
+        "compact",
+        "keyboard-heavy",
+        "familiar"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "destructive-transfer-confirmation",
+      "tags": [
+        "destructive",
+        "high-trust",
+        "familiar"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "corpus_id": "mobile-ui-skill-effectiveness-1",
+  "prompts": [
+    {
+      "id": "familiar-commerce-checkout",
+      "tags": ["familiar", "high-trust"],
+      "request": "간단한 장보기 앱의 배송지 선택과 결제 확인 화면을 만들어줘.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["commerce-marketplace"],
+        "ui_patterns": ["cart-checkout", "payment-coupon"],
+        "risk_levels": ["medium", "high"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "success", "disabled", "enabled", "focused", "invalid"],
+        "numeric_ranges": {"screen_inset": [12, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "rare-medical-reservation",
+      "tags": ["rare", "high-trust"],
+      "request": "진료 예약을 변경하고 확인하는 의료 앱 화면을 설계해줘. 개인정보가 보이지 않게 해줘.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["medical-clinical"],
+        "ui_patterns": ["reservation-ticketing", "settings-support"],
+        "risk_levels": ["high"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "success", "disabled"],
+        "numeric_ranges": {"screen_inset": [16, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "ambiguous-finance-overview",
+      "tags": ["ambiguous", "high-trust"],
+      "request": "돈을 관리하는 앱 화면 하나 만들어줘. 사용자가 다음 행동을 바로 알 수 있게.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["finance-banking"],
+        "ui_patterns": ["account-wallet", "transaction-history", "home-dashboard"],
+        "risk_levels": ["medium", "high"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "empty", "success"],
+        "numeric_ranges": {"screen_inset": [16, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "multi-pattern-travel-booking",
+      "tags": ["multi-pattern", "high-trust"],
+      "request": "여행 앱에서 지도를 보고 숙소를 예약한 뒤 쿠폰을 적용하는 흐름을 구성해줘.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["travel-booking"],
+        "ui_patterns": ["map-route", "reservation-ticketing", "payment-coupon"],
+        "risk_levels": ["medium", "high"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "success", "disabled", "enabled"],
+        "numeric_ranges": {"screen_inset": [12, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "long-copy-ko-content-detail",
+      "tags": ["long-copy-ko", "rare"],
+      "request": "한국어로 긴 상품 설명과 여러 줄 안내문이 있는 콘텐츠 상세 화면을 만들어줘. 작은 화면에서도 잘 읽혀야 해.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["content-media"],
+        "ui_patterns": ["product-detail", "viewer"],
+        "risk_levels": ["low", "medium"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "empty"],
+        "numeric_ranges": {"screen_inset": [12, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "long-copy-en-business-settings",
+      "tags": ["long-copy-en", "rare"],
+      "request": "Create a business settings screen with long English help text and clear account actions.",
+      "language": "en",
+      "expected": {
+        "app_categories": ["productivity-business"],
+        "ui_patterns": ["settings-support", "account-wallet"],
+        "risk_levels": ["medium"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "success", "disabled"],
+        "numeric_ranges": {"screen_inset": [16, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "compact-keyboard-chat",
+      "tags": ["compact", "keyboard-heavy", "familiar"],
+      "request": "320px 폭에서 키보드가 올라와도 입력창과 보내기 버튼이 보이는 채팅 화면을 만들어줘.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["messaging"],
+        "ui_patterns": ["chat", "notifications"],
+        "risk_levels": ["low", "medium"],
+        "width_range": [320, 320],
+        "required_states": ["default", "loading", "error", "empty", "focused", "disabled", "enabled"],
+        "numeric_ranges": {"screen_inset": [8, 20], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"]
+      }
+    },
+    {
+      "id": "destructive-transfer-confirmation",
+      "tags": ["destructive", "high-trust", "familiar"],
+      "request": "송금 취소처럼 되돌리기 어려운 행동을 확인하는 금융 화면을 만들어줘. 위험을 분명히 알려줘.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["finance-banking"],
+        "ui_patterns": ["transaction-history", "settings-support", "success-state"],
+        "risk_levels": ["high"],
+        "width_range": [320, 430],
+        "required_states": ["default", "loading", "error", "success", "disabled", "enabled"],
+        "numeric_ranges": {"screen_inset": [16, 24], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "required_states_renderable"]
+      }
+    }
+  ]
+}
