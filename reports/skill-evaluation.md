@@ -1,8 +1,9 @@
 # Mobile UI skill effectiveness evaluation
 
 - Status: **PASS**
-- Mode: contract-baseline
-- Prompts: 8/8
+- Mode: contract-smoke
+- Release eligible: **no (contract smoke only)**
+- Prompts: 9/9
 - Overall score: 100/100
 - Prompt pass rate: 100%
 
@@ -26,4 +27,5 @@
 - long-copy-ko-content-detail: PASS (100/100)
 - long-copy-en-business-settings: PASS (100/100)
 - compact-keyboard-chat: PASS (100/100)
+- keyboard-heavy-profile-form: PASS (100/100)
 - destructive-transfer-confirmation: PASS (100/100)

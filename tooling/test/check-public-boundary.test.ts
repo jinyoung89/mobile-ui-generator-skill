@@ -57,12 +57,14 @@ test("rejects general POSIX content paths but permits documented site routes", (
     "/tmp/release/private.json",
     "/opt/build/source.png",
     "/examples/commerce-checkout",
+    "/evaluations/prompts.json",
   ].join("\n"));
   const findings = scanPublicTree(root, { copyMode: "public" });
   const details = findings.filter((finding) => finding.kind === "path").map((finding) => finding.detail);
   assert.equal(details.some((detail) => detail.includes("/tmp/")), true);
   assert.equal(details.some((detail) => detail.includes("/opt/")), true);
   assert.equal(details.some((detail) => detail.includes("/examples/")), false);
+  assert.equal(details.some((detail) => detail.includes("/evaluations/")), false);
 });
 
 test("allows documented public URLs in repository metadata but rejects them in generated data", () => {

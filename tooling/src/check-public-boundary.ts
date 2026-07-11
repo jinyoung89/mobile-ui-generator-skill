@@ -72,7 +72,7 @@ const credentialPatterns = [
 const posixPathPattern = /(?:^|[\s"'(=:])(\/(?:[A-Za-z0-9._-]+\/)+[^\s"')<>,;]*)/g;
 const windowsPathPattern = /\b[A-Za-z]:\\(?:Users|ProgramData|Windows|Temp)\\[^\s"']+/g;
 const allowedSiteRouteRoots = new Set([
-  "assets", "catalog", "docs", "examples", "ko", "mobile-ui-generator-skill", "public-knowledge",
+  "assets", "catalog", "docs", "evaluations", "examples", "ko", "mobile-ui-generator-skill", "public-knowledge",
   "reports", "scripts", "skills", "tooling",
 ]);
 const urlPattern = /https?:\/\/[^\s<>"')\]]+/g;
@@ -346,7 +346,7 @@ export function scanPublicTree(root: string, options: ScanOptions = {}): Finding
 }
 
 const publicRoots = new Set([
-  ".gitignore", "LICENSE", "README.ko.md", "README.md", "catalog", "docs", "examples", "package-lock.json",
+  ".gitignore", "LICENSE", "README.ko.md", "README.md", "catalog", "docs", "evaluations", "examples", "package-lock.json",
   "package.json", "public-knowledge", "reports", "scripts", "skills", "tooling", "tsconfig.json",
 ]);
 

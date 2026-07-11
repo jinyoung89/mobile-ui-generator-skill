@@ -1,7 +1,8 @@
 {
   "schema_version": "1.0.0",
   "corpus_id": "mobile-ui-skill-effectiveness-1",
-  "mode": "contract-baseline",
+  "mode": "contract-smoke",
+  "release_eligible": false,
   "generated_at": "2026-07-11T00:00:00.000Z",
   "thresholds": {
     "overall_min": 90,
@@ -9,9 +10,9 @@
     "blocking_dimension_min": 85
   },
   "summary": {
-    "prompt_count": 8,
-    "response_count": 8,
-    "evaluated_count": 8,
+    "prompt_count": 9,
+    "response_count": 9,
+    "evaluated_count": 9,
     "prompt_pass_rate": 1,
     "overall_score": 100,
     "blocking_dimension_pass_rate": 1
@@ -216,6 +217,28 @@
       "tags": [
         "compact",
         "keyboard-heavy",
+        "familiar"
+      ],
+      "scores": {
+        "classification": 100,
+        "spec_completeness": 100,
+        "numeric_consistency": 100,
+        "required_states": 100,
+        "accessibility": 100,
+        "platform_mapping": 100,
+        "build_readiness": 100,
+        "visible_acceptance": 100
+      },
+      "total": 100,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "prompt_id": "keyboard-heavy-profile-form",
+      "tags": [
+        "keyboard-heavy",
+        "keyboard-heavy-form",
+        "compact",
         "familiar"
       ],
       "scores": {

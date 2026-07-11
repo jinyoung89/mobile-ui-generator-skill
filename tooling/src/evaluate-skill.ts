@@ -53,7 +53,8 @@ export type EvaluationCase = {
 export type EvaluationReport = {
   schema_version: "1.0.0";
   corpus_id: string;
-  mode: "contract-baseline" | "responses";
+  mode: "contract-smoke" | "responses";
+  release_eligible: boolean;
   generated_at: string;
   thresholds: { overall_min: number; prompt_pass_rate_min: number; blocking_dimension_min: number };
   summary: {
@@ -336,6 +337,7 @@ export function evaluateSkill(corpus: EvaluationCorpus, responses: SkillResponse
     schema_version: "1.0.0",
     corpus_id: corpus.corpus_id,
     mode,
+    release_eligible: mode === "responses",
     generated_at: "2026-07-11T00:00:00.000Z",
     thresholds: THRESHOLDS,
     summary: { prompt_count: corpus.prompts.length, response_count: responses.length, evaluated_count: cases.length, prompt_pass_rate: promptPassRate, overall_score: overall, blocking_dimension_pass_rate: blockingPassRate },
@@ -347,7 +349,7 @@ export function evaluateSkill(corpus: EvaluationCorpus, responses: SkillResponse
 }
 
 function markdown(report: EvaluationReport): string {
-  const lines = ["# Mobile UI skill effectiveness evaluation", "", `- Status: **${report.passed ? "PASS" : "FAIL"}**`, `- Mode: ${report.mode}`, `- Prompts: ${report.summary.evaluated_count}/${report.summary.prompt_count}`, `- Overall score: ${report.summary.overall_score}/100`, `- Prompt pass rate: ${(report.summary.prompt_pass_rate * 100).toFixed(0)}%`, "", "| Dimension | Average | Pass rate | Blocking |", "| --- | ---: | ---: | :---:|"];
+  const lines = ["# Mobile UI skill effectiveness evaluation", "", `- Status: **${report.passed ? "PASS" : "FAIL"}**`, `- Mode: ${report.mode}`, `- Release eligible: **${report.release_eligible ? "yes" : "no (contract smoke only)"}**`, `- Prompts: ${report.summary.evaluated_count}/${report.summary.prompt_count}`, `- Overall score: ${report.summary.overall_score}/100`, `- Prompt pass rate: ${(report.summary.prompt_pass_rate * 100).toFixed(0)}%`, "", "| Dimension | Average | Pass rate | Blocking |", "| --- | ---: | ---: | :---:|"];
   for (const dimension of report.dimensions) lines.push(`| ${dimension.label} | ${dimension.average}/100 | ${(dimension.pass_rate * 100).toFixed(0)}% | ${dimension.blocking ? "yes" : "no"} |`);
   if (report.errors.length > 0) lines.push("", "## Errors", "", ...report.errors.map((error) => `- ${error}`));
   lines.push("", "## Prompt cases", "", ...report.cases.map((item) => `- ${item.prompt_id}: ${item.passed ? "PASS" : "FAIL"} (${item.total}/100)`));
@@ -364,13 +366,19 @@ if (process.argv[1]?.endsWith("evaluate-skill.ts")) {
   const root = path.resolve(import.meta.dirname, "../..");
   const corpus = loadEvaluationCorpus(path.join(root, "evaluations/prompts.json"));
   const responseIndex = process.argv.indexOf("--responses");
-  const responses = responseIndex >= 0 && process.argv[responseIndex + 1]
-    ? readResponses(path.resolve(process.argv[responseIndex + 1]))
-    : corpus.prompts.map(baselineResponse);
-  const report = evaluateSkill(corpus, responses, responseIndex >= 0 ? "responses" : "contract-baseline");
-  mkdirSync(path.join(root, "reports"), { recursive: true });
-  writeFileSync(path.join(root, "reports/skill-evaluation.json"), `${JSON.stringify(report, null, 2)}\n`);
-  writeFileSync(path.join(root, "reports/skill-evaluation.md"), markdown(report));
-  console.log(`${report.passed ? "Skill evaluation passed" : "Skill evaluation failed"}: ${report.summary.overall_score}/100 across ${report.summary.evaluated_count}/${report.summary.prompt_count} prompts`);
-  if (!report.passed) process.exitCode = 1;
+  const smoke = process.argv.includes("--contract-smoke");
+  if (responseIndex < 0 && !smoke) {
+    console.error("Release effectiveness requires --responses <file>; use --contract-smoke only for the non-release contract check.");
+    process.exitCode = 1;
+  } else {
+    const responses = responseIndex >= 0 && process.argv[responseIndex + 1]
+      ? readResponses(path.resolve(process.argv[responseIndex + 1]))
+      : corpus.prompts.map(baselineResponse);
+    const report = evaluateSkill(corpus, responses, responseIndex >= 0 ? "responses" : "contract-smoke");
+    mkdirSync(path.join(root, "reports"), { recursive: true });
+    writeFileSync(path.join(root, "reports/skill-evaluation.json"), `${JSON.stringify(report, null, 2)}\n`);
+    writeFileSync(path.join(root, "reports/skill-evaluation.md"), markdown(report));
+    console.log(`${report.passed ? "Skill evaluation passed" : "Skill evaluation failed"}: ${report.summary.overall_score}/100 across ${report.summary.evaluated_count}/${report.summary.prompt_count} prompts (${report.mode})`);
+    if (!report.passed) process.exitCode = 1;
+  }
 }

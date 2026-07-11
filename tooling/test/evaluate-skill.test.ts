@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { test } from "node:test";
 import { evaluateSkill, loadEvaluationCorpus, type SkillResponse } from "../src/evaluate-skill.js";
 
@@ -15,6 +16,7 @@ test("the prompt corpus covers the required effectiveness stress cases", () => {
   for (const required of [
     "familiar", "rare", "ambiguous", "multi-pattern", "long-copy-ko", "long-copy-en",
     "compact", "keyboard-heavy", "destructive", "high-trust",
+    "keyboard-heavy-form",
   ]) assert.equal(tags.has(required), true, required);
   assert.ok(corpus.prompts.length >= 8);
 });
@@ -98,4 +100,16 @@ test("every prompt must have a response; omitted stress cases block the release"
   assert.equal(report.passed, false);
   assert.match(report.errors.join("\n"), /missing response/i);
   assert.ok(report.summary.prompt_pass_rate < 1);
+});
+
+test("the CLI refuses to call a contract smoke baseline a release evaluation", () => {
+  const evaluator = path.join(root, "tooling/src/evaluate-skill.ts");
+  const result = spawnSync(process.execPath, ["--import", "tsx", evaluator], { cwd: root, encoding: "utf8" });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /--responses|contract-smoke/i);
+  const smoke = spawnSync(process.execPath, ["--import", "tsx", evaluator, "--contract-smoke"], { cwd: root, encoding: "utf8" });
+  assert.equal(smoke.status, 0, smoke.stderr);
+  const report = JSON.parse(readFileSync(path.join(root, "reports/skill-evaluation.json"), "utf8")) as Record<string, unknown>;
+  assert.equal(report.mode, "contract-smoke");
+  assert.equal(report.release_eligible, false);
 });

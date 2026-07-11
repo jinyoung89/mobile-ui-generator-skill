@@ -115,6 +115,22 @@
       }
     },
     {
+      "id": "keyboard-heavy-profile-form",
+      "tags": ["keyboard-heavy", "keyboard-heavy-form", "compact", "familiar"],
+      "request": "프로필 정보를 입력하는 폼을 만들어줘. 키보드가 필드를 가리지 않고 다음 버튼까지 이동할 수 있어야 해.",
+      "language": "ko",
+      "expected": {
+        "app_categories": ["productivity-business"],
+        "ui_patterns": ["login-signup", "settings-support"],
+        "risk_levels": ["low", "medium"],
+        "width_range": [320, 390],
+        "required_states": ["default", "focused", "filled", "invalid", "disabled", "enabled", "success"],
+        "numeric_ranges": {"screen_inset": [8, 20], "control_height": [44, 56], "minimum_touch_target": [44, 48], "minimum_contrast_ratio": [4.5, 7]},
+        "platforms": ["html_css", "react_native", "flutter", "swiftui"],
+        "acceptance": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"]
+      }
+    },
+    {
       "id": "destructive-transfer-confirmation",
       "tags": ["destructive", "high-trust", "familiar"],
       "request": "송금 취소처럼 되돌리기 어려운 행동을 확인하는 금융 화면을 만들어줘. 위험을 분명히 알려줘.",
