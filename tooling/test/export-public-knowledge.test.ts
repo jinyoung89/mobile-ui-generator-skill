@@ -242,6 +242,7 @@ test("cleans only the selected non-empty staging directory", () => {
   const root = makeTemporaryRoot();
   const output = path.join(root, "public-knowledge-staging");
   mkdirSync(output);
+  writeFileSync(path.join(output, ".public-knowledge-export-owned"), "owned\n");
   writeFileSync(path.join(output, "stale.txt"), "stale");
   const sibling = path.join(root, "must-survive.txt");
   writeFileSync(sibling, "keep");
@@ -250,7 +251,18 @@ test("cleans only the selected non-empty staging directory", () => {
   assert.equal(result.status, 0, result.stderr);
   assert.equal(existsSync(path.join(output, "stale.txt")), false);
   assert.equal(readFileSync(sibling, "utf8"), "keep");
-  assert.deepEqual(readdirSync(output), ["public-knowledge.json"]);
+  assert.deepEqual(readdirSync(output).sort(), [".public-knowledge-export-owned", "public-knowledge.json"]);
+});
+
+test("refuses to replace an unowned staging directory", () => {
+  const root = makeTemporaryRoot();
+  const output = path.join(root, "public-knowledge-staging");
+  mkdirSync(output);
+  writeFileSync(path.join(output, "user-file.txt"), "keep");
+  const result = runExporter(makeInput(), { root, output });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /not owned/i);
+  assert.equal(readFileSync(path.join(output, "user-file.txt"), "utf8"), "keep");
 });
 
 test("does not follow staging symlinks or create read-through links", () => {
@@ -333,23 +345,54 @@ test("release input does not have to claim it is a synthetic fixture", () => {
 });
 
 test("release mode requires external input and forbids lowering the threshold", () => {
-  const publicInput = path.join(repositoryRoot, "tooling/test/public-input.json");
+  const ownedRoot = mkdtempSync(path.join(repositoryRoot, "tooling/test/.public-input-"));
+  temporaryRoots.push(ownedRoot);
+  const publicInput = path.join(ownedRoot, "input.json");
   writeFileSync(publicInput, `${JSON.stringify(makeInput())}\n`);
-  try {
-    const root = makeTemporaryRoot();
-    const output = path.join(root, "public-knowledge-staging");
-    const result = spawnSync(
-      process.execPath,
-      ["--import", "tsx", exporter, "--input", publicInput, "--output", output, "--mode", "release"],
-      { cwd: repositoryRoot, encoding: "utf8" },
-    );
-    assert.notEqual(result.status, 0);
-    assert.match(result.stderr, /external private input/i);
-  } finally {
-    rmSync(publicInput, { force: true });
-  }
+  const root = makeTemporaryRoot();
+  const output = path.join(root, "public-knowledge-staging");
+  const result = spawnSync(
+    process.execPath,
+    ["--import", "tsx", exporter, "--input", publicInput, "--output", output, "--mode", "release"],
+    { cwd: repositoryRoot, encoding: "utf8" },
+  );
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /external private input/i);
 
   const lowered = runExporter(makeInput(), { extraArgs: ["--min-samples", "4"] });
   assert.notEqual(lowered.status, 0);
   assert.match(lowered.stderr, /cannot be lower than 5/i);
+});
+
+test("aggregates each independent sample group once", () => {
+  const input = makeInput(5);
+  const observations = input.observations as JsonObject[];
+  const duplicate = structuredClone(observations[0]);
+  duplicate.observation_metrics = { content_padding_px: 999, card_gap_px: 999, bottom_nav_height_px: 999 };
+  duplicate.component_rules = ["duplicate-only-rule"];
+  for (let index = 0; index < 20; index += 1) observations.push(structuredClone(duplicate));
+  const result = runExporter(input);
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(readFileSync(path.join(result.output, "public-knowledge.json"), "utf8")) as JsonObject;
+  const pattern = (output.patterns as JsonObject[])[0];
+  assert.equal(pattern.sample_count, 5);
+  assert.equal((pattern.recurring_component_rules as string[]).includes("duplicate-only-rule"), false);
+  const distributions = pattern.aggregate_distributions as JsonObject[];
+  const padding = distributions.find((item) => item.metric_id === "content-padding-px")!;
+  assert.ok((padding.median as number) < 100);
+});
+
+test("canonical leak checks allow short unrelated IDs and reject case variants", () => {
+  const allowed = makeInput();
+  (allowed.observations as JsonObject[])[0].source_id = "c";
+  const allowedResult = runExporter(allowed);
+  assert.equal(allowedResult.status, 0, allowedResult.stderr);
+
+  const rejected = makeInput();
+  const rows = rejected.observations as JsonObject[];
+  (rows[0].credential_fields as JsonObject).api_key = "Private-Token";
+  rows.forEach((row) => { row.component_rules = ["uses-private-token"]; });
+  const rejectedResult = runExporter(rejected);
+  assert.notEqual(rejectedResult.status, 0);
+  assert.match(rejectedResult.stderr, /credential-like private string/i);
 });

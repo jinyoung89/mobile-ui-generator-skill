@@ -1,12 +1,21 @@
 #!/usr/bin/env node
 
 import {
+  closeSync,
+  constants,
   existsSync,
+  fstatSync,
+  fsyncSync,
   lstatSync,
+  mkdtempSync,
   mkdirSync,
+  openSync,
   readFileSync,
   realpathSync,
+  renameSync,
   rmSync,
+  rmdirSync,
+  statSync,
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
@@ -61,6 +70,20 @@ function parseJson(filePath: string): unknown {
     return JSON.parse(readFileSync(filePath, "utf8"));
   } catch (error) {
     throw new Error(`Unable to read JSON at ${filePath}: ${(error as Error).message}`);
+  }
+}
+
+function parsePrivateJsonSecure(filePath: string): unknown {
+  const noFollow = constants.O_NOFOLLOW ?? 0;
+  let descriptor: number | undefined;
+  try {
+    descriptor = openSync(filePath, constants.O_RDONLY | noFollow);
+    if (!fstatSync(descriptor).isFile()) throw new Error("Private input must be a regular file");
+    return JSON.parse(readFileSync(descriptor, "utf8"));
+  } catch (error) {
+    throw new Error(`Unable to securely read private JSON: ${(error as Error).message}`);
+  } finally {
+    if (descriptor !== undefined) closeSync(descriptor);
   }
 }
 
@@ -181,35 +204,46 @@ function assertSafePaths(input: string, output: string, mode: string): void {
   }
 }
 
-function privateStringKinds(input: PrivateInput): Map<string, string> {
-  const kinds = new Map<string, string>();
-  if (input.fixture_notice) kinds.set(input.fixture_notice, "private fixture string");
+type PrivateString = { value: string; kind: string; allowDelimitedMatch: boolean };
+
+function canonical(value: string): string {
+  return value.normalize("NFKC").toLocaleLowerCase("en-US");
+}
+
+function privateStringKinds(input: PrivateInput): PrivateString[] {
+  const kinds = new Map<string, PrivateString>();
+  const add = (value: string, kind: string, allowDelimitedMatch: boolean) => {
+    const normalized = canonical(value);
+    if (normalized) kinds.set(`${kind}\u0000${normalized}`, { value: normalized, kind, allowDelimitedMatch });
+  };
+  if (input.fixture_notice) add(input.fixture_notice, "private fixture string", true);
   for (const observation of input.observations) {
-    for (const value of [
-      observation.source_id,
-      observation.source_url,
-      observation.local_path,
-      observation.raw_asset_pointer,
-    ]) {
-      kinds.set(value, "source-identifying private string");
-    }
+    add(observation.source_id, "source-identifying private string", true);
+    add(observation.source_url, "source-identifying private string", true);
+    add(observation.local_path, "source-identifying private string", true);
+    add(observation.raw_asset_pointer, "source-identifying private string", true);
     for (const value of [observation.app_specific_copy, observation.reviewer_identity, observation.sample_group]) {
-      kinds.set(value, "app-specific private string");
+      add(value, "app-specific private string", true);
     }
     for (const value of Object.values(observation.credential_fields)) {
-      kinds.set(value, "credential-like private string");
+      add(value, "credential-like private string", true);
     }
   }
-  return kinds;
+  return [...kinds.values()];
 }
 
-function assertNoPrivateString(value: string, privateKinds: Map<string, string>, label: string): void {
-  for (const [privateValue, privateKind] of privateKinds) {
-    if (value.includes(privateValue)) throw new Error(`${label} contains a ${privateKind}`);
+function assertNoPrivateString(value: string, privateKinds: PrivateString[], label: string): void {
+  const normalized = canonical(value);
+  for (const privateValue of privateKinds) {
+    const exact = normalized === privateValue.value;
+    const escaped = privateValue.value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const delimited = privateValue.allowDelimitedMatch && privateValue.value.length >= 4
+      && new RegExp(`(?:^|[^a-z0-9])${escaped}(?:$|[^a-z0-9])`, "u").test(normalized);
+    if (exact || delimited) throw new Error(`${label} contains a ${privateValue.kind}`);
   }
 }
 
-function assertPublicIdentifier(value: string, privateKinds: Map<string, string>): void {
+function assertPublicIdentifier(value: string, privateKinds: PrivateString[]): void {
   if (/^https?:\/\//i.test(value)) throw new Error("Public identifier contains a URL");
   if (path.isAbsolute(value) || /^[a-z]:[\\/]/i.test(value)) throw new Error("Public identifier contains a local path");
   assertNoPrivateString(value, privateKinds, "Public identifier");
@@ -229,15 +263,24 @@ function percentile(values: number[], fraction: number): number {
   return rounded(interpolated);
 }
 
-function recurringRules(observations: PrivateObservation[], field: "component_rules" | "state_rules"): string[] {
+function recurringRules(groups: PrivateObservation[][], field: "component_rules" | "state_rules"): string[] {
   const counts = new Map<string, number>();
-  for (const observation of observations) {
-    for (const rule of observation[field]) counts.set(rule, (counts.get(rule) ?? 0) + 1);
+  for (const observations of groups) {
+    const present = new Set(observations.flatMap((observation) => observation[field]));
+    for (const rule of present) counts.set(rule, (counts.get(rule) ?? 0) + 1);
   }
   return [...counts.entries()]
-    .filter(([, count]) => count / observations.length >= 0.6)
+    .filter(([, count]) => count / groups.length >= 0.6)
     .map(([rule]) => rule)
     .sort();
+}
+
+function groupBySample(observations: PrivateObservation[]): PrivateObservation[][] {
+  const grouped = new Map<string, PrivateObservation[]>();
+  for (const observation of observations) {
+    grouped.set(observation.sample_group, [...(grouped.get(observation.sample_group) ?? []), observation]);
+  }
+  return [...grouped.values()];
 }
 
 function buildPublicKnowledge(input: PrivateInput, minimumSamples: number): unknown {
@@ -260,12 +303,16 @@ function buildPublicKnowledge(input: PrivateInput, minimumSamples: number): unkn
       return category || left[0].pattern_id.localeCompare(right[0].pattern_id);
     })
     .map((observations) => {
+      const independentGroups = groupBySample(observations);
       const metrics = ([
         ["bottom-nav-height-px", "bottom_nav_height_px"],
         ["card-gap-px", "card_gap_px"],
         ["content-padding-px", "content_padding_px"],
       ] as const).map(([metricId, field]) => {
-        const values = observations.map((observation) => observation.observation_metrics[field]);
+        const values = independentGroups.map((group) => percentile(
+          group.map((observation) => observation.observation_metrics[field]),
+          0.5,
+        ));
         return {
           distribution: {
             metric_id: metricId,
@@ -280,15 +327,18 @@ function buildPublicKnowledge(input: PrivateInput, minimumSamples: number): unkn
           },
         };
       });
-      const confidence = observations.map((observation) => observation.confidence);
+      const confidence = independentGroups.map((group) => percentile(
+        group.map((observation) => observation.confidence),
+        0.5,
+      ));
       return {
         category_id: observations[0].category_id,
         pattern_id: observations[0].pattern_id,
-        sample_count: observations.length,
+        sample_count: independentGroups.length,
         aggregate_distributions: metrics.map((metric) => metric.distribution),
         recommended_ranges: metrics.map((metric) => metric.range),
-        recurring_component_rules: recurringRules(observations, "component_rules"),
-        recurring_state_rules: recurringRules(observations, "state_rules"),
+        recurring_component_rules: recurringRules(independentGroups, "component_rules"),
+        recurring_state_rules: recurringRules(independentGroups, "state_rules"),
         confidence_summary: {
           minimum: Math.min(...confidence),
           median: percentile(confidence, 0.5),
@@ -311,7 +361,7 @@ function main(): void {
 
   const privateSchema = parseJson(path.join(schemaRoot, "private-observation-fixture.schema.json")) as JsonSchema;
   const publicSchema = parseJson(path.join(schemaRoot, "public-knowledge.schema.json")) as JsonSchema;
-  const privateInput = parseJson(options.input);
+  const privateInput = parsePrivateJsonSecure(options.input);
   const inputErrors = validate(privateInput, privateSchema);
   if (inputErrors.length > 0) throw new Error(`Input schema validation failed:\n${inputErrors.join("\n")}`);
 
@@ -319,13 +369,67 @@ function main(): void {
   const outputErrors = validate(publicKnowledge, publicSchema);
   if (outputErrors.length > 0) throw new Error(`Output schema validation failed:\n${outputErrors.join("\n")}`);
 
-  if (existsSync(options.output)) rmSync(options.output, { recursive: true, force: false });
-  mkdirSync(options.output, { recursive: false });
-  writeFileSync(
-    path.join(options.output, "public-knowledge.json"),
-    `${JSON.stringify(publicKnowledge, null, 2)}\n`,
-    { encoding: "utf8", flag: "wx", mode: 0o644 },
-  );
+  replaceOwnedStaging(options.output, `${JSON.stringify(publicKnowledge, null, 2)}\n`);
+}
+
+type FileStats = NonNullable<ReturnType<typeof statSync>>;
+
+function requiredStat(filePath: string): FileStats {
+  const value = statSync(filePath);
+  if (!value) throw new Error(`Unable to stat required path: ${filePath}`);
+  return value;
+}
+
+function sameIdentity(left: FileStats, right: FileStats): boolean {
+  return left.dev === right.dev && left.ino === right.ino;
+}
+
+function replaceOwnedStaging(output: string, contents: string): void {
+  const parent = path.dirname(output);
+  const parentBefore = requiredStat(parent);
+  const lock = path.join(parent, ".public-knowledge-export.lock");
+  const marker = ".public-knowledge-export-owned";
+  mkdirSync(lock, { recursive: false, mode: 0o700 });
+  let next: string | undefined;
+  let previous: string | undefined;
+  try {
+    const parentAfterLock = requiredStat(parent);
+    if (!sameIdentity(parentBefore, parentAfterLock) || realpathSync(parent) !== parent) {
+      throw new Error("Staging parent identity changed during export");
+    }
+    if (existsSync(output)) {
+      const outputStat = lstatSync(output);
+      if (!outputStat.isDirectory() || outputStat.isSymbolicLink()) throw new Error("Existing staging path is not an owned directory");
+      if (!existsSync(path.join(output, marker))) throw new Error("Existing staging directory is not owned by this exporter");
+    }
+    next = mkdtempSync(path.join(parent, ".public-knowledge-next-"));
+    writeFileSync(path.join(next, marker), "owned\n", { encoding: "utf8", flag: "wx", mode: 0o600 });
+    const outputFile = path.join(next, "public-knowledge.json");
+    const descriptor = openSync(outputFile, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL, 0o644);
+    try {
+      writeFileSync(descriptor, contents, "utf8");
+      fsyncSync(descriptor);
+    } finally {
+      closeSync(descriptor);
+    }
+    if (!sameIdentity(parentBefore, requiredStat(parent))) throw new Error("Staging parent identity changed before publish");
+    if (existsSync(output)) {
+      previous = `${output}.previous-${process.pid}`;
+      renameSync(output, previous);
+    }
+    renameSync(next, output);
+    next = undefined;
+    if (previous) {
+      const previousStat = lstatSync(previous);
+      if (!previousStat.isDirectory() || previousStat.isSymbolicLink()) throw new Error("Previous staging identity changed");
+      rmSync(previous, { recursive: true, force: false });
+      previous = undefined;
+    }
+  } finally {
+    if (next && existsSync(next) && !lstatSync(next).isSymbolicLink()) rmSync(next, { recursive: true, force: true });
+    if (previous && existsSync(previous) && !lstatSync(previous).isSymbolicLink()) rmSync(previous, { recursive: true, force: true });
+    if (existsSync(lock) && !lstatSync(lock).isSymbolicLink()) rmdirSync(lock);
+  }
 }
 
 try {
