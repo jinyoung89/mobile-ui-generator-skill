@@ -69,7 +69,7 @@ function writeInput(root: string, input: JsonObject): string {
 
 function runExporter(
   input: JsonObject,
-  options: { root?: string; output?: string; extraArgs?: string[] } = {},
+  options: { root?: string; output?: string; extraArgs?: string[]; env?: NodeJS.ProcessEnv } = {},
 ) {
   const root = options.root ?? makeTemporaryRoot();
   const inputPath = writeInput(root, input);
@@ -88,7 +88,7 @@ function runExporter(
       "release",
       ...(options.extraArgs ?? []),
     ],
-    { cwd: repositoryRoot, encoding: "utf8" },
+    { cwd: repositoryRoot, encoding: "utf8", env: { ...process.env, ...options.env } },
   );
   return { ...result, inputPath, output, root };
 }
@@ -310,7 +310,9 @@ test("rejects a deep symlink ancestor of the staging directory", () => {
 test("release mode rejects a repo-local symlink to external private input", () => {
   const root = makeTemporaryRoot();
   const inputPath = writeInput(root, makeInput());
-  const linkedInputRoot = path.join(repositoryRoot, "tooling/test/.external-private-link");
+  const ownedRoot = mkdtempSync(path.join(repositoryRoot, "tooling/test/.external-private-link-"));
+  temporaryRoots.push(ownedRoot);
+  const linkedInputRoot = path.join(ownedRoot, "link");
   const output = path.join(root, "public-knowledge-staging");
   symlinkSync(root, linkedInputRoot);
   try {
@@ -335,6 +337,22 @@ test("release mode rejects a repo-local symlink to external private input", () =
   } finally {
     rmSync(linkedInputRoot, { force: true });
   }
+});
+
+test("restores the prior owned staging directory when publication fails", () => {
+  const root = makeTemporaryRoot();
+  const output = path.join(root, "public-knowledge-staging");
+  mkdirSync(output);
+  writeFileSync(path.join(output, ".public-knowledge-export-owned"), "owned\n");
+  writeFileSync(path.join(output, "public-knowledge.json"), "previous-valid-artifact\n");
+  const result = runExporter(makeInput(), {
+    root,
+    output,
+    env: { PUBLIC_KNOWLEDGE_TEST_FAIL_PUBLISH: "1" },
+  });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /injected publish failure/i);
+  assert.equal(readFileSync(path.join(output, "public-knowledge.json"), "utf8"), "previous-valid-artifact\n");
 });
 
 test("release input does not have to claim it is a synthetic fixture", () => {

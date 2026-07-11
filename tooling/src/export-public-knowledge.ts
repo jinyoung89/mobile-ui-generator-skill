@@ -73,12 +73,43 @@ function parseJson(filePath: string): unknown {
   }
 }
 
-function parsePrivateJsonSecure(filePath: string): unknown {
+type Identity = { path: string; dev: number; ino: number };
+type InputSnapshot = { realPath: string; file: Identity; ancestors: Identity[] };
+
+function identity(filePath: string): Identity {
+  const value = lstatSync(filePath);
+  if (value.isSymbolicLink()) throw new Error(`Path identity is a symlink: ${filePath}`);
+  return { path: filePath, dev: value.dev, ino: value.ino };
+}
+
+function captureInputSnapshot(filePath: string): InputSnapshot {
+  const ancestors: Identity[] = [];
+  for (let current = path.dirname(filePath); ; current = path.dirname(current)) {
+    ancestors.push(identity(current));
+    if (current === path.dirname(current)) break;
+  }
+  return { realPath: realpathSync(filePath), file: identity(filePath), ancestors };
+}
+
+function assertIdentityUnchanged(expected: Identity): void {
+  const current = identity(expected.path);
+  if (current.dev !== expected.dev || current.ino !== expected.ino) {
+    throw new Error(`Path identity changed during secure read: ${expected.path}`);
+  }
+}
+
+function parsePrivateJsonSecure(filePath: string, snapshot: InputSnapshot): unknown {
   const noFollow = constants.O_NOFOLLOW ?? 0;
   let descriptor: number | undefined;
   try {
     descriptor = openSync(filePath, constants.O_RDONLY | noFollow);
-    if (!fstatSync(descriptor).isFile()) throw new Error("Private input must be a regular file");
+    const opened = fstatSync(descriptor);
+    if (!opened.isFile()) throw new Error("Private input must be a regular file");
+    if (opened.dev !== snapshot.file.dev || opened.ino !== snapshot.file.ino) {
+      throw new Error("Private input identity changed before secure open");
+    }
+    for (const ancestor of snapshot.ancestors) assertIdentityUnchanged(ancestor);
+    if (realpathSync(filePath) !== snapshot.realPath) throw new Error("Private input resolved path changed during secure read");
     return JSON.parse(readFileSync(descriptor, "utf8"));
   } catch (error) {
     throw new Error(`Unable to securely read private JSON: ${(error as Error).message}`);
@@ -186,7 +217,7 @@ function assertNoSymlinkAncestors(candidate: string, label: "input" | "staging")
   }
 }
 
-function assertSafePaths(input: string, output: string, mode: string): void {
+function assertSafePaths(input: string, output: string, mode: string): InputSnapshot {
   assertNoSymlinkAncestors(input, "input");
   assertNoSymlinkAncestors(output, "staging");
   if (mode === "release" && isInside(input, repositoryRoot)) {
@@ -202,6 +233,7 @@ function assertSafePaths(input: string, output: string, mode: string): void {
   if (output === path.parse(output).root || output === path.dirname(output)) {
     throw new Error("Refusing unsafe staging directory");
   }
+  return captureInputSnapshot(input);
 }
 
 type PrivateString = { value: string; kind: string; allowDelimitedMatch: boolean };
@@ -357,11 +389,11 @@ function buildPublicKnowledge(input: PrivateInput, minimumSamples: number): unkn
 
 function main(): void {
   const options = parseArguments(process.argv.slice(2));
-  assertSafePaths(options.input, options.output, options.mode);
+  const inputSnapshot = assertSafePaths(options.input, options.output, options.mode);
 
   const privateSchema = parseJson(path.join(schemaRoot, "private-observation-fixture.schema.json")) as JsonSchema;
   const publicSchema = parseJson(path.join(schemaRoot, "public-knowledge.schema.json")) as JsonSchema;
-  const privateInput = parsePrivateJsonSecure(options.input);
+  const privateInput = parsePrivateJsonSecure(options.input, inputSnapshot);
   const inputErrors = validate(privateInput, privateSchema);
   if (inputErrors.length > 0) throw new Error(`Input schema validation failed:\n${inputErrors.join("\n")}`);
 
@@ -392,6 +424,7 @@ function replaceOwnedStaging(output: string, contents: string): void {
   mkdirSync(lock, { recursive: false, mode: 0o700 });
   let next: string | undefined;
   let previous: string | undefined;
+  let published = false;
   try {
     const parentAfterLock = requiredStat(parent);
     if (!sameIdentity(parentBefore, parentAfterLock) || realpathSync(parent) !== parent) {
@@ -417,8 +450,12 @@ function replaceOwnedStaging(output: string, contents: string): void {
       previous = `${output}.previous-${process.pid}`;
       renameSync(output, previous);
     }
+    if (process.env.PUBLIC_KNOWLEDGE_TEST_FAIL_PUBLISH === "1") {
+      throw new Error("Injected publish failure for rollback verification");
+    }
     renameSync(next, output);
     next = undefined;
+    published = true;
     if (previous) {
       const previousStat = lstatSync(previous);
       if (!previousStat.isDirectory() || previousStat.isSymbolicLink()) throw new Error("Previous staging identity changed");
@@ -427,7 +464,13 @@ function replaceOwnedStaging(output: string, contents: string): void {
     }
   } finally {
     if (next && existsSync(next) && !lstatSync(next).isSymbolicLink()) rmSync(next, { recursive: true, force: true });
-    if (previous && existsSync(previous) && !lstatSync(previous).isSymbolicLink()) rmSync(previous, { recursive: true, force: true });
+    if (!published && previous && existsSync(previous) && !existsSync(output)) {
+      renameSync(previous, output);
+      previous = undefined;
+    }
+    if (published && previous && existsSync(previous) && !lstatSync(previous).isSymbolicLink()) {
+      rmSync(previous, { recursive: true, force: true });
+    }
     if (existsSync(lock) && !lstatSync(lock).isSymbolicLink()) rmdirSync(lock);
   }
 }
