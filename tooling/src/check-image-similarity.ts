@@ -24,6 +24,8 @@ export type SimilarityEvidence = {
 export type SimilarityOptions = {
   maxDHashDistance?: number;
   evidencePath?: string;
+  trustedPublicKeys?: string[];
+  repositoryRoot?: string;
 };
 
 type Fingerprint = { sha256: string; dHash: string; width: number; height: number };
@@ -60,6 +62,17 @@ function collectImages(root: string): string[] {
   };
   visit(root);
   return images;
+}
+
+export function imageRootDigest(root: string): string {
+  const digest = createHash("sha256");
+  for (const pathname of collectImages(root)) {
+    digest.update(path.relative(root, pathname).replaceAll(path.sep, "/"));
+    digest.update(Buffer.from([0]));
+    digest.update(readFileSync(pathname));
+    digest.update(Buffer.from([0]));
+  }
+  return `sha256:${digest.digest("hex")}`;
 }
 
 function fingerprint(pathname: string): Fingerprint {
@@ -99,7 +112,24 @@ function validDigest(value: unknown): value is string {
   return typeof value === "string" && /^sha256:[a-f0-9]{64}$/.test(value);
 }
 
-function verifyEvidence(pathname: string): boolean {
+function trustedKeyMatches(publicKey: string, trustedPublicKeys: string[]): boolean {
+  if (trustedPublicKeys.length === 0) return false;
+  try {
+    const candidate = createPublicKey(publicKey).export({ type: "spki", format: "der" }).toString("base64");
+    return trustedPublicKeys.some((trusted) => createPublicKey(trusted).export({ type: "spki", format: "der" }).toString("base64") === candidate);
+  } catch {
+    return false;
+  }
+}
+
+function currentCommit(repositoryRoot: string): string | undefined {
+  const result = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
+  if (result.status !== 0) return undefined;
+  const commit = result.stdout.trim();
+  return /^[0-9a-f]{40}$/.test(commit) ? commit : undefined;
+}
+
+function verifyEvidence(pathname: string, sourceRoot: string, publicRoot: string, options: SimilarityOptions): boolean {
   try {
     const value = JSON.parse(readFileSync(pathname, "utf8")) as Partial<SimilarityEvidence>;
     if (value.version !== 1 || value.status !== "passed" || value.algorithm !== "ed25519" ||
@@ -107,14 +137,23 @@ function verifyEvidence(pathname: string): boolean {
       typeof value.checkedAt !== "string" || !validDigest(value.sourceDigest) || !validDigest(value.publicDigest) ||
       typeof value.publicKey !== "string" || typeof value.signature !== "string" || !value.signature) return false;
     const evidence = value as SimilarityEvidence;
+    if (!trustedKeyMatches(evidence.publicKey, options.trustedPublicKeys ?? [])) return false;
+    if (evidence.commit !== currentCommit(options.repositoryRoot ?? process.cwd())) return false;
+    if (imageRootDigest(publicRoot) !== evidence.publicDigest) return false;
+    try {
+      if (imageRootDigest(sourceRoot) !== evidence.sourceDigest) return false;
+    } catch {
+      // A missing source directory is the explicit reason this signed attestation is used.
+    }
     return verify(null, Buffer.from(canonicalAuditPayload(evidence)), createPublicKey(evidence.publicKey), Buffer.from(evidence.signature, "base64"));
   } catch {
     return false;
   }
 }
 
-function unavailableEvidence(pathname: string, evidencePath?: string): SimilarityFinding[] {
-  if (evidencePath && verifyEvidence(evidencePath)) return [];
+function unavailableEvidence(pathname: string, publicRoot: string, options: SimilarityOptions): SimilarityFinding[] {
+  if (options.evidencePath && verifyEvidence(options.evidencePath, pathname, publicRoot, options)) return [];
+  const evidencePath = options.evidencePath;
   const suffix = evidencePath ? `; signed audit invalid: ${evidencePath}` : "; signed audit evidence is required";
   return [{ kind: "evidence", path: pathname, detail: `source image set unavailable${suffix}` }];
 }
@@ -128,11 +167,15 @@ export function scanImageSimilarity(sourceRoot: string, publicRoot: string, opti
   try {
     sourceImages = collectImages(sourceRoot);
   } catch {
-    return unavailableEvidence(sourceRoot, options.evidencePath);
+    return unavailableEvidence(sourceRoot, publicRoot, options);
   }
-  if (sourceImages.length === 0) return unavailableEvidence(sourceRoot, options.evidencePath);
+  if (sourceImages.length === 0) return unavailableEvidence(sourceRoot, publicRoot, options);
 
   const findings: SimilarityFinding[] = [];
+  if (options.evidencePath && !verifyEvidence(options.evidencePath, sourceRoot, publicRoot, options)) {
+    findings.push({ kind: "evidence", path: options.evidencePath, detail: "signed audit does not match trusted key, commit, or image-root digests" });
+  }
+
   let publicImages: string[];
   try {
     publicImages = collectImages(publicRoot);
@@ -144,7 +187,7 @@ export function scanImageSimilarity(sourceRoot: string, publicRoot: string, opti
     try { sources.push(fingerprint(source)); }
     catch (error) { findings.push({ kind: "unreadable", path: source, detail: (error as Error).message }); }
   }
-  if (sources.length === 0) return findings.length ? findings : unavailableEvidence(sourceRoot, options.evidencePath);
+  if (sources.length === 0) return findings.length ? findings : unavailableEvidence(sourceRoot, publicRoot, options);
 
   for (const publicImage of publicImages) {
     let candidate: Fingerprint;
@@ -170,17 +213,21 @@ function runCli(): void {
   let source: string | undefined;
   let output: string | undefined;
   let evidence: string | undefined;
+  const trustedKeys: string[] = [];
+  let repositoryRoot: string | undefined;
   let threshold: number | undefined;
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index];
     if (argument === "--source-dir") source = args[++index];
     else if (argument === "--public-root") output = args[++index];
     else if (argument === "--evidence") evidence = args[++index];
+    else if (argument === "--trusted-key") trustedKeys.push(readFileSync(path.resolve(args[++index] ?? ""), "utf8"));
+    else if (argument === "--repository-root") repositoryRoot = args[++index];
     else if (argument === "--threshold") threshold = Number(args[++index]);
     else throw new Error(`unknown argument: ${argument}`);
   }
   if (!source || !output) throw new Error("--source-dir and --public-root are required");
-  const findings = scanImageSimilarity(path.resolve(source), path.resolve(output), { evidencePath: evidence ? path.resolve(evidence) : undefined, maxDHashDistance: threshold });
+  const findings = scanImageSimilarity(path.resolve(source), path.resolve(output), { evidencePath: evidence ? path.resolve(evidence) : undefined, maxDHashDistance: threshold, trustedPublicKeys: trustedKeys, repositoryRoot: repositoryRoot ? path.resolve(repositoryRoot) : undefined });
   if (findings.length) {
     for (const finding of findings) console.error(`${finding.kind}: ${finding.path}: ${finding.detail}`);
     process.exitCode = 1;

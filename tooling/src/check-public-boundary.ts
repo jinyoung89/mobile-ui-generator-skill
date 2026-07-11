@@ -403,12 +403,19 @@ function runCli(): void {
       const output = args[++index];
       if (!source || !output) throw new Error("--image-similarity requires a source directory and public root");
       let evidence: string | undefined;
+      const trustedKeys: string[] = [];
       if (args[index + 1] === "--image-similarity-evidence") {
         evidence = args[index + 2];
         index += 2;
         if (!evidence) throw new Error("--image-similarity-evidence requires a path");
       }
-      findings.push(...scanImageSimilarity(path.resolve(source), path.resolve(output), { evidencePath: evidence ? path.resolve(evidence) : undefined }).map((finding) => ({
+      while (args[index + 1] === "--image-similarity-trusted-key") {
+        const keyPath = args[index + 2];
+        index += 2;
+        if (!keyPath) throw new Error("--image-similarity-trusted-key requires a path");
+        trustedKeys.push(readFileSync(path.resolve(keyPath), "utf8"));
+      }
+      findings.push(...scanImageSimilarity(path.resolve(source), path.resolve(output), { evidencePath: evidence ? path.resolve(evidence) : undefined, trustedPublicKeys: trustedKeys, repositoryRoot: root }).map((finding) => ({
         kind: "image-similarity" as const,
         path: finding.path,
         detail: `${finding.kind}: ${finding.detail}`,

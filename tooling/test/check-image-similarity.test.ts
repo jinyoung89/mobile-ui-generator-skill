@@ -8,6 +8,7 @@ import test from "node:test";
 
 import {
   canonicalAuditPayload,
+  imageRootDigest,
   scanImageSimilarity,
   type SimilarityEvidence,
 } from "../src/check-image-similarity.js";
@@ -37,23 +38,25 @@ im.save(out, format="PNG")
   assert.equal(result.status, 0, result.stderr);
 }
 
-function signedEvidence(root: string): string {
+function signedEvidence(root: string, overrides: Partial<SimilarityEvidence> = {}): { path: string; publicKey: string } {
   const { privateKey, publicKey } = generateKeyPairSync("ed25519");
+  const commit = spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).stdout.trim();
   const evidence: SimilarityEvidence = {
     version: 1,
     status: "passed",
-    commit: "0123456789abcdef0123456789abcdef01234567",
+    commit,
     checkedAt: "2026-07-11T00:00:00.000Z",
     sourceDigest: "sha256:" + "a".repeat(64),
-    publicDigest: "sha256:" + "b".repeat(64),
+    publicDigest: imageRootDigest(path.join(root, "output")),
     algorithm: "ed25519",
     publicKey: publicKey.export({ type: "spki", format: "pem" }).toString(),
     signature: "",
+    ...overrides,
   };
   evidence.signature = sign(null, Buffer.from(canonicalAuditPayload(evidence)), privateKey).toString("base64");
   const pathname = path.join(root, "audit.json");
   writeFileSync(pathname, JSON.stringify(evidence, null, 2));
-  return pathname;
+  return { path: pathname, publicKey: evidence.publicKey };
 }
 
 test("rejects an exact byte-for-byte source image by SHA-256", () => {
@@ -112,7 +115,7 @@ test("accepts a valid signed audit when the source set is unavailable", () => {
   makeImage(path.join(output, "screen.png"), "different");
   const evidence = signedEvidence(root);
 
-  assert.deepEqual(scanImageSimilarity(path.join(root, "missing-source"), output, { evidencePath: evidence }), []);
+  assert.deepEqual(scanImageSimilarity(path.join(root, "missing-source"), output, { evidencePath: evidence.path, trustedPublicKeys: [evidence.publicKey] }), []);
 });
 
 test("rejects tampered signed audit evidence", () => {
@@ -121,11 +124,47 @@ test("rejects tampered signed audit evidence", () => {
   mkdirSync(output);
   makeImage(path.join(output, "screen.png"), "different");
   const evidence = signedEvidence(root);
-  const record = JSON.parse(readFileSync(evidence, "utf8")) as SimilarityEvidence;
+  const record = JSON.parse(readFileSync(evidence.path, "utf8")) as SimilarityEvidence;
   record.publicDigest = "sha256:" + "c".repeat(64);
-  writeFileSync(evidence, JSON.stringify(record));
+  writeFileSync(evidence.path, JSON.stringify(record));
 
-  const findings = scanImageSimilarity(path.join(root, "missing-source"), output, { evidencePath: evidence });
+  const findings = scanImageSimilarity(path.join(root, "missing-source"), output, { evidencePath: evidence.path, trustedPublicKeys: [evidence.publicKey] });
+  assert.equal(findings.some((finding) => finding.kind === "evidence"), true);
+});
+
+test("does not accept a self-signed audit without an explicit trusted key", () => {
+  const root = fixtureRoot();
+  const output = path.join(root, "output");
+  mkdirSync(output);
+  makeImage(path.join(output, "screen.png"), "different");
+  const evidence = signedEvidence(root);
+
+  const findings = scanImageSimilarity(path.join(root, "missing-source"), output, { evidencePath: evidence.path });
+  assert.equal(findings.some((finding) => finding.kind === "evidence"), true);
+});
+
+test("rejects a signed audit for another commit", () => {
+  const root = fixtureRoot();
+  const output = path.join(root, "output");
+  mkdirSync(output);
+  makeImage(path.join(output, "screen.png"), "different");
+  const evidence = signedEvidence(root, { commit: "0123456789abcdef0123456789abcdef01234567" });
+
+  const findings = scanImageSimilarity(path.join(root, "missing-source"), output, { evidencePath: evidence.path, trustedPublicKeys: [evidence.publicKey] });
+  assert.equal(findings.some((finding) => finding.kind === "evidence"), true);
+});
+
+test("checks source and public image-root digests when an audit accompanies an available source set", () => {
+  const root = fixtureRoot();
+  const source = path.join(root, "source");
+  const output = path.join(root, "output");
+  mkdirSync(source);
+  mkdirSync(output);
+  makeImage(path.join(source, "screen.png"), "source");
+  makeImage(path.join(output, "screen.png"), "different");
+  const evidence = signedEvidence(root, { sourceDigest: "sha256:" + "d".repeat(64) });
+
+  const findings = scanImageSimilarity(source, output, { evidencePath: evidence.path, trustedPublicKeys: [evidence.publicKey] });
   assert.equal(findings.some((finding) => finding.kind === "evidence"), true);
 });
 
