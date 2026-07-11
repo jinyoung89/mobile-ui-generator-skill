@@ -1,14 +1,14 @@
 # Mobile UI Skill and Showcase Rebuild Design
 
 **Date:** 2026-07-11
-**Status:** Approved for implementation
+**Status:** Approved for implementation; scope revised 2026-07-11
 **Repository:** `jinyoung89/mobile-ui-generator-skill`
 
 ## 1. Purpose
 
 Rebuild the public Mobile UI Generator skill and its GitHub Pages website around one claim that can be demonstrated:
 
-> A developer can ask for a mobile screen and receive a visually aligned, responsive, implementation-ready result with complete runnable code for HTML/CSS, React Native, Flutter, and SwiftUI.
+> A developer can ask for a mobile screen and receive a visually aligned, responsive, implementation-ready result with complete source code for HTML/CSS, React Native, Flutter, and SwiftUI.
 
 The website must lead with real outputs made by the public skill. It must not use hand-built promotional previews that bypass the skill, and it must not claim quality based only on the presence of pattern names or documentation.
 
@@ -27,7 +27,7 @@ The current project contains useful taxonomy and pattern documentation, but the 
 - validators that confirm files and keywords but do not confirm rendered quality;
 - public skill metadata that does not pass the official skill validator.
 
-The rebuild must address these failures at the specification, generation, rendering, and publication layers.
+The rebuild must address these failures at the specification, generation, static validation, preview, and publication layers. Native application build and device execution are not required to prove the first-release product claim.
 
 ## 3. Scope
 
@@ -36,14 +36,15 @@ The rebuild must address these failures at the specification, generation, render
 - Preserve the private image collection and analysis workflow as an authoring system.
 - Reuse the existing private acquisition utility, local image index, curated asset library, and analyzed artifacts where legally and technically appropriate.
 - Rebuild the public skill around a canonical, numeric mobile UI specification.
-- Generate complete runnable implementations for:
+- Generate complete implementation-ready source for:
   - HTML/CSS;
   - React Native;
   - Flutter;
   - SwiftUI.
 - Build a new output-first GitHub Pages website.
 - Publish 80-120 meaningful app-category and UI-pattern combinations in the first complete release.
-- Build and launch all four platform implementations before publication. Capture every platform at its default profile, then apply the stress-profile matrix defined in this document.
+- Statistically validate every generated source tree for completeness, numeric consistency, required platform constructs, forbidden placeholders, and cross-language parity.
+- Produce representative responsive previews from the same canonical spec, using the HTML/CSS renderer as the visual evidence surface for the first release.
 - Keep original reference images, source identities, local paths, credentials, and collection mechanics private.
 
 ### 3.2 Out of scope for the first release
@@ -54,6 +55,10 @@ The rebuild must address these failures at the specification, generation, render
 - Pixel-identical copies of existing commercial applications.
 - A shared component package intended to replace each target platform's native UI system.
 - Backend workflows, authentication servers, payments, push delivery, or production data integrations.
+- Native dependency installation, application builds, simulator/emulator/device launches, ADB or `simctl` orchestration, and native screenshot capture.
+- Standalone native delivery-bundle assembly or claims that generated native code was compiled or executed.
+
+Native execution verification remains a possible later release phase. Existing preflight notes and toolchain discoveries may be retained as historical evidence, but they are optional and must not block the skill, example catalog, website, or first release.
 
 ## 4. Architectural boundary
 
@@ -65,11 +70,11 @@ Private authoring pipeline
 
 Public mobile UI skill
   understand request -> select patterns -> produce canonical spec
-  -> generate platform code -> validate -> emit artifacts
+  -> generate platform source -> statically validate -> emit artifacts
 
 Public showcase website
-  load verified artifacts -> render preview -> expose code tabs
-  -> show metrics and validation evidence -> explain installation
+  load validated artifacts -> render canonical preview -> expose code tabs
+  -> show numeric and static-validation evidence -> explain installation
 ```
 
 The private pipeline may contain provider-specific adapters and original screenshots. The public repository must contain only generalized knowledge, schemas, templates, generated demonstration artifacts, validation tooling, and the website.
@@ -147,7 +152,7 @@ Public guidance may state generalized observations such as recommended ranges, r
 Private analysis and public artifacts use different provenance schemas.
 
 - Private provenance may contain source IDs, local paths, reviewer identities, and raw observation links.
-- Public provenance is allowlist-only and may contain only the public skill commit, schema version, sanitized public reference-set version, request hash, model/runtime identifier, generator/template versions, toolchain lock versions, artifact hashes, and verification results.
+- Public provenance is allowlist-only and may contain only the public skill commit, schema version, sanitized public reference-set version, request hash, model/runtime identifier, generator/template versions, declared target compatibility, artifact hashes, and validation results.
 
 Public compilation must write into a clean staging directory that has no read-through links to private assets. Export is performed by explicit field allowlist, never by removing a denylist of known keys from private records. Publication checks must inspect filenames, text, generated source maps, image metadata, URLs, app-specific strings, embedded assets, and archive contents. Derived numeric guidance requires a minimum aggregate sample threshold defined per metric; values below the threshold remain private or are marked as authored platform guidance. Where feasible, public visuals are checked for raw-hash and perceptual similarity against the private source set to prevent accidental source-image publication.
 
@@ -217,10 +222,10 @@ Selection rules:
 - every supported UI-pattern family appears at least once;
 - patterns ranked in the top 15 by sanitized aggregate observation count and all high-risk patterns receive multiple category variants;
 - each example has a clear user job and realistic state coverage;
-- no example is admitted without four runnable platform implementations;
-- each example is traceable to a skill invocation, canonical spec, validation record, and rendered preview.
+- no example is admitted without complete source for all four code targets;
+- each example is traceable to a skill invocation, canonical spec, static-validation record, and representative preview.
 
-The count is taken from unique approved pair IDs in the manifest. `meaningful` means the pair has a documented user job, is supported by sanitized aggregate knowledge or an approved product rationale, and is accepted by the coverage owner. `frequency_rank` is computed from sanitized aggregate observation counts with a documented tie rule and snapshot version. `high-risk` means identity, finance, health, destructive, legal-consent, or irreversible-action flows. The coverage matrix is machine-readable and reports proposed, approved, generated, build_verified, render_verified, and published states.
+The count is taken from unique approved pair IDs in the manifest. `meaningful` means the pair has a documented user job, is supported by sanitized aggregate knowledge or an approved product rationale, and is accepted by the coverage owner. `frequency_rank` is computed from sanitized aggregate observation counts with a documented tie rule and snapshot version. `high-risk` means identity, finance, health, destructive, legal-consent, or irreversible-action flows. The coverage matrix is machine-readable and reports `proposed`, `approved`, `generated`, `source_validated`, `preview_reviewed`, and `published` states.
 
 State requirements are defined separately in a versioned pattern-to-state matrix. Each pattern/state entry is `required`, `optional`, or `not_applicable`. Every example spec must reference the matrix and include a reason for overrides; acceptance checks apply only to required and explicitly selected optional states.
 
@@ -265,13 +270,13 @@ If the skill packaging format requires references to remain one directory deep, 
 2. search only the relevant reference files;
 3. construct and validate a canonical UI spec;
 4. generate requested platform artifacts from the same spec; default mode generates only requested targets, while `showcase/all-platforms` mode requires all four targets;
-5. render or build outputs when the environment supports it;
+5. render the canonical HTML/CSS preview when the environment supports it and statically validate every requested source target;
 6. revise any output that fails numeric, responsive, accessibility, or visual checks;
 7. return artifacts with concise implementation notes.
 
 Detailed pattern content must live in references, not in a monolithic `SKILL.md`.
 
-The skill must distinguish ordinary user delivery from showcase production. Showcase mode records public provenance, uses locked platform harness versions, forbids incomplete snippets, and cannot report success until all required gates pass. Provenance provides traceability, not a promise of byte-for-byte deterministic model output.
+The skill must distinguish ordinary user delivery from showcase production. Showcase mode records public provenance, uses versioned templates and mapping rules, forbids incomplete snippets, and cannot report success until canonical-spec, source, parity, and preview gates pass. Provenance provides traceability, not a promise of byte-for-byte deterministic model output or native execution.
 
 ### 7.3 Official skill compatibility
 
@@ -321,7 +326,7 @@ platform_mappings:
 quality_requirements:
 ```
 
-Version 1 supports complete local screen interactions using fixture data. Network services, real authentication, real payment execution, push delivery, and production backends are outside the runnable contract. Navigation destinations and action outcomes must resolve either to another included local screen, a local modal/state transition, or an explicitly labelled fixture result.
+Version 1 describes complete local screen interactions using fixture data. Network services, real authentication, real payment execution, push delivery, and production backends are outside the source-generation contract. Navigation destinations and action outcomes must resolve either to another included local screen, a local modal/state transition, or an explicitly labelled fixture result.
 
 ### 8.2 Numeric layout contract
 
@@ -392,9 +397,9 @@ Required guarantees:
 - dynamic type or enlarged text has a documented fallback layout;
 - device safe areas are handled through platform APIs, not hard-coded status-bar guesses.
 
-### 8.6 Named verification profiles
+### 8.6 Named layout profiles
 
-Width alone is not sufficient. Every capture and assertion references a named profile containing platform/OS, viewport width and height, pixel ratio, safe-area insets, orientation, theme, locale, text scale, and keyboard state.
+Width alone is not sufficient. Every preview and static assertion references a named logical layout profile containing viewport width and height, safe-area insets, orientation, theme, locale, text scale, and keyboard inset. These profiles describe the layout contract; they do not claim a specific simulator or device run.
 
 Required baseline profiles:
 
@@ -402,19 +407,19 @@ Required baseline profiles:
 - `standard`: 390x844, portrait, default text scale;
 - `large`: 430x932, portrait, default text scale;
 - `short-keyboard`: 390x667 with keyboard open and realistic bottom inset;
-- `large-text`: 390x844 at the platform's agreed accessibility text scale;
+- `large-text`: 390x844 at the declared accessibility text scale;
 - `dark`: standard geometry with dark theme when the example declares dark-mode support;
 - `long-copy-ko` and `long-copy-en`: standard geometry with stress-copy fixtures.
 
-Every example runs `compact`, `standard`, and `large` in HTML. Applicable form, search, and chat examples also run `short-keyboard`; text-bearing archetypes run `large-text` and the relevant long-copy profile. Native stress profiles are required for every layout archetype and every high-risk example, while every native example still receives a default build, launch, and `standard` capture.
+Every representative example renders `compact`, `standard`, and `large` through the HTML/CSS preview. Applicable form, search, and chat examples also render `short-keyboard`; text-bearing archetypes render `large-text` and the relevant long-copy profile. React Native, Flutter, and SwiftUI sources must map the same profile values to explicit platform constructs, and static validation checks those mappings without launching native applications.
 
-Before the proof set, create and version a machine-readable verification-profile registry. Each platform/profile record must pin the toolchain, OS/simulator or browser, viewport width and height, device pixel ratio, safe-area values, orientation, theme, locale, text scale multiplier, keyboard frame/inset, and capture orientation. Descriptive placeholders such as `realistic`, `agreed`, or `designated` are invalid in the registry. An unresolved required field blocks proof-set verification and batch production.
+Before the proof set, create and version a machine-readable layout-profile registry. Each record pins viewport width and height, safe-area values, orientation, theme, locale, text scale multiplier, and keyboard frame/inset. Descriptive placeholders such as `realistic`, `agreed`, or `designated` are invalid. An unresolved required field blocks source generation and preview production.
 
 ## 9. Platform output contract
 
-Each published example includes a complete screen module for four versioned shared harnesses. A clean checkout contains each harness dependency manifest, locked dependency resolution, assets, fixture data, entry registry, and documented run command. An example is `runnable` only when its module can be selected by ID, built, launched without network or secrets, and exercised with bundled fixture data. Shared harnesses avoid duplicating 80-120 full projects while preserving clean reproducibility.
+Each published example includes complete, implementation-ready screen source for four targets. A clean checkout contains the canonical spec, fixture data, required local assets or fallbacks, versioned generation metadata, and all files displayed in the website code tabs. The first release validates source structure and mapping fidelity; it does not advertise native compilation, installation, launch, or device execution.
 
-Every example also has a per-platform delivery manifest containing the immutable harness version and source hash, module entry path, required fixtures and assets, platform capabilities, exact assembly command, and exact run command. Release tooling assembles a standalone runnable bundle from the verified harness plus the example module. The website code viewer exposes the assembled bundle's complete file tree, and its download contains every file needed to reproduce the verified run. A module without its version-pinned harness and assembly manifest is not advertised as complete runnable code.
+Every example has a source manifest containing the spec hash, template and mapping versions, emitted file paths, required imports/packages, asset dependencies, platform capabilities, static-validation results, and preview hash. The website exposes the exact complete files recorded by this manifest. Downloadable archives are optional convenience artifacts and do not require native bundle assembly or execution.
 
 ### 9.1 HTML/CSS
 
@@ -423,37 +428,34 @@ Every example also has a per-platform delivery manifest containing the immutable
 - Safe-area environment variables with fallbacks.
 - No horizontal scrolling inside the phone viewport.
 - Keyboard and focus behavior for interactive examples.
-- Automated browser screenshots at target widths.
-- Required pass commands: the repository-defined install command, HTML/CSS validation, browser test command, and static production build, all recorded in verification metadata.
+- Representative browser previews at target widths.
+- Required pass commands: HTML/CSS validation, browser layout checks, and the static website build, all recorded in validation metadata.
 
 ### 9.2 React Native
 
-- Current stable React Native or Expo-compatible project baseline chosen at implementation time.
 - `SafeAreaView` or maintained safe-area library policy.
 - `KeyboardAvoidingView`/scroll behavior where forms or composers exist.
 - StyleSheet or agreed token layer generated from canonical values.
-- Locked Expo/React Native harness with an example registry, local fixtures, and explicit iOS and Android run commands.
-- Every example must pass type checking, unit/component tests, an Android build, and the selected iOS simulator build on macOS CI or the release Mac.
-- Every example must launch and produce a `standard` capture on the designated reference native target. Each layout archetype and high-risk example also runs its applicable stress profiles.
+- Complete component, styles, fixture, state, and import source with no placeholder sections.
+- Static checks require balanced syntax, resolvable local file references, declared dependencies, canonical token coverage, required safe-area/keyboard/scroll constructs, and no arbitrary numeric drift.
+- No React Native build, Expo install, simulator launch, Android packaging, or native capture is required in the first release.
 
 ### 9.3 Flutter
 
-- Current stable Flutter baseline chosen at implementation time.
 - `SafeArea`, `MediaQuery`, scroll, and keyboard inset handling.
 - Shared theme/tokens generated from canonical values.
 - No device-specific absolute positioning.
-- Locked Flutter harness with an example registry, local fixtures, and explicit simulator/device run commands.
-- Every example must pass `flutter analyze`, widget tests, the designated Android build, and the selected iOS simulator build on macOS CI or the release Mac.
-- Every example must launch and produce a `standard` capture. Each layout archetype and high-risk example also runs applicable golden/stress profiles.
+- Complete widget, theme, fixture, state, and import source with no placeholder sections.
+- Static checks require balanced syntax, resolvable local file references, declared packages, canonical token coverage, and required responsive/safe-area constructs.
+- No Flutter dependency restore, analysis requiring an SDK, application build, simulator/device launch, or native capture is required in the first release.
 
 ### 9.4 SwiftUI
 
-- Current stable Xcode/iOS deployment baseline chosen at implementation time.
 - Native safe-area and keyboard behavior.
 - Dynamic Type support and semantic colors.
-- Locked Xcode project or generated project definition with an example registry, local fixtures, and explicit simulator run command.
-- Every example must pass the designated `xcodebuild` build and tests against the pinned simulator destination.
-- Every example must launch and produce a `standard` simulator capture. Each layout archetype and high-risk example also runs applicable compact, large-text, keyboard, and long-copy profiles.
+- Complete view, fixture, preview data, state, and import source with no placeholder sections.
+- Static checks require balanced syntax, canonical token coverage, declared availability assumptions, and required safe-area, scrolling, Dynamic Type, and keyboard constructs.
+- No Xcode project generation, `xcodebuild`, simulator launch, app installation, or simulator capture is required in the first release.
 
 ### 9.5 Cross-platform parity
 
@@ -469,9 +471,9 @@ The four outputs must preserve:
 
 They may use platform-native controls and idioms where exact visual identity would reduce usability.
 
-### 9.6 Verification matrix
+### 9.6 Static validation matrix
 
-The release maintains a machine-readable matrix keyed by `example_id x platform x profile x state`. Required cells are generated from the coverage manifest and pattern-to-state matrix. A cell records build status, launch status, source-tree hash, build-artifact hash, capture command, screenshot hash, assertions, reviewer status, and timestamp. The website can display a code tab or preview only when the corresponding source hash matches a passing matrix record.
+The release maintains a machine-readable matrix keyed by `example_id x target x state`, plus HTML preview-profile cells. Source cells record completeness, syntax/static-check status, spec-token coverage, dependency declarations, required platform constructs, source hash, parity assertions, reviewer status, and timestamp. HTML preview cells additionally record profile geometry, layout assertions, preview hash, and visual-review status. The website can display a code tab only when its source hash matches a passing source cell, and can display a preview only when its hash matches a passing HTML preview cell.
 
 ## 10. Generation and verification workflow
 
@@ -480,12 +482,12 @@ The release maintains a machine-readable matrix keyed by `example_id x platform 
 2. Record the skill version, request, selected references, and generated spec.
 3. Validate the canonical spec schema and numeric constraints.
 4. Generate all four platform implementations.
-5. Run formatters, linters, type checks, tests, and builds.
-6. Render target screens at required widths and states.
-7. Run deterministic layout assertions.
-8. Perform screenshot-based visual review.
+5. Run source-format, completeness, dependency, token-coverage, and platform-construct checks.
+6. Render the canonical HTML/CSS representation at required widths and states.
+7. Run deterministic browser layout assertions.
+8. Perform preview-based visual review.
 9. Revise through the skill workflow when a check fails.
-10. Publish only the immutable verified artifact bundle.
+10. Publish only the immutable source-and-preview artifact set.
 ```
 
 Generated demonstration files must include provenance metadata showing that they came from the public skill workflow. The metadata should not expose private source material.
@@ -505,14 +507,16 @@ Generated demonstration files must include provenance metadata showing that they
 
 - All code parses and formats successfully.
 - HTML/CSS passes validation and browser smoke tests.
-- React Native passes its pinned install, type check, tests, Android build, and iOS simulator build commands.
-- Flutter passes its pinned dependency restore, analysis, widget tests, Android build, and iOS simulator build commands.
-- SwiftUI passes its pinned project-generation step when used, `xcodebuild` build, and test commands.
+- React Native passes repository-owned source completeness, dependency declaration, syntax, token-parity, and required-construct checks.
+- Flutter passes repository-owned source completeness, dependency declaration, syntax, token-parity, and required-construct checks.
+- SwiftUI passes repository-owned source completeness, availability declaration, syntax, token-parity, and required-construct checks.
 - No placeholder imports, missing assets, ellipses, or omitted implementation sections.
 
-### 11.3 Rendered layout gate
+These checks prove that the skill emitted coherent implementation-ready source. They do not prove that a native compiler or runtime accepts every target; public copy must state that boundary clearly.
 
-Generate required cells from the verification matrix. HTML renders every example in `compact`, `standard`, and `large`; each native platform launches and captures every example in `standard`; applicable stress profiles run by archetype and risk as defined in Section 8.6. Assert:
+### 11.3 Representative preview gate
+
+Generate required HTML cells from the validation matrix. Representative examples render in `compact`, `standard`, and `large`; applicable stress profiles run by archetype and risk as defined in Section 8.6. Assert:
 
 - no viewport overflow;
 - no unexpected overlap;
@@ -550,21 +554,21 @@ Maintain a prompt evaluation set that includes:
 - keyboard-heavy forms and chat;
 - destructive and high-trust actions.
 
-Score outputs on classification, spec completeness, numeric consistency, build success, visual QA, accessibility, and cross-platform parity.
+Score outputs on classification, spec completeness, numeric consistency, source completeness, static platform mapping, visual QA, accessibility, and cross-platform parity.
 
 ## 12. New website design
 
 ### 12.1 Product principle
 
-The website is an evidence browser, not a long marketing document. The first meaningful viewport should show a real verified mobile UI result.
+The website is an evidence browser, not a long marketing document. The first meaningful viewport should show a real skill-produced mobile UI result.
 
 ### 12.2 Information architecture
 
-1. Output-first hero with a verified screen and concise value statement.
+1. Output-first hero with a reviewed representative screen and concise value statement.
 2. Example explorer.
 3. Example detail view.
 4. Code tabs.
-5. Layout and verification evidence.
+5. Layout and static-validation evidence.
 6. Skill installation and usage.
 7. Methodology and privacy boundary.
 
@@ -578,7 +582,7 @@ Filters:
 - language;
 - light/dark mode when supported;
 - state type;
-- verification status.
+- source-validation and preview-review status.
 
 Search should match user tasks as well as internal pattern names. The URL should preserve filters and selected example.
 
@@ -591,9 +595,9 @@ Each card shows:
 - app category;
 - UI patterns;
 - supported platforms;
-- verified viewport sizes;
+- previewed viewport sizes;
 - state count;
-- last verified skill version.
+- last validated skill version.
 
 ### 12.5 Example detail view
 
@@ -604,10 +608,10 @@ The detail page or panel contains:
 - state switcher where multiple states exist;
 - HTML/CSS, React Native, Flutter, and SwiftUI tabs;
 - complete code with file boundaries;
-- copy button and downloadable example bundle when practical;
+- copy button and downloadable source archive when practical;
 - canonical numeric tokens;
 - safe-area and responsive behavior summary;
-- build and render verification results;
+- source-validation and preview-review results;
 - the original public prompt used to invoke the skill;
 - links to the relevant public skill references.
 
@@ -616,7 +620,7 @@ The detail page or panel contains:
 Installation is visible but secondary to results. It should include:
 
 - supported agent environments;
-- current installation command verified from a clean environment;
+- current skill installation command verified from a clean environment;
 - one minimal example request;
 - expected artifact outputs;
 - link to the GitHub skill directory.
@@ -646,29 +650,27 @@ Website acceptance thresholds for the implementation plan:
 
 ## 13. Artifact model
 
-Each verified example should be stored as a versioned bundle:
+Each published example should be stored as a versioned source-and-preview artifact set:
 
 ```text
 examples/<example-id>/
 ├── request.md
 ├── spec.json
-├── verification.json
-├── delivery-manifest.json
+├── validation.json
+├── source-manifest.json
 ├── previews/
 │   ├── html/compact/default.png
 │   ├── html/standard/default.png
-│   ├── react-native/standard/default.png
-│   ├── flutter/standard/default.png
-│   └── swiftui/standard/default.png
+│   └── html/large/default.png
 ├── html-css/
 ├── react-native/
 ├── flutter/
 └── swiftui/
 ```
 
-`verification.json` records public provenance, toolchain versions, commands, results, profile geometry, renderer/platform/OS, checked states, source-tree hash, build-artifact hash, capture command, screenshot hash, skill version, and content hash.
+`validation.json` records public provenance, repository-owned static checks, checked states, profile geometry, HTML renderer, source hashes, preview hashes, skill version, and content hash. It must not imply that React Native, Flutter, or SwiftUI sources were built or executed.
 
-The website consumes a generated catalog derived from these bundles. It must not maintain a separate hand-authored source of truth for example metadata.
+The website consumes a generated catalog derived from these artifact sets. It must not maintain a separate hand-authored source of truth for example metadata.
 
 ## 14. Repository publication boundary
 
@@ -678,7 +680,7 @@ The website consumes a generated catalog derived from these bundles. It must not
 - generalized references and numeric contracts;
 - schemas and validators;
 - platform templates needed by the skill;
-- verified example bundles;
+- validated example source-and-preview artifacts;
 - generated website;
 - public documentation and license.
 
@@ -710,14 +712,14 @@ Automated repository scanning must fail publication when forbidden source identi
 - Rewrite `SKILL.md` as a concise workflow.
 - Reorganize references by responsibility.
 - Add official metadata and validation.
-- Establish prompt evaluations and a small cross-platform proof set.
+- Establish prompt evaluations and a small four-target source proof set.
 
 ### Phase C: Prove the generation system
 
 - Build 5 representative examples spanning form, feed, map, commerce, and chat archetypes.
-- Generate and run all four platform implementations.
-- Fix schema, templates, and acceptance checks until the proof set passes.
-- Measure repository growth, preview volume, install time, build minutes by platform, macOS runner use, per-example regeneration time, and full-site build time.
+- Generate and statically validate all four target implementations.
+- Render representative HTML previews and fix schema, templates, and acceptance checks until the proof set passes.
+- Measure repository growth, preview volume, per-example generation time, static-validation time, and full-site build time.
 - Set release budgets from the measurements and require an explicit go/no-go decision before expanding beyond the proof set.
 
 ### Phase D: Expand coverage
@@ -730,7 +732,7 @@ Automated repository scanning must fail publication when forbidden source identi
 
 - Remove the existing website implementation after preserving any reusable neutral assets.
 - Build the new artifact-driven explorer.
-- Load only verified bundles.
+- Load only source-validated, preview-reviewed artifacts.
 - Perform responsive, accessibility, performance, and link checks.
 
 ### Phase F: Publish and monitor
@@ -738,15 +740,15 @@ Automated repository scanning must fail publication when forbidden source identi
 - Verify clean skill installation.
 - Deploy GitHub Pages.
 - Confirm public repository sanitization.
-- Record the first release and verification matrix.
+- Record the first release and static-validation matrix.
 - Establish a repeatable update workflow for new observations and examples.
 
 ## 16. Failure handling
 
 - If private analysis confidence is low, require human review or omit the metric from public aggregation.
-- If a platform build cannot run locally, mark the artifact unverified and block publication.
+- Native build availability does not affect the first-release gate; native execution evidence, when present, is optional and separately labelled.
 - If platforms diverge, revise the canonical spec or mapping rules rather than editing website previews independently.
-- If an example fails at one viewport or state, block the entire example bundle.
+- If the canonical HTML preview fails at one required viewport or state, block that example until the shared rule or spec is corrected.
 - If reference sanitization fails, stop publication and remove the exposed material before continuing.
 - If a generated screen repeatedly needs one-off patches, treat it as a missing shared pattern rule or template defect.
 
@@ -757,8 +759,8 @@ The first complete release is successful when:
 - the public skill passes official validation and installs from a clean checkout;
 - 80-120 meaningful examples cover all supported category and pattern families;
 - every published example includes complete HTML/CSS, React Native, Flutter, and SwiftUI code;
-- every code target satisfies the agreed build or execution gate;
-- every published preview is generated from the same verified artifact bundle shown in its code tabs;
+- every code target satisfies the agreed source-completeness, numeric-parity, and static platform-mapping gate;
+- every published preview is generated from the same canonical spec used for its code tabs;
 - required viewports pass overflow, overlap, clipping, safe-area, and fixed-region checks;
 - the website opens with a real skill-produced result and supports category/pattern exploration;
 - users can inspect and copy complete platform code;
@@ -767,16 +769,14 @@ The first complete release is successful when:
 
 ## 18. Design decisions requiring implementation-time confirmation
 
-These decisions should be resolved in the implementation plan using current official documentation and local tool availability:
+These decisions should be resolved in the implementation plan:
 
 - website framework and static export strategy;
-- exact React Native/Expo baseline;
-- exact Flutter and Dart baseline;
-- exact Xcode, Swift, and iOS deployment baseline;
-- snapshot testing tools for each platform;
-- exact shared-harness layout and dependency lockfile policy;
+- source conventions and declared compatibility assumptions for React Native, Flutter, and SwiftUI;
+- browser preview and screenshot tooling for representative HTML/CSS examples;
+- exact template layout and source-manifest policy;
 - storage and lazy-loading budgets for 80-120 examples with four code modules each;
-- CI runner availability for iOS and mobile build verification.
+- whether optional native verification should be added in a later release.
 
 ## 19. Recommended implementation decomposition
 
@@ -785,10 +785,14 @@ This rebuild should be implemented as separate, testable subprojects in this ord
 1. One-way sanitized export and leakage checks.
 2. Canonical schema and numeric validation.
 3. Public skill restructure and official validation.
-4. Four-platform shared harnesses and 5-example proof set.
-5. Rendered visual QA pipeline and cost/size/time benchmark.
+4. Four-target source generators and 5-example proof set.
+5. Representative HTML preview QA and size/time benchmark.
 6. Coverage matrix approval and batch artifact production.
 7. Artifact-driven website rebuild.
 8. Publication, sanitization, and release verification.
 
-Each subproject should have its own implementation plan and acceptance gate. The website should not be rebuilt until the proof-set demonstrates that the new skill can produce stable, runnable results.
+Each subproject should have its own implementation plan and acceptance gate. The website should not be rebuilt until the proof set demonstrates that the new skill produces stable canonical specs, complete four-target source, and high-quality representative previews.
+
+## 20. Deferred optional native verification
+
+Native verification is intentionally deferred from the first release. It may later add dependency restore, platform compiler checks, application builds, simulator/emulator/device launches, accessibility runtime inspection, and native captures for a small compatibility suite. Any prior toolchain inventory or preflight work may be reused in that future phase. Its absence is neither a failure nor a blocker for the approved first-release scope, and the website must not present deferred evidence as completed.

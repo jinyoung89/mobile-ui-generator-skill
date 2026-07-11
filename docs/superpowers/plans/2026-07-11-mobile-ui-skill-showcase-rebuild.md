@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Rebuild the public mobile UI skill and output-first GitHub Pages showcase so 80-120 approved examples produce one numeric specification, complete runnable HTML/CSS, React Native, Flutter, and SwiftUI artifacts, and verified previews.
+**Goal:** Rebuild the public mobile UI skill and output-first GitHub Pages showcase so 80-120 approved examples produce one numeric specification, complete implementation-ready HTML/CSS, React Native, Flutter, and SwiftUI source, and representative reviewed previews.
 
-**Architecture:** A one-way sanitized export creates public aggregate knowledge. A versioned canonical JSON schema drives four shared platform harnesses and per-example generated modules. Verification manifests connect source hashes, build results, named device profiles, captures, and website routes so the site can publish only passing artifacts.
+**Architecture:** A one-way sanitized export creates public aggregate knowledge. A versioned canonical JSON schema drives four source generators and a canonical HTML preview renderer. Source manifests connect spec hashes, static-validation results, representative preview hashes, and website routes so the site publishes only internally consistent artifacts without requiring native builds or device execution.
 
-**Tech Stack:** Node.js 22, TypeScript, JSON Schema/Ajv, Playwright, vanilla static HTML/CSS/JavaScript, Expo/React Native, Flutter/Dart, SwiftUI/Xcode, Python validation compatibility scripts, GitHub Pages.
+**Tech Stack:** Node.js 22, TypeScript, JSON Schema/Ajv, Playwright/Chromium for representative previews, vanilla static HTML/CSS/JavaScript, platform source templates for React Native, Flutter, and SwiftUI, Python validation compatibility scripts, GitHub Pages.
 
 **Specification:** `docs/superpowers/specs/2026-07-11-mobile-ui-skill-showcase-rebuild-design.md`
 
@@ -14,7 +14,7 @@
 
 ## Normative command matrix
 
-The implementation may update pinned versions only through a reviewed toolchain commit. These are the required command shapes and passing evidence:
+These are the required first-release command shapes and passing evidence:
 
 | Target | RED/validation command | GREEN/release command | Passing evidence |
 |---|---|---|---|
@@ -22,48 +22,28 @@ The implementation may update pinned versions only through a reviewed toolchain 
 | TypeScript | `npm run typecheck` | `npm run typecheck` | exit 0, no diagnostics |
 | Public boundary | `npm run validate:boundary -- <fixture>` | `git archive --format=tar HEAD -o /tmp/public.tar && npm run validate:boundary -- --git-archive /tmp/public.tar` | leak fixtures exit 1 with named rule; explicit Git archive mode exits 0 |
 | Official skill | `python3 /Users/jinyoung/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/mobile-ui-generator` | same | `Skill is valid!` and exit 0 |
-| HTML build | `npm --prefix harnesses/html test` | `npm --prefix harnesses/html ci && npm --prefix harnesses/html run build` | exit 0 and `dist/index.html` |
-| HTML browser | `npm run test:browser -- --project=chromium` | same | all required profile/state cases pass |
-| React Native tests | `npm --prefix harnesses/react-native test -- --runInBand` | `npm --prefix harnesses/react-native run typecheck && npm --prefix harnesses/react-native test -- --runInBand` | exit 0 |
-| React Native iOS | `npm --prefix harnesses/react-native run ios:build` | pinned script invoking `xcodebuild` for iPhone 15 / iOS 17.2 | `** BUILD SUCCEEDED **` |
-| React Native Android | `npm --prefix harnesses/react-native run android:build` | pinned Gradle assemble command with API 34 | `BUILD SUCCESSFUL` |
-| Flutter tests | `flutter test harnesses/flutter/test` | `cd harnesses/flutter && flutter pub get && dart format --output=none --set-exit-if-changed . && flutter analyze && flutter test` | exit 0, `No issues found!`, all tests pass |
-| Flutter iOS | `cd harnesses/flutter && flutter build ios --simulator --debug` | same | exit 0 and simulator app exists |
-| Flutter Android | `cd harnesses/flutter && flutter build apk --debug` | same | exit 0 and debug APK exists |
-| SwiftUI | `xcodebuild -project harnesses/swiftui/MobileUIShowcase.xcodeproj -scheme MobileUIShowcase -destination 'platform=iOS Simulator,id=7732B728-22A6-4CCC-A121-C1F2BDC5EC23' test` | same plus build-for-testing | `** TEST SUCCEEDED **` and `** BUILD SUCCEEDED **` |
+| Canonical specs | `npm test -- tooling/test/validate-spec.test.ts` | `npm run validate:specs` | every published spec passes schema and numeric invariants |
+| Four-target source | `npm test -- tooling/test/validate-generated-source.test.ts` | `npm run validate:examples` | complete files, declared dependencies, required platform constructs, token parity, and no placeholders |
+| Representative previews | `npm run previews:proof && npm run test:browser -- --project=chromium` | `npm run previews:all && npm run test:browser -- --project=chromium` | required HTML profile/state cells pass and preview hashes are recorded |
 | Static site | `npm run build:site && npm run test:site` | same with `BASE_PATH=/mobile-ui-generator-skill/` | exit 0, route manifest complete |
 | Clean install | `tmp=/tmp/mobile-ui-clean-checkout && rm -rf "$tmp" && mkdir -p "$tmp" && git archive HEAD \| tar -x -C "$tmp" && mkdir -p "$tmp/codex-home/skills" && cp -R "$tmp/skills/mobile-ui-generator" "$tmp/codex-home/skills/mobile-ui-generator"` | `tmp=/tmp/mobile-ui-clean-checkout && python3 /Users/jinyoung/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$tmp/codex-home/skills/mobile-ui-generator" && python3 "$tmp/codex-home/skills/mobile-ui-generator/scripts/search.py" --pattern chat` | exit 0, official validation succeeds, chat pattern is returned without ignored/local input |
-| Release audit | `npm test -- tooling/test/release-audit.test.ts` | `npm run release:audit` | 100% required evidence cells pass |
+| Release audit | `npm test -- tooling/test/release-audit.test.ts` | `npm run release:audit` | 100% of first-release source, preview, website, skill, and boundary evidence passes |
 
-Native launch/capture commands are also normative:
-
-- Boot iOS: `xcrun simctl boot 7732B728-22A6-4CCC-A121-C1F2BDC5EC23 || true` then `open -a Simulator`; readiness is `xcrun simctl bootstatus 7732B728-22A6-4CCC-A121-C1F2BDC5EC23 -b` exit 0.
-- React Native iOS: install the built `.app` with `xcrun simctl install <udid> <app-path>`, launch `xcrun simctl launch <udid> com.jinyoung.mobileuishowcase --args --example-id <id> --profile standard --state default`, then capture `xcrun simctl io <udid> screenshot <preview-path>`; pass when launch returns a PID and PNG dimensions match the profile.
-- Flutter iOS: install its built `.app`, launch `com.jinyoung.mobileuishowcase.flutter` with the same example/profile/state arguments, and capture with `simctl io`.
-- SwiftUI: install its built `.app`, launch `com.jinyoung.mobileuishowcase.swiftui` with the same arguments, and capture with `simctl io`.
-- Boot Android: `source tooling/scripts/toolchain-env.sh && emulator -avd mobile_ui_api34 -no-snapshot -no-audio -no-boot-anim`, then poll `adb shell getprop sys.boot_completed` until `1`.
-- React Native Android: `adb install -r <apk-path>`, launch `adb shell am start -W -n com.jinyoung.mobileuishowcase/.MainActivity --es exampleId <id> --es profile standard --es state default`, and capture `adb exec-out screencap -p > <preview-path>`; pass when `Status: ok` and PNG dimensions match.
-- Flutter Android: install its APK, launch `com.jinyoung.mobileuishowcase.flutter/.MainActivity` with the same extras, and capture using `adb exec-out screencap -p`.
-- Browser: start `npm --prefix harnesses/html run preview -- --host 127.0.0.1 --port 4173`; Playwright opens `http://127.0.0.1:4173/examples/<id>?profile=<profile>&state=<state>` and writes the declared preview path.
-
-Tasks 9-14 must use these commands through checked-in scripts and record the expanded command, exit code, application identifier, PID/status, and screenshot hash.
+Native dependency restore, build, install, simulator/emulator/device launch, ADB/`simctl`, native screenshot capture, and standalone native bundle execution are explicitly deferred. Existing preflight/toolchain work remains useful optional groundwork, but it is not a release gate and must not be reported as a failed requirement.
 
 Every TDD task must first run its targeted command and record the expected missing-module, missing-field, invalid-fixture, or failed-assertion message. A test that passes before implementation must be rewritten until it proves the missing behavior.
 
 ## Chunk 1: Public boundary, schema, and skill foundation
 
-### Task 0: Freeze, inventory, and verify all toolchains
+### Task 0: Freeze and inventory the public baseline
 
 **Files:**
 - Create: `reports/current-public-inventory.json`
 - Create: `reports/current-public-inventory.md`
-- Create after Task 1 bootstraps tooling: `tooling/toolchains.json`
-- Create after Task 1 bootstraps tooling: `tooling/scripts/toolchain-env.sh`
-- Create after Task 1 bootstraps tooling: `tooling/test/toolchain-preflight.test.ts`
 
 - [ ] Inventory every tracked public file as `keep`, `rewrite`, `archive`, or `delete`; explicitly retain `docs/superpowers/**`, `robots.txt`, and neutral license metadata.
 - [ ] Snapshot current skill/site hashes and current rendered routes in the inventory report.
-- [ ] Run shell-only discovery commands from the normative matrix and record observed paths/versions without changing toolchains.
+- [ ] Preserve any recorded mobile toolchain discovery as historical, optional future-native-verification evidence.
 - [ ] Commit: `docs: freeze current public baseline`.
 
 ### Task 1: Bootstrap deterministic public tooling
@@ -74,9 +54,6 @@ Every TDD task must first run its targeted command and record the expected missi
 - Create: `tsconfig.json`
 - Create: `tooling/src/paths.ts`
 - Create: `tooling/test/paths.test.ts`
-- Create: `tooling/test/toolchain-preflight.test.ts`
-- Create: `tooling/toolchains.json`
-- Create: `tooling/scripts/toolchain-env.sh`
 - Modify: `.gitignore`
 
 - [ ] Create the minimal `package.json`, `tsconfig.json`, test-runner dependency, and `test`/`typecheck` scripts; run `npm install` to create the lockfile. This is tooling configuration, not production behavior.
@@ -85,10 +62,8 @@ Every TDD task must first run its targeted command and record the expected missi
 - [ ] Add the minimal path helpers and remaining package scripts: `validate`, `build:site`, and `verify`.
 - [ ] Pin dependencies and commit `package-lock.json`.
 - [ ] Run `npm test` and `npm run typecheck`; expect pass.
-- [ ] Write a failing preflight test requiring pinned Node, npm, Python, Flutter, Dart, Xcode, Swift, iOS simulator, Android SDK, ADB, emulator, API 34 image, and a loadable Android AVD; expect `mobile_ui_api34 missing`.
-- [ ] Create `toolchain-env.sh` exporting `ANDROID_HOME="$HOME/Library/Android/sdk"` and the SDK PATH; run `source tooling/scripts/toolchain-env.sh && echo no | avdmanager create avd -n mobile_ui_api34 -k 'system-images;android-34;google_apis;arm64-v8a' -d pixel_7`, then boot with `emulator -avd mobile_ui_api34 -no-snapshot -no-audio -no-boot-anim` and wait until `adb shell getprop sys.boot_completed` returns `1`.
-- [ ] Run `npm test -- tooling/test/toolchain-preflight.test.ts`; expect every required cell `ready`. Proof work is blocked until it passes.
-- [ ] Commit: `build: bootstrap tooling and pin mobile toolchains`.
+- [ ] Keep already-created mobile preflight files outside `npm run verify` and document them as optional future-native-verification utilities.
+- [ ] Commit: `build: bootstrap deterministic public tooling`.
 
 ### Task 2: Define the one-way sanitized export contract
 
@@ -145,25 +120,24 @@ Every TDD task must first run its targeted command and record the expected missi
 - [ ] Run `npm test -- tooling/test/validate-spec.test.ts`; expect pass.
 - [ ] Commit: `feat: define canonical mobile UI specification`.
 
-### Task 5: Define coverage, states, and verification profiles
+### Task 5: Define coverage, states, and layout profiles
 
 **Files:**
 - Create: `catalog/coverage-manifest.json`
 - Create: `catalog/pattern-state-matrix.json`
-- Create: `catalog/verification-profiles.json`
+- Create: `catalog/layout-profiles.json`
 - Create: `tooling/schemas/coverage-manifest.schema.json`
 - Create: `tooling/schemas/pattern-state-matrix.schema.json`
-- Create: `tooling/schemas/verification-profiles.schema.json`
+- Create: `tooling/schemas/layout-profiles.schema.json`
 - Create: `tooling/src/validate-catalog.ts`
 - Create: `tooling/test/validate-catalog.test.ts`
 
 - [ ] Write failing tests for duplicate pair IDs, unsupported patterns, missing rationale, absent owner, invalid state applicability, and placeholder profile values.
-- [ ] Require sanitized-knowledge snapshot or approved product-rationale basis, coverage-owner acceptance, frequency snapshot version, deterministic tie rule, and legal state transitions `proposed -> approved -> generated -> build_verified -> render_verified -> published`.
-- [ ] Add concrete web and iOS 17.2 simulator profiles for compact, standard, large, short-keyboard, large-text, and long-copy cases.
-- [ ] Add Android profiles only after an installed emulator target is identified; unresolved required Android fields must fail the release validator.
+- [ ] Require sanitized-knowledge snapshot or approved product-rationale basis, coverage-owner acceptance, frequency snapshot version, deterministic tie rule, and legal state transitions `proposed -> approved -> generated -> source_validated -> preview_reviewed -> published`.
+- [ ] Add concrete logical profiles for compact, standard, large, short-keyboard, large-text, and long-copy cases; profile values describe the cross-platform contract and HTML preview geometry, not a simulator target.
 - [ ] Seed five proof pairs covering form, commerce, map, feed, and chat archetypes.
 - [ ] Implement catalog validation and run tests.
-- [ ] Commit: `feat: add coverage and verification registries`.
+- [ ] Commit: `feat: add coverage and layout registries`.
 
 ### Task 6: Rebuild the public skill package
 
@@ -212,13 +186,13 @@ Every TDD task must first run its targeted command and record the expected missi
 - Create: `reports/skill-evaluation.md`
 
 - [ ] Write a failing evaluator test for familiar screens, rare categories, ambiguous requests, multi-pattern flows, long Korean/English copy, compact widths, keyboard-heavy chat/forms, and destructive/high-trust actions.
-- [ ] Score classification, spec completeness, numeric consistency, required states, accessibility, platform mapping, build readiness, and visible acceptance requirements.
+- [ ] Score classification, spec completeness, numeric consistency, required states, accessibility, static platform mapping, source completeness, and visible acceptance requirements.
 - [ ] Run `npm test -- tooling/test/evaluate-skill.test.ts`; expect missing evaluator failure.
 - [ ] Implement the evaluator and a versioned prompt corpus with expected invariant ranges rather than copied screen answers.
 - [ ] Run `npm run evaluate:skill`; require every blocking dimension to meet its declared threshold before the proof set.
 - [ ] Commit: `test: add mobile UI skill effectiveness evaluation`.
 
-## Chunk 2: Four-platform proof harness and rendering checks
+## Chunk 2: Four-target source generation and representative preview checks
 
 ### Task 7: Build the platform-neutral compiler
 
@@ -235,103 +209,75 @@ Every TDD task must first run its targeted command and record the expected missi
 - [ ] Run targeted tests and snapshot the normalized output.
 - [ ] Commit: `feat: compile canonical UI specs`.
 
-### Task 8: Create the HTML/CSS harness
+### Task 8: Create the canonical HTML/CSS preview renderer
 
 **Files:**
-- Create: `harnesses/html/package.json`
-- Create: `harnesses/html/package-lock.json`
-- Create: `harnesses/html/src/runtime.ts`
-- Create: `harnesses/html/src/styles.css`
-- Create: `harnesses/html/src/examples.ts`
-- Create: `harnesses/html/test/runtime.test.ts`
+- Create: `tooling/src/preview-html.ts`
+- Create: `tooling/test/preview-html.test.ts`
 - Create: `tooling/src/generators/html.ts`
 
 - [ ] Write a failing compiler test for semantic markup, CSS tokens, safe-area variables, fixed-region clearance, and responsive formulas.
-- [ ] Implement generated HTML/CSS modules and a local fixture runtime.
+- [ ] Implement generated HTML/CSS modules and a deterministic local preview renderer.
 - [ ] Add keyboard/focus behavior for applicable patterns.
-- [ ] Build and serve the checkout proof example.
+- [ ] Render and serve the checkout proof example.
 - [ ] Run browser assertions at compact, standard, and large profiles.
-- [ ] Commit: `feat: add runnable HTML CSS harness`.
+- [ ] Commit: `feat: add canonical HTML CSS preview renderer`.
 
-### Task 9: Create the React Native harness
+### Task 9: Create the React Native source generator
 
 **Files:**
-- Create: `harnesses/react-native/package.json`
-- Create: `harnesses/react-native/package-lock.json`
-- Create: `harnesses/react-native/app.json`
-- Create: `harnesses/react-native/App.tsx`
-- Create: `harnesses/react-native/src/registry.ts`
-- Create: `harnesses/react-native/src/runtime/`
-- Create: `harnesses/react-native/test/runtime.test.tsx`
 - Create: `tooling/src/generators/react-native.ts`
+- Create: `tooling/test/generate-react-native.test.ts`
 
-- [ ] Pin a current Expo/React Native baseline compatible with Node 22 and the installed Xcode after checking official documentation.
-- [ ] Write failing generator and component tests for safe area, keyboard avoidance, scroll ownership, dynamic type, and fixture actions.
-- [ ] Implement the shared runtime and generated example module.
-- [ ] Run typecheck and component tests.
-- [ ] Build and launch the checkout example on the pinned iOS simulator.
-- [ ] Capture the standard profile and record hashes.
-- [ ] Build, install, launch, and capture on `mobile_ui_api34`; any Android failure blocks proof-set completion.
-- [ ] Commit: `feat: add runnable React Native harness`.
+- [ ] Declare the intended React Native/Expo source compatibility assumptions without installing a native toolchain.
+- [ ] Write failing generator tests for complete imports, safe area, keyboard avoidance, scroll ownership, dynamic type, fixture actions, canonical token coverage, and forbidden placeholders.
+- [ ] Implement the complete generated example source and static source validator.
+- [ ] Run TypeScript tests and cross-target numeric parity checks; do not build or launch a native app.
+- [ ] Commit: `feat: generate complete React Native source`.
 
-### Task 10: Create the Flutter harness
+### Task 10: Create the Flutter source generator
 
 **Files:**
-- Create: `harnesses/flutter/pubspec.yaml`
-- Create: `harnesses/flutter/pubspec.lock`
-- Create: `harnesses/flutter/lib/main.dart`
-- Create: `harnesses/flutter/lib/registry.dart`
-- Create: `harnesses/flutter/lib/runtime/`
-- Create: `harnesses/flutter/test/runtime_test.dart`
 - Create: `tooling/src/generators/flutter.ts`
+- Create: `tooling/test/generate-flutter.test.ts`
 
-- [ ] Pin the installed stable Flutter/Dart baseline and record it in the delivery manifest.
-- [ ] Write failing generator and widget tests for SafeArea, MediaQuery, keyboard insets, scrolling, themes, and text scaling.
-- [ ] Implement the runtime and generated checkout module.
-- [ ] Run formatter, analysis, and widget tests.
-- [ ] Build and launch on the pinned iOS simulator, then capture the standard profile.
-- [ ] Build, install, launch, and capture on `mobile_ui_api34`; any Android failure blocks proof-set completion.
-- [ ] Commit: `feat: add runnable Flutter harness`.
+- [ ] Declare the intended Flutter/Dart source compatibility assumptions without installing or invoking the SDK.
+- [ ] Write failing generator tests for complete imports, `SafeArea`, `MediaQuery`, keyboard insets, scrolling, themes, text scaling, canonical token coverage, and forbidden placeholders.
+- [ ] Implement the complete generated widget and fixture source plus static source validator.
+- [ ] Run repository-owned tests and cross-target numeric parity checks; do not restore packages, build, or launch a native app.
+- [ ] Commit: `feat: generate complete Flutter source`.
 
-### Task 11: Create the SwiftUI harness
+### Task 11: Create the SwiftUI source generator
 
 **Files:**
-- Create: `harnesses/swiftui/project.yml`
-- Create: `harnesses/swiftui/MobileUIShowcase.xcodeproj/project.pbxproj`
-- Create when dependencies exist: `harnesses/swiftui/MobileUIShowcase.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`
-- Create: `harnesses/swiftui/Sources/App.swift`
-- Create: `harnesses/swiftui/Sources/Registry.swift`
-- Create: `harnesses/swiftui/Sources/Runtime/`
-- Create: `harnesses/swiftui/Tests/RuntimeTests.swift`
 - Create: `tooling/src/generators/swiftui.ts`
+- Create: `tooling/test/generate-swiftui.test.ts`
 
-- [ ] Pin Xcode 15.2, Swift 5.9.2, iOS 17.2, and a concrete iPhone 15 simulator profile for the proof set.
-- [ ] Write failing generator and XCTest cases for safe area, Dynamic Type, scrolling, focus, keyboard, semantic colors, and local actions.
-- [ ] Implement the runtime and generated checkout module.
-- [ ] Generate/open the project, run `xcodebuild` build and tests, and launch the example.
-- [ ] Capture the standard profile and record hashes.
-- [ ] Commit: `feat: add runnable SwiftUI harness`.
+- [ ] Declare SwiftUI/iOS availability assumptions in generated source comments and metadata without generating an Xcode project.
+- [ ] Write failing generator tests for complete imports, safe area, Dynamic Type, scrolling, focus, keyboard, semantic colors, local actions, canonical token coverage, and forbidden placeholders.
+- [ ] Implement the complete generated view and fixture source plus static source validator.
+- [ ] Run repository-owned tests and cross-target numeric parity checks; do not invoke Xcode or a simulator.
+- [ ] Commit: `feat: generate complete SwiftUI source`.
 
-### Task 12: Assemble standalone delivery bundles
+### Task 12: Create source manifests and optional source archives
 
 **Files:**
-- Create: `tooling/src/assemble-bundle.ts`
-- Create: `tooling/schemas/delivery-manifest.schema.json`
-- Create: `tooling/test/assemble-bundle.test.ts`
-- Create: `examples/proof/commerce-checkout/delivery-manifest.json`
+- Create: `tooling/src/create-source-manifest.ts`
+- Create: `tooling/schemas/source-manifest.schema.json`
+- Create: `tooling/test/create-source-manifest.test.ts`
+- Create: `examples/proof/commerce-checkout/source-manifest.json`
 
-- [ ] Write a failing test proving a bundle contains the immutable harness hash, module, fixtures, assets, lock data, assembly command, and run command.
-- [ ] Implement per-platform standalone assembly without network or secrets after dependency installation.
-- [ ] Rebuild each proof bundle in a clean temporary directory.
-- [ ] Execute the recorded run/test command from each assembled bundle.
-- [ ] Commit: `feat: assemble standalone example bundles`.
+- [ ] Write a failing test proving the manifest contains the canonical spec hash, generator/template versions, every emitted source file, fixtures, assets/fallbacks, declared dependencies, compatibility assumptions, and static-validation hashes.
+- [ ] Implement deterministic source-manifest generation and optional source-only archive creation.
+- [ ] Recreate each proof artifact set in a clean temporary directory and compare source hashes.
+- [ ] Do not assemble or execute native application bundles.
+- [ ] Commit: `feat: create example source manifests`.
 
-### Task 13: Add rendered verification and provenance
+### Task 13: Add source validation, representative preview review, and provenance
 
 **Files:**
 - Create: `tooling/src/verify-example.ts`
 - Create: `tooling/src/capture-browser.ts`
-- Create: `tooling/src/capture-simulator.ts`
 - Create: `tooling/schemas/verification.schema.json`
 - Create: `tooling/test/verify-example.test.ts`
 - Create: `examples/proof/commerce-checkout/verification.json`
@@ -339,14 +285,14 @@ Every TDD task must first run its targeted command and record the expected missi
 - Create: `reports/visual-review/<batch-id>.json`
 - Create: `tooling/schemas/visual-review.schema.json`
 
-- [ ] Write failing tests for missing matrix cells, hash mismatch, overflow, overlap, clipping, shared-edge tolerance, undersized touch targets, unintended max-line truncation, unsafe fixed regions, illegible required states, and incomplete public provenance.
-- [ ] Implement profile-driven build, launch, assertion, and capture orchestration.
-- [ ] Namespace screenshots by platform/profile/state.
+- [ ] Write failing tests for missing source/HTML-preview cells, hash mismatch, incomplete source, token drift, overflow, overlap, clipping, shared-edge tolerance, undersized touch targets, unintended max-line truncation, unsafe fixed regions, illegible required states, and incomplete public provenance.
+- [ ] Implement four-target static source checks plus profile-driven HTML assertion and preview capture orchestration.
+- [ ] Namespace representative previews by HTML profile/state.
 - [ ] Generate contact sheets and a reviewer matrix covering hierarchy, density, typography rhythm, alignment, realistic content, platform appropriateness, wrapping, whitespace, misleading states, and accidental source resemblance.
 - [ ] Block release when any required reviewer cell is missing or not approved.
-- [ ] Record source-tree, build-artifact, command, and screenshot hashes.
-- [ ] Run the full checkout matrix on all pinned web, iOS, and Android targets; no required cell may remain incomplete.
-- [ ] Commit: `feat: verify rendered mobile artifacts`.
+- [ ] Record spec, source-tree, validation-command, and HTML preview hashes.
+- [ ] Run the full checkout source matrix and required HTML profile/state previews; no required cell may remain incomplete.
+- [ ] Commit: `feat: validate mobile source and previews`.
 
 ## Chunk 3: Proof set, scale benchmark, and approved coverage
 
@@ -366,9 +312,9 @@ Every proof directory must contain this authoritative tree:
 request.md
 spec.json
 public-provenance.json
-delivery-manifest.json
-verification.json
-previews/<platform>/<profile>/<state>.png
+source-manifest.json
+validation.json
+previews/html/<profile>/<state>.png
 html-css/index.html
 html-css/styles.css
 html-css/app.js
@@ -380,12 +326,12 @@ swiftui/Screen.swift
 swiftui/Fixtures.swift
 ```
 
-Harness lock policy: `harnesses/html/package-lock.json`, `harnesses/react-native/package-lock.json`, `harnesses/flutter/pubspec.lock`, and the committed Swift/Xcode project generation input plus resolved package state when dependencies exist. Every delivery manifest pins these hashes and lists generated registry/module paths.
+Source-manifest policy: every manifest pins the canonical spec, generator/template versions, emitted file hashes, declared external packages, assets/fallbacks, compatibility assumptions, and static-validation results. It must not claim native compilation or execution.
 
-- [ ] Write failing coverage tests for five archetypes, required states, both languages, high-risk handling, and four platform delivery manifests.
+- [ ] Write failing coverage tests for five archetypes, required states, both languages, high-risk handling, and four target source manifests.
 - [ ] Invoke the rebuilt public skill in showcase mode for each versioned request.
 - [ ] Validate and revise each canonical spec before compiling code.
-- [ ] Generate, build, launch, capture, and review all required matrix cells.
+- [ ] Generate and statically validate all four source targets; render and review all required HTML preview cells.
 - [ ] Store only passing public artifacts; leave incomplete examples unpublished.
 - [ ] Commit each example separately with its verification record.
 
@@ -397,10 +343,10 @@ Harness lock policy: `harnesses/html/package-lock.json`, `harnesses/react-native
 - Create: `reports/proof-set-benchmark.md`
 - Create: `tooling/test/benchmark-proof-set.test.ts`
 
-- [ ] Write a failing test for required metrics: repository growth, preview volume, dependency install time, build minutes per platform, macOS usage, per-example regeneration time, and site build time.
+- [ ] Write a failing test for required metrics: repository growth, preview volume, per-example generation time, static-validation time, preview time, and site build time.
 - [ ] Measure the five-example proof set on the release Mac.
 - [ ] Set explicit release budgets and projections for 80, 100, and 120 examples.
-- [ ] Record a go/no-go result. If no-go, improve shared harness/storage architecture before continuing; do not reduce the 80-example minimum.
+- [ ] Record a go/no-go result. If no-go, improve generator/preview storage architecture before continuing; do not reduce the 80-example minimum.
 - [ ] Commit: `docs: record proof set scale benchmark`.
 
 ### Task 16: Approve the 80-120 pair coverage matrix
@@ -423,16 +369,16 @@ Harness lock policy: `harnesses/html/package-lock.json`, `harnesses/react-native
 - Create: `tooling/src/verify-approved-examples.ts`
 - Create: `tooling/src/artifact-paths.ts`
 - Create: `tooling/test/artifact-paths.test.ts`
-- Generate for every approved ID from `catalog/coverage-manifest.json`: `examples/generated/{approved-id}/request.md`, `spec.json`, `public-provenance.json`, `delivery-manifest.json`, `verification.json`, the exact nine platform module files from Task 14, and `previews/{platform}/{profile}/{state}.png`
+- Generate for every approved ID from `catalog/coverage-manifest.json`: `examples/generated/{approved-id}/request.md`, `spec.json`, `public-provenance.json`, `source-manifest.json`, `validation.json`, the exact nine target source files from Task 14, and `previews/html/{profile}/{state}.png`
 - Create: `reports/coverage-verification.json`
 
-Each generated directory uses the same authoritative bundle tree and lock/hash linkage defined in Task 14; a directory placeholder is not an accepted artifact.
+Each generated directory uses the same authoritative artifact tree and source-manifest/hash linkage defined in Task 14; a directory placeholder is not an accepted artifact.
 
 - [ ] Write a failing resumability test so interrupted batches never overwrite passing artifacts.
 - [ ] Generate specs in showcase mode from the public skill.
-- [ ] Validate, compile, build, launch, capture, and review in archetype batches.
+- [ ] Validate, compile, statically check all four target sources, and render/review representative HTML previews in archetype batches.
 - [ ] Fix shared skill/reference/template defects when failures repeat; do not patch website previews independently.
-- [ ] Require all approved matrix cells before setting an example to `published`.
+- [ ] Require all source-validation cells and applicable HTML preview-review cells before setting an example to `published`.
 - [ ] Commit verified batches by archetype.
 
 ## Chunk 4: Artifact-driven website and release
@@ -455,9 +401,9 @@ Each generated directory uses the same authoritative bundle tree and lock/hash l
 - Create: `site/test/catalog.test.ts`
 - Create: `tooling/src/build-site.ts`
 
-- [ ] Write failing tests proving the site catalog is derived only from passing verification records.
+- [ ] Write failing tests proving the site catalog is derived only from passing source-validation and preview-review records.
 - [ ] Implement static routes for hero, explorer, and every verified example.
-- [ ] Make the first meaningful viewport show a real verified result.
+- [ ] Make the first meaningful viewport show a real skill-produced, reviewed representative result.
 - [ ] Build the static site to `docs/` for GitHub Pages.
 - [ ] Add methodology and privacy-boundary content without exposing private acquisition details.
 - [ ] Commit: `feat: rebuild output-first showcase shell`.
@@ -476,12 +422,12 @@ Each generated directory uses the same authoritative bundle tree and lock/hash l
 - [ ] Write failing fixtures for category, pattern, language, state, platform, theme, and verification filters.
 - [ ] Implement URL-preserving filters and search by user job.
 - [ ] Implement platform/profile/state preview selectors.
-- [ ] Test every example card field: rendered screen, user job, category, patterns, platforms, verified sizes, state count, and skill version.
-- [ ] Test every detail evidence field: numeric tokens, safe-area/responsive summary, original public request, build/capture results, and relevant public skill links.
-- [ ] Implement complete assembled file-tree tabs for HTML/CSS, React Native, Flutter, and SwiftUI.
-- [ ] Add complete file-by-file copy controls. Enable verified bundle downloads only when the proof benchmark confirms repository and Pages budgets; otherwise explain that the visible version-pinned file tree is the reproduction surface.
+- [ ] Test every example card field: rendered screen, user job, category, patterns, source targets, previewed sizes, state count, and skill version.
+- [ ] Test every detail evidence field: numeric tokens, safe-area/responsive summary, original public request, static-validation/preview results, and relevant public skill links.
+- [ ] Implement complete source-file tabs for HTML/CSS, React Native, Flutter, and SwiftUI.
+- [ ] Add complete file-by-file copy controls. Enable source-archive downloads only when the proof benchmark confirms repository and Pages budgets; otherwise keep the visible versioned files as the copy surface.
 - [ ] Run unit and browser tests.
-- [ ] Commit: `feat: add showcase explorer and runnable code tabs`.
+- [ ] Commit: `feat: add showcase explorer and complete code tabs`.
 
 ### Task 20: Add website accessibility, performance, and link verification
 
@@ -508,7 +454,7 @@ Each generated directory uses the same authoritative bundle tree and lock/hash l
 - Modify: `docs/sitemap.xml`
 
 - [ ] Add a failing link/install smoke test for every documented command and path.
-- [ ] Lead with verified outputs, coverage, code targets, and actual validation status.
+- [ ] Lead with skill-produced outputs, coverage, code targets, and the actual static-validation/native-execution boundary.
 - [ ] Keep installation secondary but concise and reproducible.
 - [ ] Remove claims not proven by verification manifests.
 - [ ] Run link, boundary, and install tests.
@@ -524,19 +470,19 @@ Each generated directory uses the same authoritative bundle tree and lock/hash l
 - Create: `tooling/test/release-audit.test.ts`
 - Create after local implementation evidence is green and explicit publication authority is confirmed: `.github/workflows/pages.yml`
 
-- [ ] Write a failing release-audit test covering every design success criterion and every required verification matrix cell.
+- [ ] Write a failing release-audit test covering every design success criterion and every required static source/HTML preview matrix cell.
 - [ ] Run `npm test -- tooling/test/release-audit.test.ts`; expect missing audit implementation failure.
 - [ ] Derive every requirement from the approved design and map it to authoritative evidence.
 - [ ] Verify official skill validation and clean-checkout installation.
 - [ ] Verify the public boundary from a Git archive, not only the working tree.
-- [ ] Verify 80-120 approved examples and enumerate HTML, React Native iOS, React Native Android, Flutter iOS, Flutter Android, and SwiftUI required build/test cells plus required platform/profile/state captures.
-- [ ] Verify code-tab and preview source hashes, reviewer approvals, coverage state transitions, and public provenance.
-- [ ] Verify website route/filter/code/bundle/accessibility/performance/link checks.
+- [ ] Verify 80-120 approved examples and enumerate complete HTML/CSS, React Native, Flutter, and SwiftUI source cells plus required HTML profile/state preview cells.
+- [ ] Verify code-tab/source-manifest and preview/spec hashes, reviewer approvals, coverage state transitions, and public provenance.
+- [ ] Verify website route/filter/code/source-archive/accessibility/performance/link checks.
 - [ ] Verify GitHub Pages output locally under the repository base path.
 - [ ] Run the full local suite and obtain explicit publication authority before adding deployment configuration.
 - [ ] Add the Pages workflow, stage the complete release tree, and commit: `release: verify rebuilt mobile UI skill showcase`.
-- [ ] Run `npm run verify`, Python compatibility validators, every platform test/build/capture command, and `npm run release:audit` against that exact committed `HEAD`.
-- [ ] Inspect `git archive HEAD`, every downloadable archive, and the committed Pages output with boundary and similarity checks; require the audit report to name the audited commit hash.
+- [ ] Run `npm run verify`, Python compatibility validators, four-target static source checks, HTML preview checks, and `npm run release:audit` against that exact committed `HEAD`.
+- [ ] Inspect `git archive HEAD`, every downloadable source archive, and the committed Pages output with boundary and similarity checks; require the audit report to name the audited commit hash.
 - [ ] Push only the audited commit, deploy Pages from it, and verify live repository base-path routes and asset hashes match the audited output.
 
 ---
