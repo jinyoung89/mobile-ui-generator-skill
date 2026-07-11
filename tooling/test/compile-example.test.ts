@@ -6,6 +6,7 @@ import { compileExample, stableStringify } from "../src/compile-example.js";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const fixturePath = path.join(root, "examples/proof/commerce-checkout/spec.json");
+const snapshotPath = path.join(root, "examples/proof/commerce-checkout/compiled-ir.json");
 
 function fixture(): Record<string, unknown> {
   return JSON.parse(readFileSync(fixturePath, "utf8")) as Record<string, unknown>;
@@ -14,6 +15,7 @@ function fixture(): Record<string, unknown> {
 test("compiles the canonical checkout spec into a deterministic normalized IR", () => {
   const first = compileExample(fixture());
   const second = compileExample(JSON.parse(JSON.stringify(fixture())) as Record<string, unknown>);
+  const snapshot = JSON.parse(readFileSync(snapshotPath, "utf8")) as Record<string, unknown>;
 
   assert.equal(first.schema_version, 1);
   assert.equal(first.example_id, "commerce-checkout-address");
@@ -34,6 +36,7 @@ test("compiles the canonical checkout spec into a deterministic normalized IR", 
   }]);
   assert.deepEqual(first.parity.warnings, []);
   assert.equal(stableStringify(first), stableStringify(second));
+  assert.equal(stableStringify(first), stableStringify(snapshot), "normalized IR snapshot drifted; regenerate it with npm run compile:example");
 });
 
 test("resolves bounded formulas at the reference viewport while retaining their constraints", () => {
