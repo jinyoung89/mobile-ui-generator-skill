@@ -20,7 +20,7 @@ The implementation may update pinned versions only through a reviewed toolchain 
 |---|---|---|---|
 | Node unit test | `npm test -- <test-file>` | `npm test` | exit 0, zero failed tests |
 | TypeScript | `npm run typecheck` | `npm run typecheck` | exit 0, no diagnostics |
-| Public boundary | `npm run validate:boundary -- <fixture>` | `npm run validate:boundary -- $(git archive --format=tar HEAD -o /tmp/public.tar && echo /tmp/public.tar)` | leak fixtures exit 1 with named rule; archive exits 0 |
+| Public boundary | `npm run validate:boundary -- <fixture>` | `git archive --format=tar HEAD -o /tmp/public.tar && npm run validate:boundary -- --git-archive /tmp/public.tar` | leak fixtures exit 1 with named rule; explicit Git archive mode exits 0 |
 | Official skill | `python3 /Users/jinyoung/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/mobile-ui-generator` | same | `Skill is valid!` and exit 0 |
 | HTML build | `npm --prefix harnesses/html test` | `npm --prefix harnesses/html ci && npm --prefix harnesses/html run build` | exit 0 and `dist/index.html` |
 | HTML browser | `npm run test:browser -- --project=chromium` | same | all required profile/state cases pass |
