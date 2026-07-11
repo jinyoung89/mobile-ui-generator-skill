@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "export:public-knowledge": "tsx tooling/src/export-public-knowledge.ts",
     "validate:spec": "tsx tooling/src/validate-spec.ts",
+    "validate:catalog": "tsx tooling/src/validate-catalog.ts",
     "validate:boundary": "tsx tooling/src/check-public-boundary.ts",
     "validate:images": "tsx tooling/src/check-image-similarity.ts",
     "validate:baseline": "python3 scripts/validate_patterns.py && python3 scripts/validate_site.py && npm test && npm run typecheck",
