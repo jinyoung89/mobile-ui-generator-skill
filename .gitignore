@@ -33,3 +33,5 @@ venv/
 # Build artifacts
 /dist/
 /build/
+**/.dart_tool/
+**/build/

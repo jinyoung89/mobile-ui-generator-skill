@@ -58,7 +58,7 @@ const forbiddenCopy = [
 ];
 const textExtensions = new Set([
   ".css", ".csv", ".html", ".js", ".json", ".jsx", ".md", ".mjs", ".py",
-  ".sh", ".svg", ".tpl", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml",
+  ".sh", ".svg", ".tpl", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml", ".dart",
 ]);
 const imageExtensions = new Set([".png", ".jpg", ".jpeg"]);
 const archiveExtensions = [".tar.gz", ".tgz", ".zip", ".tar"];
