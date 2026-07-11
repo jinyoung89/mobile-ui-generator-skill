@@ -25,14 +25,19 @@ ROOT = Path(__file__).resolve().parents[1]
 REFERENCE_DIR = ROOT / "references"
 
 AREA_FILES = {
+    "routing": ["request-routing.md"],
+    "foundations": ["layout-foundations.md"],
+    "responsive": ["responsive-and-safe-area.md"],
+    "accessibility": ["accessibility.md"],
+    "acceptance": ["acceptance-checks.md"],
+    "taxonomy": ["taxonomy.md", "taxonomy-filter-model.md"],
+    "patterns": ["pattern-catalog.md", "mobile-pattern-library.md"],
+    "domains": ["domain-guides.md", "domain-playbooks.md"],
     "evidence": ["evidence-and-sanitization.md"],
-    "taxonomy": ["taxonomy-filter-model.md"],
     "analysis": ["pattern-analysis-insights.md"],
     "principles": ["design-principles.md"],
     "composition": ["visual-composition-contract.md"],
-    "patterns": ["mobile-pattern-library.md"],
     "styles": ["visual-style-taxonomy.md"],
-    "domains": ["domain-playbooks.md"],
     "components": ["component-state-checklist.md"],
     "quality": ["quality-review-checklist.md"],
 }
@@ -118,12 +123,12 @@ def area_for_file(filename: str) -> str:
 
 def iter_reference_files(area: str) -> list[Path]:
     if area == "all":
-        files = [name for names in AREA_FILES.values() for name in names]
+        files = list(dict.fromkeys(name for names in AREA_FILES.values() for name in names))
     else:
         files = AREA_FILES.get(area)
         if files is None:
             raise SystemExit(f"Unknown area {area!r}. Use --list-areas.")
-    return [REFERENCE_DIR / name for name in files]
+    return list(dict.fromkeys(REFERENCE_DIR / name for name in files))
 
 
 def parse_sections(path: Path) -> list[Section]:

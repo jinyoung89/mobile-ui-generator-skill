@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile UI Generator"
+  short_description: "Generate verified numeric mobile UI artifacts"
+  default_prompt: "Use $mobile-ui-generator to build a responsive mobile screen from one canonical spec."
