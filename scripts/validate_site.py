@@ -32,7 +32,7 @@ BLOCKED_PUBLIC_COPY = [
     "56" + ",665",
     "349" + " apps",
     "0" + ".95",
-    "indexed",
+    "index" + "ed",
     "수집" + "처",
     "데이터" + "셋",
     "레퍼런스" + " 품질",
@@ -191,6 +191,19 @@ def validate_skill_outputs(data: dict) -> None:
 
 
 def main() -> None:
+    if len(sys.argv) == 3 and sys.argv[1] == "--compat-fixture":
+        fixture = Path(sys.argv[2])
+        try:
+            fixture_text = read(fixture)
+        except (OSError, UnicodeError) as exc:
+            fail(f"unable to read compatibility fixture: {exc}")
+        if PRIVATE_RE.search(fixture_text):
+            fail(f"public-copy leak {fixture}")
+        print("compatibility fixture passed")
+        return
+    if len(sys.argv) != 1:
+        fail("usage: validate_site.py [--compat-fixture PATH]")
+
     subprocess.run(["node", "--check", str(DOCS / "app.js")], check=True)
     subprocess.run(["node", "--check", str(DOCS / "site-data.js")], check=True)
 
