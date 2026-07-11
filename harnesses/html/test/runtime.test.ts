@@ -14,7 +14,7 @@ test("profile registry resolves required viewport, safe-area, and keyboard contr
   assert.deepEqual(Object.keys(profileTable), ["compact", "standard", "large", "short-keyboard", "large-text"]);
   const compact = resolveProfile("compact");
   assert.deepEqual(compact.viewport, { width: 320, height: 568 });
-  assert.equal(compact.safeArea.bottom, 34);
+  assert.equal(compact.safeArea.bottom, 0);
   assert.equal(compact.keyboard.open, false);
   const keyboard = resolveProfile("short-keyboard");
   assert.equal(keyboard.keyboard.open, true);

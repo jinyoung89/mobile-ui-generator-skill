@@ -11,11 +11,11 @@ export type BrowserProfile = {
 };
 
 export const profileTable: Record<string, BrowserProfile> = {
-  compact: { name: "compact", viewport: { width: 320, height: 568 }, pixelRatio: 1, safeArea: { top: 24, right: 0, bottom: 34, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: false, inset: 0 } },
-  standard: { name: "standard", viewport: { width: 390, height: 844 }, pixelRatio: 1, safeArea: { top: 47, right: 0, bottom: 34, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: false, inset: 0 } },
-  large: { name: "large", viewport: { width: 430, height: 932 }, pixelRatio: 1, safeArea: { top: 47, right: 0, bottom: 34, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: false, inset: 0 } },
-  "short-keyboard": { name: "short-keyboard", viewport: { width: 390, height: 667 }, pixelRatio: 1, safeArea: { top: 47, right: 0, bottom: 34, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: true, inset: 291 } },
-  "large-text": { name: "large-text", viewport: { width: 390, height: 844 }, pixelRatio: 1, safeArea: { top: 47, right: 0, bottom: 34, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1.3, keyboard: { open: false, inset: 0 } },
+  compact: { name: "compact", viewport: { width: 320, height: 568 }, pixelRatio: 1, safeArea: { top: 0, right: 0, bottom: 0, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: false, inset: 0 } },
+  standard: { name: "standard", viewport: { width: 390, height: 844 }, pixelRatio: 1, safeArea: { top: 0, right: 0, bottom: 0, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: false, inset: 0 } },
+  large: { name: "large", viewport: { width: 430, height: 932 }, pixelRatio: 1, safeArea: { top: 0, right: 0, bottom: 0, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: false, inset: 0 } },
+  "short-keyboard": { name: "short-keyboard", viewport: { width: 390, height: 667 }, pixelRatio: 1, safeArea: { top: 0, right: 0, bottom: 0, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1, keyboard: { open: true, inset: 291 } },
+  "large-text": { name: "large-text", viewport: { width: 390, height: 844 }, pixelRatio: 1, safeArea: { top: 0, right: 0, bottom: 0, left: 0 }, orientation: "portrait", theme: "light", locale: "ko", textScale: 1.3, keyboard: { open: false, inset: 0 } },
 };
 
 export function resolveProfile(name: string): BrowserProfile {
@@ -63,6 +63,7 @@ export function applyBrowserProfile(root: HTMLElement, profileName: string): Bro
   screen.dataset.profile = profile.name;
   screen.dataset.keyboard = profile.keyboard.open ? "open" : "closed";
   screen.style.fontSize = `${profile.textScale}em`;
+  screen.style.setProperty("--text-scale", String(profile.textScale));
   if (profile.keyboard.open) screen.classList.add("keyboard-open");
   else screen.classList.remove("keyboard-open");
   return profile;

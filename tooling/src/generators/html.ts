@@ -147,11 +147,17 @@ export function generateHtmlArtifact(compiled: CompiledExample): HtmlArtifact {
     .replaceAll("font-size: 12px", "font-size: var(--micro-gap)")
     .replaceAll("margin: 0 0 6px", "margin: 0 0 var(--micro-gap)")
     .replaceAll("min-height: 20px", "min-height: var(--label-line)")
+    .replaceAll("font-size: var(--title-size)", "font-size: calc(var(--title-size) * var(--text-scale))")
+    .replaceAll("line-height: var(--title-line)", "line-height: calc(var(--title-line) * var(--text-scale))")
+    .replaceAll("font-size: var(--body-size)", "font-size: calc(var(--body-size) * var(--text-scale))")
+    .replaceAll("line-height: var(--body-line)", "line-height: calc(var(--body-line) * var(--text-scale))")
+    .replaceAll("font-size: var(--label-size)", "font-size: calc(var(--label-size) * var(--text-scale))")
+    .replaceAll("line-height: var(--label-line)", "line-height: calc(var(--label-line) * var(--text-scale))")
     .replaceAll("margin: 8px 0 0", "margin: var(--micro-gap) 0 0")
     .replaceAll("gap: 6px", "gap: var(--field-gap)")
     .replaceAll("padding: 0 12px", "padding: 0 var(--control-padding)")
     .replaceAll("padding: 0 16px", "padding: 0 var(--card-padding)");
-  const css = `:root { --safe-top: env(safe-area-inset-top, ${safeTop}px); --safe-bottom: env(safe-area-inset-bottom, ${safeBottom}px); --screen-inset: ${screenInset}px; --component-gap: ${componentGap}px; --section-gap: ${sectionGap}px; --card-padding: ${cardPadding}px; --control-height: ${controlHeight}px; --corner-radius: ${radius}px; --sticky-region-height: ${sticky}px; --scroll-content-bottom-inset: ${bottomInset}px; --micro-gap: ${microGap}px; --field-gap: ${fieldGap}px; --control-padding: ${controlPadding}px; --title-size: ${titleSize}px; --title-line: ${titleLine}px; --title-letter-spacing: ${titleLetter}px; --body-size: ${bodySize}px; --body-line: ${bodyLine}px; --label-size: ${labelSize}px; --label-line: ${labelLine}px; --readable-line-width: ${numberMeasure(layout.max_readable_line_width, 360)}px; --color-text: ${color(compiled, "text", "#111827")}; --color-surface: ${color(compiled, "surface", "#ffffff")}; --color-primary: ${color(compiled, "primary", "#2563eb")}; --color-danger: ${color(compiled, "danger", "#dc2626")}; }\n${derivedBase}`;
+  const css = `:root { --safe-top: env(safe-area-inset-top, ${safeTop}px); --safe-bottom: env(safe-area-inset-bottom, ${safeBottom}px); --text-scale: 1; --screen-inset: ${screenInset}px; --component-gap: ${componentGap}px; --section-gap: ${sectionGap}px; --card-padding: ${cardPadding}px; --control-height: ${controlHeight}px; --corner-radius: ${radius}px; --sticky-region-height: ${sticky}px; --scroll-content-bottom-inset: ${bottomInset}px; --micro-gap: ${microGap}px; --field-gap: ${fieldGap}px; --control-padding: ${controlPadding}px; --title-size: ${titleSize}px; --title-line: ${titleLine}px; --title-letter-spacing: ${titleLetter}px; --body-size: ${bodySize}px; --body-line: ${bodyLine}px; --label-size: ${labelSize}px; --label-line: ${labelLine}px; --readable-line-width: ${numberMeasure(layout.max_readable_line_width, 360)}px; --color-text: ${color(compiled, "text", "#111827")}; --color-surface: ${color(compiled, "surface", "#ffffff")}; --color-primary: ${color(compiled, "primary", "#2563eb")}; --color-danger: ${color(compiled, "danger", "#dc2626")}; }\n${derivedBase}`;
   const js = `window.__MOBILE_UI_EXAMPLE__ = ${safeJson({ exampleId: compiled.example_id, fixtures: compiled.fixtures, defaultState: "default" })};`;
   const manifest: HtmlArtifactManifest = {
     manifest_version: "1.0.0",
