@@ -11,7 +11,7 @@ Extract these fields before choosing colors or code:
 | `ui_patterns` | Functional units that compose the screen, usually 2–5 |
 | `risk_level` | `low`, `medium`, or `high`; trust and confirmation increase with risk |
 | `states` | Default plus applicable loading, empty, error, success, disabled, permission, and recovery states |
-| `targets` | Requested platform(s); default is requested-only, showcase is all four |
+| `targets` | Design-only or implementation; implementation and showcase deliver all four targets |
 | `language` | User language for narrative and visible copy |
 
 Do not confuse a service category with a UI pattern. `commerce` is a category;
@@ -23,8 +23,9 @@ Do not confuse a service category with a UI pattern. `commerce` is a category;
 
 - **Design brief:** return classification, pattern anatomy, visual composition,
   state matrix, copy, and a spec-ready handoff.
-- **Target artifact:** produce one canonical spec and only the requested platform
-  source unless the user asks for comparison.
+- **Implementation artifact:** produce one canonical spec and complete HTML/CSS,
+  React Native, Flutter, and SwiftUI source. A requested platform may receive
+  extra integration notes, but the four-target source bundle remains complete.
 - **`showcase/all-platforms`:** produce HTML/CSS, React Native, Flutter, and
   SwiftUI from the same spec, with complete local fixtures, provenance, and all
   acceptance gates passing.
@@ -36,5 +37,5 @@ Do not confuse a service category with a UI pattern. `commerce` is a category;
 If a request names a screen but not a category, infer only from the user job and
 state the assumption in metadata. If it names a category but no pattern, choose
 the smallest pattern set that completes the job and expose the choice. If the
-platform is omitted, use the user's existing stack when known; otherwise return a
-platform-neutral spec and ask for a target before writing native code.
+platform is omitted, produce the canonical spec and four-target source bundle;
+use the user's existing stack only to prioritize integration notes.

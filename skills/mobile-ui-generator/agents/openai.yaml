@@ -1,4 +1,4 @@
 interface:
   display_name: "Mobile UI Generator"
-  short_description: "Generate verified numeric mobile UI artifacts"
-  default_prompt: "Use $mobile-ui-generator to build a responsive mobile screen from one canonical spec."
+  short_description: "Generate numeric four-target mobile UI artifacts"
+  default_prompt: "Use $mobile-ui-generator to build a responsive mobile screen from one canonical spec with complete HTML/CSS, React Native, Flutter, and SwiftUI source."

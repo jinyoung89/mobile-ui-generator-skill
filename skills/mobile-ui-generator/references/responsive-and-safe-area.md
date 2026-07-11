@@ -28,5 +28,8 @@ safe area and its height must be added to scroll content bottom clearance.
 
 For each high-risk or layout-archetype example run compact, standard, large,
 short-keyboard, large-text, and long-copy profiles that the coverage manifest
-requires. Record logical viewport, pixel ratio, physical capture size, safe-area
-values, state, and screenshot hash.
+requires. For first-release verification, record the logical viewport, safe-area
+values, state, HTML responsive preview result, and preview hash. If optional
+native capture is explicitly requested later, record pixel ratio, physical
+capture size, simulator/emulator or device identity, and native screenshot hash
+as separate downstream evidence; do not substitute it for the HTML preview gate.

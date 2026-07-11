@@ -3,7 +3,7 @@ name: mobile-ui-generator
 description: Use when a mobile screen or flow needs pattern-aware UI design, a numeric implementation spec, or complete HTML/CSS, React Native, Flutter, or SwiftUI output that must survive responsive, accessibility, and rendered-quality checks.
 license: MIT
 metadata:
-  short-description: Generate verified, numeric mobile UI artifacts
+  short-description: Generate numeric, four-target mobile UI artifacts
 ---
 
 # Mobile UI Generator
@@ -42,25 +42,33 @@ unless the user explicitly asks to inspect them.
    The spec is the source of truth for HTML/CSS, React Native, Flutter, and
    SwiftUI. Network services, real authentication, payment execution, push, and
    production backends are outside the runnable contract.
-4. **Generate only requested targets by default.** Substitute values into the
-   target templates. Use `showcase/all-platforms` only when a public example or
-   comparison is requested; that mode requires all four complete targets and a
-   provenance manifest. Use [accessibility.md](references/accessibility.md) while
-   mapping native controls.
-5. **Verify the artifact.** Run the relevant formatter, type/build/test command,
-   then the render checks in [acceptance-checks.md](references/acceptance-checks.md).
-   A complete source bundle must include safe-area behavior, local fixture states,
-   keyboard or scroll handling where relevant, and no unresolved placeholders.
-   Validate the bundle with:
+4. **Generate complete four-target source.** An implementation or
+   `showcase/all-platforms` delivery must include complete HTML/CSS, React Native, Flutter, and SwiftUI
+   source derived from the same spec. Include fixture modules and every file
+   required to review or integrate each target; never replace omitted code with
+   comments or placeholders. A design-only brief may stop at the canonical spec.
+   Use [accessibility.md](references/accessibility.md) while mapping controls.
+5. **Run the first-release verification.** Apply source/static checks to all four
+   targets, then render the HTML/CSS target at compact, standard, and large widths.
+   Review both the responsive preview and every source file using
+   [acceptance-checks.md](references/acceptance-checks.md). A passing bundle must
+   include safe-area behavior, required local fixture states, keyboard or scroll
+   handling where relevant, and no unresolved placeholders. Validate each target
+   manifest with:
 
    ```bash
    python3 scripts/validate_artifact.py artifact.json --spec path/to/spec.json
    ```
 
-6. **Revise from failures.** Fix the canonical spec, mapping, or shared template
+6. **Treat native execution as optional downstream integration.** Native builds,
+   dependency installation, simulator/emulator or device runs, and native capture
+   happen only when the user explicitly requests them and the toolchain is
+   available. Report that evidence separately. Do not block or claim it as part
+   of first-release verification.
+7. **Revise from failures.** Fix the canonical spec, mapping, or shared template
    when a check fails. Do not hand-edit a single preview to hide a clipping,
-   overflow, contrast, state, or parity failure. Re-run spec, artifact, build,
-   and rendered checks after every revision.
+   overflow, contrast, state, or parity failure. Re-run spec, source/static, and
+   HTML rendered checks after every revision.
 
 ## Search and output
 
@@ -87,7 +95,7 @@ and checks run.
 - [layout-foundations.md](references/layout-foundations.md) — numeric grid, tokens, and typography.
 - [responsive-and-safe-area.md](references/responsive-and-safe-area.md) — width, inset, scroll, and keyboard rules.
 - [accessibility.md](references/accessibility.md) — contrast, semantics, target size, and Dynamic Type.
-- [acceptance-checks.md](references/acceptance-checks.md) — source, build, render, and showcase gates.
+- [acceptance-checks.md](references/acceptance-checks.md) — source/static, HTML preview, code-review, and showcase gates.
 
 The earlier public references remain available for deeper pattern examples and
 quality checklists: `design-principles.md`, `visual-composition-contract.md`,
