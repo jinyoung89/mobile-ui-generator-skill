@@ -375,6 +375,7 @@ function checkInteractions(value: unknown, errors: string[], componentIds: Set<s
 
 function checkNavigation(value: unknown, errors: string[], componentIds: Set<string>, fixtures: Set<string>, states: Set<string>): void {
   const actions = array(value, "navigation_and_actions", errors);
+  if (actions && actions.length === 0) errors.push("navigation_and_actions: must be non-empty");
   actions?.forEach((action, index) => {
     const field = `navigation_and_actions[${index}]`;
     const row = object(action, field, errors);

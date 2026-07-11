@@ -211,6 +211,8 @@ test("enforces array uniqueness, ID references, and fixture/profile shapes", () 
     ["invalid quality profiles", (value) => { (value.quality_requirements as Record<string, unknown>).responsive_profiles = [320, 320]; }, /responsive_profiles.*unique|duplicate/i],
     ["short language tag", (value) => { (value.request as Record<string, unknown>).language = "k"; }, /request\.language.*2|length/i],
     ["empty content fixtures", (value) => { (value.content as Record<string, unknown>).fixtures = []; }, /content\.fixtures.*non-empty/i],
+    ["empty navigation actions", (value) => { value.navigation_and_actions = []; }, /navigation_and_actions.*non-empty/i],
+    ["fixed measure bounds", (value) => { (value.layout as Record<string, unknown>).screen_horizontal_inset = { value: 16, unit: "px", min: 8 }; }, /screen_horizontal_inset.*fixed|bounds|min|max/i],
   ];
   for (const [name, mutate, expected] of cases) {
     const value = fixture();

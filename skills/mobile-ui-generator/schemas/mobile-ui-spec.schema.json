@@ -38,9 +38,9 @@
       "type": "object", "additionalProperties": false, "minProperties": 1, "maxProperties": 4,
       "properties": {"value": {}, "unit": {}, "token": {}, "formula": {}, "min": {}, "max": {}},
       "oneOf": [
-        {"required": ["value", "unit"], "properties": {"value": {"type": "number"}, "unit": {"enum": ["px", "pt", "dp", "sp", "ratio"]}}},
-        {"required": ["token"], "properties": {"token": {"type": "string", "minLength": 1}}},
-        {"required": ["formula", "unit", "min", "max"], "properties": {"formula": {"type": "string", "minLength": 1}, "unit": {"enum": ["px", "pt", "dp", "sp", "ratio"]}, "min": {"type": "number"}, "max": {"type": "number"}}}
+        {"additionalProperties": false, "required": ["value", "unit"], "properties": {"value": {"type": "number"}, "unit": {"enum": ["px", "pt", "dp", "sp", "ratio"]}}},
+        {"additionalProperties": false, "required": ["token"], "properties": {"token": {"type": "string", "minLength": 1}}},
+        {"additionalProperties": false, "required": ["formula", "unit", "min", "max"], "properties": {"formula": {"type": "string", "minLength": 1}, "unit": {"enum": ["px", "pt", "dp", "sp", "ratio"]}, "min": {"type": "number"}, "max": {"type": "number"}}}
       ]
     },
     "request": {"type": "object", "additionalProperties": false, "required": ["language", "user_job"], "properties": {"language": {"type": "string", "minLength": 2}, "user_job": {"type": "string", "minLength": 1}}},
