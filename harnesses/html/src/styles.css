@@ -1,0 +1,7 @@
+/* Shared token contract is emitted by tooling/src/generators/html.ts. */
+html, body { overflow-x: hidden; }
+.mobile-screen { min-width: 0; max-width: 430px; margin: 0 auto; }
+.mobile-scroll { min-width: 0; padding-bottom: calc(var(--sticky-region-height, 84px) + var(--scroll-content-bottom-inset, 100px) + var(--safe-bottom, 0px)); }
+.mobile-sticky { padding-bottom: max(12px, var(--safe-bottom, 0px)); }
+.ui-button, input { min-height: var(--control-height, 44px); }
+.keyboard-open .mobile-scroll { scroll-padding-bottom: calc(var(--profile-keyboard-inset, 0px) + var(--safe-bottom, 0px)); }

@@ -1,0 +1,33 @@
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --corner-radius: 12px; --sticky-region-height: 84px; --scroll-content-bottom-inset: 100px; --color-text: #111827; --color-surface: #FFFFFF; --color-primary: #2563EB; --color-danger: #DC2626; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-width: 320px; background: #e5e7eb; color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body { overflow-x: hidden; }
+.mobile-screen { position: relative; min-height: 100dvh; max-width: 430px; margin: 0 auto; overflow-x: hidden; background: var(--color-surface); }
+.safe-area-top { height: var(--safe-top); }
+.mobile-scroll { min-height: 100dvh; padding-top: 0; padding-right: var(--screen-inset); padding-bottom: calc(var(--sticky-region-height) + var(--scroll-content-bottom-inset) + var(--safe-bottom)); padding-left: var(--screen-inset); overflow-x: hidden; }
+.screen-header { padding: var(--section-gap) 0; }
+.eyebrow, .fixture-label { margin: 0 0 6px; color: color-mix(in srgb, var(--color-text) 65%, transparent); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 24px; line-height: 32px; letter-spacing: -.2px; }
+.screen-description { max-width: 360px; margin: 8px 0 0; font-size: 16px; line-height: 24px; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.ui-field { display: grid; gap: 6px; min-width: 0; }
+.ui-field label { font-size: 14px; line-height: 20px; font-weight: 600; }
+.ui-field input { width: 100%; min-height: var(--control-height); border: 1px solid #9ca3af; border-radius: var(--corner-radius); padding: 0 12px; color: var(--color-text); background: var(--color-surface); font: inherit; font-size: 16px; line-height: 24px; }
+.ui-field input:focus { outline: 3px solid color-mix(in srgb, var(--color-primary) 30%, transparent); outline-offset: 2px; border-color: var(--color-primary); }
+.ui-hint { min-height: 20px; color: var(--color-danger); font-size: 12px; }
+.fixture-card { display: flex; min-height: var(--control-height); align-items: center; padding: var(--card-padding); border-radius: var(--corner-radius); background: #f3f4f6; }
+.fixture-card strong { display: block; margin-top: 2px; font-size: 16px; line-height: 24px; }
+.mobile-sticky { position: fixed; z-index: 2; right: 0; bottom: 0; left: 0; min-height: var(--sticky-region-height); padding: 12px var(--screen-inset) max(12px, var(--safe-bottom)); background: color-mix(in srgb, var(--color-surface) 94%, transparent); border-top: 1px solid #e5e7eb; backdrop-filter: blur(12px); }
+.sticky-inner { width: min(100%, 430px); margin: 0 auto; }
+.ui-button { position: relative; display: inline-flex; width: 100%; min-height: var(--control-height); align-items: center; justify-content: center; border: 0; border-radius: var(--corner-radius); padding: 0 16px; font: inherit; font-size: 16px; line-height: 24px; font-weight: 700; cursor: pointer; }
+.ui-button-primary { color: #fff; background: var(--color-primary); }
+.ui-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 45%, transparent); outline-offset: 2px; }
+.mobile-screen[data-state="loading"] .ui-button, .mobile-screen[data-state="success"] .ui-button { pointer-events: none; }
+.mobile-screen[data-state="loading"] .ui-button-spinner { display: block; width: 18px; height: 18px; margin-left: 8px; border: 2px solid rgb(255 255 255 / .45); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+.mobile-screen[data-state="success"] .ui-button { background: #15803d; }
+.live-region { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 12px 36px rgb(15 23 42 / .18); } }
+@media (max-width: 374px) { .screen-header { padding-block: 12px; } h1 { font-size: 22px; line-height: 28px; } }
+@media (min-width: 410px) { .screen-description { max-width: 390px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
