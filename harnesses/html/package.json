@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --import tsx --test test/runtime.test.ts",
+    "test:browser": "node scripts/browser-smoke.mjs",
     "build": "node --import tsx src/build.ts",
     "preview": "node src/preview.mjs"
   },

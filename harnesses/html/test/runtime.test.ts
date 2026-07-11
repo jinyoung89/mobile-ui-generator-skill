@@ -59,3 +59,15 @@ test("browser profile type remains structurally complete", () => {
   assert.equal(profile.locale, "ko");
   assert.equal(profile.textScale, 1);
 });
+
+test("generated CSS changes when canonical numeric tokens change", () => {
+  const changed = JSON.parse(JSON.stringify(spec)) as Record<string, unknown>;
+  const layout = changed.layout as Record<string, unknown>;
+  const tokens = layout.tokens as Record<string, unknown>;
+  tokens.space_4 = { value: 20, unit: "px" };
+  const generated = generateHtmlArtifact(compileExample(changed));
+  const baseline = generateHtmlArtifact(compileExample(spec));
+  assert.notEqual(generated.css, baseline.css);
+  assert.match(generated.css, /--screen-inset: 20px/);
+  assert.match(generated.css, /--card-padding: 20px/);
+});

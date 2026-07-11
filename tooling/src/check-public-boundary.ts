@@ -347,7 +347,7 @@ export function scanPublicTree(root: string, options: ScanOptions = {}): Finding
 
 const publicRoots = new Set([
   ".gitignore", "LICENSE", "README.ko.md", "README.md", "catalog", "docs", "evaluations", "examples", "package-lock.json",
-  "package.json", "public-knowledge", "reports", "scripts", "skills", "tooling", "tsconfig.json",
+  "package.json", "public-knowledge", "reports", "scripts", "skills", "tooling", "harnesses", "tsconfig.json",
 ]);
 
 function repositoryFixturePath(name: string): boolean {

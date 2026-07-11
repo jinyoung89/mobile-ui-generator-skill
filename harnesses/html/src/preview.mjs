@@ -16,4 +16,4 @@ const server = createServer((request, response) => {
   response.writeHead(200, { "content-type": mime[path.extname(file)] ?? "application/octet-stream" });
   createReadStream(file).pipe(response);
 });
-server.listen(port, host, () => process.stdout.write(`HTML harness preview at http://${host}:${port}\n`));
+server.listen(port, host, () => process.stdout.write(`HTML harness preview ready ${host}:${port}\n`));
