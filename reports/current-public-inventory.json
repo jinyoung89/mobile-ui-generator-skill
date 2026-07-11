@@ -66,7 +66,9 @@
   "verification": {
     "inventory_source":"git ls-tree -r --name-only 717ad41902522963e29ea3161cae8694d77cae79",
     "set_equality_command":"diff -u <(git ls-tree -r --name-only 717ad41902522963e29ea3161cae8694d77cae79 | sort) <(jq -r '.files[].path' reports/current-public-inventory.json | sort)",
-    "set_equality":"verified: exit 0; 45 unique baseline paths, zero missing, zero extra, action counts match summary",
+    "set_equality":"verified: exit 0; 45 unique baseline paths, zero missing, zero extra",
+    "action_count_command":"jq -e '([.files[].action] | group_by(.) | map({key:.[0],value:length}) | from_entries) == {archive:5,delete:9,keep:7,rewrite:24} and (.summary == {tracked:45,keep:7,rewrite:24,archive:5,delete:9})' reports/current-public-inventory.json",
+    "action_counts":"verified: exit 0; computed action counts match summary",
     "private_inputs_read":false
   }
 }

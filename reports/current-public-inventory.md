@@ -23,4 +23,4 @@ Node 22.15.0, npm 10.9.2, Python 3.14.3, Flutter 3.35.3 stable, Dart 3.9.2, Xcod
 
 ## Verification
 
-Set equality is verified with `diff -u <(git ls-tree -r --name-only 717ad41902522963e29ea3161cae8694d77cae79 | sort) <(jq -r '.files[].path' reports/current-public-inventory.json | sort)`. The observed result is exit 0, zero missing paths, zero extra paths, 45 unique entries, and summary counts equal to the action totals. The baseline tree object is `4ee73bacb471c78c02400f26c8890851bc1ccbd8`. Existing pattern and site validators must remain green after this report is added.
+Set equality is verified with `diff -u <(git ls-tree -r --name-only 717ad41902522963e29ea3161cae8694d77cae79 | sort) <(jq -r '.files[].path' reports/current-public-inventory.json | sort)`. The observed result is exit 0, zero missing paths, zero extra paths, and 45 unique entries. Action totals are verified separately with the `verification.action_count_command` stored in the JSON; it exits 0 only when computed counts match the summary. The baseline tree object is `4ee73bacb471c78c02400f26c8890851bc1ccbd8`. Existing pattern and site validators must remain green after this report is added.
