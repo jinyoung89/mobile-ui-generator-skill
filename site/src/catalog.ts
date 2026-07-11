@@ -2,15 +2,12 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
 import type { CompiledExample } from "../../tooling/src/compile-example.js";
-import { generateFlutterArtifact } from "../../tooling/src/generators/flutter.js";
-import { generateHtmlArtifact } from "../../tooling/src/generators/html.js";
-import { generateReactNativeArtifact } from "../../tooling/src/generators/react-native.js";
-import { generateSwiftUIArtifact } from "../../tooling/src/generators/swiftui.js";
 
 export type SourceFile = { name: string; content: string };
 export type SourcePlatform = "html_css" | "react_native" | "flutter" | "swiftui";
 export type SiteExample = {
   id: string;
+  proofId: string;
   route: string;
   title: string;
   userJob: string;
@@ -25,6 +22,7 @@ export type SiteExample = {
 };
 
 const readJson = <T>(file: string): T => JSON.parse(readFileSync(file, "utf8")) as T;
+const readSource = (directory: string, name: string): SourceFile => ({ name, content: readFileSync(path.join(directory, name), "utf8") });
 const text = (value: unknown, fallback: string): string => typeof value === "string" && value.trim() ? value : fallback;
 
 function measure(value: unknown): string | null {
@@ -54,10 +52,10 @@ export function loadProofCatalog(proofRoot: string): SiteExample[] {
     .filter(existsSync)
     .map((file) => {
       const compiled = readJson<CompiledExample>(file);
-      const html = generateHtmlArtifact(compiled);
-      const reactNative = generateReactNativeArtifact(compiled);
-      const flutter = generateFlutterArtifact(compiled);
-      const swiftui = generateSwiftUIArtifact(compiled);
+      const proofDirectory = path.dirname(file);
+      const proofId = path.basename(proofDirectory);
+      const htmlDirectory = path.join(proofDirectory, "html-css");
+      const htmlSources = ["index.html", "styles.css", "app.js"].map((name) => readSource(htmlDirectory, name));
       const copy = compiled.content.copy as Record<string, unknown>;
       const classification = compiled.classification as Record<string, unknown>;
       const request = compiled.request as Record<string, unknown>;
@@ -65,6 +63,7 @@ export function loadProofCatalog(proofRoot: string): SiteExample[] {
       const widths = Array.isArray(compiled.viewport.profiles) ? compiled.viewport.profiles.filter((item): item is number => typeof item === "number") : [320, 390, 430];
       return {
         id: compiled.example_id,
+        proofId,
         route: `examples/${compiled.example_id}/`,
         title: text(copy.title, compiled.example_id.replaceAll("-", " ")),
         userJob: text(request.user_job, "Complete this mobile task"),
@@ -74,16 +73,12 @@ export function loadProofCatalog(proofRoot: string): SiteExample[] {
         states: stateNames(compiled),
         widths,
         tokens: numericTokens(compiled),
-        preview: { html: html.html, css: html.css, js: html.js },
+        preview: { html: htmlSources[0].content, css: htmlSources[1].content, js: htmlSources[2].content },
         sources: {
-          html_css: [
-            { name: "index.html", content: `<!doctype html>\n<html lang="${text(compiled.content.language, "en")}">\n<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="styles.css"></head>\n<body>\n${html.html}\n<script src="app.js"></script>\n</body>\n</html>\n` },
-            { name: "styles.css", content: html.css },
-            { name: "app.js", content: html.js },
-          ],
-          react_native: [{ name: `${compiled.example_id}.tsx`, content: reactNative.source }],
-          flutter: [{ name: `${compiled.example_id}.dart`, content: flutter.source }],
-          swiftui: [{ name: `${compiled.example_id}.swift`, content: swiftui.source }],
+          html_css: htmlSources,
+          react_native: ["Screen.tsx", "fixtures.ts"].map((name) => readSource(path.join(proofDirectory, "react-native"), name)),
+          flutter: ["screen.dart", "fixtures.dart"].map((name) => readSource(path.join(proofDirectory, "flutter"), name)),
+          swiftui: ["Screen.swift", "Fixtures.swift"].map((name) => readSource(path.join(proofDirectory, "swiftui"), name)),
         },
       };
     })

@@ -1,76 +1,1151 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Generated mobile UI examples with complete cross-platform source."><title>Mobile UI Generator — output first</title><link rel="stylesheet" href="./assets/site.css"></head>
 <body><header class="topbar"><a class="brand" href="./">M/UI</a><nav aria-label="Primary"><a href="#examples">Examples</a><a href="#install">Install</a><a href="https://github.com/jinyoung89/mobile-ui-generator-skill">GitHub</a></nav></header>
-<main><section class="hero"><div class="hero-copy"><p class="kicker">One numeric spec · four production targets</p><h1>Ask for a mobile screen.<br><em>Get the screen and the source.</em></h1><p class="lede">Responsive, safe-area-aware mobile UI generated from one canonical contract, with complete HTML/CSS, React Native, Flutter, and SwiftUI files.</p><a class="button" href="#examples">Explore generated outputs</a><p class="proof-note"><strong>1 proof examples</strong> · 320 / 390 / 430 widths · static source validation</p></div><div class="device-shell"><iframe class="device-preview" title="주문 결제 generated mobile UI preview" loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;style&gt;:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --text-scale: 1; --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --corner-radius: 12px; --sticky-region-height: 84px; --scroll-content-bottom-inset: 100px; --micro-gap: 4px; --field-gap: 4px; --control-padding: 12px; --title-size: 24px; --title-line: 32px; --title-letter-spacing: -0.2px; --body-size: 16px; --body-line: 24px; --label-size: 14px; --label-line: 20px; --readable-line-width: 360px; --color-text: #111827; --color-surface: #FFFFFF; --color-primary: #2563EB; --color-danger: #DC2626; }
+<main><section class="hero"><div class="hero-copy"><p class="kicker">One numeric spec · four production targets</p><h1>Ask for a mobile screen.<br><em>Get the screen and the source.</em></h1><p class="lede">Responsive, safe-area-aware mobile UI generated from one canonical contract, with complete HTML/CSS, React Native, Flutter, and SwiftUI files.</p><a class="button" href="#examples">Explore generated outputs</a><p class="proof-note"><strong>5 proof examples</strong> · 320 / 390 / 430 widths · static source validation</p></div><div class="device-shell"><iframe class="device-preview" title="주문을 확인해 주세요 generated mobile UI preview" loading="eager" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title&gt;주문을 확인해 주세요&lt;/title&gt;
+  &lt;style&gt;/* canonical commerce-checkout-address: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #2563EB; --danger: #B42318; }
 * { box-sizing: border-box; }
-html, body { margin: 0; min-width: 320px; background: #e5e7eb; color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
 body { overflow-x: hidden; }
-.mobile-screen { position: relative; min-height: 100dvh; max-width: 430px; margin: 0 auto; overflow-x: hidden; background: var(--color-surface); }
-.safe-area-top { height: var(--safe-top); }
-.mobile-scroll { min-height: 100dvh; padding-top: 0; padding-right: var(--screen-inset); padding-bottom: calc(var(--sticky-region-height) + var(--scroll-content-bottom-inset) + var(--safe-bottom)); padding-left: var(--screen-inset); overflow-x: hidden; }
-.screen-header { padding: var(--section-gap) 0; }
-.eyebrow, .fixture-label { margin: 0 0 var(--micro-gap); color: color-mix(in srgb, var(--color-text) 65%, transparent); font-size: var(--micro-gap); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-h1 { margin: 0; font-size: calc(var(--title-size) * var(--text-scale)); line-height: calc(var(--title-line) * var(--text-scale)); letter-spacing: var(--title-letter-spacing); }
-.screen-description { max-width: 360px; margin: var(--micro-gap) 0 0; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
 .screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
-.ui-field { display: grid; gap: var(--field-gap); min-width: 0; }
-.ui-field label { font-size: calc(var(--label-size) * var(--text-scale)); line-height: calc(var(--label-line) * var(--text-scale)); font-weight: 600; }
-.ui-field input { width: 100%; min-height: var(--control-height); border: 1px solid #9ca3af; border-radius: var(--corner-radius); padding: 0 var(--control-padding); color: var(--color-text); background: var(--color-surface); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
-.ui-field input:focus { outline: 3px solid color-mix(in srgb, var(--color-primary) 30%, transparent); outline-offset: 2px; border-color: var(--color-primary); }
-.ui-hint { min-height: var(--label-line); color: var(--color-danger); font-size: var(--micro-gap); }
-.fixture-card { display: flex; min-height: var(--control-height); align-items: center; padding: var(--card-padding); border-radius: var(--corner-radius); background: #f3f4f6; }
-.fixture-card strong { display: block; margin-top: 2px; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
-.mobile-sticky { position: fixed; z-index: 2; right: 0; bottom: 0; left: 0; min-height: var(--sticky-region-height); padding: 12px var(--screen-inset) max(12px, var(--safe-bottom)); background: color-mix(in srgb, var(--color-surface) 94%, transparent); border-top: 1px solid #e5e7eb; backdrop-filter: blur(12px); }
-.sticky-inner { width: min(100%, 430px); margin: 0 auto; }
-.ui-button { position: relative; display: inline-flex; width: 100%; min-height: var(--control-height); align-items: center; justify-content: center; border: 0; border-radius: var(--corner-radius); padding: 0 var(--card-padding); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); font-weight: 700; cursor: pointer; }
-.ui-button-primary { color: #fff; background: var(--color-primary); }
-.ui-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 45%, transparent); outline-offset: 2px; }
-.mobile-screen[data-state=&quot;loading&quot;] .ui-button, .mobile-screen[data-state=&quot;success&quot;] .ui-button { pointer-events: none; }
-.mobile-screen[data-state=&quot;loading&quot;] .ui-button-spinner { display: block; width: 18px; height: 18px; margin-left: 8px; border: 2px solid rgb(255 255 255 / .45); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
-.mobile-screen[data-state=&quot;success&quot;] .ui-button { background: #15803d; }
-.live-region { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 12px 36px rgb(15 23 42 / .18); } }
-@media (max-width: 374px) { .screen-header { padding-block: var(--micro-gap); } h1 { font-size: calc(var(--title-size) - var(--micro-gap)); line-height: calc(var(--title-line) - var(--micro-gap)); } }
-@media (min-width: 410px) { .screen-description { max-width: calc(var(--readable-line-width) + var(--section-gap)); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
-&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main class=&quot;mobile-screen&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot; aria-labelledby=&quot;screen-title&quot;&gt;&lt;div class=&quot;safe-area-top&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;mobile-scroll&quot;&gt;&lt;header class=&quot;screen-header&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 id=&quot;screen-title&quot;&gt;주문 결제&lt;/h1&gt;&lt;p class=&quot;screen-description&quot;&gt;Complete an order safely&lt;/p&gt;&lt;/header&gt;&lt;form class=&quot;screen-content&quot; data-component=&quot;checkout-screen&quot; novalidate&gt;&lt;div class=&quot;ui-field&quot; data-component=&quot;address-field&quot; data-state=&quot;empty&quot;&gt;&lt;label for=&quot;address-field&quot;&gt;배송 주소&lt;/label&gt;&lt;input id=&quot;address-field&quot; name=&quot;address-field&quot; type=&quot;text&quot; value=&quot;서울시 중구 세종대로 1&quot; autocomplete=&quot;street-address&quot; aria-describedby=&quot;address-field-hint&quot; data-focus-scroll /&gt;&lt;span class=&quot;ui-hint&quot; id=&quot;address-field-hint&quot; role=&quot;status&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-component=&quot;pay-button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;section class=&quot;fixture-card&quot; aria-label=&quot;address default&quot;&gt;&lt;div&gt;&lt;span class=&quot;fixture-label&quot;&gt;address default&lt;/span&gt;&lt;strong&gt;서울시 중구 세종대로 1&lt;/strong&gt;&lt;/div&gt;&lt;/section&gt;&lt;/form&gt;&lt;/div&gt;&lt;div class=&quot;mobile-sticky&quot; data-fixed-region=&quot;primary-action&quot;&gt;&lt;div class=&quot;sticky-inner&quot;&gt;&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;live-region&quot; aria-live=&quot;polite&quot; role=&quot;status&quot;&gt;&lt;/div&gt;&lt;/main&gt;&lt;script&gt;window.__MOBILE_UI_EXAMPLE__ = {&quot;exampleId&quot;:&quot;commerce-checkout-address&quot;,&quot;fixtures&quot;:{&quot;address_default&quot;:{&quot;label&quot;:&quot;서울시 중구 세종대로 1&quot;,&quot;selected&quot;:true},&quot;payment_card&quot;:{&quot;brand&quot;:&quot;Visa&quot;,&quot;last4&quot;:&quot;4242&quot;}},&quot;defaultState&quot;:&quot;default&quot;};&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div></section>
-<section class="explorer" id="examples"><div class="section-heading"><div><p class="kicker">Proof gallery</p><h2>Outputs you can inspect</h2></div><p>Every preview and source file below is generated from the same checked proof artifact.</p></div><form class="filters" role="search" aria-label="Filter examples"><label>Search<input type="search" data-filter="search" placeholder="Try checkout, chat, map…"></label><label>Category<select data-filter="category"><option value="">All categories</option><option value="commerce">commerce</option></select></label><label>Pattern<select data-filter="pattern"><option value="">All patterns</option><option value="checkout">checkout</option><option value="address_selection">address selection</option><option value="payment_method">payment method</option></select></label><button type="reset" class="quiet-button">Reset</button></form><p class="result-count" aria-live="polite"><span data-result-count>1</span> examples</p><div class="example-grid" id="example-grid"><article class="example-card" data-example data-category="commerce" data-patterns="checkout address_selection payment_method" data-search="주문 결제 complete an order safely commerce checkout address_selection payment_method"><div class="device-shell"><iframe class="device-preview" title="주문 결제 generated mobile UI preview" loading="lazy" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;style&gt;:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --text-scale: 1; --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --corner-radius: 12px; --sticky-region-height: 84px; --scroll-content-bottom-inset: 100px; --micro-gap: 4px; --field-gap: 4px; --control-padding: 12px; --title-size: 24px; --title-line: 32px; --title-letter-spacing: -0.2px; --body-size: 16px; --body-line: 24px; --label-size: 14px; --label-line: 20px; --readable-line-width: 360px; --color-text: #111827; --color-surface: #FFFFFF; --color-primary: #2563EB; --color-danger: #DC2626; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: checkout */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-checkout&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;내일 도착&lt;/span&gt;&lt;h2&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Visa ···· 4242&lt;/strong&gt;&lt;small&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// commerce-checkout-address: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;48,900원&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;배송지&quot;,
+      &quot;item_badge&quot;: &quot;내일 도착&quot;,
+      &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
+      &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
+      &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;상품 미리보기&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
+      &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
+      &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;주문 완료&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;KRW 48,900&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Delivery address&quot;,
+      &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
+      &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
+      &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
+      &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;Product preview&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
+      &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
+      &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
+      &quot;success_label&quot;: &quot;Order complete&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;title&quot;: &quot;Review your order&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;order_summary&quot;: {
+      &quot;quantity&quot;: 1,
+      &quot;sku&quot;: &quot;shirt-001&quot;,
+      &quot;total_krw&quot;: 48900
+    },
+    &quot;address_default&quot;: {
+      &quot;label&quot;: &quot;서울시 중구 세종대로 1&quot;,
+      &quot;selected&quot;: true
+    },
+    &quot;payment_card&quot;: {
+      &quot;brand&quot;: &quot;Visa&quot;,
+      &quot;execution&quot;: &quot;disabled&quot;,
+      &quot;last4&quot;: &quot;4242&quot;
+    }
+  },
+  &quot;states&quot;: {
+    &quot;screen&quot;: [
+      &quot;default&quot;,
+      &quot;loading&quot;,
+      &quot;error&quot;,
+      &quot;success&quot;
+    ],
+    &quot;inputs&quot;: [
+      &quot;empty&quot;,
+      &quot;focused&quot;,
+      &quot;filled&quot;,
+      &quot;validation_error&quot;,
+      &quot;keyboard&quot;,
+      &quot;disabled&quot;
+    ],
+    &quot;cta&quot;: [
+      &quot;disabled&quot;,
+      &quot;enabled&quot;,
+      &quot;pressed&quot;,
+      &quot;loading&quot;,
+      &quot;success&quot;
+    ]
+  }
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+let locale = &#39;ko&#39;;
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
+  status.textContent = copy.ready_label;
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  root.dataset.state = &#39;loading&#39;;
+  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
+  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+});
+window.__MOBILE_UI_PROOF__ = proof;
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div></section>
+<section class="explorer" id="examples"><div class="section-heading"><div><p class="kicker">Proof gallery</p><h2>Outputs you can inspect</h2></div><p>Every preview and source file below is generated from the same checked proof artifact.</p></div><form class="filters" role="search" aria-label="Filter examples"><label>Search<input type="search" data-filter="search" placeholder="Try checkout, chat, map…"></label><label>Category<select data-filter="category"><option value="">All categories</option><option value="commerce">commerce</option><option value="finance-fintech">finance-fintech</option><option value="messaging">messaging</option><option value="mobility-transportation">mobility-transportation</option><option value="social-community">social-community</option></select></label><label>Pattern<select data-filter="pattern"><option value="">All patterns</option><option value="checkout">checkout</option><option value="address-selection">address-selection</option><option value="payment-method">payment-method</option><option value="login-signup">login-signup</option><option value="identity-verification">identity-verification</option><option value="fixed-bottom-action">fixed-bottom-action</option><option value="chat">chat</option><option value="message-composer">message-composer</option><option value="conversation-list">conversation-list</option><option value="map-route">map-route</option><option value="reservation-ticketing">reservation-ticketing</option><option value="location-permission">location-permission</option><option value="feed-community">feed-community</option><option value="content-card">content-card</option><option value="bottom-tabs">bottom-tabs</option></select></label><button type="reset" class="quiet-button">Reset</button></form><p class="result-count" aria-live="polite"><span data-result-count>5</span> examples</p><div class="example-grid" id="example-grid"><article class="example-card" data-example data-category="commerce" data-patterns="checkout address-selection payment-method" data-search="주문을 확인해 주세요 review an order, confirm delivery details, and submit a fixture-only payment commerce checkout address-selection payment-method"><div class="device-shell"><iframe class="device-preview" title="주문을 확인해 주세요 generated mobile UI preview" loading="lazy" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title&gt;주문을 확인해 주세요&lt;/title&gt;
+  &lt;style&gt;/* canonical commerce-checkout-address: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #2563EB; --danger: #B42318; }
 * { box-sizing: border-box; }
-html, body { margin: 0; min-width: 320px; background: #e5e7eb; color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
 body { overflow-x: hidden; }
-.mobile-screen { position: relative; min-height: 100dvh; max-width: 430px; margin: 0 auto; overflow-x: hidden; background: var(--color-surface); }
-.safe-area-top { height: var(--safe-top); }
-.mobile-scroll { min-height: 100dvh; padding-top: 0; padding-right: var(--screen-inset); padding-bottom: calc(var(--sticky-region-height) + var(--scroll-content-bottom-inset) + var(--safe-bottom)); padding-left: var(--screen-inset); overflow-x: hidden; }
-.screen-header { padding: var(--section-gap) 0; }
-.eyebrow, .fixture-label { margin: 0 0 var(--micro-gap); color: color-mix(in srgb, var(--color-text) 65%, transparent); font-size: var(--micro-gap); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-h1 { margin: 0; font-size: calc(var(--title-size) * var(--text-scale)); line-height: calc(var(--title-line) * var(--text-scale)); letter-spacing: var(--title-letter-spacing); }
-.screen-description { max-width: 360px; margin: var(--micro-gap) 0 0; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
 .screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
-.ui-field { display: grid; gap: var(--field-gap); min-width: 0; }
-.ui-field label { font-size: calc(var(--label-size) * var(--text-scale)); line-height: calc(var(--label-line) * var(--text-scale)); font-weight: 600; }
-.ui-field input { width: 100%; min-height: var(--control-height); border: 1px solid #9ca3af; border-radius: var(--corner-radius); padding: 0 var(--control-padding); color: var(--color-text); background: var(--color-surface); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
-.ui-field input:focus { outline: 3px solid color-mix(in srgb, var(--color-primary) 30%, transparent); outline-offset: 2px; border-color: var(--color-primary); }
-.ui-hint { min-height: var(--label-line); color: var(--color-danger); font-size: var(--micro-gap); }
-.fixture-card { display: flex; min-height: var(--control-height); align-items: center; padding: var(--card-padding); border-radius: var(--corner-radius); background: #f3f4f6; }
-.fixture-card strong { display: block; margin-top: 2px; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
-.mobile-sticky { position: fixed; z-index: 2; right: 0; bottom: 0; left: 0; min-height: var(--sticky-region-height); padding: 12px var(--screen-inset) max(12px, var(--safe-bottom)); background: color-mix(in srgb, var(--color-surface) 94%, transparent); border-top: 1px solid #e5e7eb; backdrop-filter: blur(12px); }
-.sticky-inner { width: min(100%, 430px); margin: 0 auto; }
-.ui-button { position: relative; display: inline-flex; width: 100%; min-height: var(--control-height); align-items: center; justify-content: center; border: 0; border-radius: var(--corner-radius); padding: 0 var(--card-padding); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); font-weight: 700; cursor: pointer; }
-.ui-button-primary { color: #fff; background: var(--color-primary); }
-.ui-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 45%, transparent); outline-offset: 2px; }
-.mobile-screen[data-state=&quot;loading&quot;] .ui-button, .mobile-screen[data-state=&quot;success&quot;] .ui-button { pointer-events: none; }
-.mobile-screen[data-state=&quot;loading&quot;] .ui-button-spinner { display: block; width: 18px; height: 18px; margin-left: 8px; border: 2px solid rgb(255 255 255 / .45); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
-.mobile-screen[data-state=&quot;success&quot;] .ui-button { background: #15803d; }
-.live-region { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 12px 36px rgb(15 23 42 / .18); } }
-@media (max-width: 374px) { .screen-header { padding-block: var(--micro-gap); } h1 { font-size: calc(var(--title-size) - var(--micro-gap)); line-height: calc(var(--title-line) - var(--micro-gap)); } }
-@media (min-width: 410px) { .screen-description { max-width: calc(var(--readable-line-width) + var(--section-gap)); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
-&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main class=&quot;mobile-screen&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot; aria-labelledby=&quot;screen-title&quot;&gt;&lt;div class=&quot;safe-area-top&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;mobile-scroll&quot;&gt;&lt;header class=&quot;screen-header&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 id=&quot;screen-title&quot;&gt;주문 결제&lt;/h1&gt;&lt;p class=&quot;screen-description&quot;&gt;Complete an order safely&lt;/p&gt;&lt;/header&gt;&lt;form class=&quot;screen-content&quot; data-component=&quot;checkout-screen&quot; novalidate&gt;&lt;div class=&quot;ui-field&quot; data-component=&quot;address-field&quot; data-state=&quot;empty&quot;&gt;&lt;label for=&quot;address-field&quot;&gt;배송 주소&lt;/label&gt;&lt;input id=&quot;address-field&quot; name=&quot;address-field&quot; type=&quot;text&quot; value=&quot;서울시 중구 세종대로 1&quot; autocomplete=&quot;street-address&quot; aria-describedby=&quot;address-field-hint&quot; data-focus-scroll /&gt;&lt;span class=&quot;ui-hint&quot; id=&quot;address-field-hint&quot; role=&quot;status&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-component=&quot;pay-button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;section class=&quot;fixture-card&quot; aria-label=&quot;address default&quot;&gt;&lt;div&gt;&lt;span class=&quot;fixture-label&quot;&gt;address default&lt;/span&gt;&lt;strong&gt;서울시 중구 세종대로 1&lt;/strong&gt;&lt;/div&gt;&lt;/section&gt;&lt;/form&gt;&lt;/div&gt;&lt;div class=&quot;mobile-sticky&quot; data-fixed-region=&quot;primary-action&quot;&gt;&lt;div class=&quot;sticky-inner&quot;&gt;&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;live-region&quot; aria-live=&quot;polite&quot; role=&quot;status&quot;&gt;&lt;/div&gt;&lt;/main&gt;&lt;script&gt;window.__MOBILE_UI_EXAMPLE__ = {&quot;exampleId&quot;:&quot;commerce-checkout-address&quot;,&quot;fixtures&quot;:{&quot;address_default&quot;:{&quot;label&quot;:&quot;서울시 중구 세종대로 1&quot;,&quot;selected&quot;:true},&quot;payment_card&quot;:{&quot;brand&quot;:&quot;Visa&quot;,&quot;last4&quot;:&quot;4242&quot;}},&quot;defaultState&quot;:&quot;default&quot;};&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div><div class="card-copy"><div class="eyebrow">commerce</div><h3>주문 결제</h3><p>Complete an order safely</p><div class="chips"><span>checkout</span><span>address selection</span><span>payment method</span></div><a class="text-link" href="examples/commerce-checkout-address/">View responsive preview and source <span aria-hidden="true">→</span></a></div></article></div><p class="empty-state" data-empty hidden>No examples match those filters.</p></section>
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: checkout */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-checkout&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;내일 도착&lt;/span&gt;&lt;h2&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Visa ···· 4242&lt;/strong&gt;&lt;small&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// commerce-checkout-address: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;48,900원&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;배송지&quot;,
+      &quot;item_badge&quot;: &quot;내일 도착&quot;,
+      &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
+      &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
+      &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;상품 미리보기&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
+      &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
+      &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;주문 완료&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;KRW 48,900&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Delivery address&quot;,
+      &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
+      &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
+      &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
+      &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;Product preview&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
+      &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
+      &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
+      &quot;success_label&quot;: &quot;Order complete&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;title&quot;: &quot;Review your order&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;order_summary&quot;: {
+      &quot;quantity&quot;: 1,
+      &quot;sku&quot;: &quot;shirt-001&quot;,
+      &quot;total_krw&quot;: 48900
+    },
+    &quot;address_default&quot;: {
+      &quot;label&quot;: &quot;서울시 중구 세종대로 1&quot;,
+      &quot;selected&quot;: true
+    },
+    &quot;payment_card&quot;: {
+      &quot;brand&quot;: &quot;Visa&quot;,
+      &quot;execution&quot;: &quot;disabled&quot;,
+      &quot;last4&quot;: &quot;4242&quot;
+    }
+  },
+  &quot;states&quot;: {
+    &quot;screen&quot;: [
+      &quot;default&quot;,
+      &quot;loading&quot;,
+      &quot;error&quot;,
+      &quot;success&quot;
+    ],
+    &quot;inputs&quot;: [
+      &quot;empty&quot;,
+      &quot;focused&quot;,
+      &quot;filled&quot;,
+      &quot;validation_error&quot;,
+      &quot;keyboard&quot;,
+      &quot;disabled&quot;
+    ],
+    &quot;cta&quot;: [
+      &quot;disabled&quot;,
+      &quot;enabled&quot;,
+      &quot;pressed&quot;,
+      &quot;loading&quot;,
+      &quot;success&quot;
+    ]
+  }
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+let locale = &#39;ko&#39;;
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
+  status.textContent = copy.ready_label;
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  root.dataset.state = &#39;loading&#39;;
+  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
+  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+});
+window.__MOBILE_UI_PROOF__ = proof;
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div><div class="card-copy"><div class="eyebrow">commerce</div><h3>주문을 확인해 주세요</h3><p>Review an order, confirm delivery details, and submit a fixture-only payment</p><div class="chips"><span>checkout</span><span>address-selection</span><span>payment-method</span></div><a class="text-link" href="examples/commerce-checkout-address/">View responsive preview and source <span aria-hidden="true">→</span></a></div></article><article class="example-card" data-example data-category="finance-fintech" data-patterns="login-signup identity-verification fixed-bottom-action" data-search="휴대폰 번호로 시작할게요 verify a phone number and understand consent before opening a financial account finance-fintech login-signup identity-verification fixed-bottom-action"><div class="device-shell"><iframe class="device-preview" title="휴대폰 번호로 시작할게요 generated mobile UI preview" loading="lazy" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title&gt;휴대폰 번호로 시작할게요&lt;/title&gt;
+  &lt;style&gt;/* canonical fintech-signup: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #1457D9; --danger: #B42318; }
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: form */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-form&quot; data-example-id=&quot;fintech-signup&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;finance-fintech&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;휴대폰 번호로 시작할게요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;본인 명의 번호를 확인하면 안전하게 계정을 만들 수 있어요.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;휴대폰 번호&lt;/span&gt;&lt;input data-local-input inputmode=&quot;tel&quot; aria-label=&quot;휴대폰 번호&quot;&gt;&lt;/label&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;인증번호 6자리&lt;/span&gt;&lt;input data-local-input inputmode=&quot;numeric&quot; aria-label=&quot;인증번호 6자리&quot;&gt;&lt;/label&gt;&lt;aside class=&quot;notice&quot; role=&quot;note&quot;&gt;&lt;strong&gt;필수 약관과 본인 확인 내용에 동의합니다&lt;/strong&gt;&lt;p&gt;계좌 개설 전 이름과 휴대폰 명의가 일치하는지 확인하세요. 실제 인증이나 계좌 개설은 실행하지 않습니다.&lt;/p&gt;&lt;/aside&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;확인하고 계속&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// fintech-signup: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_label&quot;: &quot;필수 약관과 본인 확인 내용에 동의합니다&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;휴대폰 번호&quot;,
+      &quot;item_badge&quot;: &quot;보안 확인&quot;,
+      &quot;item_body&quot;: &quot;입력한 정보는 이 화면의 로컬 예시에만 사용됩니다.&quot;,
+      &quot;item_meta&quot;: &quot;02:58 남음&quot;,
+      &quot;item_title&quot;: &quot;내 정보 확인&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;확인하고 계속&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;risk_notice&quot;: &quot;계좌 개설 전 이름과 휴대폰 명의가 일치하는지 확인하세요. 실제 인증이나 계좌 개설은 실행하지 않습니다.&quot;,
+      &quot;secondary_label&quot;: &quot;인증번호 6자리&quot;,
+      &quot;subtitle&quot;: &quot;본인 명의 번호를 확인하면 안전하게 계정을 만들 수 있어요.&quot;,
+      &quot;success_body&quot;: &quot;휴대폰 본인 확인이 완료되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;본인 확인 완료&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;title&quot;: &quot;휴대폰 번호로 시작할게요&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_label&quot;: &quot;I agree to the required terms and identity check&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Phone number&quot;,
+      &quot;item_badge&quot;: &quot;Security check&quot;,
+      &quot;item_body&quot;: &quot;Entered data stays inside this local screen example.&quot;,
+      &quot;item_meta&quot;: &quot;02:58 remaining&quot;,
+      &quot;item_title&quot;: &quot;Review your details&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;Confirm and continue&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;risk_notice&quot;: &quot;Confirm that the account name and phone ownership match. This example does not perform identity verification or open an account.&quot;,
+      &quot;secondary_label&quot;: &quot;6-digit verification code&quot;,
+      &quot;subtitle&quot;: &quot;Verify a number in your name to create the account safely.&quot;,
+      &quot;success_body&quot;: &quot;Phone verification is complete.&quot;,
+      &quot;success_label&quot;: &quot;Identity confirmed&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;title&quot;: &quot;Start with your phone number&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;phone_verification&quot;: {
+      &quot;code&quot;: &quot;482913&quot;,
+      &quot;expires_in_seconds&quot;: 178,
+      &quot;phone&quot;: &quot;010-1234-5678&quot;,
+      &quot;verified&quot;: false
+    },
+    &quot;high_risk_action&quot;: {
+      &quot;effect&quot;: &quot;local_identity_confirmed&quot;,
+      &quot;fixture_only&quot;: true,
+      &quot;requires_confirmation&quot;: true
+    }
+  },
+  &quot;states&quot;: {
+    &quot;screen&quot;: [
+      &quot;default&quot;,
+      &quot;loading&quot;,
+      &quot;error&quot;,
+      &quot;success&quot;
+    ],
+    &quot;inputs&quot;: [
+      &quot;empty&quot;,
+      &quot;focused&quot;,
+      &quot;filled&quot;,
+      &quot;validation_error&quot;,
+      &quot;keyboard&quot;,
+      &quot;disabled&quot;
+    ],
+    &quot;cta&quot;: [
+      &quot;disabled&quot;,
+      &quot;enabled&quot;,
+      &quot;loading&quot;,
+      &quot;success&quot;
+    ]
+  }
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+let locale = &#39;ko&#39;;
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
+  status.textContent = copy.ready_label;
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  root.dataset.state = &#39;loading&#39;;
+  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
+  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+});
+window.__MOBILE_UI_PROOF__ = proof;
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div><div class="card-copy"><div class="eyebrow">finance-fintech</div><h3>휴대폰 번호로 시작할게요</h3><p>Verify a phone number and understand consent before opening a financial account</p><div class="chips"><span>login-signup</span><span>identity-verification</span><span>fixed-bottom-action</span></div><a class="text-link" href="examples/fintech-signup/">View responsive preview and source <span aria-hidden="true">→</span></a></div></article><article class="example-card" data-example data-category="messaging" data-patterns="chat message-composer conversation-list" data-search="민서 read recent context and send a message without the keyboard covering the conversation messaging chat message-composer conversation-list"><div class="device-shell"><iframe class="device-preview" title="민서 generated mobile UI preview" loading="lazy" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title&gt;민서&lt;/title&gt;
+  &lt;style&gt;/* canonical messenger-chat: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #0F766E; --danger: #B42318; }
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: chat */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-chat&quot; data-example-id=&quot;messenger-chat&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;messaging&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;민서&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;온라인 · 알림 켜짐&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;section class=&quot;message-list&quot; aria-label=&quot;최근 대화&quot;&gt;&lt;div class=&quot;bubble incoming&quot;&gt;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&lt;/div&gt;&lt;div class=&quot;bubble outgoing&quot;&gt;응, 긴 한국어 문장까지 줄바꿈 확인했어.&lt;/div&gt;&lt;small&gt;오후 3:24 · 읽음&lt;/small&gt;&lt;/section&gt;&lt;label class=&quot;composer&quot;&gt;&lt;span class=&quot;sr-only&quot;&gt;메시지 입력&lt;/span&gt;&lt;input data-local-input aria-label=&quot;메시지 입력&quot;&gt;&lt;button type=&quot;button&quot; data-secondary-action&gt;↑&lt;/button&gt;&lt;/label&gt;&lt;span class=&quot;source-id&quot; aria-hidden=&quot;true&quot;&gt;messenger-chat&lt;/span&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;메시지 보내기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// messenger-chat: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;메시지 입력&quot;,
+      &quot;item_badge&quot;: &quot;온라인&quot;,
+      &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+      &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+      &quot;item_title&quot;: &quot;민서와의 대화&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+      &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+      &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+      &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+      &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;전송됨&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;title&quot;: &quot;민서&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Message&quot;,
+      &quot;item_badge&quot;: &quot;Online&quot;,
+      &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+      &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+      &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+      &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+      &quot;primary_cta&quot;: &quot;Send message&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+      &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+      &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+      &quot;success_label&quot;: &quot;Sent&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;title&quot;: &quot;Minseo&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;conversation_default&quot;: {
+      &quot;delivery&quot;: &quot;read&quot;,
+      &quot;messages&quot;: 2,
+      &quot;network&quot;: false,
+      &quot;offline_queue&quot;: false,
+      &quot;participant&quot;: &quot;민서&quot;
+    }
+  },
+  &quot;states&quot;: {
+    &quot;screen&quot;: [
+      &quot;default&quot;,
+      &quot;loading&quot;,
+      &quot;empty&quot;,
+      &quot;error&quot;,
+      &quot;offline&quot;,
+      &quot;success&quot;
+    ],
+    &quot;inputs&quot;: [
+      &quot;empty&quot;,
+      &quot;focused&quot;,
+      &quot;filled&quot;,
+      &quot;keyboard&quot;,
+      &quot;disabled&quot;
+    ],
+    &quot;cta&quot;: [
+      &quot;disabled&quot;,
+      &quot;enabled&quot;,
+      &quot;loading&quot;,
+      &quot;success&quot;
+    ]
+  }
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+let locale = &#39;ko&#39;;
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
+  status.textContent = copy.ready_label;
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  root.dataset.state = &#39;loading&#39;;
+  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
+  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+});
+window.__MOBILE_UI_PROOF__ = proof;
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div><div class="card-copy"><div class="eyebrow">messaging</div><h3>민서</h3><p>Read recent context and send a message without the keyboard covering the conversation</p><div class="chips"><span>chat</span><span>message-composer</span><span>conversation-list</span></div><a class="text-link" href="examples/messenger-chat/">View responsive preview and source <span aria-hidden="true">→</span></a></div></article><article class="example-card" data-example data-category="mobility-transportation" data-patterns="map-route reservation-ticketing location-permission" data-search="이 경로로 예약할까요? confirm pickup, route, fare, and cancellation terms before booking a ride mobility-transportation map-route reservation-ticketing location-permission"><div class="device-shell"><iframe class="device-preview" title="이 경로로 예약할까요? generated mobile UI preview" loading="lazy" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title&gt;이 경로로 예약할까요?&lt;/title&gt;
+  &lt;style&gt;/* canonical mobility-map-booking: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #146C5A; --danger: #B42318; }
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: map */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-map&quot; data-example-id=&quot;mobility-map-booking&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;mobility-transportation&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;이 경로로 예약할까요?&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;탑승 위치와 예상 요금, 취소 조건을 확인해 주세요.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;section class=&quot;map-surface&quot; aria-label=&quot;서울역에서 광화문까지의 예시 경로&quot;&gt;&lt;div class=&quot;route-line&quot;&gt;&lt;/div&gt;&lt;span class=&quot;map-pin map-pin-start&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;map-pin map-pin-end&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;eta&quot;&gt;예상 12분 · 4.2km&lt;/span&gt;&lt;/section&gt;&lt;article class=&quot;booking-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;4분 뒤 도착&lt;/span&gt;&lt;h2&gt;스탠다드 · 3명&lt;/h2&gt;&lt;p&gt;서울역 1번 출구에서 광화문까지 약 12분&lt;/p&gt;&lt;aside class=&quot;notice&quot;&gt;&lt;strong&gt;요금과 취소 조건을 확인했습니다&lt;/strong&gt;&lt;p&gt;예약 후 2분이 지나면 취소 수수료가 발생할 수 있습니다. 이 예시는 실제 위치 권한이나 차량 호출을 실행하지 않습니다.&lt;/p&gt;&lt;/aside&gt;&lt;/article&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;차량 예약하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// mobility-map-booking: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;예상 13,800원&quot;,
+      &quot;confirm_label&quot;: &quot;요금과 취소 조건을 확인했습니다&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;탑승 위치&quot;,
+      &quot;item_badge&quot;: &quot;4분 뒤 도착&quot;,
+      &quot;item_body&quot;: &quot;서울역 1번 출구에서 광화문까지 약 12분&quot;,
+      &quot;item_meta&quot;: &quot;예상 12분 · 4.2km&quot;,
+      &quot;item_title&quot;: &quot;스탠다드 · 3명&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;서울역에서 광화문까지의 예시 경로&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;차량 예약하기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;risk_notice&quot;: &quot;예약 후 2분이 지나면 취소 수수료가 발생할 수 있습니다. 이 예시는 실제 위치 권한이나 차량 호출을 실행하지 않습니다.&quot;,
+      &quot;secondary_label&quot;: &quot;서울역 1번 출구 → 광화문&quot;,
+      &quot;subtitle&quot;: &quot;탑승 위치와 예상 요금, 취소 조건을 확인해 주세요.&quot;,
+      &quot;success_body&quot;: &quot;실제 차량 호출 없이 로컬 예약 상태만 변경했습니다.&quot;,
+      &quot;success_label&quot;: &quot;예약 요청 완료&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;title&quot;: &quot;이 경로로 예약할까요?&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;Estimated KRW 13,800&quot;,
+      &quot;confirm_label&quot;: &quot;I reviewed the fare and cancellation terms&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Pickup&quot;,
+      &quot;item_badge&quot;: &quot;Arrives in 4 min&quot;,
+      &quot;item_body&quot;: &quot;About 12 minutes from Seoul Station Exit 1 to Gwanghwamun&quot;,
+      &quot;item_meta&quot;: &quot;About 12 min · 4.2 km&quot;,
+      &quot;item_title&quot;: &quot;Standard · 3 seats&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;Example route from Seoul Station to Gwanghwamun&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;Book ride&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;risk_notice&quot;: &quot;A cancellation fee may apply after two minutes. This example does not request location access or book a real ride.&quot;,
+      &quot;secondary_label&quot;: &quot;Seoul Station Exit 1 → Gwanghwamun&quot;,
+      &quot;subtitle&quot;: &quot;Review pickup, estimated fare, and cancellation terms.&quot;,
+      &quot;success_body&quot;: &quot;Only the local booking state changed; no ride was requested.&quot;,
+      &quot;success_label&quot;: &quot;Booking requested&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;title&quot;: &quot;Book this route?&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;route_default&quot;: {
+      &quot;destination&quot;: &quot;광화문&quot;,
+      &quot;distance_km&quot;: 4.2,
+      &quot;eta_minutes&quot;: 12,
+      &quot;fare_krw&quot;: 13800,
+      &quot;origin&quot;: &quot;서울역 1번 출구&quot;
+    },
+    &quot;location_permission&quot;: {
+      &quot;network&quot;: false,
+      &quot;status&quot;: &quot;local_fixture_granted&quot;
+    },
+    &quot;high_risk_action&quot;: {
+      &quot;effect&quot;: &quot;local_booking_requested&quot;,
+      &quot;fixture_only&quot;: true,
+      &quot;requires_confirmation&quot;: true
+    }
+  },
+  &quot;states&quot;: {
+    &quot;screen&quot;: [
+      &quot;default&quot;,
+      &quot;loading&quot;,
+      &quot;error&quot;,
+      &quot;success&quot;,
+      &quot;permission_denied&quot;,
+      &quot;offline&quot;,
+      &quot;destructive_confirmation&quot;
+    ],
+    &quot;inputs&quot;: [
+      &quot;default&quot;,
+      &quot;focused&quot;,
+      &quot;permission_denied&quot;,
+      &quot;offline&quot;
+    ],
+    &quot;cta&quot;: [
+      &quot;enabled&quot;,
+      &quot;loading&quot;,
+      &quot;success&quot;,
+      &quot;destructive_confirmation&quot;
+    ]
+  }
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+let locale = &#39;ko&#39;;
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
+  status.textContent = copy.ready_label;
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  root.dataset.state = &#39;loading&#39;;
+  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
+  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+});
+window.__MOBILE_UI_PROOF__ = proof;
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div><div class="card-copy"><div class="eyebrow">mobility-transportation</div><h3>이 경로로 예약할까요?</h3><p>Confirm pickup, route, fare, and cancellation terms before booking a ride</p><div class="chips"><span>map-route</span><span>reservation-ticketing</span><span>location-permission</span></div><a class="text-link" href="examples/mobility-map-booking/">View responsive preview and source <span aria-hidden="true">→</span></a></div></article><article class="example-card" data-example data-category="social-community" data-patterns="feed-community content-card bottom-tabs" data-search="오늘의 커뮤니티 scan a community feed and understand post context before reacting social-community feed-community content-card bottom-tabs"><div class="device-shell"><iframe class="device-preview" title="오늘의 커뮤니티 generated mobile UI preview" loading="lazy" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+  &lt;title&gt;오늘의 커뮤니티&lt;/title&gt;
+  &lt;style&gt;/* canonical social-feed: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #7C3AED; --danger: #B42318; }
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+button, input { font: inherit; }
+button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.mobile-screen { position: relative; width: min(100%, 430px); min-height: 100dvh; margin: 0 auto; padding: calc(var(--safe-top) + var(--section-gap)) var(--screen-inset) calc(var(--fixed-height) + var(--bottom-clearance) + var(--safe-bottom)); overflow-x: hidden; background: var(--surface); }
+.screen-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--component-gap); margin-bottom: var(--section-gap); }
+.eyebrow { margin: 0 0 6px; color: var(--primary); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
+.screen-header p:last-child { margin: 8px 0 0; color: #5b6472; font-size: 15px; line-height: 23px; }
+.locale-button { border: 1px solid #d7dce3; border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 750; }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+.field input, .composer input { width: 100%; min-width: 0; min-height: var(--control-height); border: 1px solid #aeb6c2; border-radius: var(--radius); padding: 0 var(--card-padding); background: var(--surface); color: var(--text); }
+.field input:focus, .composer input:focus { border-color: var(--primary); outline: 3px solid color-mix(in srgb, var(--primary) 22%, transparent); outline-offset: 1px; }
+.notice, .summary-card, .booking-card, .payment-row, .feed-card { border: 1px solid #e2e6ec; border-radius: var(--radius); padding: var(--card-padding); background: #f7f9fc; }
+.notice p, .summary-card p, .booking-card p, .feed-card p { margin: 6px 0 0; color: #5b6472; line-height: 22px; }
+.tag { display: inline-flex; border-radius: 999px; padding: 5px 9px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size: 12px; font-weight: 800; }
+.summary-card h2, .booking-card h2 { margin: 10px 0 0; font-size: 19px; }
+.summary-card &gt; strong { display: block; margin-top: 14px; font-size: 24px; }
+.payment-row { display: flex; align-items: center; gap: 12px; }
+.payment-row small, .feed-card small { display: block; margin-top: 3px; color: #717b89; }
+.payment-mark { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--primary); color: white; font-weight: 900; }
+.map-surface { position: relative; min-height: 280px; overflow: hidden; border-radius: calc(var(--radius) + 6px); background: linear-gradient(145deg, #dff1e5, #e7edf6 52%, #f4e4ca); }
+.map-surface::before { position: absolute; inset: 0; background: repeating-linear-gradient(32deg, transparent 0 48px, rgb(255 255 255 / .72) 49px 61px); content: &quot;&quot;; }
+.route-line { position: absolute; z-index: 1; top: 104px; left: 90px; width: 170px; height: 78px; border-right: 5px solid var(--primary); border-bottom: 5px solid var(--primary); border-radius: 0 0 40px; transform: rotate(-15deg); }
+.map-pin { position: absolute; z-index: 2; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid white; border-radius: 50%; background: var(--primary); color: white; box-shadow: 0 4px 12px rgb(15 23 42 / .24); }
+.map-pin-start { top: 68px; left: 70px; } .map-pin-end { right: 64px; bottom: 64px; }
+.eta { position: absolute; z-index: 2; top: 16px; right: 16px; border-radius: 10px; padding: 9px 12px; background: white; font-weight: 800; }
+.story-row { display: flex; gap: 12px; overflow: hidden; }
+.story-row span { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 3px solid color-mix(in srgb, var(--primary) 70%, #f472b6); border-radius: 50%; background: #eef2f7; font-size: 11px; font-weight: 800; }
+.feed-card { display: grid; grid-template-columns: 44px 1fr; gap: 8px 12px; background: var(--surface); }
+.feed-card &gt; p, .feed-media, .feed-actions { grid-column: 1 / -1; }
+.avatar { display: grid; height: 44px; place-items: center; border-radius: 50%; background: var(--primary); color: white; font-weight: 850; }
+.feed-media { display: grid; min-height: 220px; place-items: center; border-radius: calc(var(--radius) - 4px); background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, white), #e8edf4); color: #455061; font-weight: 800; }
+.feed-actions { display: flex; gap: 8px; } .feed-actions button { border: 0; background: transparent; color: var(--text); }
+.message-list { display: flex; min-height: 390px; flex-direction: column; justify-content: flex-end; gap: 10px; }
+.bubble { width: fit-content; max-width: 78%; border-radius: 18px; padding: 11px 14px; line-height: 21px; }
+.incoming { border-bottom-left-radius: 6px; background: #edf0f4; } .outgoing { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--primary); color: white; }
+.message-list small { align-self: center; color: #717b89; }
+.composer { display: flex; gap: 8px; padding-top: var(--component-gap); }
+.composer button { border: 0; border-radius: 50%; background: var(--primary); color: white; font-size: 20px; }
+.source-id { display: none; }
+.fixed-action { position: fixed; z-index: 4; right: 0; bottom: 0; left: 0; width: min(100%, 430px); min-height: var(--fixed-height); margin: auto; padding: 12px var(--screen-inset) calc(12px + var(--safe-bottom)); border-top: 1px solid #e2e6ec; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+.primary-action { width: 100%; min-height: var(--control-height); border: 0; border-radius: var(--radius); background: var(--primary); color: white; font-weight: 800; }
+.primary-action:focus-visible, .locale-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent); outline-offset: 2px; }
+.status-text { margin: 7px 0 0; color: #717b89; font-size: 12px; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.mobile-screen[data-state=&quot;loading&quot;] .primary-action { opacity: .6; pointer-events: none; }
+.mobile-screen[data-state=&quot;success&quot;] .primary-action { background: #15803d; }
+@media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+/* archetype: feed */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;mobile-screen archetype-feed&quot; data-example-id=&quot;social-feed&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;social-community&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;오늘의 커뮤니티&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;관심 있는 사람들의 새 소식을 편안하게 둘러보세요.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;nav class=&quot;story-row&quot; aria-label=&quot;댓글 24개&quot;&gt;&lt;span&gt;UI&lt;/span&gt;&lt;span&gt;UX&lt;/span&gt;&lt;span&gt;DEV&lt;/span&gt;&lt;span&gt;KR&lt;/span&gt;&lt;/nav&gt;&lt;article class=&quot;feed-card&quot;&gt;&lt;div class=&quot;avatar&quot;&gt;JY&lt;/div&gt;&lt;div&gt;&lt;strong&gt;지영 · 모바일 디자인&lt;/strong&gt;&lt;small&gt;12분 전&lt;/small&gt;&lt;/div&gt;&lt;p&gt;작은 화면일수록 정보의 순서와 여백이 제품의 목소리를 더 또렷하게 만든다고 느꼈어요.&lt;/p&gt;&lt;div class=&quot;feed-media&quot; role=&quot;img&quot; aria-label=&quot;보라색과 회색으로 구성된 모바일 UI 스터디 이미지&quot;&gt;보라색과 회색으로 구성된 모바일 UI 스터디 이미지&lt;/div&gt;&lt;div class=&quot;feed-actions&quot;&gt;&lt;button type=&quot;button&quot;&gt;♡ 128&lt;/button&gt;&lt;button type=&quot;button&quot;&gt;댓글 24개&lt;/button&gt;&lt;/div&gt;&lt;/article&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;새 글 쓰기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;/main&gt;
+  &lt;script type=&quot;module&quot;&gt;// social-feed: 한국어 + English local fixture runtime
+const proof = {
+  &quot;locales&quot;: {
+    &quot;ko&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
+      &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
+      &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
+      &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
+      &quot;field_label&quot;: &quot;게시물 작성&quot;,
+      &quot;item_badge&quot;: &quot;팔로잉&quot;,
+      &quot;item_body&quot;: &quot;작은 화면일수록 정보의 순서와 여백이 제품의 목소리를 더 또렷하게 만든다고 느꼈어요.&quot;,
+      &quot;item_meta&quot;: &quot;12분 전&quot;,
+      &quot;item_title&quot;: &quot;지영 · 모바일 디자인&quot;,
+      &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
+      &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;보라색과 회색으로 구성된 모바일 UI 스터디 이미지&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;새 글 쓰기&quot;,
+      &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;댓글 24개&quot;,
+      &quot;subtitle&quot;: &quot;관심 있는 사람들의 새 소식을 편안하게 둘러보세요.&quot;,
+      &quot;success_body&quot;: &quot;로컬 작성 상태로 전환했습니다.&quot;,
+      &quot;success_label&quot;: &quot;작성 화면 열림&quot;,
+      &quot;success_title&quot;: &quot;완료됐어요&quot;,
+      &quot;title&quot;: &quot;오늘의 커뮤니티&quot;
+    },
+    &quot;en&quot;: {
+      &quot;amount&quot;: &quot;&quot;,
+      &quot;confirm_label&quot;: &quot;&quot;,
+      &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
+      &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
+      &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
+      &quot;error_title&quot;: &quot;We could not finish that&quot;,
+      &quot;field_label&quot;: &quot;Create post&quot;,
+      &quot;item_badge&quot;: &quot;Following&quot;,
+      &quot;item_body&quot;: &quot;On a small screen, information order and spacing make the product voice much clearer.&quot;,
+      &quot;item_meta&quot;: &quot;12 min ago&quot;,
+      &quot;item_title&quot;: &quot;Jiyoung · Mobile design&quot;,
+      &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
+      &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
+      &quot;map_label&quot;: &quot;&quot;,
+      &quot;media_label&quot;: &quot;Purple and gray mobile UI study&quot;,
+      &quot;message_in&quot;: &quot;&quot;,
+      &quot;message_out&quot;: &quot;&quot;,
+      &quot;primary_cta&quot;: &quot;Write a post&quot;,
+      &quot;ready_label&quot;: &quot;Static local example&quot;,
+      &quot;risk_notice&quot;: &quot;&quot;,
+      &quot;secondary_label&quot;: &quot;24 comments&quot;,
+      &quot;subtitle&quot;: &quot;Browse new posts from people and topics you care about.&quot;,
+      &quot;success_body&quot;: &quot;The example moved to its local compose state.&quot;,
+      &quot;success_label&quot;: &quot;Composer opened&quot;,
+      &quot;success_title&quot;: &quot;All set&quot;,
+      &quot;title&quot;: &quot;Today&#39;s community&quot;
+    }
+  },
+  &quot;fixtures&quot;: {
+    &quot;feed_default&quot;: {
+      &quot;author&quot;: &quot;지영&quot;,
+      &quot;comments&quot;: 24,
+      &quot;media_fallback&quot;: &quot;gradient-card&quot;,
+      &quot;network&quot;: false,
+      &quot;reactions&quot;: 128
+    }
+  },
+  &quot;states&quot;: {
+    &quot;screen&quot;: [
+      &quot;default&quot;,
+      &quot;loading&quot;,
+      &quot;empty&quot;,
+      &quot;error&quot;,
+      &quot;success&quot;
+    ],
+    &quot;inputs&quot;: [
+      &quot;default&quot;,
+      &quot;focused&quot;
+    ],
+    &quot;cta&quot;: [
+      &quot;enabled&quot;,
+      &quot;loading&quot;,
+      &quot;success&quot;
+    ]
+  }
+};
+const root = document.querySelector(&#39;.mobile-screen&#39;);
+const localeButton = document.querySelector(&#39;[data-locale]&#39;);
+const primary = document.querySelector(&#39;[data-primary-action]&#39;);
+const status = document.querySelector(&#39;[data-status]&#39;);
+let locale = &#39;ko&#39;;
+const renderLocale = () =&gt; {
+  const copy = proof.locales[locale];
+  document.documentElement.lang = locale;
+  document.querySelectorAll(&#39;[data-i18n]&#39;).forEach((node) =&gt; { const key = node.dataset.i18n; if (key &amp;&amp; copy[key]) node.textContent = copy[key]; });
+  localeButton.textContent = locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;;
+  localeButton.setAttribute(&#39;aria-label&#39;, locale === &#39;ko&#39; ? &#39;English&#39; : &#39;한국어&#39;);
+  status.textContent = copy.ready_label;
+};
+localeButton.addEventListener(&#39;click&#39;, () =&gt; { locale = locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;; renderLocale(); });
+primary.addEventListener(&#39;click&#39;, () =&gt; {
+  root.dataset.state = &#39;loading&#39;;
+  primary.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
+  queueMicrotask(() =&gt; { root.dataset.state = &#39;success&#39;; primary.removeAttribute(&#39;aria-busy&#39;); primary.textContent = proof.locales[locale].success_label; status.textContent = proof.locales[locale].success_body; });
+});
+window.__MOBILE_UI_PROOF__ = proof;
+renderLocale();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe></div><div class="card-copy"><div class="eyebrow">social-community</div><h3>오늘의 커뮤니티</h3><p>Scan a community feed and understand post context before reacting</p><div class="chips"><span>feed-community</span><span>content-card</span><span>bottom-tabs</span></div><a class="text-link" href="examples/social-feed/">View responsive preview and source <span aria-hidden="true">→</span></a></div></article></div><p class="empty-state" data-empty hidden>No examples match those filters.</p></section>
 <section class="install" id="install"><div><p class="kicker">Install and use</p><h2>Install the skill. Request the outcome.</h2><p>Copy the public skill into your Codex skills directory, then describe the screen, states, language, and target platforms you need.</p></div><div class="install-steps"><article><span>01</span><h3>Install</h3><pre><code>git clone https://github.com/jinyoung89/mobile-ui-generator-skill.git
 cp -R mobile-ui-generator-skill/skills/mobile-ui-generator "$CODEX_HOME/skills/"</code></pre></article><article><span>02</span><h3>Ask</h3><pre><code>Create a checkout screen for 320–430 px widths. Include empty, loading, error, and success states. Return HTML/CSS, React Native, Flutter, and SwiftUI.</code></pre></article><article><span>03</span><h3>Inspect</h3><p>Review the numeric spec, responsive preview, complete files, and static validation evidence before integrating.</p></article></div></section>
 <section class="method"><p class="kicker">Public boundary</p><h2>Generalized knowledge in. Original references out.</h2><p>This public site consumes only sanitized canonical specs and repository-generated proof outputs. It does not publish source screenshots, private acquisition data, local paths, or credentials.</p></section></main><footer><span>Mobile UI Generator</span><span>Static, inspectable, API-free.</span></footer><script src="./assets/site.js" defer></script></body></html>

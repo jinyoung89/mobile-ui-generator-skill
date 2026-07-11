@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -11,12 +11,14 @@ const root = path.resolve(import.meta.dirname, "../..");
 
 test("catalog is derived from proof artifacts with four source targets", () => {
   const catalog = loadProofCatalog(path.join(root, "examples/proof"));
-  assert.ok(catalog.length >= 1, "the site builds from the currently available proof set");
+  assert.equal(catalog.length, 5);
   for (const example of catalog) {
     assert.match(example.route, /^examples\/[a-z0-9-]+\/$/);
     assert.ok(example.category);
     assert.ok(example.patterns.length > 0);
     assert.deepEqual(Object.keys(example.sources), ["html_css", "react_native", "flutter", "swiftui"]);
+    assert.deepEqual(Object.values(example.sources).map((files) => files.length), [3, 2, 2, 2]);
+    assert.equal(existsSync(path.join(root, "examples/proof", example.proofId)), true);
     for (const files of Object.values(example.sources)) {
       assert.ok(files.length > 0);
       assert.ok(files.every((file) => file.content.trim().length > 40));
@@ -44,5 +46,7 @@ test("static build emits an explorer and one accessible detail route per proof",
     assert.match(detail, /React Native/);
     assert.match(detail, /Flutter/);
     assert.match(detail, /SwiftUI/);
+    const proofId = route.split("/").filter(Boolean).at(-1) === "commerce-checkout-address" ? "commerce-checkout" : route.split("/").filter(Boolean).at(-1);
+    assert.match(detail, new RegExp(`examples/proof/${proofId}`));
   }
 });

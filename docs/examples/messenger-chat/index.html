@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Generated mobile UI examples with complete cross-platform source."><title>주문을 확인해 주세요 — Mobile UI Generator</title><link rel="stylesheet" href="../../assets/site.css"></head>
-<body><header class="topbar"><a class="brand" href="../../">M/UI</a><nav aria-label="Primary"><a href="../../#examples">All examples</a><a href="../../#install">Install</a></nav></header><main class="detail"><section class="detail-hero"><div><p class="kicker">commerce · checkout + address-selection + payment-method</p><h1>주문을 확인해 주세요</h1><p class="lede">Review an order, confirm delivery details, and submit a fixture-only payment</p><div class="chips"><span>disabled</span><span>enabled</span><span>pressed</span><span>loading</span><span>success</span><span>empty</span></div></div><div class="preview-studio"><div class="preview-toolbar" role="group" aria-label="Preview width"><button type="button" data-preview-width="320" aria-pressed="false">320</button><button type="button" data-preview-width="390" aria-pressed="true">390</button><button type="button" data-preview-width="430" aria-pressed="false">430</button></div><div class="resizable-preview" data-preview-container style="--preview-width:390px"><div class="device-shell"><iframe class="device-preview" title="주문을 확인해 주세요 generated mobile UI preview" loading="eager" srcdoc="&lt;!doctype html&gt;
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Generated mobile UI examples with complete cross-platform source."><title>민서 — Mobile UI Generator</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="topbar"><a class="brand" href="../../">M/UI</a><nav aria-label="Primary"><a href="../../#examples">All examples</a><a href="../../#install">Install</a></nav></header><main class="detail"><section class="detail-hero"><div><p class="kicker">messaging · chat + message-composer + conversation-list</p><h1>민서</h1><p class="lede">Read recent context and send a message without the keyboard covering the conversation</p><div class="chips"><span>disabled</span><span>enabled</span><span>loading</span><span>success</span><span>empty</span><span>focused</span></div></div><div class="preview-studio"><div class="preview-toolbar" role="group" aria-label="Preview width"><button type="button" data-preview-width="320" aria-pressed="false">320</button><button type="button" data-preview-width="390" aria-pressed="true">390</button><button type="button" data-preview-width="430" aria-pressed="false">430</button></div><div class="resizable-preview" data-preview-container style="--preview-width:390px"><div class="device-shell"><iframe class="device-preview" title="민서 generated mobile UI preview" loading="eager" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;ko&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
-  &lt;title&gt;주문을 확인해 주세요&lt;/title&gt;
-  &lt;style&gt;/* canonical commerce-checkout-address: 한국어 + English static proof */
-:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #2563EB; --danger: #B42318; }
+  &lt;title&gt;민서&lt;/title&gt;
+  &lt;style&gt;/* canonical messenger-chat: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #0F766E; --danger: #B42318; }
 * { box-sizing: border-box; }
 html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
 body { overflow-x: hidden; }
@@ -61,110 +61,103 @@ h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
 @media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
 @media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
-/* archetype: checkout */
+/* archetype: chat */
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;main class=&quot;mobile-screen archetype-checkout&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot;&gt;
-    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
-    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;내일 도착&lt;/span&gt;&lt;h2&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Visa ···· 4242&lt;/strong&gt;&lt;small&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
-    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;main class=&quot;mobile-screen archetype-chat&quot; data-example-id=&quot;messenger-chat&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;messaging&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;민서&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;온라인 · 알림 켜짐&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;section class=&quot;message-list&quot; aria-label=&quot;최근 대화&quot;&gt;&lt;div class=&quot;bubble incoming&quot;&gt;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&lt;/div&gt;&lt;div class=&quot;bubble outgoing&quot;&gt;응, 긴 한국어 문장까지 줄바꿈 확인했어.&lt;/div&gt;&lt;small&gt;오후 3:24 · 읽음&lt;/small&gt;&lt;/section&gt;&lt;label class=&quot;composer&quot;&gt;&lt;span class=&quot;sr-only&quot;&gt;메시지 입력&lt;/span&gt;&lt;input data-local-input aria-label=&quot;메시지 입력&quot;&gt;&lt;button type=&quot;button&quot; data-secondary-action&gt;↑&lt;/button&gt;&lt;/label&gt;&lt;span class=&quot;source-id&quot; aria-hidden=&quot;true&quot;&gt;messenger-chat&lt;/span&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;메시지 보내기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
   &lt;/main&gt;
-  &lt;script type=&quot;module&quot;&gt;// commerce-checkout-address: 한국어 + English local fixture runtime
+  &lt;script type=&quot;module&quot;&gt;// messenger-chat: 한국어 + English local fixture runtime
 const proof = {
   &quot;locales&quot;: {
     &quot;ko&quot;: {
-      &quot;amount&quot;: &quot;48,900원&quot;,
+      &quot;amount&quot;: &quot;&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
       &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
       &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
       &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
       &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
-      &quot;field_label&quot;: &quot;배송지&quot;,
-      &quot;item_badge&quot;: &quot;내일 도착&quot;,
-      &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
-      &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
-      &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+      &quot;field_label&quot;: &quot;메시지 입력&quot;,
+      &quot;item_badge&quot;: &quot;온라인&quot;,
+      &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+      &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+      &quot;item_title&quot;: &quot;민서와의 대화&quot;,
       &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
       &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
       &quot;map_label&quot;: &quot;&quot;,
-      &quot;media_label&quot;: &quot;상품 미리보기&quot;,
-      &quot;message_in&quot;: &quot;&quot;,
-      &quot;message_out&quot;: &quot;&quot;,
-      &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+      &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+      &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
       &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
-      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
-      &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
-      &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
-      &quot;success_label&quot;: &quot;주문 완료&quot;,
+      &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+      &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+      &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;전송됨&quot;,
       &quot;success_title&quot;: &quot;완료됐어요&quot;,
-      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+      &quot;title&quot;: &quot;민서&quot;
     },
     &quot;en&quot;: {
-      &quot;amount&quot;: &quot;KRW 48,900&quot;,
+      &quot;amount&quot;: &quot;&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
       &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
       &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
       &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
       &quot;error_title&quot;: &quot;We could not finish that&quot;,
-      &quot;field_label&quot;: &quot;Delivery address&quot;,
-      &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
-      &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
-      &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
-      &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+      &quot;field_label&quot;: &quot;Message&quot;,
+      &quot;item_badge&quot;: &quot;Online&quot;,
+      &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+      &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+      &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
       &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
       &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
       &quot;map_label&quot;: &quot;&quot;,
-      &quot;media_label&quot;: &quot;Product preview&quot;,
-      &quot;message_in&quot;: &quot;&quot;,
-      &quot;message_out&quot;: &quot;&quot;,
-      &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+      &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+      &quot;primary_cta&quot;: &quot;Send message&quot;,
       &quot;ready_label&quot;: &quot;Static local example&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
-      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
-      &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
-      &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
-      &quot;success_label&quot;: &quot;Order complete&quot;,
+      &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+      &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+      &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+      &quot;success_label&quot;: &quot;Sent&quot;,
       &quot;success_title&quot;: &quot;All set&quot;,
-      &quot;title&quot;: &quot;Review your order&quot;
+      &quot;title&quot;: &quot;Minseo&quot;
     }
   },
   &quot;fixtures&quot;: {
-    &quot;order_summary&quot;: {
-      &quot;quantity&quot;: 1,
-      &quot;sku&quot;: &quot;shirt-001&quot;,
-      &quot;total_krw&quot;: 48900
-    },
-    &quot;address_default&quot;: {
-      &quot;label&quot;: &quot;서울시 중구 세종대로 1&quot;,
-      &quot;selected&quot;: true
-    },
-    &quot;payment_card&quot;: {
-      &quot;brand&quot;: &quot;Visa&quot;,
-      &quot;execution&quot;: &quot;disabled&quot;,
-      &quot;last4&quot;: &quot;4242&quot;
+    &quot;conversation_default&quot;: {
+      &quot;delivery&quot;: &quot;read&quot;,
+      &quot;messages&quot;: 2,
+      &quot;network&quot;: false,
+      &quot;offline_queue&quot;: false,
+      &quot;participant&quot;: &quot;민서&quot;
     }
   },
   &quot;states&quot;: {
     &quot;screen&quot;: [
       &quot;default&quot;,
       &quot;loading&quot;,
+      &quot;empty&quot;,
       &quot;error&quot;,
+      &quot;offline&quot;,
       &quot;success&quot;
     ],
     &quot;inputs&quot;: [
       &quot;empty&quot;,
       &quot;focused&quot;,
       &quot;filled&quot;,
-      &quot;validation_error&quot;,
       &quot;keyboard&quot;,
       &quot;disabled&quot;
     ],
     &quot;cta&quot;: [
       &quot;disabled&quot;,
       &quot;enabled&quot;,
-      &quot;pressed&quot;,
       &quot;loading&quot;,
       &quot;success&quot;
     ]
@@ -201,20 +194,20 @@ renderLocale();
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
   &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
-  &lt;title&gt;주문을 확인해 주세요&lt;/title&gt;
+  &lt;title&gt;민서&lt;/title&gt;
   &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;main class=&quot;mobile-screen archetype-checkout&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot;&gt;
-    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;주문을 확인해 주세요&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
-    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;article class=&quot;summary-card&quot;&gt;&lt;span class=&quot;tag&quot;&gt;내일 도착&lt;/span&gt;&lt;h2&gt;데일리 코튼 셔츠&lt;/h2&gt;&lt;p&gt;오프화이트 · M · 수량 1&lt;/p&gt;&lt;strong&gt;48,900원&lt;/strong&gt;&lt;/article&gt;&lt;label class=&quot;field&quot;&gt;&lt;span&gt;배송지&lt;/span&gt;&lt;input data-local-input inputmode=&quot;text&quot; aria-label=&quot;배송지&quot;&gt;&lt;/label&gt;&lt;section class=&quot;payment-row&quot; aria-label=&quot;Visa ···· 4242&quot;&gt;&lt;span class=&quot;payment-mark&quot;&gt;V&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Visa ···· 4242&lt;/strong&gt;&lt;small&gt;일시불 · 결제 실행 없음&lt;/small&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;
-    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;48,900원 결제하기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
+  &lt;main class=&quot;mobile-screen archetype-chat&quot; data-example-id=&quot;messenger-chat&quot; data-state=&quot;default&quot;&gt;
+    &lt;header class=&quot;screen-header&quot;&gt;&lt;div&gt;&lt;p class=&quot;eyebrow&quot;&gt;messaging&lt;/p&gt;&lt;h1 data-i18n=&quot;title&quot;&gt;민서&lt;/h1&gt;&lt;p data-i18n=&quot;subtitle&quot;&gt;온라인 · 알림 켜짐&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;locale-button&quot; type=&quot;button&quot; data-locale aria-label=&quot;English&quot;&gt;EN&lt;/button&gt;&lt;/header&gt;
+    &lt;section class=&quot;screen-content&quot; aria-live=&quot;polite&quot;&gt;&lt;section class=&quot;message-list&quot; aria-label=&quot;최근 대화&quot;&gt;&lt;div class=&quot;bubble incoming&quot;&gt;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&lt;/div&gt;&lt;div class=&quot;bubble outgoing&quot;&gt;응, 긴 한국어 문장까지 줄바꿈 확인했어.&lt;/div&gt;&lt;small&gt;오후 3:24 · 읽음&lt;/small&gt;&lt;/section&gt;&lt;label class=&quot;composer&quot;&gt;&lt;span class=&quot;sr-only&quot;&gt;메시지 입력&lt;/span&gt;&lt;input data-local-input aria-label=&quot;메시지 입력&quot;&gt;&lt;button type=&quot;button&quot; data-secondary-action&gt;↑&lt;/button&gt;&lt;/label&gt;&lt;span class=&quot;source-id&quot; aria-hidden=&quot;true&quot;&gt;messenger-chat&lt;/span&gt;&lt;/section&gt;
+    &lt;footer class=&quot;fixed-action&quot;&gt;&lt;button class=&quot;primary-action&quot; type=&quot;button&quot; data-primary-action data-i18n=&quot;primary_cta&quot;&gt;메시지 보내기&lt;/button&gt;&lt;p class=&quot;status-text&quot; data-status&gt;정적 로컬 예시&lt;/p&gt;&lt;/footer&gt;
   &lt;/main&gt;
   &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>styles.css</strong><button type="button" data-copy-source="source-html_css-1">Copy file</button></div><pre tabindex="0"><code id="source-html_css-1">/* canonical commerce-checkout-address: 한국어 + English static proof */
-:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #2563EB; --danger: #B42318; }
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>styles.css</strong><button type="button" data-copy-source="source-html_css-1">Copy file</button></div><pre tabindex="0"><code id="source-html_css-1">/* canonical messenger-chat: 한국어 + English static proof */
+:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --radius: 12px; --fixed-height: 84px; --bottom-clearance: 100px; --text: #111827; --surface: #FFFFFF; --primary: #0F766E; --danger: #B42318; }
 * { box-sizing: border-box; }
 html, body { min-width: 320px; min-height: 100%; margin: 0; background: #e8edf4; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
 body { overflow-x: hidden; }
@@ -268,102 +261,95 @@ h1 { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -.35px; }
 @media (max-width: 374px) { h1 { font-size: 23px; line-height: 30px; } .map-surface { min-height: 230px; } .message-list { min-height: 320px; } }
 @media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 16px 44px rgb(15 23 42 / .16); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
-/* archetype: checkout */
-</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>app.js</strong><button type="button" data-copy-source="source-html_css-2">Copy file</button></div><pre tabindex="0"><code id="source-html_css-2">// commerce-checkout-address: 한국어 + English local fixture runtime
+/* archetype: chat */
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>app.js</strong><button type="button" data-copy-source="source-html_css-2">Copy file</button></div><pre tabindex="0"><code id="source-html_css-2">// messenger-chat: 한국어 + English local fixture runtime
 const proof = {
   &quot;locales&quot;: {
     &quot;ko&quot;: {
-      &quot;amount&quot;: &quot;48,900원&quot;,
+      &quot;amount&quot;: &quot;&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
       &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
       &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
       &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
       &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
-      &quot;field_label&quot;: &quot;배송지&quot;,
-      &quot;item_badge&quot;: &quot;내일 도착&quot;,
-      &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
-      &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
-      &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+      &quot;field_label&quot;: &quot;메시지 입력&quot;,
+      &quot;item_badge&quot;: &quot;온라인&quot;,
+      &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+      &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+      &quot;item_title&quot;: &quot;민서와의 대화&quot;,
       &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
       &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
       &quot;map_label&quot;: &quot;&quot;,
-      &quot;media_label&quot;: &quot;상품 미리보기&quot;,
-      &quot;message_in&quot;: &quot;&quot;,
-      &quot;message_out&quot;: &quot;&quot;,
-      &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+      &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+      &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
       &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
-      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
-      &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
-      &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
-      &quot;success_label&quot;: &quot;주문 완료&quot;,
+      &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+      &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+      &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+      &quot;success_label&quot;: &quot;전송됨&quot;,
       &quot;success_title&quot;: &quot;완료됐어요&quot;,
-      &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+      &quot;title&quot;: &quot;민서&quot;
     },
     &quot;en&quot;: {
-      &quot;amount&quot;: &quot;KRW 48,900&quot;,
+      &quot;amount&quot;: &quot;&quot;,
       &quot;confirm_label&quot;: &quot;&quot;,
       &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
       &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
       &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
       &quot;error_title&quot;: &quot;We could not finish that&quot;,
-      &quot;field_label&quot;: &quot;Delivery address&quot;,
-      &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
-      &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
-      &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
-      &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+      &quot;field_label&quot;: &quot;Message&quot;,
+      &quot;item_badge&quot;: &quot;Online&quot;,
+      &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+      &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+      &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
       &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
       &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
       &quot;map_label&quot;: &quot;&quot;,
-      &quot;media_label&quot;: &quot;Product preview&quot;,
-      &quot;message_in&quot;: &quot;&quot;,
-      &quot;message_out&quot;: &quot;&quot;,
-      &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
+      &quot;media_label&quot;: &quot;&quot;,
+      &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+      &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+      &quot;primary_cta&quot;: &quot;Send message&quot;,
       &quot;ready_label&quot;: &quot;Static local example&quot;,
       &quot;risk_notice&quot;: &quot;&quot;,
-      &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
-      &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
-      &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
-      &quot;success_label&quot;: &quot;Order complete&quot;,
+      &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+      &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+      &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+      &quot;success_label&quot;: &quot;Sent&quot;,
       &quot;success_title&quot;: &quot;All set&quot;,
-      &quot;title&quot;: &quot;Review your order&quot;
+      &quot;title&quot;: &quot;Minseo&quot;
     }
   },
   &quot;fixtures&quot;: {
-    &quot;order_summary&quot;: {
-      &quot;quantity&quot;: 1,
-      &quot;sku&quot;: &quot;shirt-001&quot;,
-      &quot;total_krw&quot;: 48900
-    },
-    &quot;address_default&quot;: {
-      &quot;label&quot;: &quot;서울시 중구 세종대로 1&quot;,
-      &quot;selected&quot;: true
-    },
-    &quot;payment_card&quot;: {
-      &quot;brand&quot;: &quot;Visa&quot;,
-      &quot;execution&quot;: &quot;disabled&quot;,
-      &quot;last4&quot;: &quot;4242&quot;
+    &quot;conversation_default&quot;: {
+      &quot;delivery&quot;: &quot;read&quot;,
+      &quot;messages&quot;: 2,
+      &quot;network&quot;: false,
+      &quot;offline_queue&quot;: false,
+      &quot;participant&quot;: &quot;민서&quot;
     }
   },
   &quot;states&quot;: {
     &quot;screen&quot;: [
       &quot;default&quot;,
       &quot;loading&quot;,
+      &quot;empty&quot;,
       &quot;error&quot;,
+      &quot;offline&quot;,
       &quot;success&quot;
     ],
     &quot;inputs&quot;: [
       &quot;empty&quot;,
       &quot;focused&quot;,
       &quot;filled&quot;,
-      &quot;validation_error&quot;,
       &quot;keyboard&quot;,
       &quot;disabled&quot;
     ],
     &quot;cta&quot;: [
       &quot;disabled&quot;,
       &quot;enabled&quot;,
-      &quot;pressed&quot;,
       &quot;loading&quot;,
       &quot;success&quot;
     ]
@@ -390,14 +376,14 @@ primary.addEventListener(&#39;click&#39;, () =&gt; {
 });
 window.__MOBILE_UI_PROOF__ = proof;
 renderLocale();
-</code></pre></article></section><section id="panel-react_native" role="tabpanel" aria-labelledby="tab-react_native" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.tsx</strong><button type="button" data-copy-source="source-react_native-0">Copy file</button></div><pre tabindex="0"><code id="source-react_native-0">// Generated from canonical IR commerce-checkout-address; 한국어 + English; fixture-only.
+</code></pre></article></section><section id="panel-react_native" role="tabpanel" aria-labelledby="tab-react_native" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.tsx</strong><button type="button" data-copy-source="source-react_native-0">Copy file</button></div><pre tabindex="0"><code id="source-react_native-0">// Generated from canonical IR messenger-chat; 한국어 + English; fixture-only.
 import React, { useMemo, useState } from &#39;react&#39;;
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from &#39;react-native&#39;;
 import { SafeAreaView } from &#39;react-native-safe-area-context&#39;;
 import { fixtures } from &#39;./fixtures&#39;;
 
 type Locale = keyof typeof fixtures;
-export function CommerceCheckoutAddressScreen() {
+export function MessengerChatScreen() {
   const [locale, setLocale] = useState&lt;Locale&gt;(&#39;ko&#39;);
   const [screenState, setScreenState] = useState&lt;&#39;default&#39; | &#39;success&#39;&gt;(&#39;default&#39;);
   const model = useMemo(() =&gt; fixtures[locale], [locale]);
@@ -405,7 +391,7 @@ export function CommerceCheckoutAddressScreen() {
     &lt;KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === &#39;ios&#39; ? &#39;padding&#39; : &#39;height&#39;}&gt;
       &lt;ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps=&quot;handled&quot; automaticallyAdjustKeyboardInsets&gt;
         &lt;View style={styles.header}&gt;&lt;View style={styles.flex}&gt;&lt;Text accessibilityRole=&quot;header&quot; allowFontScaling style={styles.title}&gt;{model.title}&lt;/Text&gt;&lt;Text allowFontScaling style={styles.muted}&gt;{model.subtitle}&lt;/Text&gt;&lt;/View&gt;&lt;Pressable accessibilityRole=&quot;button&quot; onPress={() =&gt; setLocale(locale === &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;)} style={styles.locale}&gt;&lt;Text&gt;{locale === &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
-        &lt;View style={styles.card}&gt;&lt;Text style={styles.badge}&gt;{model.item_badge}&lt;/Text&gt;&lt;Text style={styles.strong}&gt;{model.item_title}&lt;/Text&gt;&lt;Text style={styles.muted}&gt;{model.item_body}&lt;/Text&gt;&lt;Text style={styles.amount}&gt;{model.amount}&lt;/Text&gt;&lt;/View&gt;&lt;TextInput accessibilityLabel={model.field_label} style={styles.input} /&gt;&lt;View style={styles.row}&gt;&lt;View style={styles.mark}&gt;&lt;Text style={styles.markText}&gt;V&lt;/Text&gt;&lt;/View&gt;&lt;Text style={styles.strong}&gt;{model.secondary_label}&lt;/Text&gt;&lt;/View&gt;
+        &lt;View style={styles.messages}&gt;&lt;Text style={styles.incoming}&gt;{model.message_in}&lt;/Text&gt;&lt;Text style={styles.outgoing}&gt;{model.message_out}&lt;/Text&gt;&lt;Text style={styles.time}&gt;{model.item_meta}&lt;/Text&gt;&lt;/View&gt;&lt;View style={styles.composer}&gt;&lt;TextInput accessibilityLabel={model.field_label} style={[styles.input, styles.flex]} /&gt;&lt;Pressable accessibilityRole=&quot;button&quot; style={styles.send}&gt;&lt;Text style={styles.markText}&gt;↑&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
       &lt;/ScrollView&gt;
       &lt;View style={styles.fixed}&gt;&lt;Pressable accessibilityRole=&quot;button&quot; accessibilityLabel={model.primary_cta} onPress={() =&gt; setScreenState(&#39;success&#39;)} style={styles.action}&gt;&lt;Text style={styles.actionText}&gt;{screenState === &#39;success&#39; ? model.success_label : model.primary_cta}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;
     &lt;/KeyboardAvoidingView&gt;
@@ -414,100 +400,100 @@ export function CommerceCheckoutAddressScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: &#39;#FFFFFF&#39; }, flex: { flex: 1 }, content: { paddingHorizontal: 16, paddingTop: 24, paddingBottom: 218, gap: 12 },
-  header: { flexDirection: &#39;row&#39;, gap: 12, alignItems: &#39;flex-start&#39; }, title: { color: &#39;#111827&#39;, fontSize: 26, lineHeight: 34, fontWeight: &#39;700&#39; }, muted: { color: &#39;#5B6472&#39;, lineHeight: 22 }, strong: { color: &#39;#111827&#39;, fontWeight: &#39;700&#39;, fontSize: 17 }, amount: { marginTop: 12, fontSize: 24, fontWeight: &#39;800&#39; }, badge: { color: &#39;#2563EB&#39;, fontWeight: &#39;800&#39; },
-  locale: { minWidth: 44, minHeight: 44, borderRadius: 22, borderWidth: 1, borderColor: &#39;#D7DCE3&#39;, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39; }, input: { minHeight: 52, borderRadius: 12, borderWidth: 1, borderColor: &#39;#AEB6C2&#39;, paddingHorizontal: 16 }, card: { gap: 12, padding: 16, borderRadius: 12, backgroundColor: &#39;#F7F9FC&#39; }, row: { flexDirection: &#39;row&#39;, alignItems: &#39;center&#39;, gap: 12 }, mark: { width: 44, height: 44, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; }, markText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; },
-  map: { minHeight: 280, borderRadius: 18, backgroundColor: &#39;#DFEEE5&#39;, overflow: &#39;hidden&#39; }, route: { position: &#39;absolute&#39;, top: 105, left: 88, width: 170, height: 72, borderRightWidth: 5, borderBottomWidth: 5, borderColor: &#39;#2563EB&#39;, borderRadius: 36 }, pinA: { position: &#39;absolute&#39;, top: 64, left: 65, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#2563EB&#39; }, pinB: { position: &#39;absolute&#39;, right: 58, bottom: 54, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#2563EB&#39; }, eta: { position: &#39;absolute&#39;, top: 16, right: 16, padding: 10, borderRadius: 10, backgroundColor: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; }, risk: { color: &#39;#B42318&#39;, lineHeight: 22 },
-  stories: { flexDirection: &#39;row&#39;, gap: 12 }, story: { width: 56, height: 56, borderRadius: 28, borderWidth: 3, borderColor: &#39;#2563EB&#39;, textAlign: &#39;center&#39;, paddingTop: 17, fontWeight: &#39;800&#39; }, avatar: { width: 44, height: 44, borderRadius: 22, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; }, media: { minHeight: 220, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#E8EDF4&#39; },
-  messages: { minHeight: 390, justifyContent: &#39;flex-end&#39;, gap: 12 }, incoming: { alignSelf: &#39;flex-start&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, backgroundColor: &#39;#EDF0F4&#39; }, outgoing: { alignSelf: &#39;flex-end&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#2563EB&#39; }, time: { alignSelf: &#39;center&#39;, color: &#39;#717B89&#39; }, composer: { flexDirection: &#39;row&#39;, gap: 12 }, send: { width: 52, height: 52, borderRadius: 26, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; },
-  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: &#39;#FFFFFF&#39; }, action: { minHeight: 52, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#2563EB&#39; }, actionText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39;, fontSize: 16 },
+  header: { flexDirection: &#39;row&#39;, gap: 12, alignItems: &#39;flex-start&#39; }, title: { color: &#39;#111827&#39;, fontSize: 26, lineHeight: 34, fontWeight: &#39;700&#39; }, muted: { color: &#39;#5B6472&#39;, lineHeight: 22 }, strong: { color: &#39;#111827&#39;, fontWeight: &#39;700&#39;, fontSize: 17 }, amount: { marginTop: 12, fontSize: 24, fontWeight: &#39;800&#39; }, badge: { color: &#39;#0F766E&#39;, fontWeight: &#39;800&#39; },
+  locale: { minWidth: 44, minHeight: 44, borderRadius: 22, borderWidth: 1, borderColor: &#39;#D7DCE3&#39;, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39; }, input: { minHeight: 52, borderRadius: 12, borderWidth: 1, borderColor: &#39;#AEB6C2&#39;, paddingHorizontal: 16 }, card: { gap: 12, padding: 16, borderRadius: 12, backgroundColor: &#39;#F7F9FC&#39; }, row: { flexDirection: &#39;row&#39;, alignItems: &#39;center&#39;, gap: 12 }, mark: { width: 44, height: 44, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; }, markText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; },
+  map: { minHeight: 280, borderRadius: 18, backgroundColor: &#39;#DFEEE5&#39;, overflow: &#39;hidden&#39; }, route: { position: &#39;absolute&#39;, top: 105, left: 88, width: 170, height: 72, borderRightWidth: 5, borderBottomWidth: 5, borderColor: &#39;#0F766E&#39;, borderRadius: 36 }, pinA: { position: &#39;absolute&#39;, top: 64, left: 65, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#0F766E&#39; }, pinB: { position: &#39;absolute&#39;, right: 58, bottom: 54, padding: 12, borderRadius: 24, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#0F766E&#39; }, eta: { position: &#39;absolute&#39;, top: 16, right: 16, padding: 10, borderRadius: 10, backgroundColor: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39; }, risk: { color: &#39;#B42318&#39;, lineHeight: 22 },
+  stories: { flexDirection: &#39;row&#39;, gap: 12 }, story: { width: 56, height: 56, borderRadius: 28, borderWidth: 3, borderColor: &#39;#0F766E&#39;, textAlign: &#39;center&#39;, paddingTop: 17, fontWeight: &#39;800&#39; }, avatar: { width: 44, height: 44, borderRadius: 22, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; }, media: { minHeight: 220, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#E8EDF4&#39; },
+  messages: { minHeight: 390, justifyContent: &#39;flex-end&#39;, gap: 12 }, incoming: { alignSelf: &#39;flex-start&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, backgroundColor: &#39;#EDF0F4&#39; }, outgoing: { alignSelf: &#39;flex-end&#39;, maxWidth: &#39;78%&#39;, padding: 12, borderRadius: 18, color: &#39;#FFFFFF&#39;, backgroundColor: &#39;#0F766E&#39; }, time: { alignSelf: &#39;center&#39;, color: &#39;#717B89&#39; }, composer: { flexDirection: &#39;row&#39;, gap: 12 }, send: { width: 52, height: 52, borderRadius: 26, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; },
+  fixed: { minHeight: 84, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: &#39;#FFFFFF&#39; }, action: { minHeight: 52, borderRadius: 12, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;, backgroundColor: &#39;#0F766E&#39; }, actionText: { color: &#39;#FFFFFF&#39;, fontWeight: &#39;800&#39;, fontSize: 16 },
 });
-</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.ts</strong><button type="button" data-copy-source="source-react_native-1">Copy file</button></div><pre tabindex="0"><code id="source-react_native-1">// commerce-checkout-address: 한국어 + English canonical fixtures
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.ts</strong><button type="button" data-copy-source="source-react_native-1">Copy file</button></div><pre tabindex="0"><code id="source-react_native-1">// messenger-chat: 한국어 + English canonical fixtures
 export const fixtures = {
   &quot;ko&quot;: {
-    &quot;amount&quot;: &quot;48,900원&quot;,
+    &quot;amount&quot;: &quot;&quot;,
     &quot;confirm_label&quot;: &quot;&quot;,
     &quot;empty_body&quot;: &quot;아래 기본 동작으로 시작해 보세요.&quot;,
     &quot;empty_title&quot;: &quot;아직 내용이 없어요&quot;,
     &quot;error_body&quot;: &quot;표시된 정보를 확인하고 다시 시도해 주세요.&quot;,
     &quot;error_title&quot;: &quot;완료하지 못했어요&quot;,
-    &quot;field_label&quot;: &quot;배송지&quot;,
-    &quot;item_badge&quot;: &quot;내일 도착&quot;,
-    &quot;item_body&quot;: &quot;오프화이트 · M · 수량 1&quot;,
-    &quot;item_meta&quot;: &quot;일시불 · 결제 실행 없음&quot;,
-    &quot;item_title&quot;: &quot;데일리 코튼 셔츠&quot;,
+    &quot;field_label&quot;: &quot;메시지 입력&quot;,
+    &quot;item_badge&quot;: &quot;온라인&quot;,
+    &quot;item_body&quot;: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;,
+    &quot;item_meta&quot;: &quot;오후 3:24 · 읽음&quot;,
+    &quot;item_title&quot;: &quot;민서와의 대화&quot;,
     &quot;loading_body&quot;: &quot;네트워크 요청 없이 로컬 예시를 불러오고 있습니다.&quot;,
     &quot;loading_title&quot;: &quot;화면을 준비하고 있어요&quot;,
     &quot;map_label&quot;: &quot;&quot;,
-    &quot;media_label&quot;: &quot;상품 미리보기&quot;,
-    &quot;message_in&quot;: &quot;&quot;,
-    &quot;message_out&quot;: &quot;&quot;,
-    &quot;primary_cta&quot;: &quot;48,900원 결제하기&quot;,
+    &quot;media_label&quot;: &quot;&quot;,
+    &quot;message_in&quot;: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;,
+    &quot;message_out&quot;: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;,
+    &quot;primary_cta&quot;: &quot;메시지 보내기&quot;,
     &quot;ready_label&quot;: &quot;정적 로컬 예시&quot;,
     &quot;risk_notice&quot;: &quot;&quot;,
-    &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
-    &quot;subtitle&quot;: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;,
-    &quot;success_body&quot;: &quot;주문이 로컬 성공 상태로 변경되었습니다.&quot;,
-    &quot;success_label&quot;: &quot;주문 완료&quot;,
+    &quot;secondary_label&quot;: &quot;최근 대화&quot;,
+    &quot;subtitle&quot;: &quot;온라인 · 알림 켜짐&quot;,
+    &quot;success_body&quot;: &quot;메시지가 로컬 대화에 추가되었습니다.&quot;,
+    &quot;success_label&quot;: &quot;전송됨&quot;,
     &quot;success_title&quot;: &quot;완료됐어요&quot;,
-    &quot;title&quot;: &quot;주문을 확인해 주세요&quot;
+    &quot;title&quot;: &quot;민서&quot;
   },
   &quot;en&quot;: {
-    &quot;amount&quot;: &quot;KRW 48,900&quot;,
+    &quot;amount&quot;: &quot;&quot;,
     &quot;confirm_label&quot;: &quot;&quot;,
     &quot;empty_body&quot;: &quot;Start with the primary action below.&quot;,
     &quot;empty_title&quot;: &quot;Nothing here yet&quot;,
     &quot;error_body&quot;: &quot;Review the highlighted information and try again.&quot;,
     &quot;error_title&quot;: &quot;We could not finish that&quot;,
-    &quot;field_label&quot;: &quot;Delivery address&quot;,
-    &quot;item_badge&quot;: &quot;Arrives tomorrow&quot;,
-    &quot;item_body&quot;: &quot;Off white · M · Quantity 1&quot;,
-    &quot;item_meta&quot;: &quot;One-time · No payment execution&quot;,
-    &quot;item_title&quot;: &quot;Daily cotton shirt&quot;,
+    &quot;field_label&quot;: &quot;Message&quot;,
+    &quot;item_badge&quot;: &quot;Online&quot;,
+    &quot;item_body&quot;: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;,
+    &quot;item_meta&quot;: &quot;3:24 PM · Read&quot;,
+    &quot;item_title&quot;: &quot;Chat with Minseo&quot;,
     &quot;loading_body&quot;: &quot;The local example is loading without a network request.&quot;,
     &quot;loading_title&quot;: &quot;Preparing your screen&quot;,
     &quot;map_label&quot;: &quot;&quot;,
-    &quot;media_label&quot;: &quot;Product preview&quot;,
-    &quot;message_in&quot;: &quot;&quot;,
-    &quot;message_out&quot;: &quot;&quot;,
-    &quot;primary_cta&quot;: &quot;Pay KRW 48,900&quot;,
+    &quot;media_label&quot;: &quot;&quot;,
+    &quot;message_in&quot;: &quot;Did the screen stay aligned at 320 px?&quot;,
+    &quot;message_out&quot;: &quot;Yes, I checked wrapping with long Korean copy too.&quot;,
+    &quot;primary_cta&quot;: &quot;Send message&quot;,
     &quot;ready_label&quot;: &quot;Static local example&quot;,
     &quot;risk_notice&quot;: &quot;&quot;,
-    &quot;secondary_label&quot;: &quot;Visa ···· 4242&quot;,
-    &quot;subtitle&quot;: &quot;Confirm delivery details and the final total before placing the order.&quot;,
-    &quot;success_body&quot;: &quot;The order moved to a local success state.&quot;,
-    &quot;success_label&quot;: &quot;Order complete&quot;,
+    &quot;secondary_label&quot;: &quot;Recent conversation&quot;,
+    &quot;subtitle&quot;: &quot;Online · Notifications on&quot;,
+    &quot;success_body&quot;: &quot;The message was added to the local conversation.&quot;,
+    &quot;success_label&quot;: &quot;Sent&quot;,
     &quot;success_title&quot;: &quot;All set&quot;,
-    &quot;title&quot;: &quot;Review your order&quot;
+    &quot;title&quot;: &quot;Minseo&quot;
   }
 } as const;
-</code></pre></article></section><section id="panel-flutter" role="tabpanel" aria-labelledby="tab-flutter" hidden><article class="source-file"><div class="source-toolbar"><strong>screen.dart</strong><button type="button" data-copy-source="source-flutter-0">Copy file</button></div><pre tabindex="0"><code id="source-flutter-0">// Generated from canonical IR commerce-checkout-address; 한국어 + English; fixture-only.
+</code></pre></article></section><section id="panel-flutter" role="tabpanel" aria-labelledby="tab-flutter" hidden><article class="source-file"><div class="source-toolbar"><strong>screen.dart</strong><button type="button" data-copy-source="source-flutter-0">Copy file</button></div><pre tabindex="0"><code id="source-flutter-0">// Generated from canonical IR messenger-chat; 한국어 + English; fixture-only.
 import &#39;package:flutter/material.dart&#39;;
 import &#39;fixtures.dart&#39;;
 
-class CommerceCheckoutAddressScreen extends StatefulWidget { const CommerceCheckoutAddressScreen({super.key}); @override State&lt;CommerceCheckoutAddressScreen&gt; createState() =&gt; _CommerceCheckoutAddressScreenState(); }
-class _CommerceCheckoutAddressScreenState extends State&lt;CommerceCheckoutAddressScreen&gt; {
+class MessengerChatScreen extends StatefulWidget { const MessengerChatScreen({super.key}); @override State&lt;MessengerChatScreen&gt; createState() =&gt; _MessengerChatScreenState(); }
+class _MessengerChatScreenState extends State&lt;MessengerChatScreen&gt; {
   String locale = &#39;ko&#39;; String screenState = &#39;default&#39;;
   @override Widget build(BuildContext context) {
     final model = proofFixtures[locale]!; final media = MediaQuery.of(context); final scaler = MediaQuery.textScalerOf(context);
     return SafeArea(child: Scaffold(backgroundColor: const Color(0xFFFFFFFF), body: Column(children: [
       Expanded(child: SingleChildScrollView(key: const Key(&#39;proof-scroll&#39;), keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, padding: EdgeInsets.fromLTRB(16, 24, 16, 100 + media.viewInsets.bottom), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(model[&#39;title&#39;]!, textScaler: scaler, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)), SizedBox(height: 6), Text(model[&#39;subtitle&#39;]!)])), TextButton(onPressed: () =&gt; setState(() =&gt; locale = locale == &#39;ko&#39; ? &#39;en&#39; : &#39;ko&#39;), child: Text(locale == &#39;ko&#39; ? &#39;EN&#39; : &#39;KO&#39;))]),
-        SizedBox(height: 24), _Card(model[&#39;item_title&#39;]!, &#39;48,900원 · KRW 48,900&#39;, 16, 12), SizedBox(height: 12), TextField(decoration: InputDecoration(labelText: model[&#39;field_label&#39;])), SizedBox(height: 12), _Card(model[&#39;secondary_label&#39;]!, model[&#39;item_meta&#39;]!, 16, 12)
+        SizedBox(height: 24), SizedBox(height: 360, child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.stretch, children: [Align(alignment: Alignment.centerLeft, child: Chip(label: Text(model[&#39;message_in&#39;]!))), Align(alignment: Alignment.centerRight, child: Chip(backgroundColor: const Color(0xFF0F766E), label: Text(model[&#39;message_out&#39;]!, style: const TextStyle(color: Colors.white))))])), SizedBox(height: 12), TextField(decoration: InputDecoration(labelText: model[&#39;field_label&#39;]))
       ]))),
       Container(padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + media.padding.bottom + media.viewInsets.bottom), child: SizedBox(height: 52, width: double.infinity, child: FilledButton(onPressed: () =&gt; setState(() =&gt; screenState = &#39;success&#39;), child: Text(screenState == &#39;success&#39; ? model[&#39;success_label&#39;]! : model[&#39;primary_cta&#39;]!))))
     ])));
   }
 }
 class _Card extends StatelessWidget { const _Card(this.title, this.body, this.padding, this.radius); final String title; final String body; final double padding; final double radius; @override Widget build(BuildContext context) =&gt; Container(padding: EdgeInsets.all(padding), decoration: BoxDecoration(color: const Color(0xFFF7F9FC), borderRadius: BorderRadius.circular(radius)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w700)), const SizedBox(height: 6), Text(body)])); }
-</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.dart</strong><button type="button" data-copy-source="source-flutter-1">Copy file</button></div><pre tabindex="0"><code id="source-flutter-1">// commerce-checkout-address: 한국어 + English canonical fixtures
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>fixtures.dart</strong><button type="button" data-copy-source="source-flutter-1">Copy file</button></div><pre tabindex="0"><code id="source-flutter-1">// messenger-chat: 한국어 + English canonical fixtures
 const proofFixtures = &lt;String, Map&lt;String, String&gt;&gt;{
-  &#39;ko&#39;: {&#39;title&#39;: &#39;주문을 확인해 주세요&#39;, &#39;subtitle&#39;: &#39;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&#39;, &#39;primary_cta&#39;: &#39;48,900원 결제하기&#39;, &#39;success_label&#39;: &#39;주문 완료&#39;, &#39;field_label&#39;: &#39;배송지&#39;, &#39;secondary_label&#39;: &#39;Visa ···· 4242&#39;, &#39;item_title&#39;: &#39;데일리 코튼 셔츠&#39;, &#39;item_body&#39;: &#39;오프화이트 · M · 수량 1&#39;, &#39;item_meta&#39;: &#39;일시불 · 결제 실행 없음&#39;, &#39;amount&#39;: &#39;48,900원&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;&#39;, &#39;message_out&#39;: &#39;&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;상품 미리보기&#39;},
-  &#39;en&#39;: {&#39;title&#39;: &#39;Review your order&#39;, &#39;subtitle&#39;: &#39;Confirm delivery details and the final total before placing the order.&#39;, &#39;primary_cta&#39;: &#39;Pay KRW 48,900&#39;, &#39;success_label&#39;: &#39;Order complete&#39;, &#39;field_label&#39;: &#39;Delivery address&#39;, &#39;secondary_label&#39;: &#39;Visa ···· 4242&#39;, &#39;item_title&#39;: &#39;Daily cotton shirt&#39;, &#39;item_body&#39;: &#39;Off white · M · Quantity 1&#39;, &#39;item_meta&#39;: &#39;One-time · No payment execution&#39;, &#39;amount&#39;: &#39;KRW 48,900&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;&#39;, &#39;message_out&#39;: &#39;&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;Product preview&#39;},
+  &#39;ko&#39;: {&#39;title&#39;: &#39;민서&#39;, &#39;subtitle&#39;: &#39;온라인 · 알림 켜짐&#39;, &#39;primary_cta&#39;: &#39;메시지 보내기&#39;, &#39;success_label&#39;: &#39;전송됨&#39;, &#39;field_label&#39;: &#39;메시지 입력&#39;, &#39;secondary_label&#39;: &#39;최근 대화&#39;, &#39;item_title&#39;: &#39;민서와의 대화&#39;, &#39;item_body&#39;: &#39;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&#39;, &#39;item_meta&#39;: &#39;오후 3:24 · 읽음&#39;, &#39;amount&#39;: &#39;&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&#39;, &#39;message_out&#39;: &#39;응, 긴 한국어 문장까지 줄바꿈 확인했어.&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;&#39;},
+  &#39;en&#39;: {&#39;title&#39;: &#39;Minseo&#39;, &#39;subtitle&#39;: &#39;Online · Notifications on&#39;, &#39;primary_cta&#39;: &#39;Send message&#39;, &#39;success_label&#39;: &#39;Sent&#39;, &#39;field_label&#39;: &#39;Message&#39;, &#39;secondary_label&#39;: &#39;Recent conversation&#39;, &#39;item_title&#39;: &#39;Chat with Minseo&#39;, &#39;item_body&#39;: &#39;Recent messages and the composer remain visible with the keyboard open.&#39;, &#39;item_meta&#39;: &#39;3:24 PM · Read&#39;, &#39;amount&#39;: &#39;&#39;, &#39;risk_notice&#39;: &#39;&#39;, &#39;confirm_label&#39;: &#39;&#39;, &#39;message_in&#39;: &#39;Did the screen stay aligned at 320 px?&#39;, &#39;message_out&#39;: &#39;Yes, I checked wrapping with long Korean copy too.&#39;, &#39;map_label&#39;: &#39;&#39;, &#39;media_label&#39;: &#39;&#39;},
 };
-</code></pre></article></section><section id="panel-swiftui" role="tabpanel" aria-labelledby="tab-swiftui" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.swift</strong><button type="button" data-copy-source="source-swiftui-0">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-0">// Generated from canonical IR commerce-checkout-address; 한국어 + English; fixture-only.
+</code></pre></article></section><section id="panel-swiftui" role="tabpanel" aria-labelledby="tab-swiftui" hidden><article class="source-file"><div class="source-toolbar"><strong>Screen.swift</strong><button type="button" data-copy-source="source-swiftui-0">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-0">// Generated from canonical IR messenger-chat; 한국어 + English; fixture-only.
 import SwiftUI
 
-struct CommerceCheckoutAddressScreen: View {
+struct MessengerChatScreen: View {
   @Environment(\.dynamicTypeSize) private var dynamicTypeSize
   @FocusState private var focused: Bool
   @State private var locale = &quot;ko&quot;; @State private var screenState = &quot;default&quot;; @State private var input = &quot;&quot;; @State private var secondaryInput = &quot;&quot;
@@ -515,7 +501,7 @@ struct CommerceCheckoutAddressScreen: View {
   var body: some View {
     ScrollView { VStack(alignment: .leading, spacing: 12) {
       HStack(alignment: .top) { VStack(alignment: .leading, spacing: 6) { Text(model.title).font(.system(size: 26, weight: .bold)).accessibilityAddTraits(.isHeader); Text(model.subtitle).font(.body).foregroundStyle(.secondary) }; Spacer(); Button(locale == &quot;ko&quot; ? &quot;EN&quot; : &quot;KO&quot;) { locale = locale == &quot;ko&quot; ? &quot;en&quot; : &quot;ko&quot; }.frame(minWidth: 44, minHeight: 44).buttonStyle(.bordered) }
-      proofCard(model.item_title, model.amount); TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).frame(minHeight: 52).focused($focused); proofCard(model.secondary_label, model.item_meta)
+      VStack(spacing: 12) { Spacer(minLength: 260); Text(model.message_in).proofBubble(.secondary.opacity(0.14), alignment: .leading); Text(model.message_out).proofBubble(Color.accentColor, foreground: .white, alignment: .trailing); Text(model.item_meta).font(.caption).foregroundStyle(.secondary) }; HStack { TextField(model.field_label, text: $input).textFieldStyle(.roundedBorder).focused($focused); Button(&quot;↑&quot;) { screenState = &quot;success&quot; }.frame(width: 52, height: 52).buttonStyle(.borderedProminent).clipShape(Circle()) }
     }.padding(.horizontal, 16).padding(.top, 24).padding(.bottom, 100).frame(maxWidth: .infinity, alignment: .leading) }
     .scrollDismissesKeyboard(.interactively).dynamicTypeSize(...DynamicTypeSize.accessibility3)
     .safeAreaInset(edge: .bottom, spacing: 0) { Button(screenState == &quot;success&quot; ? model.success_label : model.primary_cta) { screenState = &quot;success&quot;; focused = false }.frame(maxWidth: .infinity, minHeight: 52).buttonStyle(.borderedProminent).clipShape(RoundedRectangle(cornerRadius: 12)).padding(.horizontal, 16).padding(.vertical, 12).background(.ultraThinMaterial) }
@@ -524,11 +510,11 @@ struct CommerceCheckoutAddressScreen: View {
 }
 private extension View { func proofBubble(_ background: Color, foreground: Color = .primary, alignment: Alignment) -&gt; some View { self.padding(12).foregroundStyle(foreground).background(background, in: RoundedRectangle(cornerRadius: 18)).frame(maxWidth: .infinity, alignment: alignment) } }
 private extension Text { func proofPin() -&gt; some View { self.frame(width: 38, height: 38).foregroundStyle(.white).background(Color.accentColor, in: Circle()).overlay(Circle().stroke(.white, lineWidth: 4)) } }
-</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>Fixtures.swift</strong><button type="button" data-copy-source="source-swiftui-1">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-1">// commerce-checkout-address: 한국어 + English canonical fixtures
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>Fixtures.swift</strong><button type="button" data-copy-source="source-swiftui-1">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-1">// messenger-chat: 한국어 + English canonical fixtures
 import Foundation
 struct ProofFixture { let title: String; let subtitle: String; let primary_cta: String; let success_label: String; let field_label: String; let secondary_label: String; let item_title: String; let item_body: String; let item_meta: String; let amount: String; let risk_notice: String; let confirm_label: String; let message_in: String; let message_out: String; let map_label: String; let media_label: String }
 let proofFixtures: [String: ProofFixture] = [
-  &quot;ko&quot;: ProofFixture(title: &quot;주문을 확인해 주세요&quot;, subtitle: &quot;배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.&quot;, primary_cta: &quot;48,900원 결제하기&quot;, success_label: &quot;주문 완료&quot;, field_label: &quot;배송지&quot;, secondary_label: &quot;Visa ···· 4242&quot;, item_title: &quot;데일리 코튼 셔츠&quot;, item_body: &quot;오프화이트 · M · 수량 1&quot;, item_meta: &quot;일시불 · 결제 실행 없음&quot;, amount: &quot;48,900원&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;&quot;, message_out: &quot;&quot;, map_label: &quot;&quot;, media_label: &quot;상품 미리보기&quot;),
-  &quot;en&quot;: ProofFixture(title: &quot;Review your order&quot;, subtitle: &quot;Confirm delivery details and the final total before placing the order.&quot;, primary_cta: &quot;Pay KRW 48,900&quot;, success_label: &quot;Order complete&quot;, field_label: &quot;Delivery address&quot;, secondary_label: &quot;Visa ···· 4242&quot;, item_title: &quot;Daily cotton shirt&quot;, item_body: &quot;Off white · M · Quantity 1&quot;, item_meta: &quot;One-time · No payment execution&quot;, amount: &quot;KRW 48,900&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;&quot;, message_out: &quot;&quot;, map_label: &quot;&quot;, media_label: &quot;Product preview&quot;)
+  &quot;ko&quot;: ProofFixture(title: &quot;민서&quot;, subtitle: &quot;온라인 · 알림 켜짐&quot;, primary_cta: &quot;메시지 보내기&quot;, success_label: &quot;전송됨&quot;, field_label: &quot;메시지 입력&quot;, secondary_label: &quot;최근 대화&quot;, item_title: &quot;민서와의 대화&quot;, item_body: &quot;키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.&quot;, item_meta: &quot;오후 3:24 · 읽음&quot;, amount: &quot;&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;오늘 공유한 화면, 320px에서도 정렬 괜찮았어?&quot;, message_out: &quot;응, 긴 한국어 문장까지 줄바꿈 확인했어.&quot;, map_label: &quot;&quot;, media_label: &quot;&quot;),
+  &quot;en&quot;: ProofFixture(title: &quot;Minseo&quot;, subtitle: &quot;Online · Notifications on&quot;, primary_cta: &quot;Send message&quot;, success_label: &quot;Sent&quot;, field_label: &quot;Message&quot;, secondary_label: &quot;Recent conversation&quot;, item_title: &quot;Chat with Minseo&quot;, item_body: &quot;Recent messages and the composer remain visible with the keyboard open.&quot;, item_meta: &quot;3:24 PM · Read&quot;, amount: &quot;&quot;, risk_notice: &quot;&quot;, confirm_label: &quot;&quot;, message_in: &quot;Did the screen stay aligned at 320 px?&quot;, message_out: &quot;Yes, I checked wrapping with long Korean copy too.&quot;, map_label: &quot;&quot;, media_label: &quot;&quot;)
 ]
-</code></pre></article></section></section></main><footer><a href="../../#examples">← Back to all examples</a><span>Generated from <code>examples/proof/commerce-checkout</code></span></footer><script src="../../assets/site.js" defer></script></body></html>
+</code></pre></article></section></section></main><footer><a href="../../#examples">← Back to all examples</a><span>Generated from <code>examples/proof/messenger-chat</code></span></footer><script src="../../assets/site.js" defer></script></body></html>

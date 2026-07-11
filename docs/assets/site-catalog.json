@@ -1,15 +1,16 @@
 [
   {
     "id": "commerce-checkout-address",
+    "proofId": "commerce-checkout",
     "route": "examples/commerce-checkout-address/",
-    "title": "주문 결제",
-    "userJob": "Complete an order safely",
+    "title": "주문을 확인해 주세요",
+    "userJob": "Review an order, confirm delivery details, and submit a fixture-only payment",
     "language": "ko",
     "category": "commerce",
     "patterns": [
       "checkout",
-      "address_selection",
-      "payment_method"
+      "address-selection",
+      "payment-method"
     ],
     "states": [
       "disabled",
@@ -20,8 +21,267 @@
       "empty",
       "focused",
       "filled",
-      "invalid",
+      "validation_error",
+      "keyboard",
       "default",
+      "error"
+    ],
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "tokens": [
+      {
+        "name": "card padding",
+        "value": "16px"
+      },
+      {
+        "name": "component gap",
+        "value": "12px"
+      },
+      {
+        "name": "control height",
+        "value": "52px"
+      },
+      {
+        "name": "corner radius",
+        "value": "12px"
+      },
+      {
+        "name": "max readable line width",
+        "value": "360px"
+      },
+      {
+        "name": "screen horizontal inset",
+        "value": "16px"
+      },
+      {
+        "name": "scroll content bottom inset",
+        "value": "100px"
+      },
+      {
+        "name": "section gap",
+        "value": "16px"
+      }
+    ]
+  },
+  {
+    "id": "fintech-signup",
+    "proofId": "fintech-signup",
+    "route": "examples/fintech-signup/",
+    "title": "휴대폰 번호로 시작할게요",
+    "userJob": "Verify a phone number and understand consent before opening a financial account",
+    "language": "ko",
+    "category": "finance-fintech",
+    "patterns": [
+      "login-signup",
+      "identity-verification",
+      "fixed-bottom-action"
+    ],
+    "states": [
+      "disabled",
+      "enabled",
+      "loading",
+      "success",
+      "empty",
+      "focused",
+      "filled",
+      "validation_error",
+      "keyboard",
+      "default",
+      "error"
+    ],
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "tokens": [
+      {
+        "name": "card padding",
+        "value": "16px"
+      },
+      {
+        "name": "component gap",
+        "value": "12px"
+      },
+      {
+        "name": "control height",
+        "value": "52px"
+      },
+      {
+        "name": "corner radius",
+        "value": "12px"
+      },
+      {
+        "name": "max readable line width",
+        "value": "360px"
+      },
+      {
+        "name": "screen horizontal inset",
+        "value": "16px"
+      },
+      {
+        "name": "scroll content bottom inset",
+        "value": "100px"
+      },
+      {
+        "name": "section gap",
+        "value": "16px"
+      }
+    ]
+  },
+  {
+    "id": "messenger-chat",
+    "proofId": "messenger-chat",
+    "route": "examples/messenger-chat/",
+    "title": "민서",
+    "userJob": "Read recent context and send a message without the keyboard covering the conversation",
+    "language": "ko",
+    "category": "messaging",
+    "patterns": [
+      "chat",
+      "message-composer",
+      "conversation-list"
+    ],
+    "states": [
+      "disabled",
+      "enabled",
+      "loading",
+      "success",
+      "empty",
+      "focused",
+      "filled",
+      "keyboard",
+      "default",
+      "error",
+      "offline"
+    ],
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "tokens": [
+      {
+        "name": "card padding",
+        "value": "16px"
+      },
+      {
+        "name": "component gap",
+        "value": "12px"
+      },
+      {
+        "name": "control height",
+        "value": "52px"
+      },
+      {
+        "name": "corner radius",
+        "value": "12px"
+      },
+      {
+        "name": "max readable line width",
+        "value": "360px"
+      },
+      {
+        "name": "screen horizontal inset",
+        "value": "16px"
+      },
+      {
+        "name": "scroll content bottom inset",
+        "value": "100px"
+      },
+      {
+        "name": "section gap",
+        "value": "16px"
+      }
+    ]
+  },
+  {
+    "id": "mobility-map-booking",
+    "proofId": "mobility-map-booking",
+    "route": "examples/mobility-map-booking/",
+    "title": "이 경로로 예약할까요?",
+    "userJob": "Confirm pickup, route, fare, and cancellation terms before booking a ride",
+    "language": "ko",
+    "category": "mobility-transportation",
+    "patterns": [
+      "map-route",
+      "reservation-ticketing",
+      "location-permission"
+    ],
+    "states": [
+      "enabled",
+      "loading",
+      "success",
+      "destructive_confirmation",
+      "default",
+      "focused",
+      "permission_denied",
+      "offline",
+      "error"
+    ],
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "tokens": [
+      {
+        "name": "card padding",
+        "value": "16px"
+      },
+      {
+        "name": "component gap",
+        "value": "12px"
+      },
+      {
+        "name": "control height",
+        "value": "52px"
+      },
+      {
+        "name": "corner radius",
+        "value": "12px"
+      },
+      {
+        "name": "max readable line width",
+        "value": "360px"
+      },
+      {
+        "name": "screen horizontal inset",
+        "value": "16px"
+      },
+      {
+        "name": "scroll content bottom inset",
+        "value": "100px"
+      },
+      {
+        "name": "section gap",
+        "value": "16px"
+      }
+    ]
+  },
+  {
+    "id": "social-feed",
+    "proofId": "social-feed",
+    "route": "examples/social-feed/",
+    "title": "오늘의 커뮤니티",
+    "userJob": "Scan a community feed and understand post context before reacting",
+    "language": "ko",
+    "category": "social-community",
+    "patterns": [
+      "feed-community",
+      "content-card",
+      "bottom-tabs"
+    ],
+    "states": [
+      "enabled",
+      "loading",
+      "success",
+      "default",
+      "focused",
+      "empty",
       "error"
     ],
     "widths": [

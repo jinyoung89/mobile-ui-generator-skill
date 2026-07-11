@@ -4,3 +4,7 @@ Artifact-driven mobile UI proof gallery with complete HTML/CSS, React Native, Fl
 
 - https://jinyoung89.github.io/mobile-ui-generator-skill/
 - https://jinyoung89.github.io/mobile-ui-generator-skill/examples/commerce-checkout-address/
+- https://jinyoung89.github.io/mobile-ui-generator-skill/examples/fintech-signup/
+- https://jinyoung89.github.io/mobile-ui-generator-skill/examples/messenger-chat/
+- https://jinyoung89.github.io/mobile-ui-generator-skill/examples/mobility-map-booking/
+- https://jinyoung89.github.io/mobile-ui-generator-skill/examples/social-feed/
