@@ -19,7 +19,7 @@ test("Flutter generator emits a numeric, local-only artifact manifest", () => {
   assert.match(artifact.source, /padding: const EdgeInsets\.all\(16\)/);
   assert.match(artifact.source, /minHeight: 52/);
   assert.equal(artifact.manifest.platform, "flutter");
-  assert.deepEqual(artifact.manifest.required_fixtures, ["address_default", "payment_card"]);
+  assert.deepEqual(artifact.manifest.required_fixtures, ["order_summary", "address_default", "payment_card"]);
   assert.deepEqual(artifact.manifest.verification, { native_build: "unverified", native_capture: "unverified" });
   assert.match(artifact.manifest.assembly_command, /flutter pub get/);
   assert.match(artifact.manifest.run_command, /flutter run/);

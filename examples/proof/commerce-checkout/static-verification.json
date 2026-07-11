@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "example_id": "commerce-checkout-address",
+  "status": "passed",
+  "verification_scope": "canonical-spec-and-static-source",
+  "spec_valid": true,
+  "source_static_valid": true,
+  "bilingual_fixtures_present": true,
+  "numeric_tokens_resolved": true,
+  "platform_parity_warnings": [],
+  "spec_sha256": "e78cbf2ec93e7f11aa4450193cdac306c788eb1b79d9bc3a6a65e8200bb0f593",
+  "canonical_ir_sha256": "4c056de2a5ef21992aae8e679e3918522eb2265393aa3ba4800ece402a6a6223",
+  "request_sha256": "7be98305986f82db5a8c2ea050a19f75a5fe74377c1f71d3bad196713ab6e28a",
+  "source_sha256": {
+    "html-css/index.html": "9de239ecf32ab60f999bee8a109fe73434b5273cd5dec3f6746aa73e0913f2bc",
+    "html-css/styles.css": "c8d1fd68475ff00ffb410c90785c51e139f8e59c40f0688a83ebc83f13696508",
+    "html-css/app.js": "fdad4b18126819b623eeb71400d9d52a6413ac228a610cd68b159280990e282f",
+    "react-native/Screen.tsx": "a87e912192e80715870c921ee7c54ef74eeb87a8d0dedf3031e2532b6ba65fa4",
+    "react-native/fixtures.ts": "ba2dc0de3919c0b18d7585bb8456e0f2c9e552c9d6612bbda166f8ae81b9d6ed",
+    "flutter/screen.dart": "323747c352d26ea21b5aa8986c3baace06f3e8223de1764ff40754c0ef53d94f",
+    "flutter/fixtures.dart": "6f4cfca18cf698f7034a8a0e9a1647ab69a5af246c4f51ba7e05f432617a95fc",
+    "swiftui/Screen.swift": "4198758664228bb23ab30e74fd335223cdf707171498312333e435aa411b3cfb",
+    "swiftui/Fixtures.swift": "70a2a848979b8b2859412bffd0ac3c0b06c7b2ec553527de59e4b2e21cb61d57"
+  },
+  "checked_targets": [
+    "html-css",
+    "react-native",
+    "flutter",
+    "swiftui"
+  ],
+  "native_build": "not_run_not_required",
+  "native_execution": "not_run_not_required",
+  "native_capture": "not_run_not_required",
+  "generator_version": "1.0.0"
+}

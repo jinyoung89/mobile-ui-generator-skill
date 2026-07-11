@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "example_id": "social-feed",
+  "status": "passed",
+  "verification_scope": "canonical-spec-and-static-source",
+  "spec_valid": true,
+  "source_static_valid": true,
+  "bilingual_fixtures_present": true,
+  "numeric_tokens_resolved": true,
+  "platform_parity_warnings": [],
+  "spec_sha256": "7937d244f96c24858ae2d86b361736b94caeb6e6ea4793a8c0d4305c6171d49b",
+  "canonical_ir_sha256": "45d2d17003a8f16c411c63e3829dbbb5c35c454985000b814c9b680662824e0e",
+  "request_sha256": "e1264968f3686f16177959c2ec61f836d3ff4c7746e42588760c3b4ff0c3a653",
+  "source_sha256": {
+    "html-css/index.html": "75879ade854b095ea6399d47acd14f02f163299299d37da1405b700e8d6a1bb9",
+    "html-css/styles.css": "895738662b733535d84a5c4e303ec21fb089fbeb080298f67d274157c0c1951c",
+    "html-css/app.js": "092df543f200416c57591a732422d9bef799cdc35fca1e96d915e580f9db2c16",
+    "react-native/Screen.tsx": "7940f687a03c6acd9a076abb115aa7b995fff50b122ce0adb0ec2df65347654b",
+    "react-native/fixtures.ts": "69b79e38125c659f9153cc2a3f3ec775253f557e99d18072b50095c004ef1796",
+    "flutter/screen.dart": "9db0f9a85d64177597d47eebb35c8e1846888b8495e707c9b66b90af771906ee",
+    "flutter/fixtures.dart": "198e0b03e7f524ade014b2c94c4f4a278ba651501f63eff08bfee43ef0433778",
+    "swiftui/Screen.swift": "fa5356854a02849928325892e256a9e95c2add40b2bb19dfdb3b0e1193d6d1e9",
+    "swiftui/Fixtures.swift": "654adad88b89105c052b05a5439619369682ddcc12eaefd8f659f328cdf710d5"
+  },
+  "checked_targets": [
+    "html-css",
+    "react-native",
+    "flutter",
+    "swiftui"
+  ],
+  "native_build": "not_run_not_required",
+  "native_execution": "not_run_not_required",
+  "native_capture": "not_run_not_required",
+  "generator_version": "1.0.0"
+}

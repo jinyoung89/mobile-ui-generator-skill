@@ -1,0 +1,7 @@
+// commerce-checkout-address: 한국어 + English canonical fixtures
+import Foundation
+struct ProofFixture { let title: String; let subtitle: String; let primary_cta: String; let success_label: String; let field_label: String; let secondary_label: String; let item_title: String; let item_body: String; let item_meta: String; let amount: String; let risk_notice: String; let confirm_label: String; let message_in: String; let message_out: String; let map_label: String; let media_label: String }
+let proofFixtures: [String: ProofFixture] = [
+  "ko": ProofFixture(title: "주문을 확인해 주세요", subtitle: "배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.", primary_cta: "48,900원 결제하기", success_label: "주문 완료", field_label: "배송지", secondary_label: "Visa ···· 4242", item_title: "데일리 코튼 셔츠", item_body: "오프화이트 · M · 수량 1", item_meta: "일시불 · 결제 실행 없음", amount: "48,900원", risk_notice: "", confirm_label: "", message_in: "", message_out: "", map_label: "", media_label: "상품 미리보기"),
+  "en": ProofFixture(title: "Review your order", subtitle: "Confirm delivery details and the final total before placing the order.", primary_cta: "Pay KRW 48,900", success_label: "Order complete", field_label: "Delivery address", secondary_label: "Visa ···· 4242", item_title: "Daily cotton shirt", item_body: "Off white · M · Quantity 1", item_meta: "One-time · No payment execution", amount: "KRW 48,900", risk_notice: "", confirm_label: "", message_in: "", message_out: "", map_label: "", media_label: "Product preview")
+]

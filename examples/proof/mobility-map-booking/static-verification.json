@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "example_id": "mobility-map-booking",
+  "status": "passed",
+  "verification_scope": "canonical-spec-and-static-source",
+  "spec_valid": true,
+  "source_static_valid": true,
+  "bilingual_fixtures_present": true,
+  "numeric_tokens_resolved": true,
+  "platform_parity_warnings": [],
+  "spec_sha256": "1a283ce0110584d49433d48ce93c282085cb45c9379733257da4108b81945a2c",
+  "canonical_ir_sha256": "006794a9236f220f5919282c25bf0371e151aa3db1985f3cabeb5339547db2a0",
+  "request_sha256": "bdc00c925599b401afec6e3ec74215abd45c53e96ad2bbd3a9b49d795ee0b6e7",
+  "source_sha256": {
+    "html-css/index.html": "02bae178871fac8931cebe0b52cb246d979d76b11b28b20b57986254da396c96",
+    "html-css/styles.css": "4a964b51f6464e1a0ded345c1ec8fa7a19c89a4e0bc34ea101d93216e4a9863a",
+    "html-css/app.js": "941b7b63e45f8e945620624e06bed372ce2ef44be57ae9c25f49713d584937ab",
+    "react-native/Screen.tsx": "f8ecb211c814d21a1fe0d1310fe02403447800526c2334d4b9fe6b474c481fd1",
+    "react-native/fixtures.ts": "fc7f7ff015ceca505d4f38919de858b572a1666ea7e1941eae91141b6ef6d7ec",
+    "flutter/screen.dart": "2208e548c2f32f2f8db1b6d7ac54d3298893eaeb12483b9822717dbcee48e2c8",
+    "flutter/fixtures.dart": "cc5da41ad7fbc3143735466b9f30e70545327893dfe3a579d728ebb26511afa3",
+    "swiftui/Screen.swift": "fa77a6502dff8d8d43a452c59e298a442c4caf248838508bf5a2a363077a5e9f",
+    "swiftui/Fixtures.swift": "c631f9b72ae73c18aaa831eef22f75fe0b75d452a18d89604a63d1738e2c6674"
+  },
+  "checked_targets": [
+    "html-css",
+    "react-native",
+    "flutter",
+    "swiftui"
+  ],
+  "native_build": "not_run_not_required",
+  "native_execution": "not_run_not_required",
+  "native_capture": "not_run_not_required",
+  "generator_version": "1.0.0"
+}

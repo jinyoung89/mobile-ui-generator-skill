@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "id": "commerce-checkout-address",
+  "id": "fintech-signup",
   "request": {
     "language": "ko",
-    "user_job": "Review an order, confirm delivery details, and submit a fixture-only payment"
+    "user_job": "Verify a phone number and understand consent before opening a financial account"
   },
   "classification": {
-    "app_category": "commerce",
+    "app_category": "finance-fintech",
     "ui_patterns": [
-      "checkout",
-      "address-selection",
-      "payment-method"
+      "login-signup",
+      "identity-verification",
+      "fixed-bottom-action"
     ],
-    "risk_level": "medium"
+    "risk_level": "high"
   },
   "platform_policy": {
     "reference_viewport_width": 390,
@@ -199,7 +199,7 @@
     "tokens": {
       "text": "#111827",
       "surface": "#FFFFFF",
-      "primary": "#2563EB",
+      "primary": "#1457D9",
       "danger": "#B42318"
     },
     "contrast_pairs": [
@@ -217,7 +217,7 @@
   },
   "components": [
     {
-      "id": "commerce-checkout-address-screen",
+      "id": "fintech-signup-screen",
       "role": "screen",
       "parent": null,
       "order": 0,
@@ -247,7 +247,7 @@
         "kind": "screen"
       },
       "accessibility": {
-        "label": "주문을 확인해 주세요",
+        "label": "휴대폰 번호로 시작할게요",
         "target_size": {
           "width": 44,
           "height": 44,
@@ -257,13 +257,15 @@
       "platform_native_substitution": "safe_area_scroll_container"
     },
     {
-      "id": "order-summary",
-      "role": "summary_card",
-      "parent": "commerce-checkout-address-screen",
+      "id": "phone-field",
+      "role": "text_field",
+      "parent": "fintech-signup-screen",
       "order": 1,
       "layout": {
         "width": "fill",
-        "height": "content",
+        "height": {
+          "token": "control_height"
+        },
         "padding": {
           "token": "space_4"
         },
@@ -273,32 +275,35 @@
         "alignment": "screen-leading"
       },
       "states": [
-        "default",
-        "loading",
-        "error"
+        "empty",
+        "focused",
+        "filled",
+        "validation_error",
+        "disabled"
       ],
-      "default_state": "default",
+      "default_state": "empty",
       "text_roles": [
         "body",
         "label"
       ],
       "interaction": {
-        "kind": "content"
+        "kind": "text_input",
+        "focusable": true
       },
       "accessibility": {
-        "label": "order summary",
+        "label": "phone field",
         "target_size": {
           "width": 44,
           "height": 44,
           "unit": "px"
         }
       },
-      "platform_native_substitution": "semantic_summary_group"
+      "platform_native_substitution": "native_phone_field"
     },
     {
-      "id": "address-field",
+      "id": "code-field",
       "role": "text_field",
-      "parent": "commerce-checkout-address-screen",
+      "parent": "fintech-signup-screen",
       "order": 2,
       "layout": {
         "width": "fill",
@@ -320,7 +325,7 @@
         "validation_error",
         "disabled"
       ],
-      "default_state": "filled",
+      "default_state": "empty",
       "text_roles": [
         "body",
         "label"
@@ -330,19 +335,19 @@
         "focusable": true
       },
       "accessibility": {
-        "label": "address field",
+        "label": "code field",
         "target_size": {
           "width": 44,
           "height": 44,
           "unit": "px"
         }
       },
-      "platform_native_substitution": "native_address_field"
+      "platform_native_substitution": "native_numeric_field"
     },
     {
-      "id": "payment-card",
-      "role": "payment_method",
-      "parent": "commerce-checkout-address-screen",
+      "id": "consent-card",
+      "role": "risk_notice",
+      "parent": "fintech-signup-screen",
       "order": 3,
       "layout": {
         "width": "fill",
@@ -357,8 +362,7 @@
       },
       "states": [
         "default",
-        "focused",
-        "disabled"
+        "error"
       ],
       "default_state": "default",
       "text_roles": [
@@ -366,23 +370,22 @@
         "label"
       ],
       "interaction": {
-        "kind": "content",
-        "focusable": true
+        "kind": "content"
       },
       "accessibility": {
-        "label": "payment card",
+        "label": "consent card",
         "target_size": {
           "width": 44,
           "height": 44,
           "unit": "px"
         }
       },
-      "platform_native_substitution": "native_selection_row"
+      "platform_native_substitution": "semantic_information_group"
     },
     {
-      "id": "pay-button",
+      "id": "signup-button",
       "role": "primary_action",
-      "parent": "commerce-checkout-address-screen",
+      "parent": "fintech-signup-screen",
       "order": 4,
       "layout": {
         "width": "fill",
@@ -400,11 +403,10 @@
       "states": [
         "disabled",
         "enabled",
-        "pressed",
         "loading",
         "success"
       ],
-      "default_state": "enabled",
+      "default_state": "disabled",
       "text_roles": [
         "label"
       ],
@@ -413,7 +415,7 @@
         "focusable": true
       },
       "accessibility": {
-        "label": "pay button",
+        "label": "signup button",
         "target_size": {
           "width": 44,
           "height": 44,
@@ -441,15 +443,14 @@
     "cta": [
       "disabled",
       "enabled",
-      "pressed",
       "loading",
       "success"
     ]
   },
   "interactions": [
     {
-      "id": "commerce-checkout-address-primary-action",
-      "source": "pay-button",
+      "id": "fintech-signup-primary-action",
+      "source": "signup-button",
       "event": "press",
       "action": "resolve_fixture_state"
     }
@@ -512,24 +513,24 @@
         "empty_body": "아래 기본 동작으로 시작해 보세요.",
         "success_title": "완료됐어요",
         "ready_label": "정적 로컬 예시",
-        "title": "주문을 확인해 주세요",
-        "subtitle": "배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.",
-        "field_label": "배송지",
-        "secondary_label": "Visa ···· 4242",
-        "primary_cta": "48,900원 결제하기",
-        "success_label": "주문 완료",
-        "success_body": "주문이 로컬 성공 상태로 변경되었습니다.",
-        "item_badge": "내일 도착",
-        "item_title": "데일리 코튼 셔츠",
-        "item_body": "오프화이트 · M · 수량 1",
-        "item_meta": "일시불 · 결제 실행 없음",
-        "amount": "48,900원",
-        "risk_notice": "",
-        "confirm_label": "",
+        "title": "휴대폰 번호로 시작할게요",
+        "subtitle": "본인 명의 번호를 확인하면 안전하게 계정을 만들 수 있어요.",
+        "field_label": "휴대폰 번호",
+        "secondary_label": "인증번호 6자리",
+        "primary_cta": "확인하고 계속",
+        "success_label": "본인 확인 완료",
+        "success_body": "휴대폰 본인 확인이 완료되었습니다.",
+        "item_badge": "보안 확인",
+        "item_title": "내 정보 확인",
+        "item_body": "입력한 정보는 이 화면의 로컬 예시에만 사용됩니다.",
+        "item_meta": "02:58 남음",
+        "amount": "",
+        "risk_notice": "계좌 개설 전 이름과 휴대폰 명의가 일치하는지 확인하세요. 실제 인증이나 계좌 개설은 실행하지 않습니다.",
+        "confirm_label": "필수 약관과 본인 확인 내용에 동의합니다",
         "message_in": "",
         "message_out": "",
         "map_label": "",
-        "media_label": "상품 미리보기"
+        "media_label": ""
       },
       "en": {
         "loading_title": "Preparing your screen",
@@ -540,30 +541,29 @@
         "empty_body": "Start with the primary action below.",
         "success_title": "All set",
         "ready_label": "Static local example",
-        "title": "Review your order",
-        "subtitle": "Confirm delivery details and the final total before placing the order.",
-        "field_label": "Delivery address",
-        "secondary_label": "Visa ···· 4242",
-        "primary_cta": "Pay KRW 48,900",
-        "success_label": "Order complete",
-        "success_body": "The order moved to a local success state.",
-        "item_badge": "Arrives tomorrow",
-        "item_title": "Daily cotton shirt",
-        "item_body": "Off white · M · Quantity 1",
-        "item_meta": "One-time · No payment execution",
-        "amount": "KRW 48,900",
-        "risk_notice": "",
-        "confirm_label": "",
+        "title": "Start with your phone number",
+        "subtitle": "Verify a number in your name to create the account safely.",
+        "field_label": "Phone number",
+        "secondary_label": "6-digit verification code",
+        "primary_cta": "Confirm and continue",
+        "success_label": "Identity confirmed",
+        "success_body": "Phone verification is complete.",
+        "item_badge": "Security check",
+        "item_title": "Review your details",
+        "item_body": "Entered data stays inside this local screen example.",
+        "item_meta": "02:58 remaining",
+        "amount": "",
+        "risk_notice": "Confirm that the account name and phone ownership match. This example does not perform identity verification or open an account.",
+        "confirm_label": "I agree to the required terms and identity check",
         "message_in": "",
         "message_out": "",
         "map_label": "",
-        "media_label": "Product preview"
+        "media_label": ""
       }
     },
     "fixtures": [
-      "order_summary",
-      "address_default",
-      "payment_card"
+      "phone_verification",
+      "high_risk_action"
     ]
   },
   "assets_and_fallbacks": {
@@ -571,25 +571,22 @@
     "fallback_policy": "system_shapes_and_text_fallbacks"
   },
   "fixture_data": {
-    "order_summary": {
-      "sku": "shirt-001",
-      "quantity": 1,
-      "total_krw": 48900
+    "phone_verification": {
+      "phone": "010-1234-5678",
+      "code": "482913",
+      "expires_in_seconds": 178,
+      "verified": false
     },
-    "address_default": {
-      "label": "서울시 중구 세종대로 1",
-      "selected": true
-    },
-    "payment_card": {
-      "brand": "Visa",
-      "last4": "4242",
-      "execution": "disabled"
+    "high_risk_action": {
+      "requires_confirmation": true,
+      "fixture_only": true,
+      "effect": "local_identity_confirmed"
     }
   },
   "navigation_and_actions": [
     {
-      "id": "commerce-checkout-address-primary-action",
-      "source_component": "pay-button",
+      "id": "fintech-signup-primary-action",
+      "source_component": "signup-button",
       "outcome": {
         "kind": "local_state",
         "state": "success"
@@ -605,9 +602,9 @@
   },
   "focus_and_keyboard": {
     "focusable_components": [
-      "address-field",
-      "payment-card",
-      "pay-button"
+      "phone-field",
+      "code-field",
+      "signup-button"
     ],
     "keyboard_behavior": "resize_and_scroll_active_field_above_keyboard",
     "primary_action_visible": true

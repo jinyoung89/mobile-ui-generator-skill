@@ -43,11 +43,11 @@ test("Android preflight allocates and owns a serial before targeting its process
   );
 });
 
-test("unfinished release scripts always fail behind an explicit baseline validator", () => {
+test("the implemented site build and unfinished release verifier stay explicit", () => {
   assert.equal(
     packageJson.scripts["validate:baseline"],
     "python3 scripts/validate_patterns.py && python3 scripts/validate_site.py && npm test && npm run typecheck",
   );
-  assert.equal(packageJson.scripts["build:site"], "node tooling/scripts/not-implemented.mjs build:site");
+  assert.equal(packageJson.scripts["build:site"], "tsx tooling/src/build-site.ts");
   assert.equal(packageJson.scripts.verify, "node tooling/scripts/not-implemented.mjs verify");
 });

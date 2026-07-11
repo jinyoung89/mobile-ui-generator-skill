@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "generated_by": "mobile-ui-generator",
+  "skill_package": "skills/mobile-ui-generator",
+  "skill_contract_version": "1.0.0",
+  "mode": "showcase/all-platforms",
+  "source_kind": "public-generalized-guidance",
+  "canonical_spec_id": "fintech-signup",
+  "request_sha256": "53807aa1dfd73b0515c561d5389b8298a5f9c6a6a79b94162f54b5d2f2071a0f",
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "generator": "tooling/src/generate-proof-set.ts",
+  "generator_version": "1.0.0",
+  "restricted_inputs_included": false
+}

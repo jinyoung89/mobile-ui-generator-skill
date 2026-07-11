@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "generated_by": "mobile-ui-generator",
+  "skill_package": "skills/mobile-ui-generator",
+  "skill_contract_version": "1.0.0",
+  "mode": "showcase/all-platforms",
+  "source_kind": "public-generalized-guidance",
+  "canonical_spec_id": "messenger-chat",
+  "request_sha256": "9f03f340f14829f99877f3863a0cd1ac23c3c25518f1608cd8b864b2e9fdb937",
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "generator": "tooling/src/generate-proof-set.ts",
+  "generator_version": "1.0.0",
+  "restricted_inputs_included": false
+}

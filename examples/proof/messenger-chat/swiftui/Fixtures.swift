@@ -1,0 +1,7 @@
+// messenger-chat: 한국어 + English canonical fixtures
+import Foundation
+struct ProofFixture { let title: String; let subtitle: String; let primary_cta: String; let success_label: String; let field_label: String; let secondary_label: String; let item_title: String; let item_body: String; let item_meta: String; let amount: String; let risk_notice: String; let confirm_label: String; let message_in: String; let message_out: String; let map_label: String; let media_label: String }
+let proofFixtures: [String: ProofFixture] = [
+  "ko": ProofFixture(title: "민서", subtitle: "온라인 · 알림 켜짐", primary_cta: "메시지 보내기", success_label: "전송됨", field_label: "메시지 입력", secondary_label: "최근 대화", item_title: "민서와의 대화", item_body: "키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.", item_meta: "오후 3:24 · 읽음", amount: "", risk_notice: "", confirm_label: "", message_in: "오늘 공유한 화면, 320px에서도 정렬 괜찮았어?", message_out: "응, 긴 한국어 문장까지 줄바꿈 확인했어.", map_label: "", media_label: ""),
+  "en": ProofFixture(title: "Minseo", subtitle: "Online · Notifications on", primary_cta: "Send message", success_label: "Sent", field_label: "Message", secondary_label: "Recent conversation", item_title: "Chat with Minseo", item_body: "Recent messages and the composer remain visible with the keyboard open.", item_meta: "3:24 PM · Read", amount: "", risk_notice: "", confirm_label: "", message_in: "Did the screen stay aligned at 320 px?", message_out: "Yes, I checked wrapping with long Korean copy too.", map_label: "", media_label: "")
+]

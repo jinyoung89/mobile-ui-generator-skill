@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "id": "commerce-checkout-address",
+  "id": "messenger-chat",
   "request": {
     "language": "ko",
-    "user_job": "Review an order, confirm delivery details, and submit a fixture-only payment"
+    "user_job": "Read recent context and send a message without the keyboard covering the conversation"
   },
   "classification": {
-    "app_category": "commerce",
+    "app_category": "messaging",
     "ui_patterns": [
-      "checkout",
-      "address-selection",
-      "payment-method"
+      "chat",
+      "message-composer",
+      "conversation-list"
     ],
     "risk_level": "medium"
   },
@@ -199,7 +199,7 @@
     "tokens": {
       "text": "#111827",
       "surface": "#FFFFFF",
-      "primary": "#2563EB",
+      "primary": "#0F766E",
       "danger": "#B42318"
     },
     "contrast_pairs": [
@@ -217,7 +217,7 @@
   },
   "components": [
     {
-      "id": "commerce-checkout-address-screen",
+      "id": "messenger-chat-screen",
       "role": "screen",
       "parent": null,
       "order": 0,
@@ -235,7 +235,9 @@
       "states": [
         "default",
         "loading",
+        "empty",
         "error",
+        "offline",
         "success"
       ],
       "default_state": "default",
@@ -247,7 +249,7 @@
         "kind": "screen"
       },
       "accessibility": {
-        "label": "주문을 확인해 주세요",
+        "label": "민서",
         "target_size": {
           "width": 44,
           "height": 44,
@@ -257,9 +259,9 @@
       "platform_native_substitution": "safe_area_scroll_container"
     },
     {
-      "id": "order-summary",
-      "role": "summary_card",
-      "parent": "commerce-checkout-address-screen",
+      "id": "message-list",
+      "role": "message_list",
+      "parent": "messenger-chat-screen",
       "order": 1,
       "layout": {
         "width": "fill",
@@ -275,7 +277,9 @@
       "states": [
         "default",
         "loading",
-        "error"
+        "empty",
+        "error",
+        "offline"
       ],
       "default_state": "default",
       "text_roles": [
@@ -286,19 +290,19 @@
         "kind": "content"
       },
       "accessibility": {
-        "label": "order summary",
+        "label": "message list",
         "target_size": {
           "width": 44,
           "height": 44,
           "unit": "px"
         }
       },
-      "platform_native_substitution": "semantic_summary_group"
+      "platform_native_substitution": "native_inverted_lazy_list"
     },
     {
-      "id": "address-field",
+      "id": "message-composer",
       "role": "text_field",
-      "parent": "commerce-checkout-address-screen",
+      "parent": "messenger-chat-screen",
       "order": 2,
       "layout": {
         "width": "fill",
@@ -317,10 +321,10 @@
         "empty",
         "focused",
         "filled",
-        "validation_error",
+        "keyboard",
         "disabled"
       ],
-      "default_state": "filled",
+      "default_state": "empty",
       "text_roles": [
         "body",
         "label"
@@ -330,60 +334,20 @@
         "focusable": true
       },
       "accessibility": {
-        "label": "address field",
+        "label": "message composer",
         "target_size": {
           "width": 44,
           "height": 44,
           "unit": "px"
         }
       },
-      "platform_native_substitution": "native_address_field"
+      "platform_native_substitution": "native_multiline_field"
     },
     {
-      "id": "payment-card",
-      "role": "payment_method",
-      "parent": "commerce-checkout-address-screen",
-      "order": 3,
-      "layout": {
-        "width": "fill",
-        "height": "content",
-        "padding": {
-          "token": "space_4"
-        },
-        "gap": {
-          "token": "space_2"
-        },
-        "alignment": "screen-leading"
-      },
-      "states": [
-        "default",
-        "focused",
-        "disabled"
-      ],
-      "default_state": "default",
-      "text_roles": [
-        "body",
-        "label"
-      ],
-      "interaction": {
-        "kind": "content",
-        "focusable": true
-      },
-      "accessibility": {
-        "label": "payment card",
-        "target_size": {
-          "width": 44,
-          "height": 44,
-          "unit": "px"
-        }
-      },
-      "platform_native_substitution": "native_selection_row"
-    },
-    {
-      "id": "pay-button",
+      "id": "send-button",
       "role": "primary_action",
-      "parent": "commerce-checkout-address-screen",
-      "order": 4,
+      "parent": "messenger-chat-screen",
+      "order": 3,
       "layout": {
         "width": "fill",
         "height": {
@@ -400,11 +364,10 @@
       "states": [
         "disabled",
         "enabled",
-        "pressed",
         "loading",
         "success"
       ],
-      "default_state": "enabled",
+      "default_state": "disabled",
       "text_roles": [
         "label"
       ],
@@ -413,7 +376,7 @@
         "focusable": true
       },
       "accessibility": {
-        "label": "pay button",
+        "label": "send button",
         "target_size": {
           "width": 44,
           "height": 44,
@@ -427,29 +390,29 @@
     "screen": [
       "default",
       "loading",
+      "empty",
       "error",
+      "offline",
       "success"
     ],
     "inputs": [
       "empty",
       "focused",
       "filled",
-      "validation_error",
       "keyboard",
       "disabled"
     ],
     "cta": [
       "disabled",
       "enabled",
-      "pressed",
       "loading",
       "success"
     ]
   },
   "interactions": [
     {
-      "id": "commerce-checkout-address-primary-action",
-      "source": "pay-button",
+      "id": "messenger-chat-primary-action",
+      "source": "send-button",
       "event": "press",
       "action": "resolve_fixture_state"
     }
@@ -512,24 +475,24 @@
         "empty_body": "아래 기본 동작으로 시작해 보세요.",
         "success_title": "완료됐어요",
         "ready_label": "정적 로컬 예시",
-        "title": "주문을 확인해 주세요",
-        "subtitle": "배송 정보와 결제 금액을 마지막으로 확인하면 주문이 완료됩니다.",
-        "field_label": "배송지",
-        "secondary_label": "Visa ···· 4242",
-        "primary_cta": "48,900원 결제하기",
-        "success_label": "주문 완료",
-        "success_body": "주문이 로컬 성공 상태로 변경되었습니다.",
-        "item_badge": "내일 도착",
-        "item_title": "데일리 코튼 셔츠",
-        "item_body": "오프화이트 · M · 수량 1",
-        "item_meta": "일시불 · 결제 실행 없음",
-        "amount": "48,900원",
+        "title": "민서",
+        "subtitle": "온라인 · 알림 켜짐",
+        "field_label": "메시지 입력",
+        "secondary_label": "최근 대화",
+        "primary_cta": "메시지 보내기",
+        "success_label": "전송됨",
+        "success_body": "메시지가 로컬 대화에 추가되었습니다.",
+        "item_badge": "온라인",
+        "item_title": "민서와의 대화",
+        "item_body": "키보드가 열려도 최근 메시지와 입력창을 함께 확인합니다.",
+        "item_meta": "오후 3:24 · 읽음",
+        "amount": "",
         "risk_notice": "",
         "confirm_label": "",
-        "message_in": "",
-        "message_out": "",
+        "message_in": "오늘 공유한 화면, 320px에서도 정렬 괜찮았어?",
+        "message_out": "응, 긴 한국어 문장까지 줄바꿈 확인했어.",
         "map_label": "",
-        "media_label": "상품 미리보기"
+        "media_label": ""
       },
       "en": {
         "loading_title": "Preparing your screen",
@@ -540,30 +503,28 @@
         "empty_body": "Start with the primary action below.",
         "success_title": "All set",
         "ready_label": "Static local example",
-        "title": "Review your order",
-        "subtitle": "Confirm delivery details and the final total before placing the order.",
-        "field_label": "Delivery address",
-        "secondary_label": "Visa ···· 4242",
-        "primary_cta": "Pay KRW 48,900",
-        "success_label": "Order complete",
-        "success_body": "The order moved to a local success state.",
-        "item_badge": "Arrives tomorrow",
-        "item_title": "Daily cotton shirt",
-        "item_body": "Off white · M · Quantity 1",
-        "item_meta": "One-time · No payment execution",
-        "amount": "KRW 48,900",
+        "title": "Minseo",
+        "subtitle": "Online · Notifications on",
+        "field_label": "Message",
+        "secondary_label": "Recent conversation",
+        "primary_cta": "Send message",
+        "success_label": "Sent",
+        "success_body": "The message was added to the local conversation.",
+        "item_badge": "Online",
+        "item_title": "Chat with Minseo",
+        "item_body": "Recent messages and the composer remain visible with the keyboard open.",
+        "item_meta": "3:24 PM · Read",
+        "amount": "",
         "risk_notice": "",
         "confirm_label": "",
-        "message_in": "",
-        "message_out": "",
+        "message_in": "Did the screen stay aligned at 320 px?",
+        "message_out": "Yes, I checked wrapping with long Korean copy too.",
         "map_label": "",
-        "media_label": "Product preview"
+        "media_label": ""
       }
     },
     "fixtures": [
-      "order_summary",
-      "address_default",
-      "payment_card"
+      "conversation_default"
     ]
   },
   "assets_and_fallbacks": {
@@ -571,25 +532,18 @@
     "fallback_policy": "system_shapes_and_text_fallbacks"
   },
   "fixture_data": {
-    "order_summary": {
-      "sku": "shirt-001",
-      "quantity": 1,
-      "total_krw": 48900
-    },
-    "address_default": {
-      "label": "서울시 중구 세종대로 1",
-      "selected": true
-    },
-    "payment_card": {
-      "brand": "Visa",
-      "last4": "4242",
-      "execution": "disabled"
+    "conversation_default": {
+      "participant": "민서",
+      "messages": 2,
+      "delivery": "read",
+      "offline_queue": false,
+      "network": false
     }
   },
   "navigation_and_actions": [
     {
-      "id": "commerce-checkout-address-primary-action",
-      "source_component": "pay-button",
+      "id": "messenger-chat-primary-action",
+      "source_component": "send-button",
       "outcome": {
         "kind": "local_state",
         "state": "success"
@@ -605,11 +559,10 @@
   },
   "focus_and_keyboard": {
     "focusable_components": [
-      "address-field",
-      "payment-card",
-      "pay-button"
+      "message-composer",
+      "send-button"
     ],
-    "keyboard_behavior": "resize_and_scroll_active_field_above_keyboard",
+    "keyboard_behavior": "resize_keep_composer_above_keyboard_and_preserve_message_context",
     "primary_action_visible": true
   },
   "localization": {

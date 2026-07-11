@@ -16,7 +16,7 @@ test("React Native generator emits canonical numeric layout and local-only manif
   assert.match(artifact.source, /paddingBottom: 218/);
   assert.match(artifact.source, /minHeight: 52/);
   assert.equal(artifact.manifest.platform, "react_native");
-  assert.deepEqual(artifact.manifest.required_fixtures, ["address_default", "payment_card"]);
+  assert.deepEqual(artifact.manifest.required_fixtures, ["order_summary", "address_default", "payment_card"]);
   assert.deepEqual(artifact.manifest.verification, { native_build: "unverified", native_capture: "unverified" });
   assert.match(artifact.manifest.assembly_command, /npm --prefix harnesses\/react-native ci/);
   assert.match(artifact.manifest.run_command, /start -- --offline/);

@@ -1,0 +1,5 @@
+// social-feed: 한국어 + English canonical fixtures
+const proofFixtures = <String, Map<String, String>>{
+  'ko': {'title': '오늘의 커뮤니티', 'subtitle': '관심 있는 사람들의 새 소식을 편안하게 둘러보세요.', 'primary_cta': '새 글 쓰기', 'success_label': '작성 화면 열림', 'field_label': '게시물 작성', 'secondary_label': '댓글 24개', 'item_title': '지영 · 모바일 디자인', 'item_body': '작은 화면일수록 정보의 순서와 여백이 제품의 목소리를 더 또렷하게 만든다고 느꼈어요.', 'item_meta': '12분 전', 'amount': '', 'risk_notice': '', 'confirm_label': '', 'message_in': '', 'message_out': '', 'map_label': '', 'media_label': '보라색과 회색으로 구성된 모바일 UI 스터디 이미지'},
+  'en': {'title': 'Today\'s community', 'subtitle': 'Browse new posts from people and topics you care about.', 'primary_cta': 'Write a post', 'success_label': 'Composer opened', 'field_label': 'Create post', 'secondary_label': '24 comments', 'item_title': 'Jiyoung · Mobile design', 'item_body': 'On a small screen, information order and spacing make the product voice much clearer.', 'item_meta': '12 min ago', 'amount': '', 'risk_notice': '', 'confirm_label': '', 'message_in': '', 'message_out': '', 'map_label': '', 'media_label': 'Purple and gray mobile UI study'},
+};

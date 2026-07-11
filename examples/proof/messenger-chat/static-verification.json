@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "example_id": "messenger-chat",
+  "status": "passed",
+  "verification_scope": "canonical-spec-and-static-source",
+  "spec_valid": true,
+  "source_static_valid": true,
+  "bilingual_fixtures_present": true,
+  "numeric_tokens_resolved": true,
+  "platform_parity_warnings": [],
+  "spec_sha256": "21bece9851f8e8414a9e4d57351266e88d424970f2dda453a1ebd6959357e6d2",
+  "canonical_ir_sha256": "b2fa93cc9f7a9aa157c878fa27a9cc90fd7f666f5fef974f75d09d21a037f90d",
+  "request_sha256": "9f03f340f14829f99877f3863a0cd1ac23c3c25518f1608cd8b864b2e9fdb937",
+  "source_sha256": {
+    "html-css/index.html": "bae915a66fb9d82ff56aca084a06a009ae50d723c322e3e87bdd037bd57cc6bf",
+    "html-css/styles.css": "472628c38b00da048b6efc239577270456696cfe53d05311bf139553a4157a29",
+    "html-css/app.js": "c3598b7f2729b84c851dcecf62aeb4314af69582c465b8bac754aab0a5bf3704",
+    "react-native/Screen.tsx": "f1387d7e266c412d40bf7696a67400b4c50a37a7943509c19596ccc977bdb2be",
+    "react-native/fixtures.ts": "0fef85f576c8d329bca86dee8f8e9173b7db329caefd813ae3a3b70796c8f14f",
+    "flutter/screen.dart": "e8150e8075c9bf3cdd27540147539257e0a160b4454c1ad16ddbab21980b8778",
+    "flutter/fixtures.dart": "9aea451d6b2711dac9c206e3f05cf336fed849eb93a9cfa7976eeeed19bb5f43",
+    "swiftui/Screen.swift": "e3a8b90821a79ed1b141f1d4cd8c6f169ed51c55660189d43462088690b37253",
+    "swiftui/Fixtures.swift": "389b313ddea2107d80db4258f7eb845f9e5170374bc77a79f718e54a10d0a68b"
+  },
+  "checked_targets": [
+    "html-css",
+    "react-native",
+    "flutter",
+    "swiftui"
+  ],
+  "native_build": "not_run_not_required",
+  "native_execution": "not_run_not_required",
+  "native_capture": "not_run_not_required",
+  "generator_version": "1.0.0"
+}

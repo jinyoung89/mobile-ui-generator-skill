@@ -21,16 +21,16 @@ test("compiles the canonical checkout spec into a deterministic normalized IR", 
   assert.equal(first.example_id, "commerce-checkout-address");
   assert.deepEqual(first.tokens.layout.space_4, { value: 16, unit: "px", source: "layout.tokens.space_4" });
   assert.deepEqual(first.tokens.layout.control_height, { value: 52, unit: "px", source: "layout.tokens.control_height" });
-  assert.deepEqual(first.components.map((component) => component.id), ["checkout-screen", "address-field", "pay-button"]);
-  assert.deepEqual(first.components.map((component) => component.order), [0, 1, 2]);
+  assert.deepEqual(first.components.map((component) => component.id), ["commerce-checkout-address-screen", "order-summary", "address-field", "payment-card", "pay-button"]);
+  assert.deepEqual(first.components.map((component) => component.order), [0, 1, 2, 3, 4]);
   assert.deepEqual(first.state_matrix, {
     screen: ["default", "loading", "error", "success"],
-    inputs: ["empty", "focused", "filled", "invalid", "disabled"],
+    inputs: ["empty", "focused", "filled", "validation_error", "keyboard", "disabled"],
     cta: ["disabled", "enabled", "pressed", "loading", "success"],
   });
-  assert.deepEqual(Object.keys(first.fixtures), ["address_default", "payment_card"]);
+  assert.deepEqual(Object.keys(first.fixtures), ["order_summary", "address_default", "payment_card"]);
   assert.deepEqual(first.navigation, [{
-    id: "submit-payment",
+    id: "commerce-checkout-address-primary-action",
     source_component: "pay-button",
     outcome: { kind: "local_state", state: "success" },
   }]);

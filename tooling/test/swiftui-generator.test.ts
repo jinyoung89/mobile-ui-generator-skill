@@ -20,10 +20,9 @@ test("SwiftUI generator emits a numeric, local-only source artifact", () => {
   assert.match(artifact.source, /padding\(16\)/);
   assert.match(artifact.source, /frame\(minHeight: 52/);
   assert.equal(artifact.manifest.platform, "swiftui");
-  assert.deepEqual(artifact.manifest.required_fixtures, ["address_default", "payment_card"]);
+  assert.deepEqual(artifact.manifest.required_fixtures, ["order_summary", "address_default", "payment_card"]);
   assert.deepEqual(artifact.manifest.verification, { native_build: "unverified", native_capture: "unverified" });
   assert.match(artifact.manifest.assembly_command, /swiftui-source/);
   assert.match(artifact.manifest.run_command, /xcodebuild/);
   assert.equal(artifact.manifest.source_hash.length, 64);
 });
-
