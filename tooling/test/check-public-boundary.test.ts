@@ -150,6 +150,14 @@ test("fails closed on unsupported files and bounded archive expansion", () => {
   assert.equal(archiveFindings.some((finding) => finding.kind === "limit"), true);
 });
 
+test("treats shipped template files as text during public scans", () => {
+  const root = fixtureRoot();
+  writeFileSync(path.join(root, "Screen.tsx.tpl"), "export const Screen = '{{SCREEN_ID}}';\n");
+  const findings = scanPublicTree(root, { copyMode: "public" });
+  assert.equal(findings.some((finding) => finding.kind === "unsupported"), false);
+  assert.deepEqual(findings, []);
+});
+
 test("stops oversized archive member enumeration at the configured bound", () => {
   const root = fixtureRoot();
   const archive = path.join(root, "oversized.zip");
