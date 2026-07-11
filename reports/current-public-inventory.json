@@ -1,6 +1,6 @@
 {
   "baseline_commit": "717ad41902522963e29ea3161cae8694d77cae79",
-  "tracked_tree_sha256": "bfcd530b28041ec3894755f702b2f23913845e0eeb84d4e514ed6a5378bf0fab",
+  "baseline_tree_oid": "4ee73bacb471c78c02400f26c8890851bc1ccbd8",
   "files": [
     {"path":".gitignore","action":"rewrite","reason":"Extend public build and worktree exclusions."},
     {"path":"LICENSE","action":"keep","reason":"Neutral project license."},
@@ -57,15 +57,16 @@
   },
   "routes":["/mobile-ui-generator-skill/","/mobile-ui-generator-skill/ko/"],
   "toolchains": {
-    "node":"22.15.0","npm":"10.9.2","python":"3.14.3","dart":"3.9.2",
+    "node":"22.15.0","npm":"10.9.2","python":"3.14.3","flutter":"3.35.3 stable","dart":"3.9.2",
     "xcode":"15.2 (15C500b)","swift":"5.9.2","ios_runtime":"17.2",
     "ios_simulator":"iPhone 15 available","android_sdk":"$HOME/Library/Android/sdk",
     "adb":"35.0.2 present outside default PATH","emulator":"35.2.10 present outside default PATH",
     "android_api":"API 34 system image installed","android_avd":"existing AVD invalid; dedicated AVD required"
   },
   "verification": {
-    "inventory_source":"git ls-files at baseline_commit",
-    "set_equality":"verified: 45 unique tracked paths, zero missing, zero extra, action counts match summary",
+    "inventory_source":"git ls-tree -r --name-only 717ad41902522963e29ea3161cae8694d77cae79",
+    "set_equality_command":"diff -u <(git ls-tree -r --name-only 717ad41902522963e29ea3161cae8694d77cae79 | sort) <(jq -r '.files[].path' reports/current-public-inventory.json | sort)",
+    "set_equality":"verified: exit 0; 45 unique baseline paths, zero missing, zero extra, action counts match summary",
     "private_inputs_read":false
   }
 }
