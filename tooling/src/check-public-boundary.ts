@@ -13,6 +13,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inflateSync } from "node:zlib";
+import { scanImageSimilarity } from "./check-image-similarity.js";
 
 export type FindingKind =
   | "copy"
@@ -23,6 +24,7 @@ export type FindingKind =
   | "sensitive-name"
   | "source-map"
   | "image-metadata"
+  | "image-similarity"
   | "unsupported"
   | "unreadable"
   | "limit";
@@ -396,6 +398,21 @@ function runCli(): void {
       const value = args[++index];
       if (!value) throw new Error("--git-archive requires a path");
       findings.push(...filterRepositoryFixtureFindings(scanArchive(path.resolve(value), { copyMode: "repository" })));
+    } else if (argument === "--image-similarity") {
+      const source = args[++index];
+      const output = args[++index];
+      if (!source || !output) throw new Error("--image-similarity requires a source directory and public root");
+      let evidence: string | undefined;
+      if (args[index + 1] === "--image-similarity-evidence") {
+        evidence = args[index + 2];
+        index += 2;
+        if (!evidence) throw new Error("--image-similarity-evidence requires a path");
+      }
+      findings.push(...scanImageSimilarity(path.resolve(source), path.resolve(output), { evidencePath: evidence ? path.resolve(evidence) : undefined }).map((finding) => ({
+        kind: "image-similarity" as const,
+        path: finding.path,
+        detail: `${finding.kind}: ${finding.detail}`,
+      })));
     } else if (!argument.startsWith("-") && archiveExtension(argument)) {
       findings.push(...scanArchive(path.resolve(argument), { copyMode: "distribution" }));
     } else if (!argument.startsWith("-")) {
