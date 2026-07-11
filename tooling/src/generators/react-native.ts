@@ -13,6 +13,7 @@ export type ReactNativeArtifactManifest = {
   capabilities: { network: false; authentication: false; payment_execution: false; push: false; fixture_only: true };
   assembly_command: string;
   run_command: string;
+  verification: { native_build: "unverified"; native_capture: "unverified" };
   profiles: string[];
 };
 
@@ -48,7 +49,8 @@ export function generateReactNativeArtifact(compiled: CompiledExample): ReactNat
       required_assets: [],
       capabilities: { network: false, authentication: false, payment_execution: false, push: false, fixture_only: true },
       assembly_command: "npm --prefix harnesses/react-native ci && npm --prefix harnesses/react-native run typecheck",
-      run_command: `npm --prefix harnesses/react-native run ios:build -- --example-id ${compiled.example_id} --profile standard --state default`,
+      run_command: "npm --prefix harnesses/react-native run start -- --offline",
+      verification: { native_build: "unverified", native_capture: "unverified" },
       profiles: ["compact", "standard", "large", "short-keyboard", "large-text"],
     },
   };

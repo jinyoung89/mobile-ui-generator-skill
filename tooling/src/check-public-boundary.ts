@@ -83,6 +83,10 @@ const generatedUrlHosts = new Set([
 const repositoryUrlHosts = new Set([
   ...generatedUrlHosts,
   "example.com", "github.com", "json-schema.org", "mobile-ui-generator.dev", "opencollective.com", "raw.githubusercontent.com", "registry.npmjs.org",
+  // Dependency lockfiles preserve package funding metadata. These hosts are
+  // permitted only in repository metadata; generated/distribution scans still
+  // reject them so they cannot enter the public website or proof artifacts.
+  "docs.expo.dev", "dotenvx.com", "feross.org", "npmjs.com", "www.npmjs.com", "paypal.me", "patreon.com", "www.patreon.com", "tidelift.com",
 ]);
 
 function archiveExtension(name: string): string | undefined {

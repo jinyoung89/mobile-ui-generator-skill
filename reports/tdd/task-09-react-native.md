@@ -27,3 +27,8 @@ The tests assert profile-safe-area and keyboard metrics, one-owner scrolling wit
 
 - `expo prebuild` and CocoaPods dependency resolution were exercised during development, but native build/capture was stopped when scope changed to source-only verification.
 - iOS and Android build/capture hashes are intentionally absent. Any release manifest must represent them as `unverified`, not `passed`.
+
+The committed registry and generated manifests expose
+`verification.native_build = "unverified"` and
+`verification.native_capture = "unverified"`; no nonexistent capture command is
+advertised by the harness package.

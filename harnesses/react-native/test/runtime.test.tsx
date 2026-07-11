@@ -66,6 +66,7 @@ describe("React Native runtime contracts", () => {
       platform: "react_native",
       capabilities: { network: false, authentication: false, payment_execution: false, fixture_only: true },
       required_fixtures: ["address_default", "payment_card"],
+      verification: { native_build: "unverified", native_capture: "unverified" },
     });
   });
 

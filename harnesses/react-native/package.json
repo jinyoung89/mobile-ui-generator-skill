@@ -7,13 +7,8 @@
     "start": "expo start --offline",
     "typecheck": "tsc --noEmit",
     "test": "jest --runInBand",
-    "ios:build": "expo run:ios --no-install --device \"iPhone 15\"",
-    "android:build": "expo run:android --no-install",
     "prebuild": "expo prebuild --no-install",
-    "capture:ios": "node scripts/capture-ios.mjs",
-    "capture:android": "node scripts/capture-android.mjs",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "verify:source": "npm run typecheck && npm test -- --runInBand"
   },
   "dependencies": {
     "expo": "51.0.39",
