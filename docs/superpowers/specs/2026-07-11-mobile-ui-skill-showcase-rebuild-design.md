@@ -34,7 +34,7 @@ The rebuild must address these failures at the specification, generation, render
 ### 3.1 In scope
 
 - Preserve the private image collection and analysis workflow as an authoring system.
-- Reuse the existing private crawler, local image index, curated asset library, and analyzed artifacts where legally and technically appropriate.
+- Reuse the existing private acquisition utility, local image index, curated asset library, and analyzed artifacts where legally and technically appropriate.
 - Rebuild the public skill around a canonical, numeric mobile UI specification.
 - Generate complete runnable implementations for:
   - HTML/CSS;
@@ -78,10 +78,10 @@ The private pipeline may contain provider-specific adapters and original screens
 
 ### 5.1 Inputs
 
-- Existing private crawler skill available in the local agent environments.
+- Existing private acquisition skill available in the local agent environments.
 - Local metadata index containing tens of thousands of screen entries.
 - Local asset library containing curated mobile UI screenshots.
-- Existing local manifests, contact sheets, pattern books, quality reports, and layout metrics.
+- Existing local manifests, contact sheets, pattern books, evaluation summaries, and layout metrics.
 - Future manually supplied or legally collected reference screens.
 
 ### 5.2 Per-screen observation model
@@ -149,7 +149,7 @@ Private analysis and public artifacts use different provenance schemas.
 - Private provenance may contain source IDs, local paths, reviewer identities, and raw observation links.
 - Public provenance is allowlist-only and may contain only the public skill commit, schema version, sanitized public reference-set version, request hash, model/runtime identifier, generator/template versions, toolchain lock versions, artifact hashes, and verification results.
 
-Public compilation must write into a clean staging directory that has no read-through links to private assets. Export is performed by explicit field allowlist, never by removing a denylist of known keys from private records. Publication checks must inspect filenames, text, generated source maps, image metadata, URLs, app-specific strings, embedded assets, and archive contents. Derived numeric guidance requires a minimum aggregate sample threshold defined per metric; values below the threshold remain private or are marked as authored platform guidance. Where feasible, public visuals are checked for raw-hash and perceptual similarity against the private corpus to prevent accidental source-image publication.
+Public compilation must write into a clean staging directory that has no read-through links to private assets. Export is performed by explicit field allowlist, never by removing a denylist of known keys from private records. Publication checks must inspect filenames, text, generated source maps, image metadata, URLs, app-specific strings, embedded assets, and archive contents. Derived numeric guidance requires a minimum aggregate sample threshold defined per metric; values below the threshold remain private or are marked as authored platform guidance. Where feasible, public visuals are checked for raw-hash and perceptual similarity against the private source set to prevent accidental source-image publication.
 
 ## 6. Taxonomy and coverage model
 
@@ -222,7 +222,7 @@ Selection rules:
 
 The count is taken from unique approved pair IDs in the manifest. `meaningful` means the pair has a documented user job, is supported by sanitized aggregate knowledge or an approved product rationale, and is accepted by the coverage owner. `frequency_rank` is computed from sanitized aggregate observation counts with a documented tie rule and snapshot version. `high-risk` means identity, finance, health, destructive, legal-consent, or irreversible-action flows. The coverage matrix is machine-readable and reports proposed, approved, generated, build_verified, render_verified, and published states.
 
-State requirements are defined separately in a versioned pattern-to-state matrix. Each pattern/state entry is `required`, `optional`, or `not_applicable`. Every example spec must reference the matrix and include a reason for overrides; quality gates apply only to required and explicitly selected optional states.
+State requirements are defined separately in a versioned pattern-to-state matrix. Each pattern/state entry is `required`, `optional`, or `not_applicable`. Every example spec must reference the matrix and include a reason for overrides; acceptance checks apply only to required and explicitly selected optional states.
 
 ## 7. Public skill design
 
@@ -490,7 +490,7 @@ The release maintains a machine-readable matrix keyed by `example_id x platform 
 
 Generated demonstration files must include provenance metadata showing that they came from the public skill workflow. The metadata should not expose private source material.
 
-## 11. Quality gates
+## 11. Quality checks
 
 ### 11.1 Spec gate
 
@@ -684,7 +684,7 @@ The website consumes a generated catalog derived from these bundles. It must not
 
 ### 14.2 Private/local
 
-- crawlers and provider adapters;
+- acquisition utilities and provider adapters;
 - authentication material;
 - original screenshots and crops;
 - raw manifests and source URLs;
@@ -716,7 +716,7 @@ Automated repository scanning must fail publication when forbidden source identi
 
 - Build 5 representative examples spanning form, feed, map, commerce, and chat archetypes.
 - Generate and run all four platform implementations.
-- Fix schema, templates, and quality gates until the proof set passes.
+- Fix schema, templates, and acceptance checks until the proof set passes.
 - Measure repository growth, preview volume, install time, build minutes by platform, macOS runner use, per-example regeneration time, and full-site build time.
 - Set release budgets from the measurements and require an explicit go/no-go decision before expanding beyond the proof set.
 
