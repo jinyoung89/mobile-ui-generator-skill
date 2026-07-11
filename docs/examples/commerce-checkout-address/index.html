@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Generated mobile UI examples with complete cross-platform source."><title>주문 결제 — Mobile UI Generator</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="topbar"><a class="brand" href="../../">M/UI</a><nav aria-label="Primary"><a href="../../#examples">All examples</a><a href="../../#install">Install</a></nav></header><main class="detail"><section class="detail-hero"><div><p class="kicker">commerce · checkout + address_selection + payment_method</p><h1>주문 결제</h1><p class="lede">Complete an order safely</p><div class="chips"><span>disabled</span><span>enabled</span><span>pressed</span><span>loading</span><span>success</span><span>empty</span></div></div><div class="preview-studio"><div class="preview-toolbar" role="group" aria-label="Preview width"><button type="button" data-preview-width="320" aria-pressed="false">320</button><button type="button" data-preview-width="390" aria-pressed="true">390</button><button type="button" data-preview-width="430" aria-pressed="false">430</button></div><div class="resizable-preview" data-preview-container style="--preview-width:390px"><div class="device-shell"><iframe class="device-preview" title="주문 결제 generated mobile UI preview" loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;style&gt;:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --text-scale: 1; --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --corner-radius: 12px; --sticky-region-height: 84px; --scroll-content-bottom-inset: 100px; --micro-gap: 4px; --field-gap: 4px; --control-padding: 12px; --title-size: 24px; --title-line: 32px; --title-letter-spacing: -0.2px; --body-size: 16px; --body-line: 24px; --label-size: 14px; --label-line: 20px; --readable-line-width: 360px; --color-text: #111827; --color-surface: #FFFFFF; --color-primary: #2563EB; --color-danger: #DC2626; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-width: 320px; background: #e5e7eb; color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+.mobile-screen { position: relative; min-height: 100dvh; max-width: 430px; margin: 0 auto; overflow-x: hidden; background: var(--color-surface); }
+.safe-area-top { height: var(--safe-top); }
+.mobile-scroll { min-height: 100dvh; padding-top: 0; padding-right: var(--screen-inset); padding-bottom: calc(var(--sticky-region-height) + var(--scroll-content-bottom-inset) + var(--safe-bottom)); padding-left: var(--screen-inset); overflow-x: hidden; }
+.screen-header { padding: var(--section-gap) 0; }
+.eyebrow, .fixture-label { margin: 0 0 var(--micro-gap); color: color-mix(in srgb, var(--color-text) 65%, transparent); font-size: var(--micro-gap); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+h1 { margin: 0; font-size: calc(var(--title-size) * var(--text-scale)); line-height: calc(var(--title-line) * var(--text-scale)); letter-spacing: var(--title-letter-spacing); }
+.screen-description { max-width: 360px; margin: var(--micro-gap) 0 0; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.ui-field { display: grid; gap: var(--field-gap); min-width: 0; }
+.ui-field label { font-size: calc(var(--label-size) * var(--text-scale)); line-height: calc(var(--label-line) * var(--text-scale)); font-weight: 600; }
+.ui-field input { width: 100%; min-height: var(--control-height); border: 1px solid #9ca3af; border-radius: var(--corner-radius); padding: 0 var(--control-padding); color: var(--color-text); background: var(--color-surface); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+.ui-field input:focus { outline: 3px solid color-mix(in srgb, var(--color-primary) 30%, transparent); outline-offset: 2px; border-color: var(--color-primary); }
+.ui-hint { min-height: var(--label-line); color: var(--color-danger); font-size: var(--micro-gap); }
+.fixture-card { display: flex; min-height: var(--control-height); align-items: center; padding: var(--card-padding); border-radius: var(--corner-radius); background: #f3f4f6; }
+.fixture-card strong { display: block; margin-top: 2px; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+.mobile-sticky { position: fixed; z-index: 2; right: 0; bottom: 0; left: 0; min-height: var(--sticky-region-height); padding: 12px var(--screen-inset) max(12px, var(--safe-bottom)); background: color-mix(in srgb, var(--color-surface) 94%, transparent); border-top: 1px solid #e5e7eb; backdrop-filter: blur(12px); }
+.sticky-inner { width: min(100%, 430px); margin: 0 auto; }
+.ui-button { position: relative; display: inline-flex; width: 100%; min-height: var(--control-height); align-items: center; justify-content: center; border: 0; border-radius: var(--corner-radius); padding: 0 var(--card-padding); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); font-weight: 700; cursor: pointer; }
+.ui-button-primary { color: #fff; background: var(--color-primary); }
+.ui-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 45%, transparent); outline-offset: 2px; }
+.mobile-screen[data-state=&quot;loading&quot;] .ui-button, .mobile-screen[data-state=&quot;success&quot;] .ui-button { pointer-events: none; }
+.mobile-screen[data-state=&quot;loading&quot;] .ui-button-spinner { display: block; width: 18px; height: 18px; margin-left: 8px; border: 2px solid rgb(255 255 255 / .45); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+.mobile-screen[data-state=&quot;success&quot;] .ui-button { background: #15803d; }
+.live-region { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 12px 36px rgb(15 23 42 / .18); } }
+@media (max-width: 374px) { .screen-header { padding-block: var(--micro-gap); } h1 { font-size: calc(var(--title-size) - var(--micro-gap)); line-height: calc(var(--title-line) - var(--micro-gap)); } }
+@media (min-width: 410px) { .screen-description { max-width: calc(var(--readable-line-width) + var(--section-gap)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main class=&quot;mobile-screen&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot; aria-labelledby=&quot;screen-title&quot;&gt;&lt;div class=&quot;safe-area-top&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;mobile-scroll&quot;&gt;&lt;header class=&quot;screen-header&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 id=&quot;screen-title&quot;&gt;주문 결제&lt;/h1&gt;&lt;p class=&quot;screen-description&quot;&gt;Complete an order safely&lt;/p&gt;&lt;/header&gt;&lt;form class=&quot;screen-content&quot; data-component=&quot;checkout-screen&quot; novalidate&gt;&lt;div class=&quot;ui-field&quot; data-component=&quot;address-field&quot; data-state=&quot;empty&quot;&gt;&lt;label for=&quot;address-field&quot;&gt;배송 주소&lt;/label&gt;&lt;input id=&quot;address-field&quot; name=&quot;address-field&quot; type=&quot;text&quot; value=&quot;서울시 중구 세종대로 1&quot; autocomplete=&quot;street-address&quot; aria-describedby=&quot;address-field-hint&quot; data-focus-scroll /&gt;&lt;span class=&quot;ui-hint&quot; id=&quot;address-field-hint&quot; role=&quot;status&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-component=&quot;pay-button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;section class=&quot;fixture-card&quot; aria-label=&quot;address default&quot;&gt;&lt;div&gt;&lt;span class=&quot;fixture-label&quot;&gt;address default&lt;/span&gt;&lt;strong&gt;서울시 중구 세종대로 1&lt;/strong&gt;&lt;/div&gt;&lt;/section&gt;&lt;/form&gt;&lt;/div&gt;&lt;div class=&quot;mobile-sticky&quot; data-fixed-region=&quot;primary-action&quot;&gt;&lt;div class=&quot;sticky-inner&quot;&gt;&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;live-region&quot; aria-live=&quot;polite&quot; role=&quot;status&quot;&gt;&lt;/div&gt;&lt;/main&gt;&lt;script&gt;window.__MOBILE_UI_EXAMPLE__ = {&quot;exampleId&quot;:&quot;commerce-checkout-address&quot;,&quot;fixtures&quot;:{&quot;address_default&quot;:{&quot;label&quot;:&quot;서울시 중구 세종대로 1&quot;,&quot;selected&quot;:true},&quot;payment_card&quot;:{&quot;brand&quot;:&quot;Visa&quot;,&quot;last4&quot;:&quot;4242&quot;}},&quot;defaultState&quot;:&quot;default&quot;};&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div></div></div></section>
+<section class="evidence"><div><p class="kicker">Numeric contract</p><h2>Measured, not guessed</h2></div><dl><div><dt>card padding</dt><dd>16px</dd></div><div><dt>component gap</dt><dd>12px</dd></div><div><dt>control height</dt><dd>52px</dd></div><div><dt>corner radius</dt><dd>12px</dd></div><div><dt>max readable line width</dt><dd>360px</dd></div><div><dt>screen horizontal inset</dt><dd>16px</dd></div><div><dt>scroll content bottom inset</dt><dd>100px</dd></div><div><dt>section gap</dt><dd>16px</dd></div></dl><p class="evidence-note">Safe area and fixed regions are represented in the canonical IR. Responsive profiles cover 320, 390, and 430 px. Platform source is statically generated; native execution is not claimed.</p></section>
+<section class="source-section"><div class="section-heading"><div><p class="kicker">Complete source</p><h2>Use the platform you ship</h2></div><p>File boundaries are preserved. Copy controls copy the entire visible file.</p></div><div class="source-tabs" role="tablist" aria-label="Source platform"><button id="tab-html_css" type="button" role="tab" aria-controls="panel-html_css" aria-selected="true" tabindex="0">HTML / CSS</button><button id="tab-react_native" type="button" role="tab" aria-controls="panel-react_native" aria-selected="false" tabindex="-1">React Native</button><button id="tab-flutter" type="button" role="tab" aria-controls="panel-flutter" aria-selected="false" tabindex="-1">Flutter</button><button id="tab-swiftui" type="button" role="tab" aria-controls="panel-swiftui" aria-selected="false" tabindex="-1">SwiftUI</button></div><section id="panel-html_css" role="tabpanel" aria-labelledby="tab-html_css" ><article class="source-file"><div class="source-toolbar"><strong>index.html</strong><button type="button" data-copy-source="source-html_css-0">Copy file</button></div><pre tabindex="0"><code id="source-html_css-0">&lt;!doctype html&gt;
+&lt;html lang=&quot;ko&quot;&gt;
+&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;main class=&quot;mobile-screen&quot; data-example-id=&quot;commerce-checkout-address&quot; data-state=&quot;default&quot; aria-labelledby=&quot;screen-title&quot;&gt;&lt;div class=&quot;safe-area-top&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;mobile-scroll&quot;&gt;&lt;header class=&quot;screen-header&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;commerce&lt;/p&gt;&lt;h1 id=&quot;screen-title&quot;&gt;주문 결제&lt;/h1&gt;&lt;p class=&quot;screen-description&quot;&gt;Complete an order safely&lt;/p&gt;&lt;/header&gt;&lt;form class=&quot;screen-content&quot; data-component=&quot;checkout-screen&quot; novalidate&gt;&lt;div class=&quot;ui-field&quot; data-component=&quot;address-field&quot; data-state=&quot;empty&quot;&gt;&lt;label for=&quot;address-field&quot;&gt;배송 주소&lt;/label&gt;&lt;input id=&quot;address-field&quot; name=&quot;address-field&quot; type=&quot;text&quot; value=&quot;서울시 중구 세종대로 1&quot; autocomplete=&quot;street-address&quot; aria-describedby=&quot;address-field-hint&quot; data-focus-scroll /&gt;&lt;span class=&quot;ui-hint&quot; id=&quot;address-field-hint&quot; role=&quot;status&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-component=&quot;pay-button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;section class=&quot;fixture-card&quot; aria-label=&quot;address default&quot;&gt;&lt;div&gt;&lt;span class=&quot;fixture-label&quot;&gt;address default&lt;/span&gt;&lt;strong&gt;서울시 중구 세종대로 1&lt;/strong&gt;&lt;/div&gt;&lt;/section&gt;&lt;/form&gt;&lt;/div&gt;&lt;div class=&quot;mobile-sticky&quot; data-fixed-region=&quot;primary-action&quot;&gt;&lt;div class=&quot;sticky-inner&quot;&gt;&lt;button class=&quot;ui-button ui-button-primary&quot; type=&quot;button&quot; data-action=&quot;submit-payment&quot; aria-label=&quot;결제하기&quot;&gt;&lt;span class=&quot;ui-button-label&quot;&gt;결제하기&lt;/span&gt;&lt;span class=&quot;ui-button-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;live-region&quot; aria-live=&quot;polite&quot; role=&quot;status&quot;&gt;&lt;/div&gt;&lt;/main&gt;
+&lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>styles.css</strong><button type="button" data-copy-source="source-html_css-1">Copy file</button></div><pre tabindex="0"><code id="source-html_css-1">:root { --safe-top: env(safe-area-inset-top, 47px); --safe-bottom: env(safe-area-inset-bottom, 34px); --text-scale: 1; --screen-inset: 16px; --component-gap: 12px; --section-gap: 16px; --card-padding: 16px; --control-height: 52px; --corner-radius: 12px; --sticky-region-height: 84px; --scroll-content-bottom-inset: 100px; --micro-gap: 4px; --field-gap: 4px; --control-padding: 12px; --title-size: 24px; --title-line: 32px; --title-letter-spacing: -0.2px; --body-size: 16px; --body-line: 24px; --label-size: 14px; --label-line: 20px; --readable-line-width: 360px; --color-text: #111827; --color-surface: #FFFFFF; --color-primary: #2563EB; --color-danger: #DC2626; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-width: 320px; background: #e5e7eb; color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; }
+body { overflow-x: hidden; }
+.mobile-screen { position: relative; min-height: 100dvh; max-width: 430px; margin: 0 auto; overflow-x: hidden; background: var(--color-surface); }
+.safe-area-top { height: var(--safe-top); }
+.mobile-scroll { min-height: 100dvh; padding-top: 0; padding-right: var(--screen-inset); padding-bottom: calc(var(--sticky-region-height) + var(--scroll-content-bottom-inset) + var(--safe-bottom)); padding-left: var(--screen-inset); overflow-x: hidden; }
+.screen-header { padding: var(--section-gap) 0; }
+.eyebrow, .fixture-label { margin: 0 0 var(--micro-gap); color: color-mix(in srgb, var(--color-text) 65%, transparent); font-size: var(--micro-gap); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+h1 { margin: 0; font-size: calc(var(--title-size) * var(--text-scale)); line-height: calc(var(--title-line) * var(--text-scale)); letter-spacing: var(--title-letter-spacing); }
+.screen-description { max-width: 360px; margin: var(--micro-gap) 0 0; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+.screen-content { display: grid; gap: var(--component-gap); min-width: 0; }
+.ui-field { display: grid; gap: var(--field-gap); min-width: 0; }
+.ui-field label { font-size: calc(var(--label-size) * var(--text-scale)); line-height: calc(var(--label-line) * var(--text-scale)); font-weight: 600; }
+.ui-field input { width: 100%; min-height: var(--control-height); border: 1px solid #9ca3af; border-radius: var(--corner-radius); padding: 0 var(--control-padding); color: var(--color-text); background: var(--color-surface); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+.ui-field input:focus { outline: 3px solid color-mix(in srgb, var(--color-primary) 30%, transparent); outline-offset: 2px; border-color: var(--color-primary); }
+.ui-hint { min-height: var(--label-line); color: var(--color-danger); font-size: var(--micro-gap); }
+.fixture-card { display: flex; min-height: var(--control-height); align-items: center; padding: var(--card-padding); border-radius: var(--corner-radius); background: #f3f4f6; }
+.fixture-card strong { display: block; margin-top: 2px; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); }
+.mobile-sticky { position: fixed; z-index: 2; right: 0; bottom: 0; left: 0; min-height: var(--sticky-region-height); padding: 12px var(--screen-inset) max(12px, var(--safe-bottom)); background: color-mix(in srgb, var(--color-surface) 94%, transparent); border-top: 1px solid #e5e7eb; backdrop-filter: blur(12px); }
+.sticky-inner { width: min(100%, 430px); margin: 0 auto; }
+.ui-button { position: relative; display: inline-flex; width: 100%; min-height: var(--control-height); align-items: center; justify-content: center; border: 0; border-radius: var(--corner-radius); padding: 0 var(--card-padding); font: inherit; font-size: calc(var(--body-size) * var(--text-scale)); line-height: calc(var(--body-line) * var(--text-scale)); font-weight: 700; cursor: pointer; }
+.ui-button-primary { color: #fff; background: var(--color-primary); }
+.ui-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 45%, transparent); outline-offset: 2px; }
+.mobile-screen[data-state=&quot;loading&quot;] .ui-button, .mobile-screen[data-state=&quot;success&quot;] .ui-button { pointer-events: none; }
+.mobile-screen[data-state=&quot;loading&quot;] .ui-button-spinner { display: block; width: 18px; height: 18px; margin-left: 8px; border: 2px solid rgb(255 255 255 / .45); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+.mobile-screen[data-state=&quot;success&quot;] .ui-button { background: #15803d; }
+.live-region { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (min-width: 431px) { body { padding: 24px 0; } .mobile-screen { min-height: calc(100dvh - 48px); border-radius: 28px; box-shadow: 0 12px 36px rgb(15 23 42 / .18); } }
+@media (max-width: 374px) { .screen-header { padding-block: var(--micro-gap); } h1 { font-size: calc(var(--title-size) - var(--micro-gap)); line-height: calc(var(--title-line) - var(--micro-gap)); } }
+@media (min-width: 410px) { .screen-description { max-width: calc(var(--readable-line-width) + var(--section-gap)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+</code></pre></article><article class="source-file"><div class="source-toolbar"><strong>app.js</strong><button type="button" data-copy-source="source-html_css-2">Copy file</button></div><pre tabindex="0"><code id="source-html_css-2">window.__MOBILE_UI_EXAMPLE__ = {&quot;exampleId&quot;:&quot;commerce-checkout-address&quot;,&quot;fixtures&quot;:{&quot;address_default&quot;:{&quot;label&quot;:&quot;서울시 중구 세종대로 1&quot;,&quot;selected&quot;:true},&quot;payment_card&quot;:{&quot;brand&quot;:&quot;Visa&quot;,&quot;last4&quot;:&quot;4242&quot;}},&quot;defaultState&quot;:&quot;default&quot;};</code></pre></article></section><section id="panel-react_native" role="tabpanel" aria-labelledby="tab-react_native" hidden><article class="source-file"><div class="source-toolbar"><strong>commerce-checkout-address.tsx</strong><button type="button" data-copy-source="source-react_native-0">Copy file</button></div><pre tabindex="0"><code id="source-react_native-0">import React, { useState } from &quot;react&quot;;
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from &quot;react-native&quot;;
+import { SafeAreaView } from &quot;react-native-safe-area-context&quot;;
+
+export function commerce_checkout_addressScreen() {
+  const [state, setState] = useState(&quot;default&quot;);
+  return &lt;SafeAreaView style={styles.safe}&gt;&lt;KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === &quot;ios&quot; ? &quot;padding&quot; : &quot;height&quot;}&gt;&lt;ScrollView testID=&quot;screen-scroll&quot; contentContainerStyle={styles.content} keyboardShouldPersistTaps=&quot;handled&quot; automaticallyAdjustKeyboardInsets&gt;&lt;Text accessibilityRole=&quot;header&quot; allowFontScaling maxFontSizeMultiplier={1.3}&gt;{title}&lt;/Text&gt;&lt;TextInput style={styles.input} allowFontScaling maxFontSizeMultiplier={1.3} /&gt;&lt;View style={styles.card}&gt;&lt;Text allowFontScaling maxFontSizeMultiplier={1.3}&gt;{subtitle}&lt;/Text&gt;&lt;/View&gt;&lt;/ScrollView&gt;&lt;View testID=&quot;primary-action&quot; style={styles.fixed}&gt;&lt;Pressable accessibilityRole=&quot;button&quot; onPress={() =&gt; setState(&quot;success&quot;)}&gt;&lt;Text allowFontScaling maxFontSizeMultiplier={1.3}&gt;{state === &quot;success&quot; ? &quot;완료&quot; : cta}&lt;/Text&gt;&lt;/Pressable&gt;&lt;/View&gt;&lt;/KeyboardAvoidingView&gt;&lt;/SafeAreaView&gt;;
+}
+
+const styles = StyleSheet.create({ safe: { flex: 1 }, flex: { flex: 1 }, content: { padding: 16, paddingBottom: 218, gap: 12 }, input: { minHeight: 52, borderRadius: 12, paddingHorizontal: 16 }, card: { padding: 16, borderRadius: 12 }, fixed: { minHeight: 84, paddingHorizontal: 16 } });
+</code></pre></article></section><section id="panel-flutter" role="tabpanel" aria-labelledby="tab-flutter" hidden><article class="source-file"><div class="source-toolbar"><strong>commerce-checkout-address.dart</strong><button type="button" data-copy-source="source-flutter-0">Copy file</button></div><pre tabindex="0"><code id="source-flutter-0">import &#39;package:flutter/material.dart&#39;;
+
+class commerce_checkout_addressScreen extends StatefulWidget {
+  const commerce_checkout_addressScreen({super.key});
+
+  @override
+  State&lt;commerce_checkout_addressScreen&gt; createState() =&gt; _ScreenState();
+}
+
+class _ScreenState extends State&lt;commerce_checkout_addressScreen&gt; {
+  String state = &#39;default&#39;;
+
+  @override
+  Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+    final bottomClearance = 84 + 100 + media.padding.bottom + media.viewInsets.bottom;
+    return SafeArea(child: Scaffold(body: Column(children: [
+      Expanded(child: SingleChildScrollView(key: const Key(&#39;screen-scroll&#39;), padding: EdgeInsets.fromLTRB(16, 24, 16, bottomClearance), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Text(&#39;주문 결제&#39;, textScaler: textScaler, style: Theme.of(context).textTheme.headlineSmall),
+        SizedBox(height: 12),
+        Text(&#39;Local fixture&#39;, style: Theme.of(context).textTheme.bodyLarge),
+        SizedBox(height: 12),
+        TextField(decoration: const InputDecoration(labelText: &#39;배송지&#39;), minLines: 1, maxLines: 2, style: const TextStyle(height: 1.5)),
+        SizedBox(height: 12),
+        Card(child: Padding(padding: const EdgeInsets.all(16), child: const Text(&#39;신한카드 ···· 1234&#39;))),
+      ]))),
+      Container(key: const Key(&#39;primary-action&#39;), padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + media.padding.bottom + media.viewInsets.bottom), child: ConstrainedBox(constraints: const BoxConstraints(minHeight: 52), child: SizedBox(height: 52, width: double.infinity, child: FilledButton(onPressed: () =&gt; setState(() =&gt; state = &#39;success&#39;), child: Text(state == &#39;success&#39; ? &#39;결제가 완료됐어요&#39; : &#39;결제하기&#39;))))),
+    ])));
+  }
+}
+
+const numericRadius = 12;
+const numericSafeBottom = 34;
+</code></pre></article></section><section id="panel-swiftui" role="tabpanel" aria-labelledby="tab-swiftui" hidden><article class="source-file"><div class="source-toolbar"><strong>commerce-checkout-address.swift</strong><button type="button" data-copy-source="source-swiftui-0">Copy file</button></div><pre tabindex="0"><code id="source-swiftui-0">import SwiftUI
+
+/// Generated from canonical spec commerce-checkout-address; fixture-only, no network or authentication.
+struct commerce_checkout_addressScreen: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @FocusState private var focusedField: Field?
+    @State private var address = &quot;&quot;
+    @State private var screenState = &quot;default&quot;
+
+    private enum Field: Hashable { case address }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(&quot;주문 결제&quot;)
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(Color(.label))
+                    .dynamicTypeSize(...DynamicTypeSize.accessibility3)
+                    .accessibilityAddTraits(.isHeader)
+                Text(&quot;Local fixture&quot;)
+                    .font(.body)
+                    .foregroundStyle(Color(.secondaryLabel))
+                    .dynamicTypeSize(...DynamicTypeSize.accessibility3)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(&quot;배송지&quot;)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color(.label))
+                    TextField(&quot;서울시 강남구 테헤란로 123&quot;, text: $address)
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.default)
+                        .frame(minHeight: 52)
+                        .focused($focusedField, equals: .address)
+                        .submitLabel(.done)
+                        .accessibilityLabel(&quot;배송지&quot;)
+                }
+                .padding(16)
+                .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
+                Text(&quot;신한카드 ···· 1234&quot;)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(Color(.label))
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
+            }
+            .padding(16)
+            .padding(.bottom, 218)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            Button {
+                screenState = &quot;success&quot;
+                focusedField = nil
+            } label: {
+                Text(screenState == &quot;success&quot; ? &quot;결제가 완료됐어요&quot; : &quot;결제하기&quot;)
+                    .frame(maxWidth: .infinity, minHeight: 52)
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .accessibilityLabel(&quot;결제하기&quot;)
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 34)
+            .background(.ultraThinMaterial)
+        }
+        .background(Color(.systemBackground))
+        .scrollIndicators(.hidden)
+        .onChange(of: dynamicTypeSize) { _, _ in }
+    }
+}
+</code></pre></article></section></section></main><footer><a href="../../#examples">← Back to all examples</a><span>Generated from <code>examples/proof/commerce-checkout-address</code></span></footer><script src="../../assets/site.js" defer></script></body></html>

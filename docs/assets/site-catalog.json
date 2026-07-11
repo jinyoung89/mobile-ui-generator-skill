@@ -1,0 +1,67 @@
+[
+  {
+    "id": "commerce-checkout-address",
+    "route": "examples/commerce-checkout-address/",
+    "title": "주문 결제",
+    "userJob": "Complete an order safely",
+    "language": "ko",
+    "category": "commerce",
+    "patterns": [
+      "checkout",
+      "address_selection",
+      "payment_method"
+    ],
+    "states": [
+      "disabled",
+      "enabled",
+      "pressed",
+      "loading",
+      "success",
+      "empty",
+      "focused",
+      "filled",
+      "invalid",
+      "default",
+      "error"
+    ],
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "tokens": [
+      {
+        "name": "card padding",
+        "value": "16px"
+      },
+      {
+        "name": "component gap",
+        "value": "12px"
+      },
+      {
+        "name": "control height",
+        "value": "52px"
+      },
+      {
+        "name": "corner radius",
+        "value": "12px"
+      },
+      {
+        "name": "max readable line width",
+        "value": "360px"
+      },
+      {
+        "name": "screen horizontal inset",
+        "value": "16px"
+      },
+      {
+        "name": "scroll content bottom inset",
+        "value": "100px"
+      },
+      {
+        "name": "section gap",
+        "value": "16px"
+      }
+    ]
+  }
+]

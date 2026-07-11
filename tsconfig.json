@@ -7,5 +7,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["tooling/**/*.ts"]
+  "include": ["tooling/**/*.ts", "site/**/*.ts"]
 }

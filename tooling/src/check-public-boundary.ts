@@ -352,12 +352,17 @@ export function scanPublicTree(root: string, options: ScanOptions = {}): Finding
 
 const publicRoots = new Set([
   ".gitignore", "LICENSE", "README.ko.md", "README.md", "catalog", "docs", "evaluations", "examples", "package-lock.json",
-  "package.json", "public-knowledge", "reports", "scripts", "skills", "tooling", "harnesses", "tsconfig.json",
+  "package.json", "public-knowledge", "reports", "scripts", "site", "skills", "tooling", "harnesses", "tsconfig.json",
 ]);
 
-function repositoryFixturePath(name: string): boolean {
+export function isAllowedTrackedPath(name: string): boolean {
+  return publicRoots.has(name.replaceAll("\\", "/").split("/")[0] ?? name);
+}
+
+export function isRepositoryFixturePath(name: string): boolean {
   const normalized = name.replaceAll("\\", "/");
   return normalized.includes("/tooling/test/") || normalized.startsWith("tooling/test/") ||
+    normalized.includes(`/${"site"}/${"test"}/`) || normalized.startsWith("site/test/") ||
     normalized.includes("/tooling/fixtures/private/") || normalized.startsWith("tooling/fixtures/private/") ||
     normalized.endsWith("/docs/superpowers/plans/2026-07-11-mobile-ui-skill-showcase-rebuild.md") ||
     normalized === "docs/superpowers/plans/2026-07-11-mobile-ui-skill-showcase-rebuild.md";
@@ -366,7 +371,7 @@ function repositoryFixturePath(name: string): boolean {
 function filterRepositoryFixtureFindings(findings: Finding[]): Finding[] {
   return findings.filter((item) => {
     const memberName = item.path.includes("!/") ? item.path.split("!/").at(-1) ?? item.path : item.path;
-    return !repositoryFixturePath(memberName) || !["path", "credential", "url"].includes(item.kind);
+    return !isRepositoryFixturePath(memberName) || !["path", "credential", "url"].includes(item.kind);
   });
 }
 
@@ -374,8 +379,7 @@ function scanTrackedRepository(root: string): Finding[] {
   const names = execFileSync("git", ["ls-files", "-z"], { cwd: root }).toString("utf8").split("\0").filter(Boolean);
   const findings: Finding[] = [];
   for (const name of names) {
-    const top = name.split("/")[0] ?? name;
-    if (!publicRoots.has(top)) {
+    if (!isAllowedTrackedPath(name)) {
       findings.push({ kind: "unsupported", path: name, detail: "tracked file is outside the explicit public-root allowlist" });
       continue;
     }

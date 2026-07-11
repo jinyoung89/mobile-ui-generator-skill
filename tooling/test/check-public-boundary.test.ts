@@ -5,7 +5,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
 
-import { scanArchive, scanPublicTree } from "../src/check-public-boundary.js";
+import { isAllowedTrackedPath, isRepositoryFixturePath, scanArchive, scanPublicTree } from "../src/check-public-boundary.js";
 
 const blockedCopy = "private" + " corpus";
 const providerCopy = "crawl" + "er";
@@ -15,6 +15,13 @@ const homePath = "/Users/" + "fixture-owner/Library/source.png";
 function fixtureRoot(): string {
   return mkdtempSync(path.join(os.tmpdir(), "boundary-leak-fixtures-"));
 }
+
+test("allows tracked site source alongside generated docs", () => {
+  assert.equal(isAllowedTrackedPath("site/src/catalog.ts"), true);
+  assert.equal(isAllowedTrackedPath("not-public/notes.txt"), false);
+  assert.equal(isRepositoryFixturePath("site/test/browser-smoke.mjs"), true);
+  assert.equal(isRepositoryFixturePath("site/static/app.js"), false);
+});
 
 function makeImage(pathname: string, format: "PNG" | "JPEG", metadata: string): void {
   const script = String.raw`

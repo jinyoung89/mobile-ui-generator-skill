@@ -1,0 +1,6 @@
+{
+  "routes": [
+    "./",
+    "examples/commerce-checkout-address/"
+  ]
+}

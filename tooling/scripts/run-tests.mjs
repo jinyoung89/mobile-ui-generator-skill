@@ -7,10 +7,12 @@ import { spawnSync } from "node:child_process";
 const requested = process.argv.slice(2);
 const testFiles = requested.length > 0
   ? requested
-  : readdirSync(path.resolve("tooling/test"))
-      .filter((file) => file.endsWith(".test.ts"))
-      .sort()
-      .map((file) => path.join("tooling", "test", file));
+  : ["tooling/test", "site/test"].flatMap((directory) =>
+      readdirSync(path.resolve(directory))
+        .filter((file) => file.endsWith(".test.ts"))
+        .sort()
+        .map((file) => path.join(directory, file)),
+    );
 
 const result = spawnSync(
   process.execPath,
