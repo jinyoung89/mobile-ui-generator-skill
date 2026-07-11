@@ -83,28 +83,104 @@ Relevant output:
 # fail 0
 ```
 
-The three passing checks establish host command agreement with the registry, Android SDK/API 34/AVD agreement, and readiness of every required registry cell.
+The three passing checks establish host command agreement with the registry, Android SDK/API 34/AVD agreement, and the installed/configured state of every required registry cell. Installed/configured is not treated as proof that a simulator or emulator can boot.
 
-## Android API 34 boot readiness
+## Checked-in mobile runtime verification
 
-The emulator was started with:
+Command:
 
 ```sh
-emulator -avd mobile_ui_api34 -no-snapshot -no-audio -no-boot-anim
+npm run preflight:mobile
 ```
 
-`adb shell getprop sys.boot_completed` was polled in a bounded loop of at most 60 attempts with two seconds between attempts. After boot, the API level was read with `adb shell getprop ro.build.version.sdk`; shutdown used `adb emu kill` and a bounded device-removal poll.
+This invokes the checked-in `tooling/scripts/verify-mobile-targets.sh`. It boots the pinned iOS and Android targets, uses bounded condition polling, verifies iOS 17.2 and Android API 34, shuts both targets down, and emits a JSON success record only after those checks complete.
 
 Exit status: `0`
 
 Relevant output:
 
 ```text
-BOOT_COMPLETED attempt=7
-34
-OK: killing emulator, bye bye
-OK
-EMULATOR_SHUTDOWN attempt=4
+IOS_BOOT_COMPLETED attempt=1 runtime=17.2
+ANDROID_BOOT_COMPLETED attempt=11 api=34
+{"status":"ok","ios":{"runtime":"17.2","udid":"7732B728-22A6-4CCC-A121-C1F2BDC5EC23","verified":true},"android":{"api":34,"avd":"mobile_ui_api34","verified":true}}
+```
+
+The JSON record is runtime verification evidence. The `installed` and `configured` fields in `tooling/toolchains.json` intentionally make no boot-readiness claim.
+
+## Hardening RED/GREEN evidence
+
+The hardening tests were added and run before the corresponding resolver, registry, script, and npm command changes.
+
+Path-boundary RED command:
+
+```sh
+node --import tsx --test tooling/test/paths.test.ts
+```
+
+Exit status: `1`
+
+Relevant output:
+
+```text
+# tests 6
+# pass 2
+# fail 4
+```
+
+The failures covered the public staging location/allowlist, disallowed root config access, sensitive case variants, and an allowed-root symlink escaping the repository.
+
+Path-boundary GREEN command:
+
+```sh
+npm test -- tooling/test/paths.test.ts
+```
+
+Exit status: `0`
+
+Relevant output:
+
+```text
+# tests 6
+# pass 6
+# fail 0
+```
+
+The npm output named only `tooling/test/paths.test.ts`; no toolchain tests ran in the targeted command.
+
+An additional ignored-root expansion was also test-first. The same targeted command exited `1` with 6 tests, 5 passes, and 1 failure (`Missing expected exception: docs/.idea/workspace.xml`) before the ignored private/editor/cache patterns were implemented; the GREEN result remained 6/6.
+
+Mobile/configuration contract RED command:
+
+```sh
+node --import tsx --test tooling/test/mobile-preflight-contract.test.ts tooling/test/toolchain-preflight.test.ts
+```
+
+Exit status: `1`
+
+Relevant output:
+
+```text
+# tests 5
+# pass 2
+# fail 3
+```
+
+The failures reported the missing mobile preflight command, missing baseline validation contract, and absent installed/configured registry state.
+
+Hardening full-suite command:
+
+```sh
+npm test
+```
+
+Exit status: `0`
+
+Relevant output:
+
+```text
+# tests 11
+# pass 11
+# fail 0
 ```
 
 ## Full verification

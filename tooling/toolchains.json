@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
   "observedAt": "2026-07-11",
-  "requiredCellsReady": true,
+  "requiredCellsConfigured": true,
   "node": {
     "version": "22.15.0",
-    "ready": true
+    "installed": true
   },
   "npm": {
     "version": "10.9.2",
-    "ready": true
+    "installed": true
   },
   "python": {
     "version": "3.14.3",
-    "ready": true
+    "installed": true
   },
   "flutter": {
     "version": "3.35.3",
-    "ready": true
+    "installed": true
   },
   "dart": {
     "version": "3.9.2",
-    "ready": true
+    "installed": true
   },
   "apple": {
     "xcode": "15.2",
@@ -29,9 +29,9 @@
     "simulator": {
       "name": "iPhone 15",
       "udid": "7732B728-22A6-4CCC-A121-C1F2BDC5EC23",
-      "ready": true
+      "configured": true
     },
-    "ready": true
+    "installed": true
   },
   "android": {
     "sdkRoot": "$HOME/Library/Android/sdk",
@@ -43,8 +43,8 @@
     "avd": {
       "name": "mobile_ui_api34",
       "device": "pixel_7",
-      "ready": true
+      "configured": true
     },
-    "ready": true
+    "installed": true
   }
 }

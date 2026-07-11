@@ -7,11 +7,12 @@
     "node": ">=22 <23"
   },
   "scripts": {
-    "test": "node --import tsx --test tooling/test/*.test.ts",
+    "test": "node tooling/scripts/run-tests.mjs",
     "typecheck": "tsc --noEmit",
-    "validate": "python3 scripts/validate_patterns.py && python3 scripts/validate_site.py",
-    "build:site": "node -e \"if (process.env.RELEASE_MODE === '1' || process.env.CI === 'true') { console.error('Site build is not implemented; refusing release-mode success.'); process.exit(1) } console.warn('PENDING: site build is not implemented yet.')\"",
-    "verify": "npm run validate && npm test && npm run typecheck && npm run build:site"
+    "validate:baseline": "python3 scripts/validate_patterns.py && python3 scripts/validate_site.py && npm test && npm run typecheck",
+    "preflight:mobile": "tooling/scripts/verify-mobile-targets.sh",
+    "build:site": "node tooling/scripts/not-implemented.mjs build:site",
+    "verify": "node tooling/scripts/not-implemented.mjs verify"
   },
   "devDependencies": {
     "@types/node": "22.15.3",
