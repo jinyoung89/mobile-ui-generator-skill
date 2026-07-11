@@ -78,3 +78,14 @@ test("rejects placeholder profile values and incomplete named profiles", () => {
   assert.match(result.errors.join("\n"), /safe.?area/i);
 });
 
+test("requires the logical viewport to map to physical capture pixels and pins Pixel 7 API 34", () => {
+  const profiles = readJson(profilesPath);
+  const standard = (profiles.profiles as Array<Record<string, unknown>>).find((profile) => profile.profile_id === "ios-standard")!;
+  (standard.capture as Record<string, unknown>).width = 390;
+  const android = (profiles.profiles as Array<Record<string, unknown>>).find((profile) => profile.profile_id === "android-standard")!;
+  android.device_name = "Generic Android";
+  const result = validateCatalog(readJson(manifestPath), readJson(matrixPath), profiles);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join("\n"), /capture dimensions/i);
+  assert.match(result.errors.join("\n"), /Pixel 7|API 34/i);
+});

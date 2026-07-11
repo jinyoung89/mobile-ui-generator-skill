@@ -12,7 +12,7 @@ type AjvLike = { compile(schema: unknown): Validator };
 const Ajv = Ajv2020Module as unknown as new (options?: Record<string, unknown>) => AjvLike;
 const root = path.resolve(import.meta.dirname, "../..");
 const transitionOrder = ["proposed", "approved", "generated", "build_verified", "render_verified", "published"];
-const profileNames = ["compact", "standard", "large", "short-keyboard", "large-text", "long-copy-ko", "long-copy-en"];
+const profileNames = ["compact", "standard", "large", "dark", "short-keyboard", "large-text", "long-copy-ko", "long-copy-en"];
 const placeholder = /^(?:realistic|agreed|designated|tbd|todo|pending|unknown|fill.?me)$/i;
 
 function readJson(filePath: string): unknown {
@@ -136,6 +136,8 @@ function validateMatrix(matrix: JsonObject, manifest: JsonObject, errors: string
 
 function validateProfiles(profiles: JsonObject, errors: string[]): void {
   schemaErrors(profiles, "verification-profiles", "tooling/schemas/verification-profiles.schema.json", errors);
+  const contract = object(profiles.dimensions_contract);
+  if (contract?.viewport_units !== "logical_css_or_points" || contract.capture_units !== "physical_pixels" || contract.capture_rule !== "capture.width = viewport.width * pixel_ratio and capture.height = viewport.height * pixel_ratio") add(errors, "verification-profiles: logical viewport and physical capture dimensions contract is required");
   const rows = Array.isArray(profiles.profiles) ? profiles.profiles : [];
   const ids = new Set<string>();
   const byPlatform = new Map<string, Set<string>>();
@@ -151,9 +153,12 @@ function validateProfiles(profiles: JsonObject, errors: string[]): void {
     const values = byPlatform.get(platform) ?? new Set<string>();
     values.add(name); byPlatform.set(platform, values);
     const viewport = object(profile.viewport);
-    const expected: Record<string, [number, number]> = { compact: [320, 568], standard: [390, 844], large: [430, 932], "short-keyboard": [390, 667], "large-text": [390, 844], "long-copy-ko": [390, 844], "long-copy-en": [390, 844] };
+    const expected: Record<string, [number, number]> = { compact: [320, 568], standard: [390, 844], large: [430, 932], dark: [390, 844], "short-keyboard": [390, 667], "large-text": [390, 844], "long-copy-ko": [390, 844], "long-copy-en": [390, 844] };
     const dimensions = expected[name];
     if (dimensions && (viewport?.width !== dimensions[0] || viewport?.height !== dimensions[1])) add(errors, `${label}: ${name} profile has incorrect concrete viewport`);
+    const capture = object(profile.capture);
+    const ratio = Number(profile.pixel_ratio);
+    if (viewport && capture && Number.isFinite(ratio) && (capture.width !== Number(viewport.width) * ratio || capture.height !== Number(viewport.height) * ratio)) add(errors, `${label}: capture dimensions must equal logical viewport multiplied by pixel_ratio`);
     const safe = object(profile.safe_area);
     if (!safe || ["top", "right", "bottom", "left"].some((key) => typeof safe[key] !== "number" || Number(safe[key]) < 0)) add(errors, `${label}: safe-area values must be concrete numeric values`);
     const walk = (value: unknown, location: string): void => {
@@ -163,7 +168,7 @@ function validateProfiles(profiles: JsonObject, errors: string[]): void {
     };
     walk(profile, label);
     if (platform === "ios" && (profile.os_version !== "17.2" || typeof profile.simulator_udid !== "string")) add(errors, `${label}: iOS 17.2 simulator identity is required`);
-    if (platform === "android" && (profile.api_level !== 34 || profile.avd_name !== "mobile_ui_api34")) add(errors, `${label}: Android API 34 emulator identity is required`);
+    if (platform === "android" && (profile.api_level !== 34 || profile.avd_name !== "mobile_ui_api34" || profile.device_name !== "Pixel 7")) add(errors, `${label}: Android API 34 Pixel 7 emulator identity is required`);
     if (platform === "web" && (typeof profile.browser !== "string" || typeof profile.browser_version !== "string")) add(errors, `${label}: concrete browser identity is required`);
   }
   for (const platform of ["web", "ios", "android"]) {

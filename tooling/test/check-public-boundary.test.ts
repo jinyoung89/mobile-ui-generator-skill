@@ -67,7 +67,7 @@ test("rejects general POSIX content paths but permits documented site routes", (
 
 test("allows documented public URLs in repository metadata but rejects them in generated data", () => {
   const root = fixtureRoot();
-  writeFileSync(path.join(root, "README.md"), "https://example.com/docs\n");
+  writeFileSync(path.join(root, "README.md"), "https://example.com/docs\nhttps://mobile-ui-generator.dev/schema/catalog.json\n");
   assert.equal(scanPublicTree(root, { copyMode: "repository" }).length, 0);
   assert.equal(scanPublicTree(root, { copyMode: "generated" }).some((finding) => finding.kind === "url"), true);
 });

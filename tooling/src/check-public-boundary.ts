@@ -78,11 +78,11 @@ const allowedSiteRouteRoots = new Set([
 const urlPattern = /https?:\/\/[^\s<>"')\]]+/g;
 const generatedUrlHosts = new Set([
   "cdn.jsdelivr.net", "fonts.google.com", "fonts.googleapis.com", "fonts.gstatic.com",
-  "github.com", "jinyoung89.github.io", "opensource.org", "schema.org", "www.sitemaps.org", "www.w3.org",
+  "github.com", "jinyoung89.github.io", "mobile-ui-generator.dev", "opensource.org", "schema.org", "www.sitemaps.org", "www.w3.org",
 ]);
 const repositoryUrlHosts = new Set([
   ...generatedUrlHosts,
-  "example.com", "github.com", "json-schema.org", "opencollective.com", "raw.githubusercontent.com", "registry.npmjs.org",
+  "example.com", "github.com", "json-schema.org", "mobile-ui-generator.dev", "opencollective.com", "raw.githubusercontent.com", "registry.npmjs.org",
 ]);
 
 function archiveExtension(name: string): string | undefined {
@@ -346,7 +346,7 @@ export function scanPublicTree(root: string, options: ScanOptions = {}): Finding
 }
 
 const publicRoots = new Set([
-  ".gitignore", "LICENSE", "README.ko.md", "README.md", "docs", "examples", "package-lock.json",
+  ".gitignore", "LICENSE", "README.ko.md", "README.md", "catalog", "docs", "examples", "package-lock.json",
   "package.json", "public-knowledge", "reports", "scripts", "skills", "tooling", "tsconfig.json",
 ]);
 
