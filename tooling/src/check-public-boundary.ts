@@ -58,7 +58,7 @@ const forbiddenCopy = [
 ];
 const textExtensions = new Set([
   ".css", ".csv", ".html", ".js", ".json", ".jsx", ".md", ".mjs", ".py",
-  ".sh", ".svg", ".tpl", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml", ".dart",
+  ".lock", ".sh", ".svg", ".tpl", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml", ".dart",
 ]);
 const imageExtensions = new Set([".png", ".jpg", ".jpeg"]);
 const archiveExtensions = [".tar.gz", ".tgz", ".zip", ".tar"];
@@ -86,7 +86,7 @@ const repositoryUrlHosts = new Set([
   // Dependency lockfiles preserve package funding metadata. These hosts are
   // permitted only in repository metadata; generated/distribution scans still
   // reject them so they cannot enter the public website or proof artifacts.
-  "docs.expo.dev", "dotenvx.com", "feross.org", "npmjs.com", "www.npmjs.com", "paypal.me", "patreon.com", "www.patreon.com", "tidelift.com",
+  "dart.dev", "docs.expo.dev", "dotenvx.com", "feross.org", "npmjs.com", "pub.dev", "www.npmjs.com", "paypal.me", "patreon.com", "www.patreon.com", "tidelift.com",
 ]);
 
 function archiveExtension(name: string): string | undefined {
