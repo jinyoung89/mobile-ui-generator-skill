@@ -95,9 +95,10 @@ function checkMeasure(value: unknown, field: string, errors: string[], tokens: S
   if (min !== undefined && max !== undefined && min > max) errors.push(`${field}: min must not exceed max`);
 }
 
-function checkColorTokens(value: JsonObject, errors: string[]): void {
+function checkColorTokens(value: JsonObject, errors: string[]): Set<string> {
   strict(value, ["tokens", "contrast_pairs"], "colors", errors);
   const tokens = object(value.tokens, "colors.tokens", errors);
+  const tokenNames = new Set(tokens ? Object.keys(tokens) : []);
   if (tokens) {
     if (Object.keys(tokens).length === 0) errors.push("colors.tokens: at least one token is required");
     for (const [name, color] of Object.entries(tokens)) {
@@ -112,8 +113,11 @@ function checkColorTokens(value: JsonObject, errors: string[]): void {
     required(row, ["foreground", "background", "minimum_ratio"], `colors.contrast_pairs[${index}]`, errors);
     stringValue(row.foreground, `colors.contrast_pairs[${index}].foreground`, errors);
     stringValue(row.background, `colors.contrast_pairs[${index}].background`, errors);
+    if (typeof row.foreground === "string" && !tokenNames.has(row.foreground)) errors.push(`colors.contrast_pairs[${index}].foreground: unknown color token ${row.foreground}`);
+    if (typeof row.background === "string" && !tokenNames.has(row.background)) errors.push(`colors.contrast_pairs[${index}].background: unknown color token ${row.background}`);
     numberValue(row.minimum_ratio, `colors.contrast_pairs[${index}].minimum_ratio`, errors, { min: 1 });
   });
+  return tokenNames;
 }
 
 function checkPlatformPolicy(value: JsonObject, errors: string[]): void {
@@ -137,7 +141,7 @@ function checkPlatformPolicy(value: JsonObject, errors: string[]): void {
     numberValue(safe.top, "platform_policy.safe_area.top", errors, { min: 0 });
     numberValue(safe.bottom, "platform_policy.safe_area.bottom", errors, { min: 0 });
     const unit = stringValue(safe.unit, "platform_policy.safe_area.unit", errors);
-    if (unit && !UNITS.has(unit)) errors.push("platform_policy.safe_area.unit: unsupported unit");
+    if (unit && unit !== "px") errors.push("platform_policy.safe_area.unit: canonical safe-area unit must be px");
     stringValue(safe.mode, "platform_policy.safe_area.mode", errors);
   }
   const order = array(value.token_resolution_order, "platform_policy.token_resolution_order", errors);
@@ -166,6 +170,23 @@ function checkLayout(value: JsonObject, errors: string[]): Set<string> {
     checkMeasure(token, `layout.tokens.${name}`, errors, names);
     const row = token as JsonObject;
     if (row && typeof row === "object" && "token" in row && row.token === name) errors.push(`layout.tokens.${name}: token cannot reference itself`);
+  }
+  if (tokens) {
+    const visiting = new Set<string>();
+    const visited = new Set<string>();
+    const visit = (name: string, trail: string[]): void => {
+      if (visiting.has(name)) {
+        errors.push(`layout.tokens.${name}: token cycle detected (${[...trail, name].join(" -> ")})`);
+        return;
+      }
+      if (visited.has(name)) return;
+      visiting.add(name);
+      const row = tokens[name] as JsonObject | undefined;
+      if (row && typeof row.token === "string" && names.has(row.token)) visit(row.token, [...trail, name]);
+      visiting.delete(name);
+      visited.add(name);
+    };
+    for (const name of names) visit(name, []);
   }
   for (const field of ["screen_horizontal_inset", "component_gap", "section_gap", "card_padding", "control_height", "corner_radius", "sticky_region_height", "scroll_content_bottom_inset", "max_readable_line_width"]) checkMeasure(value[field], `layout.${field}`, errors, names);
   const grid = object(value.grid, "layout.grid", errors);
@@ -196,7 +217,7 @@ function checkLayout(value: JsonObject, errors: string[]): Set<string> {
   return names;
 }
 
-function checkTypography(value: JsonObject, errors: string[], tokens: Set<string>): void {
+function checkTypography(value: JsonObject, errors: string[], tokens: Set<string>): Set<string> {
   strict(value, ["roles"], "typography", errors);
   const roles = array(value.roles, "typography.roles", errors);
   const ids = new Set<string>();
@@ -218,9 +239,10 @@ function checkTypography(value: JsonObject, errors: string[], tokens: Set<string
     stringValue(row.text_scale_policy, `${field}.text_scale_policy`, errors);
     numberValue(row.min_contrast_ratio, `${field}.min_contrast_ratio`, errors, { min: 1 });
   });
+  return ids;
 }
 
-function checkComponents(value: unknown, errors: string[], tokens: Set<string>, declaredStates: Set<string>): Set<string> {
+function checkComponents(value: unknown, errors: string[], tokens: Set<string>, componentStates: Set<string>, typographyRoles: Set<string>): Set<string> {
   const components = array(value, "components", errors);
   const ids = new Set<string>();
   const rows: JsonObject[] = [];
@@ -250,14 +272,17 @@ function checkComponents(value: unknown, errors: string[], tokens: Set<string>, 
     const stateNames = new Set<string>();
     states?.forEach((state, stateIndex) => {
       const name = stringValue(state, `${field}.states[${stateIndex}]`, errors);
-      if (name) { stateNames.add(name); declaredStates.add(name); }
+      if (name) { stateNames.add(name); componentStates.add(name); }
     });
     const defaultState = stringValue(row.default_state, `${field}.default_state`, errors);
     if (defaultState && !stateNames.has(defaultState)) errors.push(`${field}.default_state: must be listed in states`);
-    const textRoles = row.text_roles;
-    if (textRoles !== undefined) {
-      const textRoleList = array(textRoles, `${field}.text_roles`, errors);
-      textRoleList?.forEach((role, roleIndex) => stringValue(role, `${field}.text_roles[${roleIndex}]`, errors));
+    const textRolesValue = row.text_roles;
+    if (textRolesValue !== undefined) {
+      const textRoleList = array(textRolesValue, `${field}.text_roles`, errors);
+      textRoleList?.forEach((role, roleIndex) => {
+        const roleName = stringValue(role, `${field}.text_roles[${roleIndex}]`, errors);
+        if (roleName && !typographyRoles.has(roleName)) errors.push(`${field}.text_roles[${roleIndex}]: unknown typography role ${roleName}`);
+      });
     }
     const interaction = object(row.interaction, `${field}.interaction`, errors);
     if (interaction) { strict(interaction, ["kind", "focusable"], `${field}.interaction`, errors); required(interaction, ["kind"], `${field}.interaction`, errors); stringValue(interaction.kind, `${field}.interaction.kind`, errors); if ("focusable" in interaction && typeof interaction.focusable !== "boolean") errors.push(`${field}.interaction.focusable: expected boolean`); }
@@ -267,7 +292,7 @@ function checkComponents(value: unknown, errors: string[], tokens: Set<string>, 
       required(accessibility, ["label", "target_size"], `${field}.accessibility`, errors);
       stringValue(accessibility.label, `${field}.accessibility.label`, errors);
       const target = object(accessibility.target_size, `${field}.accessibility.target_size`, errors);
-      if (target) { strict(target, ["width", "height", "unit"], `${field}.accessibility.target_size`, errors); required(target, ["width", "height", "unit"], `${field}.accessibility.target_size`, errors); const width = numberValue(target.width, `${field}.accessibility.target_size.width`, errors, { min: 44 }); const height = numberValue(target.height, `${field}.accessibility.target_size.height`, errors, { min: 44 }); if (width !== undefined && height !== undefined && (width < 44 || height < 44)) errors.push(`${field}.accessibility.target_size: minimum 44x44`); stringValue(target.unit, `${field}.accessibility.target_size.unit`, errors); }
+      if (target) { strict(target, ["width", "height", "unit"], `${field}.accessibility.target_size`, errors); required(target, ["width", "height", "unit"], `${field}.accessibility.target_size`, errors); const width = numberValue(target.width, `${field}.accessibility.target_size.width`, errors, { min: 44 }); const height = numberValue(target.height, `${field}.accessibility.target_size.height`, errors, { min: 44 }); if (width !== undefined && height !== undefined && (width < 44 || height < 44)) errors.push(`${field}.accessibility.target_size: minimum 44x44`); const unit = stringValue(target.unit, `${field}.accessibility.target_size.unit`, errors); if (unit && !new Set(["px", "pt", "dp"]).has(unit)) errors.push(`${field}.accessibility.target_size.unit: expected px, pt, or dp`); }
     }
     stringValue(row.platform_native_substitution, `${field}.platform_native_substitution`, errors);
   });
@@ -276,18 +301,21 @@ function checkComponents(value: unknown, errors: string[], tokens: Set<string>, 
   return componentIds;
 }
 
-function checkStates(value: JsonObject, errors: string[], componentStates: Set<string>): void {
+function checkStates(value: JsonObject, errors: string[], componentStates: Set<string>): Set<string> {
   strict(value, ["screen", "inputs", "cta"], "states", errors);
   required(value, ["screen", "inputs", "cta"], "states", errors);
   for (const key of ["screen", "inputs", "cta"]) {
     const list = array(value[key], `states.${key}`, errors);
+    if (list && list.length === 0) errors.push(`states.${key}: must be non-empty`);
     list?.forEach((state, index) => { const name = stringValue(state, `states.${key}[${index}]`, errors); if (name) componentStates.add(name); });
   }
+  return componentStates;
 }
 
 function checkResponsive(value: unknown, errors: string[], policy: JsonObject): void {
   const rules = array(value, "responsive_rules", errors);
   const covered = [320, 390, 430].map(() => false);
+  const ranges: Array<{ min: number; max: number; index: number }> = [];
   rules?.forEach((rule, index) => {
     const field = `responsive_rules[${index}]`;
     const row = object(rule, field, errors);
@@ -301,13 +329,37 @@ function checkResponsive(value: unknown, errors: string[], policy: JsonObject): 
     if (row.no_horizontal_overflow !== true) errors.push(`${field}.no_horizontal_overflow: must be true`);
     if (row.fixed_regions_preserve_inset !== true) errors.push(`${field}.fixed_regions_preserve_inset: must be true`);
     [320, 390, 430].forEach((widthValue, widthIndex) => { if (min !== undefined && max !== undefined && widthValue >= min && widthValue <= max) covered[widthIndex] = true; });
+    if (min !== undefined && max !== undefined) ranges.push({ min, max, index });
   });
   covered.forEach((present, index) => { if (!present) errors.push(`responsive_rules: missing coverage for ${[320, 390, 430][index]}px`); });
   const range = policy.supported_width_range as JsonObject | undefined;
   if (range && (range.min !== 320 || range.max !== 430)) errors.push("platform_policy.supported_width_range: version 1 requires 320..430 baseline");
+  if (range && ranges.length > 0) {
+    ranges.sort((left, right) => left.min - right.min);
+    if (ranges[0].min !== range.min) errors.push("responsive_rules: coverage must start at supported minimum");
+    if (ranges[ranges.length - 1].max !== range.max) errors.push("responsive_rules: coverage must end at supported maximum");
+    for (let index = 1; index < ranges.length; index += 1) {
+      if (ranges[index].min !== ranges[index - 1].max + 1) errors.push(`responsive_rules[${ranges[index].index}]: coverage must be contiguous; gap or overlap follows rule ${ranges[index - 1].index}`);
+    }
+  }
 }
 
-function checkNavigation(value: unknown, errors: string[], componentIds: Set<string>, fixtures: Set<string>): void {
+function checkInteractions(value: unknown, errors: string[], componentIds: Set<string>): void {
+  const interactions = array(value, "interactions", errors);
+  const ids = new Set<string>();
+  interactions?.forEach((interaction, index) => {
+    const field = `interactions[${index}]`;
+    const row = object(interaction, field, errors);
+    if (!row) return;
+    strict(row, ["id", "source", "event", "action"], field, errors);
+    required(row, ["id", "source", "event", "action"], field, errors);
+    const id = stringValue(row.id, `${field}.id`, errors); if (id && ids.has(id)) errors.push(`${field}.id: duplicate interaction id`); else if (id) ids.add(id);
+    const source = stringValue(row.source, `${field}.source`, errors); if (source && !componentIds.has(source)) errors.push(`${field}.source: missing component ${source}`);
+    stringValue(row.event, `${field}.event`, errors); stringValue(row.action, `${field}.action`, errors);
+  });
+}
+
+function checkNavigation(value: unknown, errors: string[], componentIds: Set<string>, fixtures: Set<string>, states: Set<string>): void {
   const actions = array(value, "navigation_and_actions", errors);
   actions?.forEach((action, index) => {
     const field = `navigation_and_actions[${index}]`;
@@ -322,7 +374,7 @@ function checkNavigation(value: unknown, errors: string[], componentIds: Set<str
     strict(outcome, ["kind", "state", "target", "fixture"], `${field}.outcome`, errors);
     const kind = stringValue(outcome.kind, `${field}.outcome.kind`, errors);
     if (kind && !OUTCOMES.has(kind)) errors.push(`${field}.outcome.kind: must resolve locally, not ${kind}`);
-    if (kind === "local_state") stringValue(outcome.state, `${field}.outcome.state`, errors);
+    if (kind === "local_state") { const state = stringValue(outcome.state, `${field}.outcome.state`, errors); if (state && !states.has(state)) errors.push(`${field}.outcome.state: unknown state ${state}`); }
     if (kind === "local_screen" || kind === "local_modal") stringValue(outcome.target, `${field}.outcome.target`, errors);
     if (kind === "fixture_result") { const fixture = stringValue(outcome.fixture, `${field}.outcome.fixture`, errors); if (fixture && !fixtures.has(fixture)) errors.push(`${field}.outcome.fixture: missing fixture ${fixture}`); }
   });
@@ -334,23 +386,27 @@ function checkSimpleSections(spec: JsonObject, errors: string[]): void {
     strict(accessibility, ["minimum_contrast_ratio", "minimum_touch_target", "screen_reader", "reduced_motion", "dynamic_text"], "accessibility", errors);
     required(accessibility, ["minimum_contrast_ratio", "minimum_touch_target", "screen_reader", "reduced_motion", "dynamic_text"], "accessibility", errors);
     numberValue(accessibility.minimum_contrast_ratio, "accessibility.minimum_contrast_ratio", errors, { min: 4.5 });
-    const target = object(accessibility.minimum_touch_target, "accessibility.minimum_touch_target", errors); if (target) { strict(target, ["width", "height", "unit"], "accessibility.minimum_touch_target", errors); required(target, ["width", "height", "unit"], "accessibility.minimum_touch_target", errors); numberValue(target.width, "accessibility.minimum_touch_target.width", errors, { min: 44 }); numberValue(target.height, "accessibility.minimum_touch_target.height", errors, { min: 44 }); stringValue(target.unit, "accessibility.minimum_touch_target.unit", errors); }
+    const target = object(accessibility.minimum_touch_target, "accessibility.minimum_touch_target", errors); if (target) { strict(target, ["width", "height", "unit"], "accessibility.minimum_touch_target", errors); required(target, ["width", "height", "unit"], "accessibility.minimum_touch_target", errors); numberValue(target.width, "accessibility.minimum_touch_target.width", errors, { min: 44 }); numberValue(target.height, "accessibility.minimum_touch_target.height", errors, { min: 44 }); const unit = stringValue(target.unit, "accessibility.minimum_touch_target.unit", errors); if (unit && !new Set(["px", "pt", "dp"]).has(unit)) errors.push("accessibility.minimum_touch_target.unit: expected px, pt, or dp"); }
     for (const key of ["screen_reader", "reduced_motion", "dynamic_text"]) stringValue(accessibility[key], `accessibility.${key}`, errors);
   }
   const focus = object(spec.focus_and_keyboard, "focus_and_keyboard", errors); if (focus) { strict(focus, ["focusable_components", "keyboard_behavior", "primary_action_visible"], "focus_and_keyboard", errors); required(focus, ["focusable_components", "keyboard_behavior", "primary_action_visible"], "focus_and_keyboard", errors); const ids = array(focus.focusable_components, "focus_and_keyboard.focusable_components", errors); ids?.forEach((id, index) => stringValue(id, `focus_and_keyboard.focusable_components[${index}]`, errors)); stringValue(focus.keyboard_behavior, "focus_and_keyboard.keyboard_behavior", errors); if (focus.primary_action_visible !== true) errors.push("focus_and_keyboard.primary_action_visible: must be true"); }
-  const localization = object(spec.localization, "localization", errors); if (localization) { strict(localization, ["default_language", "supported_languages", "fallback_language", "long_copy_profiles"], "localization", errors); required(localization, ["default_language", "supported_languages", "fallback_language", "long_copy_profiles"], "localization", errors); const supported = array(localization.supported_languages, "localization.supported_languages", errors); supported?.forEach((lang, index) => { const value = stringValue(lang, `localization.supported_languages[${index}]`, errors); if (value && !/^[a-z]{2}(?:-[A-Z]{2})?$/.test(value)) errors.push(`localization.supported_languages[${index}]: invalid language tag`); }); const defaultLanguage = stringValue(localization.default_language, "localization.default_language", errors); const fallback = stringValue(localization.fallback_language, "localization.fallback_language", errors); if (defaultLanguage && supported && !supported.includes(defaultLanguage)) errors.push("localization.default_language: must be supported"); if (fallback && supported && !supported.includes(fallback)) errors.push("localization.fallback_language: must be supported"); const profiles = array(localization.long_copy_profiles, "localization.long_copy_profiles", errors); profiles?.forEach((profile, index) => stringValue(profile, `localization.long_copy_profiles[${index}]`, errors)); }
+  const localization = object(spec.localization, "localization", errors); if (localization) { strict(localization, ["default_language", "supported_languages", "fallback_language", "long_copy_profiles"], "localization", errors); required(localization, ["default_language", "supported_languages", "fallback_language", "long_copy_profiles"], "localization", errors); const supported = array(localization.supported_languages, "localization.supported_languages", errors); if (supported && supported.length === 0) errors.push("localization.supported_languages: must be non-empty"); supported?.forEach((lang, index) => { const value = stringValue(lang, `localization.supported_languages[${index}]`, errors); if (value && !/^[a-z]{2}(?:-[A-Z]{2})?$/.test(value)) errors.push(`localization.supported_languages[${index}]: invalid language tag`); }); const defaultLanguage = stringValue(localization.default_language, "localization.default_language", errors); const fallback = stringValue(localization.fallback_language, "localization.fallback_language", errors); if (defaultLanguage && supported && !supported.includes(defaultLanguage)) errors.push("localization.default_language: must be supported"); if (fallback && supported && !supported.includes(fallback)) errors.push("localization.fallback_language: must be supported"); const profiles = array(localization.long_copy_profiles, "localization.long_copy_profiles", errors); if (profiles && profiles.length === 0) errors.push("localization.long_copy_profiles: must be non-empty"); profiles?.forEach((profile, index) => stringValue(profile, `localization.long_copy_profiles[${index}]`, errors)); }
 }
 
-function checkMappings(value: JsonObject, errors: string[]): void {
+function checkMappings(value: JsonObject, errors: string[], policy: JsonObject | undefined): void {
   strict(value, PLATFORMS, "platform_mappings", errors);
   for (const platform of PLATFORMS) {
     const row = object(value[platform], `platform_mappings.${platform}`, errors);
     if (!row) continue;
     strict(row, ["unit", "safe_area", "rounding", "native_substitutions_explicit"], `platform_mappings.${platform}`, errors);
     required(row, ["unit", "safe_area", "rounding", "native_substitutions_explicit"], `platform_mappings.${platform}`, errors);
-    stringValue(row.unit, `platform_mappings.${platform}.unit`, errors);
+    const unit = stringValue(row.unit, `platform_mappings.${platform}.unit`, errors);
+    const expectedUnit: Record<string, string> = { html_css: "px", react_native: "dp", flutter: "dp", swiftui: "pt" };
+    if (unit && unit !== expectedUnit[platform]) errors.push(`platform_mappings.${platform}.unit: expected canonical ${expectedUnit[platform]} unit`);
     stringValue(row.safe_area, `platform_mappings.${platform}.safe_area`, errors);
     const rounding = stringValue(row.rounding, `platform_mappings.${platform}.rounding`, errors); if (rounding && !ROUNDING.has(rounding)) errors.push(`platform_mappings.${platform}.rounding: unsupported rounding mode`);
+    const policyRounding = (policy?.rounding as JsonObject | undefined)?.[platform];
+    if (rounding && typeof policyRounding === "string" && rounding !== policyRounding) errors.push(`platform_mappings.${platform}.rounding: must match platform_policy rounding for parity`);
     if (row.native_substitutions_explicit !== true) errors.push(`platform_mappings.${platform}.native_substitutions_explicit: must be true`);
   }
 }
@@ -369,20 +425,22 @@ export function validateSpec(input: unknown): SpecValidationResult {
   if (policy) checkPlatformPolicy(policy, errors);
   const layout = object(spec.layout, "layout", errors);
   const tokens = layout ? checkLayout(layout, errors) : new Set<string>();
-  const typography = object(spec.typography, "typography", errors); if (typography) checkTypography(typography, errors, tokens);
+  const typography = object(spec.typography, "typography", errors); const typographyRoles = typography ? checkTypography(typography, errors, tokens) : new Set<string>();
   const colors = object(spec.colors, "colors", errors); if (colors) checkColorTokens(colors, errors);
-  const declaredStates = new Set<string>();
-  const componentIds = checkComponents(spec.components, errors, tokens, declaredStates);
-  const states = object(spec.states, "states", errors); if (states) checkStates(states, errors, declaredStates);
+  const componentStates = new Set<string>();
+  const componentIds = checkComponents(spec.components, errors, tokens, componentStates, typographyRoles);
+  const states = object(spec.states, "states", errors); const matrixStates = states ? checkStates(states, errors, new Set<string>()) : new Set<string>();
+  for (const state of componentStates) if (!matrixStates.has(state)) errors.push(`states: component state ${state} is not represented in the state matrix`);
   const fixtureData = object(spec.fixture_data, "fixture_data", errors); const fixtures = new Set(fixtureData ? Object.keys(fixtureData) : []);
   checkResponsive(spec.responsive_rules, errors, policy ?? {});
-  checkNavigation(spec.navigation_and_actions, errors, componentIds, fixtures);
+  checkInteractions(spec.interactions, errors, componentIds);
+  checkNavigation(spec.navigation_and_actions, errors, componentIds, fixtures, matrixStates);
   checkSimpleSections(spec, errors);
   const content = object(spec.content, "content", errors); if (content) { strict(content, ["locales", "fixtures"], "content", errors); required(content, ["locales", "fixtures"], "content", errors); const locales = object(content.locales, "content.locales", errors); const requestLanguage = (spec.request as JsonObject | undefined)?.language; if (locales && typeof requestLanguage === "string" && !(requestLanguage in locales)) errors.push("content.locales: request language must have copy"); const contentFixtures = array(content.fixtures, "content.fixtures", errors); contentFixtures?.forEach((name, index) => { const key = stringValue(name, `content.fixtures[${index}]`, errors); if (key && !fixtures.has(key)) errors.push(`content.fixtures[${index}]: missing fixture_data.${key}`); }); }
   const assets = object(spec.assets_and_fallbacks, "assets_and_fallbacks", errors); if (assets) { strict(assets, ["assets", "fallback_policy"], "assets_and_fallbacks", errors); required(assets, ["assets", "fallback_policy"], "assets_and_fallbacks", errors); array(assets.assets, "assets_and_fallbacks.assets", errors); stringValue(assets.fallback_policy, "assets_and_fallbacks.fallback_policy", errors); }
   const themes = object(spec.themes, "themes", errors); if (themes) { strict(themes, ["supported", "default"], "themes", errors); required(themes, ["supported", "default"], "themes", errors); const supported = array(themes.supported, "themes.supported", errors); const defaultTheme = stringValue(themes.default, "themes.default", errors); if (defaultTheme && supported && !supported.includes(defaultTheme)) errors.push("themes.default: must be supported"); }
   const capabilities = object(spec.capabilities_and_dependencies, "capabilities_and_dependencies", errors); if (capabilities) { strict(capabilities, ["network", "authentication", "payment_execution", "push", "fixture_only"], "capabilities_and_dependencies", errors); for (const key of ["network", "authentication", "payment_execution", "push", "fixture_only"]) if (typeof capabilities[key] !== "boolean") errors.push(`capabilities_and_dependencies.${key}: expected boolean`); if (capabilities.network === true || capabilities.authentication === true || capabilities.payment_execution === true || capabilities.push === true) errors.push("capabilities_and_dependencies: version 1 examples must be fixture-only and local"); if (capabilities.fixture_only !== true) errors.push("capabilities_and_dependencies.fixture_only: must be true"); }
-  const mappings = object(spec.platform_mappings, "platform_mappings", errors); if (mappings) checkMappings(mappings, errors);
+  const mappings = object(spec.platform_mappings, "platform_mappings", errors); if (mappings) checkMappings(mappings, errors, policy);
   const validationRules = object(spec.validation_rules, "validation_rules", errors); if (validationRules) { strict(validationRules, ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"], "validation_rules", errors); for (const key of ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"]) if (validationRules[key] !== true) errors.push(`validation_rules.${key}: must be true`); }
   const quality = object(spec.quality_requirements, "quality_requirements", errors); if (quality) { strict(quality, ["numeric_spec_validated", "responsive_profiles", "all_states_fixture_backed", "platform_parity_report"], "quality_requirements", errors); required(quality, ["numeric_spec_validated", "responsive_profiles", "all_states_fixture_backed", "platform_parity_report"], "quality_requirements", errors); if (quality.numeric_spec_validated !== true || quality.all_states_fixture_backed !== true || quality.platform_parity_report !== true) errors.push("quality_requirements: all release gates must be true"); const profiles = array(quality.responsive_profiles, "quality_requirements.responsive_profiles", errors); if (profiles && [320, 390, 430].some((width) => !profiles.includes(width))) errors.push("quality_requirements.responsive_profiles: must include 320, 390, and 430"); }
   const requestLanguage = request?.language; const localization = object(spec.localization, "localization", errors); if (localization && typeof requestLanguage === "string" && Array.isArray(localization.supported_languages) && !localization.supported_languages.includes(requestLanguage)) errors.push("localization.supported_languages: must include request.language");
