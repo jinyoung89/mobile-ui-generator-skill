@@ -57,8 +57,8 @@
     "navigationAction": {"type": "object", "additionalProperties": false, "required": ["id", "source_component", "outcome"], "properties": {"id": {"type": "string"}, "source_component": {"type": "string"}, "outcome": {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"enum": ["local_state", "local_screen", "local_modal", "fixture_result"]}, "state": {"type": "string"}, "target": {"type": "string"}, "fixture": {"type": "string"}}}}},
     "validationRules": {"type": "object", "additionalProperties": false, "required": ["no_horizontal_overflow", "no_overlap", "safe_area_respected", "fixed_regions_do_not_cover_content", "required_states_renderable"], "properties": {"no_horizontal_overflow": {"const": true}, "no_overlap": {"const": true}, "safe_area_respected": {"const": true}, "fixed_regions_do_not_cover_content": {"const": true}, "required_states_renderable": {"const": true}}},
     "platformMapping": {"type": "object", "additionalProperties": false, "required": ["unit", "safe_area", "rounding", "native_substitutions_explicit"], "properties": {"unit": {"enum": ["px", "pt", "dp", "sp"]}, "safe_area": {"type": "string", "minLength": 1}, "rounding": {"enum": ["nearest", "floor", "ceil"]}, "native_substitutions_explicit": {"const": true}}},
-    "platformMappingPx": {"allOf": [{"$ref": "#/$defs/platformMapping"}, {"properties": {"unit": {"const": "px"}}}]},
-    "platformMappingDp": {"allOf": [{"$ref": "#/$defs/platformMapping"}, {"properties": {"unit": {"const": "dp"}}}]},
-    "platformMappingPt": {"allOf": [{"$ref": "#/$defs/platformMapping"}, {"properties": {"unit": {"const": "pt"}}}]}
+    "platformMappingPx": {"allOf": [{"$ref": "#/$defs/platformMapping"}, {"type": "object", "properties": {"unit": {"const": "px"}}}]},
+    "platformMappingDp": {"allOf": [{"$ref": "#/$defs/platformMapping"}, {"type": "object", "properties": {"unit": {"const": "dp"}}}]},
+    "platformMappingPt": {"allOf": [{"$ref": "#/$defs/platformMapping"}, {"type": "object", "properties": {"unit": {"const": "pt"}}}]}
   }
 }

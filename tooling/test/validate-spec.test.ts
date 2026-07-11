@@ -24,7 +24,7 @@ test("validates the canonical commerce fixture", () => {
 
 test("canonical fixture validates against the published JSON Schema", () => {
   const schema = JSON.parse(readFileSync(schemaPath, "utf8")) as Record<string, unknown>;
-  const ajv = new (Ajv2020Module as unknown as AjvConstructor)({ allErrors: true, strict: false });
+  const ajv = new (Ajv2020Module as unknown as AjvConstructor)({ allErrors: true, strict: true });
   const validate = ajv.compile(schema);
   const valid = validate(fixture());
   assert.equal(valid, true, JSON.stringify(validate.errors));
