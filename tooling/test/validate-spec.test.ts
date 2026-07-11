@@ -1,11 +1,16 @@
 import assert from "node:assert/strict";
+import Ajv from "ajv";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 import { validateSpec } from "../src/validate-spec.js";
 
+type JsonSchemaValidator = ((value: unknown) => boolean) & { errors?: unknown };
+type AjvConstructor = new (options?: Record<string, unknown>) => { compile(schema: unknown): JsonSchemaValidator };
+
 const root = path.resolve(import.meta.dirname, "../..");
 const fixturePath = path.join(root, "examples/proof/commerce-checkout/spec.json");
+const schemaPath = path.join(root, "skills/mobile-ui-generator/schemas/mobile-ui-spec.schema.json");
 
 function fixture(): Record<string, unknown> {
   return JSON.parse(readFileSync(fixturePath, "utf8")) as Record<string, unknown>;
@@ -15,6 +20,19 @@ test("validates the canonical commerce fixture", () => {
   const result = validateSpec(fixture());
   assert.equal(result.valid, true, result.errors.join("\n"));
   assert.deepEqual(result.errors, []);
+});
+
+test("canonical fixture validates against the published JSON Schema", () => {
+  const schema = JSON.parse(readFileSync(schemaPath, "utf8")) as Record<string, unknown>;
+  delete schema.$schema;
+  const ajv = new (Ajv as unknown as AjvConstructor)({ allErrors: true, strict: false });
+  const validate = ajv.compile(schema);
+  const valid = validate(fixture());
+  assert.equal(valid, true, JSON.stringify(validate.errors));
+
+  const invalid = fixture();
+  invalid.unknown = true;
+  assert.equal(validate(invalid), false, "additional top-level keys must fail JSON Schema validation");
 });
 
 test("rejects missing numeric viewport, safe-area, typography, states, and platform mappings", () => {

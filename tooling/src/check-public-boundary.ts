@@ -82,7 +82,7 @@ const generatedUrlHosts = new Set([
 ]);
 const repositoryUrlHosts = new Set([
   ...generatedUrlHosts,
-  "example.com", "github.com", "json-schema.org", "raw.githubusercontent.com", "registry.npmjs.org",
+  "example.com", "github.com", "json-schema.org", "opencollective.com", "raw.githubusercontent.com", "registry.npmjs.org",
 ]);
 
 function archiveExtension(name: string): string | undefined {
