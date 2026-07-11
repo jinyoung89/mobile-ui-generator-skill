@@ -9,6 +9,7 @@
   "scripts": {
     "test": "node tooling/scripts/run-tests.mjs",
     "typecheck": "tsc --noEmit",
+    "export:public-knowledge": "tsx tooling/src/export-public-knowledge.ts",
     "validate:baseline": "python3 scripts/validate_patterns.py && python3 scripts/validate_site.py && npm test && npm run typecheck",
     "preflight:mobile": "tooling/scripts/verify-mobile-targets.sh",
     "build:site": "node tooling/scripts/not-implemented.mjs build:site",

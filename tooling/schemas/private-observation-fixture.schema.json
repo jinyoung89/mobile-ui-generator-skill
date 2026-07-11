@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "private-observation-fixture.schema.json",
+  "title": "Private observation input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "observations"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "fixture_notice": {
+      "type": "string",
+      "pattern": "^SYNTHETIC TEST DATA ONLY; NOT SOURCE-DERIVED$"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "source_url",
+          "local_path",
+          "credential_fields",
+          "reviewer_identity",
+          "raw_asset_pointer",
+          "app_specific_copy",
+          "category_id",
+          "pattern_id",
+          "observation_metrics",
+          "component_rules",
+          "state_rules",
+          "confidence",
+          "sample_group"
+        ],
+        "properties": {
+          "source_id": { "type": "string", "minLength": 1 },
+          "source_url": { "type": "string", "minLength": 1 },
+          "local_path": { "type": "string", "minLength": 1 },
+          "credential_fields": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["api_key", "bearer_token"],
+            "properties": {
+              "api_key": { "type": "string", "minLength": 1 },
+              "bearer_token": { "type": "string", "minLength": 1 }
+            }
+          },
+          "reviewer_identity": { "type": "string", "minLength": 1 },
+          "raw_asset_pointer": { "type": "string", "minLength": 1 },
+          "app_specific_copy": { "type": "string", "minLength": 1 },
+          "category_id": { "type": "string", "minLength": 1 },
+          "pattern_id": { "type": "string", "minLength": 1 },
+          "observation_metrics": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["content_padding_px", "card_gap_px", "bottom_nav_height_px"],
+            "properties": {
+              "content_padding_px": { "type": "number", "minimum": 0, "maximum": 1000 },
+              "card_gap_px": { "type": "number", "minimum": 0, "maximum": 1000 },
+              "bottom_nav_height_px": { "type": "number", "minimum": 0, "maximum": 1000 }
+            }
+          },
+          "component_rules": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "state_rules": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "sample_group": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
